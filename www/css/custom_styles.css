@@ -1,0 +1,669 @@
+    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap');
+
+    /* Set the background color of the sidebar */
+    .main-sidebar {
+        background-color: #fff !important;  /* Apply the desired color */
+        box-shadow: none !important;
+        padding-top: 0;
+        border-top: none;
+        border-bottom: none;
+        width: 260px;
+    }
+    
+    .control-button {
+       font-size: 14px;
+       margin-right: 10px; 
+       margin-left: 10px; 
+       background-color: white;
+       color: #0137A6; 
+       border: 1px solid #0137A6; 
+       padding: 8px 16px;
+       border-radius: 5px;
+       cursor: pointer;
+    }
+
+    .control-button-submit {
+      font-size: 14px;
+      margin-top: 15px;
+      margin-right: 7px; 
+      margin-left: 7px; 
+      margin-bottom: 15px;
+      background-color: #006AA6;
+      color: #fff; 
+      border: 1px solid #006AA6; 
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+   }
+
+
+    .control-button-tavnav {
+      font-size: 12px;
+      margin-top: 15px;
+      margin-right: 7px; 
+      margin-left: 7px; 
+      margin-bottom: 15px;
+      background-color: #DC5A17;
+      color: #fff; 
+      border: 1px solid #DC5A17; 
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+   }
+
+   /* Add on hover background color for control-button-tavnav to #DC5A17 */
+    .control-button-tavnav:hover {
+        background-color: #006AA6;
+        color: #fff; 
+        border: 1px solid #006AA6; 
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+   
+
+    .header-title-container {
+       display: flex;
+       align-items: center;
+       justify-content: center; /* Align items to the start of the container */
+       margin-left: 0; /* Match the sidebar width */
+       position: relative; /* Ensure the container is positioned correctly */
+       width: 240px; /* Match the width of the sidebar-footer */
+       padding: 4px 6px; /* Add padding to give some space around the title */
+       background-color: #fff; /* Light background color to distinguish the title area */
+       border-radius: 6px; /* Optional: Add rounded corners for a modern look */
+       border: 1px solid #969696; 
+       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25); /* Subtle shadow for a more professional look */
+    }
+     
+     .header-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: #000000;
+      padding-top: 5px; /* Space after the vertical line */
+     }
+
+    /* ──────────────────────────────────────────────────────────────
+      Sidebar container: fixed under logos, scrollable, full height
+      ────────────────────────────────────────────────────────────── */
+    .menu-container {
+      position: fixed !important;
+      top: 150px;              /* adjust to match your .logos height */
+      bottom: 0 !important;
+      left: 0;                 /* ensure flush to the left edge */
+      width: 260px;            /* match your dashboardSidebar width */
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box;
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+      All menu links fill 100% width, no horizontal overflow
+      ────────────────────────────────────────────────────────────── */
+    .menu-container .nav-link {
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      box-sizing: border-box;
+      padding: 6px 12px !important;   /* vertical & horizontal padding */
+      line-height: 1.2 !important;
+      white-space: nowrap;            /* truncate long text */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+ 
+    /* ──────────────────────────────────────────────────────────────
+    Re-indent text now that icons are gone
+    ────────────────────────────────────────────────────────────── */    
+    .menu-container .nav-treeview .nav-link {
+      padding-left: 12px !important;   /* originally 24px + icon space */
+      font-size: 15px !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+    
+    /* ──────────────────────────────────────────────────────────────
+      Text inside <p> tags for sub-items
+      ────────────────────────────────────────────────────────────── */
+    .menu-container .nav-treeview .nav-link > p {
+      font-size: inherit !important;
+      margin: 0 !important;
+      line-height: 1.2;
+      margin-left: 0 !important;
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+      Nested submenu (treeview) items: smaller indent, wrap if needed
+      ────────────────────────────────────────────────────────────── */
+    .menu-container .nav-treeview {
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+      Icon spacing: consistent box, gap, vertical centering
+      ────────────────────────────────────────────────────────────── */
+    .menu-container .nav-icon {
+      flex: 0 0 1.25rem !important;    /* reserve horizontal space */
+      margin-right: 0.5rem !important;
+      text-align: center;
+      font-size: 1.1em !important;     /* adjust icon size if needed */
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+      Active link styling
+      ────────────────────────────────────────────────────────────── */
+    .menu-container .nav-link.active {
+      background-color: #006AA6 !important;
+      color: #fff !important;
+      border-radius: 8px;
+      border-left: 3px solid #DC5A17 !important;
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+      Text styling (optional overrides)
+      ────────────────────────────────────────────────────────────── */
+    .menu-container .nav-link p {
+      margin: 0 !important;
+      font-size: 0.9rem !important;    /* adjust text size */
+      font-weight: bold !important;
+    }
+
+    /* Ensure spacing between menuSubItem icon and label text */
+    .menu-container .nav-treeview .nav-link i.nav-icon {
+      margin-right: 0.75rem !important;  /* creates the space */
+      flex-shrink: 0 !important;         /* ensures icon keeps its size */
+    }
+
+
+
+  /* Style the clock container */
+  .clock-container {
+    list-style-type: none;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;  /* Positions the clock on the far right */
+    align-items: center;
+    margin-right: 3px;         /* Adjust spacing as desired */
+  }
+  
+  /* Style the clock text */
+  #dynamic-clock {
+    font-size: 12px;
+    color: #000000;
+    border: 1px solid #969696;
+    padding: 8px 16px;
+    border-radius: 5px;
+  }
+
+  .page-title {
+    text-align: center;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    background-color: #fff; 
+    padding: 10px; 
+    border-radius: 10px;
+}
+
+
+
+/* Target the menu item icon in the sidebar */
+/* custom_styles.css */
+.logos {
+  position: absolute;
+  top: 5px;   
+  text-align: left;
+  padding: 20px 10px 10px 10px; 
+}
+
+/* custom_styles.css */
+.ira-logo {
+  height: 80px;
+}
+
+.logos img {
+  height: 80px;
+}
+
+.info-icon {
+  margin-left: 2px;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer; 
+  border: none;
+  background: none;
+  color: #555;
+}
+
+/* makes the bar a subtle separator */
+.logo-bar {
+  background: #ffffff;          /* or transparent */
+  padding: 8px 20px;
+  border-radius: 10px;
+  border-bottom: 1px solid #e1e1e1;
+  max-width:1140px;     /* same as the body content */
+  margin:0 auto;        /* centre it */
+  margin-bottom: 20px;
+}
+
+/* flex container already set by wrapper’s classes */
+.logo-wrapper {
+  width: 100%;
+}
+
+/* generic logo tweaks */
+.logo {
+  max-height: 40px;             /* keep them tidy */
+  height: auto;
+}
+
+.print-title {
+  display: none;
+}
+
+.section-header {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: .5rem; 
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-left: 5px solid #DC5A17;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #006AA6;
+}
+
+.section-header h3 {
+  margin-bottom: 10px;
+  color: #DC5A17;
+}
+.section-header p {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+}
+
+.section-title {
+  margin-bottom: .5rem;
+  font-size: 1.25rem;
+}
+
+.section-title-top {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+.section-subtitle {
+  margin: 0;
+  color: #DC5A17;
+  font-size: 1rem;
+}
+
+
+.intro-outer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  padding: 20px;
+  max-width: 1140px; 
+  background-color: #fdfdf9;
+}
+
+.ifrs17-intro-container {
+  background: #ffffff;
+  max-width: 1000px;
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: none;
+  text-align: center;
+}
+
+.ifrs17-intro-container h1 { color: #DC5A17; }
+
+h1 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #006AA6;
+  margin-bottom: 25px;           
+}
+
+.intro-lead {
+  border-left: 5px solid #006AA6;
+  padding-left: 20px;
+  margin: 20px 0;
+  font-size: 17px;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+
+
+.intro-section-header {
+  font-size: 20px;
+  font-weight: 600;
+  color: #DC5A17;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+/* Section Title */
+.modules-title {
+  color: #006AA6;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid Layout for Modules */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  padding: 0 10px;
+}
+
+/* Individual Module Item */
+.module-item {
+  background-color: #f9f9f9;
+  border-left: 5px solid #006AA6;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: background 0.3s ease;
+}
+
+.module-item:hover {
+  background-color: #f5fbe9;
+}
+
+
+/* Container + Title */
+.cover-section {
+  text-align: center;
+  margin: 40px auto 20px;
+  max-width: 900px;
+}
+.cover-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #DC5A17;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.cover-title::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 60%;
+  background: #006AA6;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.cover-title, .intro-section-header { 
+  color: #006AA6; 
+  margin-top: 20px; 
+}
+
+/* List layout */
+.cover-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.cover-box {
+  background: #f9f9f9;
+  border-left: 6px solid #006AA6;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 16px;
+  /* box-shadow: 0 2px 6px rgba(0,0,0,0.05); */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.3s ease;
+}
+
+.cover-box:hover {
+  background-color: #f9fcf4;
+}
+
+.cover-list li:hover {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-left-color: #006AA6;
+}
+
+/* Icon */
+.cover-icon {
+  font-size: 22px;
+}
+
+/* Text */
+.cover-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+}
+
+
+/* new objectives list */
+.objectives-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 25px;
+  text-align: left;
+  display: inline-block;
+  max-width: 600px;
+}
+
+.objectives-list li {
+  font-size: 16px;
+  background: #FAFAFA;
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  border-left: 4px solid #DC5A17;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: background 0.2s ease;
+}
+
+.objectives-list li:hover {
+  background: #F0F1F5;
+}
+
+.intro-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 25px;
+  text-align: left;
+  display: inline-block;
+}
+
+.intro-list li {
+  font-size: 16px;
+  background: #ffffff;
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s;
+}
+
+.intro-list li:hover {
+  background: #f8f9fc;
+}
+
+.intro-note {
+  position: relative;
+  max-width: 650px;       /* cap line length for readability */
+  margin: 20px auto 0;
+  background-color: #ffffff;
+  border-left: 6px solid #DC5A17;
+  padding: 24px 28px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-size: 16px;        /* desktop base */
+  color: #333;
+}
+
+.note-header {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.note-icon {
+  font-size: 24px;
+  color: #DC5A17;
+  margin-right: 8px;
+}
+
+.note-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #DC5A17;
+}
+
+.intro-note p {
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.intro-note strong {
+  color: #006AA6;
+}
+
+.intro-nav {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.measurement-nav {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.quiz-nav {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Style Measurement Models Module*/
+.model-outer-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  width: auto;
+  max-width: 1140px; /* same as the body content */
+}
+
+.ifrs17-model-container {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  max-width: 900px;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #006AA6;
+  margin-bottom: 20px;
+}
+
+.model-intro {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 25px;
+}
+
+.radio-wrapper {
+  margin-bottom: 30px;
+}
+
+.plot-wrapper {
+  margin-top: 30px;
+}
+
+
+.case-outer-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.model-description {
+  font-size: 15px;
+  color: #333;
+  background-color: #f8f9fc;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+/* --------------------------------------- */
+
+/* Style IFRS 17 Case Studies Module*/
+.ifrs17-case-container {
+  background-color: #ffffff;
+  padding: 35px 45px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  max-width: 900px;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #006AA6;
+  margin-bottom: 20px;
+}
+
+.case-description {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 25px;
+}
+
+table.dataTable tr.shown {
+  background-color: #f9f9f9;
+}
+
+
+
+
+
+
+
+
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+
+
+

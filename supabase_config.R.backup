@@ -1,0 +1,170 @@
+# supabase_config.R
+# Supabase Configuration and Authentication Functions
+
+library(httr)
+library(jsonlite)
+library(shiny)
+library(shinyjs)
+library(dotenv)
+dotenv::load_dot_env()
+
+# Supabase Configuration
+SUPABASE_URL      <- Sys.getenv("SUPABASE_URL")
+SUPABASE_ANON_KEY <- Sys.getenv("SUPABASE_ANON_KEY")
+
+SUPABASE_AUTH_URL <- paste0(SUPABASE_URL, "/auth/v1")
+SUPABASE_REST_URL <- paste0(SUPABASE_URL, "/rest/v1")
+
+
+# Helper function to make authenticated requests
+make_supabase_request <- function(endpoint, method = "GET", body = NULL, token = NULL) {
+  headers <- list(
+    "apikey" = SUPABASE_ANON_KEY,
+    "Content-Type" = "application/json"
+  )
+  
+  if (!is.null(token)) {
+    headers[["Authorization"]] <- paste("Bearer", token)
+  }
+  
+  url <- paste0(SUPABASE_REST_URL, endpoint)
+  
+  if (method == "GET") {
+    response <- GET(url, add_headers(.headers = headers))
+  } else if (method == "POST") {
+    response <- POST(url, add_headers(.headers = headers), body = body, encode = "json")
+  } else if (method == "PATCH") {
+    response <- PATCH(url, add_headers(.headers = headers), body = body, encode = "json")
+  }
+  
+  return(response)
+}
+
+# Authentication Functions
+supabase_signup <- function(email, password) {
+  url <- paste0(SUPABASE_AUTH_URL, "/signup")
+  body <- list(email = email, password = password)
+  
+  response <- POST(
+    url,
+    add_headers(
+      "apikey" = SUPABASE_ANON_KEY,
+      "Content-Type" = "application/json"
+    ),
+    body = body,
+    encode = "json"
+  )
+  
+  if (status_code(response) == 200) {
+    content <- content(response, "parsed")
+    return(list(success = TRUE, user = content$user, session = content$session))
+  } else {
+    error_content <- content(response, "parsed")
+    return(list(success = FALSE, error = error_content$msg))
+  }
+}
+
+supabase_signin <- function(email, password) {
+  url <- paste0(SUPABASE_AUTH_URL, "/token?grant_type=password")
+  body <- list(email = email, password = password)
+  
+  response <- POST(
+    url,
+    add_headers(
+      "apikey" = SUPABASE_ANON_KEY,
+      "Content-Type" = "application/json"
+    ),
+    body = body,
+    encode = "json"
+  )
+  
+  if (status_code(response) == 200) {
+    content <- content(response, "parsed")
+    return(list(success = TRUE, user = content$user, session = content))
+  } else {
+    error_content <- content(response, "parsed")
+    return(list(success = FALSE, error = error_content$error_description))
+  }
+}
+
+supabase_signout <- function(token) {
+  url <- paste0(SUPABASE_AUTH_URL, "/logout")
+  
+  response <- POST(
+    url,
+    add_headers(
+      "apikey" = SUPABASE_ANON_KEY,
+      "Authorization" = paste("Bearer", token)
+    )
+  )
+  
+  return(status_code(response) == 204)
+}
+
+# User Progress Functions
+save_user_progress <- function(user_id, module_name, score, percentage, completed_at, token) {
+  endpoint <- "/user_progress"
+  body <- list(
+    user_id = user_id,
+    module_name = module_name,
+    score = score,
+    total_questions = length(score), # Assuming score is the number correct
+    percentage = percentage,
+    completed_at = completed_at,
+    updated_at = Sys.time()
+  )
+  
+  response <- make_supabase_request(endpoint, "POST", body, token)
+  return(status_code(response) == 201)
+}
+
+get_user_progress <- function(user_id, token) {
+  endpoint <- paste0("/user_progress?user_id=eq.", user_id)
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (status_code(response) == 200) {
+    return(content(response, "parsed"))
+  } else {
+    return(NULL)
+  }
+}
+
+save_quiz_result <- function(user_id, module_name, quiz_data, token) {
+  endpoint <- "/quiz_results"
+  body <- list(
+    user_id = user_id,
+    module_name = module_name,
+    quiz_data = jsonlite::toJSON(quiz_data, auto_unbox = TRUE),
+    submitted_at = Sys.time()
+  )
+  
+  response <- make_supabase_request(endpoint, "POST", body, token)
+  return(status_code(response) == 201)
+}
+
+# User Profile Functions
+get_user_profile <- function(user_id, token) {
+  endpoint <- paste0("/user_profiles?user_id=eq.", user_id)
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (status_code(response) == 200) {
+    profiles <- content(response, "parsed")
+    if (length(profiles) > 0) {
+      return(profiles[[1]])
+    }
+  }
+  return(NULL)
+}
+
+create_user_profile <- function(user_id, full_name, organization = NULL, token) {
+  endpoint <- "/user_profiles"
+  body <- list(
+    user_id = user_id,
+    full_name = full_name,
+    organization = organization,
+    created_at = Sys.time()
+  )
+  
+  response <- make_supabase_request(endpoint, "POST", body, token)
+  return(status_code(response) == 201)
+}

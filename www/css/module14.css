@@ -1,0 +1,180 @@
+.module-content-wrapper {
+  background-color: #fefefe;
+  border: 1px solid #dee2e6;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.section-heading {
+  color: #DC5A17;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.module-content-header p {
+  font-size: 15px;
+  color: #343a40;
+}
+
+.comparison-table-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.centered-footer-box {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.module-content-footer {
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fefefe;
+  border-left: 5px solid #006AA6;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+
+.module-content-footer h4 {
+  text-align: center;
+  color: #DC5A17;
+  margin-bottom: 15px;
+}
+
+.module-content-footer ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.module-content-footer li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+  color: #495057;
+}
+
+
+.module-intro-text {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #343a40;
+  background-color: #fdfdfd;
+  border-left: 5px solid #DC5A17;
+  padding: 20px 25px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.module-intro-text ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+  list-style-position: outside;
+}
+
+.module-intro-text li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.balance-sheet-diagram {
+  background-color: #ffffff;
+  border-left: 5px solid #006AA6;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  border-radius: 6px;
+}
+
+.financial-reporting-diagram {
+  background-color: #ffffff;
+  border-left: 5px solid #DC5A17;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  border-radius: 6px;
+}
+
+.diagram-title {
+  color: #DC5A17;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.balance-sheet-img {
+  width: 60%;
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+
+.financial-position-img {
+  width: 80%;
+  max-width: 900px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.income-statement-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  text-align: left;
+  min-width: 400px;
+}
+
+.income-statement-table th {
+  background-color: #006AA6;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.income-statement-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.income-statement-table td:last-child {
+  text-align: right;
+  color: #DC5A17;
+  font-weight: bold;
+}
+
+/* Responsive behavior */
+@media (max-width: 800px) {
+  .income-statement-table td,
+  .income-statement-table th {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 450px) {
+  .income-statement-table td,
+  .income-statement-table th {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .income-statement-table {
+    min-width: 400px;
+  }
+}

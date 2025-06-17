@@ -1,0 +1,103 @@
+.financial-aspects-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  min-width: 600px;
+}
+
+.financial-aspects-table th {
+  background-color: #006AA6;
+  color: #fff;
+  padding: 12px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.financial-aspects-table td {
+  border: 1px solid #ccc;
+  padding: 10px 10px;
+  vertical-align: top;
+}
+
+.financial-aspects-table td:first-child {
+  background-color: #DC5A17;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Zebra striping for readability */
+.financial-aspects-table tr:nth-child(odd) td:not(:first-child) {
+  background-color: #fdfdf9;
+}
+
+.financial-aspects-table tr:nth-child(even) td:not(:first-child) {
+  background-color: #ffffff;
+}
+
+.balance-sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  min-width: 700px;
+  margin-top: 15px;
+}
+
+.balance-sheet-table th,
+.balance-sheet-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.balance-sheet-table th {
+  text-align: center;
+  font-weight: bold;
+}
+
+.balance-sheet-table td b {
+  font-weight: bold;
+}
+
+.balance-sheet-table-wrapper {
+  overflow-x: auto;
+}
+
+/* Responsive scaling */
+@media (max-width: 800px) {
+  .financial-aspects-table th,
+  .financial-aspects-table td {
+    font-size: 14px;
+    padding: 8px 6px;
+  }
+  .balance-sheet-table td,
+  .balance-sheet-table th {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 450px) {
+  .financial-aspects-table th,
+  .financial-aspects-table td {
+    font-size: 12px;
+    padding: 6px 5px;
+  }
+
+  .financial-aspects-table {
+    min-width: 600px;
+  }
+
+  .balance-sheet-table td,
+  .balance-sheet-table th {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .balance-sheet-table {
+    min-width: 700px;
+  }
+}
+
+

@@ -1,0 +1,22 @@
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Nunito, sans-serif;
+}
+
+.comparison-table th {
+  background-color: #DC5A17;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.comparison-table td {
+  background-color: #F5E7CD;
+  border: 1px solid #E2D4B7;
+  padding: 10px;
+}
+
+.comparison-table tr:nth-child(even) td {
+  background-color: #FFF9F0;
+}

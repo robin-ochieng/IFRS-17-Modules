@@ -1,0 +1,162 @@
+/* ==== MODULE 5 STYLES ==== */
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #006AA6;
+  margin-bottom: 20px;
+}
+
+.module-wrapper {
+  padding: 30px;
+  font-family: "Nunito", sans-serif;
+  background-color: #ffffff;
+}
+
+.module-section {
+  margin-bottom: 30px;
+}
+
+.module-section h3 {
+  color: #DC5A17;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.module-section p,
+.module-section ul {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.module-section ul li {
+  margin-bottom: 6px;
+}
+
+.summary-box {
+  background-color: #f7f8f5;
+  border-left: 6px solid #DC5A17;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* Table/Image Containers */
+.table-image-container,
+.summary-image-container {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.table-image-container img,
+.summary-image-container img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+/* === Scenario Box === */
+.info-box.scenario-box {
+  background-color: #fdfdf9;
+  border-left: 5px solid #DC5A17;
+  padding: 20px 25px;
+  margin: 20px 0;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info-box.scenario-box h4 {
+  color: #006AA6;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.info-box.scenario-box ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.info-box.scenario-box li {
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+/* --- Row Layout for Scenario and Calculation --- */
+.scenario-calc-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Left column: Scenario */
+.scenario-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Right column: Calculation */
+.calc-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+
+.measurement-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  min-width: 600px;
+}
+
+.measurement-table th {
+  background-color: #006AA6;
+  color: #fff;
+  padding: 12px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.measurement-table td {
+  border: 1px solid #ccc;
+  padding: 10px 10px;
+  vertical-align: top;
+}
+
+.measurement-table td:first-child {
+  color: #DC5A17;
+  font-weight: bold;
+}
+
+/* Zebra striping for readability */
+.measurement-table tr:nth-child(odd) td {
+  background-color: #f9f9f9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .measurement-table th,
+  .measurement-table td {
+    font-size: 14px;
+    padding: 8px 6px;
+  }
+}
+
+@media (max-width: 450px) {
+  .measurement-table th,
+  .measurement-table td {
+    font-size: 12px;
+    padding: 6px 5px;
+  }
+
+  .measurement-table {
+    min-width: 600px;
+  }
+}

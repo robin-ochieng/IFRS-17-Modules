@@ -1,0 +1,79 @@
+/* Styled IFRS Table */
+.styled-ifrs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+  background-color: white;
+}
+
+.styled-ifrs-table thead {
+  background-color: #006AA6; /* green header */
+  color: white;
+  text-align: left;
+}
+
+.styled-ifrs-table th,
+.styled-ifrs-table td {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.styled-ifrs-table tbody tr:nth-child(even):not(.highlight-brown) {
+  background-color: #f9f9f9;
+}
+
+/* Brown highlighted rows */
+.highlight-brown {
+  background-color: #DC5A17;
+  color: white;
+}
+
+.highlight-brown td {
+  border-color: #DC5A17;
+}
+
+
+.highlight-header {
+  background-color: #006AA6;
+  color: white;
+}
+
+.table-dpf-reference {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.table-dpf-reference thead th {
+  background-color: #006AA6;
+  color: white;
+  font-weight: 700;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.table-dpf-reference td {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  vertical-align: top;
+  background-color: white;
+}
+
+/* Highlight only first column (Reference) */
+.table-dpf-reference td:first-child {
+  background-color: #DC5A17;
+  color: white;
+  font-weight: bold;
+  border-color: #DC5A17;
+}
+
+/* Zebra striping for better readability */
+.table-dpf-reference tbody tr:nth-child(even) td:not(:first-child) {
+  background-color: #f9f9f9;
+}

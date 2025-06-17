@@ -1,0 +1,91 @@
+/* Module 7 CSS Enhancements */
+.module-intro-text {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 15.5px;
+  color: #2f2f2f;
+  background-color: #fefefe;
+  border-left: 6px solid #DC5A17;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  line-height: 1.7;
+}
+
+.module-intro-text h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #DC5A17;
+  margin-bottom: 20px;
+}
+
+.module-intro-text h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #006AA6;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.module-intro-text p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.module-intro-text ul {
+  padding-left: 25px;
+  margin-bottom: 15px;
+  list-style-position: outside;
+}
+
+.module-intro-text li {
+  margin-bottom: 6px;
+  color: #3a3a3a;
+}
+
+.radio label {
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.box .shiny-input-radiogroup {
+  margin-bottom: 20px;
+}
+
+/* === Table Styling for Key IFRS 17 Concepts === */
+.table.key-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 15px;
+}
+
+/* Header row */
+.table.key-table thead th {
+  background-color: #006AA6; /* Green highlight */
+  color: #ffffff;
+  padding: 10px;
+  text-align: left;
+  font-weight: 700;
+  border: 1px solid #dee2e6;
+}
+
+/* Table cells */
+.table.key-table td {
+  padding: 10px;
+  vertical-align: top;
+  border: 1px solid #dee2e6;
+  font-size: 15px;
+  background-color: #ffffff;
+}
+
+/* Optional: Emphasize first column */
+.table.key-table tbody td:first-child {
+  font-weight: 600;
+  color: #333333;
+  background-color: #f9f9f9;
+}
+
+
+
+

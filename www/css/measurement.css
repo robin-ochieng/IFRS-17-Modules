@@ -1,0 +1,303 @@
+.ifrs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+}
+
+.ifrs-table th {
+  background-color: #006AA6; /* Company green */
+  color: #000;
+  padding: 12px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.ifrs-table td {
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  vertical-align: top;
+}
+
+/* Highlight first column with company gold-bronze */
+.ifrs-table td:first-child {
+  background-color: #DC5A17;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Light zebra striping for clarity */
+.ifrs-table tr:nth-child(odd) td:not(:first-child) {
+  background-color: #fdfdf9;
+}
+
+.ifrs-table tr:nth-child(even) td:not(:first-child) {
+  background-color: #ffffff;
+}
+
+
+
+
+
+
+/* IAS STANDARDS   */
+.ias-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+}
+
+.ias-table th {
+  background-color: #006AA6; /* Green for headers */
+  color: #000;
+  padding: 12px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.ias-table td {
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  vertical-align: top;
+}
+
+/* First column: IAS standard codes */
+.ias-table td:first-child {
+  background-color: #DC5A17; /* Gold-Bronze */
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Optional row striping for clarity */
+.ias-table tr:nth-child(odd) td:not(:first-child) {
+  background-color: #fdfdf9;
+}
+
+.ias-table tr:nth-child(even) td:not(:first-child) {
+  background-color: #ffffff;
+}
+
+
+
+
+/* === IFRS 17 GLOSSARY === */
+.glossary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+}
+
+.glossary-table th {
+  background-color: #006AA6; /* Company green */
+  color: #000;
+  padding: 12px 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.glossary-table td {
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  vertical-align: top;
+}
+
+/* First column: Terms */
+.glossary-table td:first-child {
+  background-color: #DC5A17; /* Gold-Bronze */
+  color: #fff;
+  font-weight: bold;
+  width: 25%;
+}
+
+/* Optional striped rows for readability */
+.glossary-table tr:nth-child(odd) td:not(:first-child) {
+  background-color: #fdfdf9;
+}
+
+.glossary-table tr:nth-child(even) td:not(:first-child) {
+  background-color: #ffffff;
+}
+
+/* Indented nested list formatting */
+.glossary-table ol {
+  margin-left: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* Optional: scroll hint on small screens */
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+/* Apply consistent font scaling and spacing for nested lists inside table cells */
+.glossary-table td ol,
+.ifrs-table td ol,
+.ias-table td ol {
+  font-size: 0.95em;          /* scale font slightly smaller */
+  margin-left: 1.2em;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-left: 1.2em;
+}
+
+.glossary-table td ol li,
+.ifrs-table td ol li,
+.ias-table td ol li {
+  line-height: 1.4;
+  word-break: break-word;     /* prevent overflow of long words */
+}
+
+/* Optional: adjust nested <ol> inside <li> */
+.glossary-table td ol li ol,
+.ifrs-table td ol li ol,
+.ias-table td ol li ol {
+  margin-top: 4px;
+  font-size: 0.92em;
+}
+
+
+
+@media (max-width: 800px) {
+
+  /* Make table text and layout more compact */
+  .ifrs-table td,
+  .ifrs-table th,
+  .ias-table td,
+  .ias-table th {
+    font-size: 14px;
+    padding: 10px 8px;
+  }
+
+  .glossary-table th,
+  .glossary-table td {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+
+  /* Prevent overflow in long nested lists */
+  .ifrs-table td ol,
+  .ias-table td ol {
+    font-size: 0.95em;
+    margin-left: 1.2em;
+    padding-left: 1em;
+  }
+
+  .ifrs-table td ol li,
+  .ias-table td ol li {
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .ifrs-table td ol li ol,
+  .ias-table td ol li ol {
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  /* Ensure tables don't overflow horizontally */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Optional: reduce width for first column */
+  .ifrs-table td:first-child,
+  .ias-table td:first-child {
+    white-space: nowrap;
+    width: auto;
+  }
+
+  .glossary-table td:first-child {
+    width: 30%;
+    white-space: normal;  /* Allow wrapping of term text */
+    font-size: 12px;
+  }
+
+  .glossary-table td ol,
+  .glossary-table td ol li,
+  .glossary-table td ol li ol {
+    font-size: 0.85em;
+    line-height: 1.4;
+    margin-left: 1.2em;
+    padding-left: 0.8em;
+  }
+
+  .glossary-table {
+    min-width: 600px;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .ifrs-table td,
+  .ifrs-table th,
+  .ias-table td,
+  .ias-table th {
+    font-size: 12px;
+    padding: 10px 8px;
+    overflow-wrap: break-word;
+  }
+
+  .glossary-table th,
+  .glossary-table td {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+
+   .glossary-table td:first-child {
+    width: 40%;
+    font-size: 11px;
+    white-space: normal;
+  } 
+
+  .glossary-table td ol,
+  .glossary-table td ol li,
+  .glossary-table td ol li ol {
+    font-size: 0.8em;
+    line-height: 1.4;
+    margin-left: 1em;
+    padding-left: 0.6em;
+  }
+
+  .ifrs-table td:first-child,
+  .ias-table td:first-child {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .ifrs-table td ol,
+  .ias-table td ol {
+    font-size: 0.9em; /* slightly smaller for mobile */
+    margin-left: 1em; /* adjust left margin for smaller screens */
+  }
+
+  .glossary-table {
+    min-width: 600px;
+  }  
+  
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+  }
+}
+
+

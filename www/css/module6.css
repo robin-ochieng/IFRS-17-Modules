@@ -1,0 +1,70 @@
+/* === Section Titles === */
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #006AA6;
+  margin-bottom: 20px;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* === Subsection Titles === */
+.subsection-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #DC5A17;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* === Module Content Wrapper === */
+.module-content-wrapper {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  font-family: 'Nunito', sans-serif;
+  color: #212529;
+  line-height: 1.6;
+}
+
+/* === Bullet Lists === */
+.module-content-wrapper ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.module-content-wrapper li {
+  margin-bottom: 8px;
+}
+
+/* === Emphasis and Notes === */
+.module-content-wrapper em {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* === Info Box Example / Scenario === */
+.info-box {
+  background-color: #f8f9fa;
+  border-left: 4px solid #006AA6;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.info-box p {
+  margin: 4px 0;
+}
+
+.module-image {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
