@@ -1,0 +1,12 @@
+name: IFRS17-Training-Module
+title: IFRS17-Training-Module
+username: robinochieng
+account: robinochieng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14952048
+bundleId: 10477245
+url: https://robinochieng.shinyapps.io/IFRS17-Training-Module/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
