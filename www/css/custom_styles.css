@@ -83,6 +83,29 @@
       padding-top: 5px; /* Space after the vertical line */
      }
 
+     
+
+    /* Target the menu item icon in the sidebar */
+    /* custom_styles.css */
+    .logos {
+      position: absolute;
+      top: 0;   
+      text-align: center;
+      padding: 20px 10px 10px 10px; 
+      height: 120px;       
+      box-sizing: border-box;
+    }
+
+    /* custom_styles.css */
+    .ira-logo {
+      height: 80px;
+    }
+
+    .logos img {
+      height: 80px;
+    }
+
+
     /* ──────────────────────────────────────────────────────────────
       Sidebar container: fixed under logos, scrollable, full height
       ────────────────────────────────────────────────────────────── */
@@ -206,26 +229,6 @@
     background-color: #fff; 
     padding: 10px; 
     border-radius: 10px;
-}
-
-
-
-/* Target the menu item icon in the sidebar */
-/* custom_styles.css */
-.logos {
-  position: absolute;
-  top: 5px;   
-  text-align: left;
-  padding: 20px 10px 10px 10px; 
-}
-
-/* custom_styles.css */
-.ira-logo {
-  height: 80px;
-}
-
-.logos img {
-  height: 80px;
 }
 
 .info-icon {
