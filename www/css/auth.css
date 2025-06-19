@@ -1,0 +1,114 @@
+            /* General styles for the authentication overlay */
+            .auth-overlay {
+              font-family: 'Nunito Sans', sans-serif;
+              padding: 20px;
+              box-sizing: border-box;
+            }
+            .auth-container {
+              position: relative;
+              z-index: 10000;
+            }
+            .nav-tabs {
+              display: flex;
+              border-bottom: 1px solid #ddd;
+              margin-bottom: 0;
+            }
+            .nav-tabs .nav-link {
+              padding: 8px 16px;
+              margin-right: 5px;
+              border: 1px solid #ddd;
+              border-bottom: none;
+              background: #f8f9fa;
+              color: #495057;
+              cursor: pointer;
+              text-decoration: none;
+              border-radius: 5px 5px 0 0;
+            }
+            .nav-tabs .nav-link.active {
+              background: white;
+              color: #495057;
+              border-bottom: 1px solid white;
+              margin-bottom: -1px;
+            }
+            .auth-form {
+              padding-top: 20px;
+              min-height: 400px;
+            }
+            .form-group {
+              margin-bottom: 15px;
+            }
+            .form-control {
+              padding: 10px 12px;
+              font-size: 14px;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+            }
+            .btn {
+              border-radius: 4px;
+              border: none;
+              cursor: pointer;
+              transition: background-color 0.2s;
+            }
+            .btn-primary {
+              background-color: #007bff;
+              color: white;
+            }
+            .btn-primary:hover {
+              background-color: #0056b3;
+            }
+            .btn-success {
+              background-color: #28a745;
+              color: white;
+            }
+            .btn-success:hover {
+              background-color: #1e7e34;
+            }
+            .alert {
+              padding: 10px 15px;
+              margin-top: 10px;
+              border-radius: 4px;
+            }
+            .alert-success {
+              background-color: #d4edda;
+              border: 1px solid #c3e6cb;
+              color: #155724;
+            }
+            .alert-danger {
+              background-color: #f8d7da;
+              border: 1px solid #f5c6cb;
+              color: #721c24;
+            }
+            .alert-warning {
+              background-color: #fff3cd;
+              border: 1px solid #ffeaa7;
+              color: #856404;
+            }
+            .user-progress-sidebar {
+              border-left: 4px solid #007bff;
+            }
+            .progress-item {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 2px 0;
+            }
+            .progress-badge {
+              font-size: 10px;
+              padding: 2px 6px;
+              border-radius: 10px;
+            }
+            .completed { background: #28a745; color: white; }
+            .in-progress { background: #ffc107; color: black; }
+            .not-started { background: #6c757d; color: white; }
+            
+            /* Ensure modal is properly positioned */
+            @media (max-height: 600px) {
+              .auth-container {
+                max-height: 80vh;
+                padding: 20px;
+              }
+              .auth-form {
+                min-height: auto;
+              }
+            }
+
