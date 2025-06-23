@@ -1,3 +1,5 @@
+#app.R
+
 library(shiny)
 library(shinyWidgets)
 library(rmarkdown) 
@@ -69,46 +71,40 @@ ui <- tagList(
       scrollToTop = TRUE,
       dashboardHeader(
         disable = FALSE,
-        fixed = TRUE,
-        # User info in header
-        rightUi = tagList(
-          dropdownMenu(
-            type = "notifications",
-            icon = icon("user"),
-            headerText = "User Menu",
-            notificationItem(
-              text = textOutput("user_welcome", inline = TRUE),
-              icon = icon("user")
-            ),
-            notificationItem(
-              text = "View Progress",
-              href = "#",
-              icon = icon("chart-line")
-            ),
-            notificationItem(
-              text = "Logout",
-              href = "#",
-              icon = icon("sign-out-alt"),
-              inputId = "logout_btn"
-            )
+        fixed = FALSE,
+        rightUi = dropdownMenu(
+          type = "notifications",
+          icon = icon("user"),
+          headerText = "User Menu",
+          
+          # User welcome
+          notificationItem(
+            text = textOutput("user_welcome", inline = TRUE),
+            icon = icon("user")
+          ),
+
+          
+          # Progress (moved here from outside)
+          notificationItem(
+            text = textOutput("progress_display", inline = TRUE),
+            icon = icon("chart-line"),
+            href = "#",
+            inputId = "show_progress_dashboard"
+          ),
+
+          # Logout
+          notificationItem(
+            text = "Logout",
+            href = "#",
+            icon = icon("sign-out-alt"),
+            inputId = "logout_btn"
           )
         )
       ),
       dashboardSidebar(
         div(class = "logos",
             img(src = "images/ira_logo_.png", class = "ira-logo") 
-        ),
-        # User progress indicator
-        div(
-          class = "user-progress-sidebar",
-          style = "padding: 15px; background: #f8f9fa; margin: 10px; border-radius: 5px;",
-          h5("Your Progress", style = "margin-bottom: 10px;"),
-          div(
-            id = "progress_indicator",
-            style = "font-size: 14px; color: #666;",
-            "Loading progress..."
-          )
-        ),        
+        ),    
         tags$div(
           class = "menu-container", 
           sidebarMenu(
@@ -126,7 +122,7 @@ ui <- tagList(
               menuSubItem(" | Module 5",  tabName = "module5", icon = icon("book")),
               menuSubItem(" | Module 6",  tabName = "module6", icon = icon("book")),
               menuSubItem(" | Module 7",  tabName = "module7", icon = icon("book")),
-              menuSubItem(" |  Module 8",  tabName = "module8", icon = icon("book")),
+              menuSubItem(" | Module 8",  tabName = "module8", icon = icon("book")),
               menuSubItem(" | Module 9",  tabName = "module9", icon = icon("book")),
               menuSubItem(" | Module 10", tabName = "module10", icon = icon("book")),
               menuSubItem(" | Module 11", tabName = "module11", icon = icon("book")),
@@ -159,121 +155,7 @@ ui <- tagList(
       includeCSS("www/css/module11.css"),  
       includeCSS("www/css/module13.css"), 
       includeCSS("www/css/module14.css"),
-            # Add authentication CSS
-          tags$style(HTML("
-            .auth-overlay {
-              font-family: 'Nunito Sans', sans-serif;
-              padding: 20px;
-              box-sizing: border-box;
-            }
-            .auth-container {
-              position: relative;
-              z-index: 10000;
-            }
-            .nav-tabs {
-              display: flex;
-              border-bottom: 1px solid #ddd;
-              margin-bottom: 0;
-            }
-            .nav-tabs .nav-link {
-              padding: 8px 16px;
-              margin-right: 5px;
-              border: 1px solid #ddd;
-              border-bottom: none;
-              background: #f8f9fa;
-              color: #495057;
-              cursor: pointer;
-              text-decoration: none;
-              border-radius: 5px 5px 0 0;
-            }
-            .nav-tabs .nav-link.active {
-              background: white;
-              color: #495057;
-              border-bottom: 1px solid white;
-              margin-bottom: -1px;
-            }
-            .auth-form {
-              padding-top: 20px;
-              min-height: 400px;
-            }
-            .form-group {
-              margin-bottom: 15px;
-            }
-            .form-control {
-              padding: 10px 12px;
-              font-size: 14px;
-              border: 1px solid #ddd;
-              border-radius: 4px;
-            }
-            .btn {
-              border-radius: 4px;
-              border: none;
-              cursor: pointer;
-              transition: background-color 0.2s;
-            }
-            .btn-primary {
-              background-color: #007bff;
-              color: white;
-            }
-            .btn-primary:hover {
-              background-color: #0056b3;
-            }
-            .btn-success {
-              background-color: #28a745;
-              color: white;
-            }
-            .btn-success:hover {
-              background-color: #1e7e34;
-            }
-            .alert {
-              padding: 10px 15px;
-              margin-top: 10px;
-              border-radius: 4px;
-            }
-            .alert-success {
-              background-color: #d4edda;
-              border: 1px solid #c3e6cb;
-              color: #155724;
-            }
-            .alert-danger {
-              background-color: #f8d7da;
-              border: 1px solid #f5c6cb;
-              color: #721c24;
-            }
-            .alert-warning {
-              background-color: #fff3cd;
-              border: 1px solid #ffeaa7;
-              color: #856404;
-            }
-            .user-progress-sidebar {
-              border-left: 4px solid #007bff;
-            }
-            .progress-item {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 2px 0;
-            }
-            .progress-badge {
-              font-size: 10px;
-              padding: 2px 6px;
-              border-radius: 10px;
-            }
-            .completed { background: #28a745; color: white; }
-            .in-progress { background: #ffc107; color: black; }
-            .not-started { background: #6c757d; color: white; }
-            
-            /* Ensure modal is properly positioned */
-            @media (max-height: 600px) {
-              .auth-container {
-                max-height: 80vh;
-                padding: 20px;
-              }
-              .auth-form {
-                min-height: auto;
-              }
-            }
-          ")),
+      includeCSS("www/css/auth.css"),
       tags$script(src = "js/custom.js"),
       tags$link(rel = "shortcut icon", href = "favicon/kenbright.ico", type = "image/x-icon"),
       tags$link(
@@ -330,7 +212,9 @@ server <- function(input, output, session) {
 
   # User welcome message
   output$user_welcome <- renderText({
-    if (user_data$is_authenticated && !is.null(user_data$profile)) {
+    if (user_data$is_authenticated && user_data$is_guest) {
+      "Guest User"
+    } else if (user_data$is_authenticated && !is.null(user_data$profile)) {
       paste("Welcome,", user_data$profile$full_name)
     } else if (user_data$is_authenticated) {
       paste("Welcome,", user_data$email)
@@ -338,10 +222,14 @@ server <- function(input, output, session) {
       ""
     }
   })
+
+  # Add a reactive value to trigger progress refresh
+  progress_refresh_trigger <- reactiveVal(0)
   
   # Load and display user progress
   user_progress <- reactive({
-    if (user_data$is_authenticated) {
+    progress_refresh_trigger()
+    if (user_data$is_authenticated && !user_data$is_guest) {
       get_user_progress(user_data$user_id, user_data$token)
     } else {
       NULL
@@ -350,27 +238,38 @@ server <- function(input, output, session) {
   
   # Update progress indicator
   observe({
-    progress <- user_progress()
-    if (!is.null(progress)) {
-      modules <- c("intro", "measurement", paste0("module", 1:15))
-      completed_modules <- sapply(progress, function(x) x$module_name)
-      
-      progress_html <- sapply(modules, function(mod) {
-        status <- if (mod %in% completed_modules) "completed" else "not-started"
-        badge_text <- if (status == "completed") "✓" else "○"
-        
-        paste0(
-          '<div class="progress-item">',
-          '<span>', stringr::str_to_title(gsub("module(\\d+)", "Module \\1", mod)), '</span>',
-          '<span class="progress-badge ', status, '">', badge_text, '</span>',
-          '</div>'
-        )
-      })
-      
-      shinyjs::html("progress_indicator", paste(progress_html, collapse = ""))
+    if (user_data$is_guest) {
+      shinyjs::html("progress_text", "Guest Mode")
+    } else if (user_data$is_authenticated) {
+      progress <- user_progress()
+      if (!is.null(progress) && length(progress) > 0) {
+        total_modules <- 15  #  15 modules
+        completed_count <- length(progress)
+        percentage <- round((completed_count / total_modules) * 100)
+        shinyjs::html("progress_text", paste0(completed_count, "/", total_modules, " (", percentage, "%)"))
+      } else {
+        shinyjs::html("progress_text", "0/15 (0%)")
+      }
+    } else {
+      shinyjs::html("progress_text", "Not logged in")
     }
   })
-  
+
+  output$progress_display <- renderText({
+    if (isTRUE(user_data$is_guest)) {
+      "📊 Progress: Guest Mode"
+    } else if (isTRUE(user_data$is_authenticated)) {
+      progress <- user_progress()
+      if (!is.null(progress) && length(progress) > 0) {
+        paste0("📊 Progress: ", length(progress), "/15")
+      } else {
+        "📊 Progress: 0/15"
+      }
+    } else {
+      "📊 Progress: Not logged in"
+    }
+  })
+
   # Logout handler
   observeEvent(input$logout_btn, {
     if (user_data$is_authenticated) {
@@ -391,21 +290,133 @@ server <- function(input, output, session) {
   # Modified module servers with user data integration
   intro_nav <- IFRS17TrainingIntroServer("intro", user_data)
   measurement_nav <- IFRS17MeasurementServer("measurement", user_data)
-  module1_nav <- IFRS17Module1Server("module1", user_data)
-  module2_nav <- IFRS17Module2Server("module2", user_data)
-  module3_nav <- IFRS17Module3Server("module3", user_data)
-  module4_nav <- IFRS17Module4Server("module4", user_data)
-  module5_nav <- IFRS17Module5Server("module5", user_data)  
-  module6_nav <- IFRS17Module6Server("module6", user_data)
-  module7_nav <- IFRS17Module7Server("module7", user_data)
-  module8_nav <- IFRS17Module8Server("module8", user_data)
-  module9_nav <- IFRS17Module9Server("module9", user_data)
-  module10_nav <- IFRS17Module10Server("module10", user_data)
-  module11_nav <- IFRS17Module11Server("module11", user_data)
-  module12_nav <- IFRS17Module12Server("module12", user_data)
-  module13_nav <- IFRS17Module13Server("module13", user_data)
-  module14_nav <- IFRS17Module14Server("module14", user_data)
 
+  module1_result <- IFRS17Module1Server("module1", user_data)
+  module2_result <- IFRS17Module2Server("module2", user_data)
+  module3_result <- IFRS17Module3Server("module3", user_data)
+  module4_result <- IFRS17Module4Server("module4", user_data)
+  module5_result <- IFRS17Module5Server("module5", user_data)  
+  module6_result <- IFRS17Module6Server("module6", user_data)
+  module7_result <- IFRS17Module7Server("module7", user_data)
+  module8_result <- IFRS17Module8Server("module8", user_data)
+  module9_result <- IFRS17Module9Server("module9", user_data)
+  module10_result <- IFRS17Module10Server("module10", user_data)
+  module11_result <- IFRS17Module11Server("module11", user_data)
+  module12_result <- IFRS17Module12Server("module12", user_data)
+  module13_result <- IFRS17Module13Server("module13", user_data)
+  module14_result <- IFRS17Module14Server("module14", user_data)
+
+  # Observe progress updates from Module 1
+  observeEvent(module1_result$progress_trigger(), {
+    if (module1_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 2
+  observeEvent(module2_result$progress_trigger(), {
+    if (module2_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 3
+  observeEvent(module3_result$progress_trigger(), {
+    if (module3_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 4
+  observeEvent(module4_result$progress_trigger(), {
+    if (module4_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 5
+  observeEvent(module5_result$progress_trigger(), {
+    if (module5_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 6
+  observeEvent(module6_result$progress_trigger(), {
+    if (module6_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 7
+  observeEvent(module7_result$progress_trigger(), {
+    if (module7_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 8
+  observeEvent(module8_result$progress_trigger(), {
+    if (module8_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 9
+  observeEvent(module9_result$progress_trigger(), {
+    if (module9_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 10
+  observeEvent(module10_result$progress_trigger(), {
+    if (module10_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 11
+  observeEvent(module11_result$progress_trigger(), {
+    if (module11_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 12
+  observeEvent(module12_result$progress_trigger(), {
+    if (module12_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 13
+  observeEvent(module13_result$progress_trigger(), {
+    if (module13_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
+
+  # Observe progress updates from Module 14
+  observeEvent(module14_result$progress_trigger(), {
+    if (module14_result$progress_trigger() > 0) {
+      # Trigger a refresh of the user progress
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
 
   
   # When the user clicks “Next: Measurement Models”, jump the sidebar
@@ -430,7 +441,7 @@ server <- function(input, output, session) {
 
   
   # When the user clicks “Next: Case Studies”, jump the sidebar
-  observeEvent(module1_nav(), {
+  observeEvent(module1_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -439,7 +450,7 @@ server <- function(input, output, session) {
   })  
 
   # When the user clicks “Next: Module 3 - Combination & Separation of Insurance Contracts”, jump the sidebar
-  observeEvent(module2_nav(), {
+  observeEvent(module2_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -449,7 +460,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 4 - Level of Aggregation”, jump the sidebar
-  observeEvent(module3_nav(), {
+  observeEvent(module3_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -459,7 +470,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 5 - Recognition”, jump the sidebar
-  observeEvent(module4_nav(), {
+  observeEvent(module4_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -469,7 +480,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 6 - Measurement on Initial Recognition”, jump the sidebar
-  observeEvent(module5_nav(), {
+  observeEvent(module5_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -479,7 +490,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 7 - Subsequent Measurement”, jump the sidebar
-  observeEvent(module6_nav(), {
+  observeEvent(module6_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -489,7 +500,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 8 - Discounting, CSM & Risk Adjustment”, jump the sidebar
-  observeEvent(module7_nav(), {
+  observeEvent(module7_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -499,7 +510,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 9 - Onerous Contracts”, jump the sidebar
-  observeEvent(module8_nav(), {
+  observeEvent(module8_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -509,7 +520,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 10 - Premium Allocation Approach”, jump the sidebar
-  observeEvent(module9_nav(), {
+  observeEvent(module9_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -519,7 +530,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 11 - Reinsurance Contracts Held”, jump the sidebar
-  observeEvent(module10_nav(), {
+  observeEvent(module10_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -529,7 +540,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 12 - Investment Contracts with Discretionary Participation Features”, jump the sidebar
-  observeEvent(module11_nav(), {
+  observeEvent(module11_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -539,7 +550,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 13 - Modification & Derecognition”, jump the sidebar
-  observeEvent(module12_nav(), {
+  observeEvent(module12_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -549,7 +560,7 @@ server <- function(input, output, session) {
 
 
   # When the user clicks “Next: Module 14 - Presentation of Financial Statements”, jump the sidebar
-  observeEvent(module13_nav(), {
+  observeEvent(module13_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -559,7 +570,7 @@ server <- function(input, output, session) {
 
   
   # When the user clicks “Next: Module 15 - Insurance Service Result”, jump the sidebar
-  observeEvent(module14_nav(), {
+  observeEvent(module14_result$navigate(), {
     updateTabItems(
       session,            # THIS session is the **root** session
       inputId   = "sidebar",
@@ -583,7 +594,450 @@ server <- function(input, output, session) {
 
   # This captures the Case Studies navigation event 
   # IFRS17CaseStudiesServer("cases")
+
+
+  # This observer is for the progress dashboard:
+  observeEvent(input$show_progress_dashboard, {
+    if (!user_data$is_authenticated) {
+      showNotification("Please log in to view progress", type = "info")
+      return()
+    }
+    
+    if (user_data$is_guest) {
+      showNotification("Progress tracking is not available in guest mode", type = "warning")
+      return()
+    }
+    
+    # Get user progress
+    progress_data <- user_progress()
+    
+    # Define all modules (only modules 1-15)
+    all_modules <- paste0("module", 1:15)
+    module_names <- c(
+      "Introduction & Scope",
+      "Combination & Separation",
+      "Level of Aggregation",
+      "Recognition",
+      "Measurement on Initial Recognition",
+      "Subsequent Measurement",
+      "Discounting, CSM & Risk Adjustment",
+      "Onerous Contracts",
+      "Premium Allocation Approach",
+      "Reinsurance Contracts Held",
+      "Investment Contracts with DPF",
+      "Modification & Derecognition",
+      "Presentation of Financial Statements",
+      "Insurance Service Result",
+      "Insurance Finance Income or Expenses"
+    )
+    
+    # Create progress summary
+    if (!is.null(progress_data) && length(progress_data) > 0) {
+      # Convert progress data to a more usable format
+      progress_df <- data.frame(
+        module = character(),
+        score = numeric(),
+        percentage = numeric(),
+        completed_at = character(),
+        stringsAsFactors = FALSE
+      )
+      
+      for (p in progress_data) {
+        progress_df <- rbind(progress_df, data.frame(
+          module = p$module_name,
+          score = as.numeric(p$score),
+          percentage = as.numeric(p$percentage),
+          completed_at = format(as.POSIXct(p$completed_at), "%B %d, %Y"),
+          stringsAsFactors = FALSE
+        ))
+      }
+    } else {
+      progress_df <- data.frame(
+        module = character(),
+        score = numeric(),
+        percentage = numeric(),
+        completed_at = character(),
+        stringsAsFactors = FALSE
+      )
+    }
+    
+    # Show modal with progress dashboard
+    showModal(
+      modalDialog(
+        title = tagList(
+          icon("chart-line"),
+          "Your Learning Progress Dashboard"
+        ),
+        size = "l",
+        easyClose = TRUE,
+        
+        # Overall Progress Card
+        div(
+          style = "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                  padding: 30px; border-radius: 15px; color: white; 
+                  text-align: center; margin-bottom: 30px;",
+          h2(
+            paste0(nrow(progress_df), " / ", length(all_modules)),
+            style = "font-size: 48px; margin: 0; font-weight: bold;"
+          ),
+          p("Modules Completed", style = "font-size: 18px; margin: 10px 0;"),
+          
+          # Progress bar
+          div(
+            style = "background: rgba(255,255,255,0.3); height: 20px; 
+                    border-radius: 10px; margin-top: 20px; overflow: hidden;",
+            div(
+              style = paste0(
+                "background: white; height: 100%; width: ",
+                round(nrow(progress_df) / length(all_modules) * 100), "%; ",
+                "transition: width 0.5s ease;"
+              )
+            )
+          ),
+          
+          # Average score if modules completed
+          if (nrow(progress_df) > 0) {
+            avg_score <- round(mean(progress_df$percentage), 1)
+            p(
+              paste0("Average Score: ", avg_score, "%"),
+              style = "font-size: 16px; margin-top: 15px; opacity: 0.9;"
+            )
+          }
+        ),
+        
+        # Module Progress Grid
+        h4("Module Progress Details", style = "margin-bottom: 20px;"),
+        div(
+          style = "display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+                  gap: 15px; max-height: 400px; overflow-y: auto; padding: 10px;",
+          
+          lapply(seq_along(all_modules), function(i) {
+            module_id <- all_modules[i]
+            module_name <- module_names[i]
+            
+            # Check if module is completed
+            module_progress <- progress_df[progress_df$module == module_id, ]
+            is_completed <- nrow(module_progress) > 0
+            
+            div(
+              style = paste0(
+                "background: ", if(is_completed) "#f0f9ff" else "#f8f9fa", "; ",
+                "border: 2px solid ", if(is_completed) "#3b82f6" else "#e5e7eb", "; ",
+                "border-radius: 10px; padding: 15px; position: relative;"
+              ),
+              
+              # Module number badge
+              div(
+                style = paste0(
+                  "position: absolute; top: -10px; right: -10px; ",
+                  "background: ", if(is_completed) "#3b82f6" else "#9ca3af", "; ",
+                  "color: white; width: 30px; height: 30px; ",
+                  "border-radius: 50%; display: flex; align-items: center; ",
+                  "justify-content: center; font-weight: bold;"
+                ),
+                as.character(i)
+              ),
+              
+              # Module name
+              h5(
+                module_name,
+                style = paste0(
+                  "margin: 0 0 10px 0; font-size: 14px; ",
+                  "color: ", if(is_completed) "#1e40af" else "#6b7280", ";"
+                )
+              ),
+              
+              # Status and score
+              if (is_completed) {
+                tagList(
+                  div(
+                    style = "display: flex; justify-content: space-between; 
+                            align-items: center; margin-bottom: 5px;",
+                    span(
+                      icon("check-circle", style = "color: #10b981;"),
+                      " Completed",
+                      style = "color: #10b981; font-weight: 500;"
+                    ),
+                    span(
+                      paste0(module_progress$percentage, "%"),
+                      style = paste0(
+                        "font-weight: bold; font-size: 18px; ",
+                        "color: ", if(module_progress$percentage >= 70) "#10b981" else "#ef4444", ";"
+                      )
+                    )
+                  ),
+                  p(
+                    paste("Completed on", module_progress$completed_at),
+                    style = "font-size: 12px; color: #6b7280; margin: 0;"
+                  )
+                )
+              } else {
+                div(
+                  icon("circle", style = "color: #9ca3af;"),
+                  " Not Started",
+                  style = "color: #9ca3af;"
+                )
+              }
+            )
+          })
+        ),
+        
+        footer = tagList(
+          if (nrow(progress_df) == length(all_modules)) {
+            actionButton(
+              "generate_certificate",
+              "Generate Certificate",
+              icon = icon("certificate"),
+              class = "btn-success"
+            )
+          },
+          modalButton("Close")
+        )
+      )
+    )
+  })
+
+  # Add this observer to handle certificate generation
+  observeEvent(input$generate_certificate, {
+    progress_data <- user_progress()
+    
+    if (!is.null(progress_data) && length(progress_data) > 0) {
+      # Convert to dataframe
+      progress_df <- data.frame(
+        module = character(),
+        score = numeric(),
+        percentage = numeric(),
+        stringsAsFactors = FALSE
+      )
+      
+      for (p in progress_data) {
+        progress_df <- rbind(progress_df, data.frame(
+          module = p$module_name,
+          score = as.numeric(p$score),
+          percentage = as.numeric(p$percentage),
+          stringsAsFactors = FALSE
+        ))
+      }
+      
+      # Calculate overall statistics
+      overall_average <- round(mean(progress_df$percentage), 1)
+      total_modules <- 15
+      
+      # Module names for display
+      module_display_names <- c(
+        "module1" = "Introduction & Scope of IFRS 17",
+        "module2" = "Combination & Separation of Insurance Contracts",
+        "module3" = "Level of Aggregation",
+        "module4" = "Recognition",
+        "module5" = "Measurement on Initial Recognition",
+        "module6" = "Subsequent Measurement",
+        "module7" = "Discounting, CSM & Risk Adjustment",
+        "module8" = "Onerous Contracts",
+        "module9" = "Premium Allocation Approach",
+        "module10" = "Reinsurance Contracts Held",
+        "module11" = "Investment Contracts with DPF",
+        "module12" = "Modification & Derecognition",
+        "module13" = "Presentation of Financial Statements",
+        "module14" = "Insurance Service Result",
+        "module15" = "Insurance Finance Income or Expenses"
+      )
+      
+      showModal(
+        modalDialog(
+          title = "IFRS 17 Training Certificate",
+          size = "l",
+          easyClose = TRUE,
+          
+          div(
+            id = "certificate_content",
+            style = "background: white; padding: 40px; position: relative;",
+            
+            # Certificate Border
+            div(
+              style = "border: 3px solid #1e40af; padding: 30px; position: relative;",
+              
+              # Header with logos
+              div(
+                style = "text-align: center; margin-bottom: 30px;",
+                img(src = "images/ira_logo_.png", 
+                    style = "height: 80px; margin-bottom: 20px;"),
+                
+                h1("Certificate of Completion",
+                  style = "color: #1e40af; font-size: 36px; 
+                            font-weight: bold; margin: 10px 0;"),
+                
+                div(
+                  style = "width: 200px; height: 3px; background: #3b82f6; 
+                          margin: 20px auto;"
+                )
+              ),
+              
+              # Recipient Information
+              div(
+                style = "text-align: center; margin: 30px 0;",
+                p("This is to certify that", 
+                  style = "font-size: 18px; color: #4b5563;"),
+                
+                h2(user_data$profile$full_name,
+                  style = "color: #1e40af; font-size: 32px; 
+                            margin: 15px 0; font-weight: bold;"),
+                
+                p("has successfully completed the",
+                  style = "font-size: 18px; color: #4b5563;"),
+                
+                h3("IFRS 17 Digital Training Program",
+                  style = "color: #1e40af; font-size: 24px; margin: 15px 0;")
+              ),
+              
+              # Scores Table
+              div(
+                style = "margin: 30px 0;",
+                h4("Module Performance Summary",
+                  style = "text-align: center; color: #1e40af; 
+                            margin-bottom: 20px;"),
+                
+                # Create a two-column layout for modules
+                div(
+                  style = "display: grid; grid-template-columns: 1fr 1fr; 
+                          gap: 10px; font-size: 14px;",
+                  
+                  lapply(names(module_display_names), function(mod_id) {
+                    mod_data <- progress_df[progress_df$module == mod_id, ]
+                    if (nrow(mod_data) > 0) {
+                      div(
+                        style = "display: flex; justify-content: space-between; 
+                                padding: 5px 10px; background: #f8f9fa; 
+                                border-radius: 5px;",
+                        span(module_display_names[[mod_id]], 
+                            style = "flex: 1; font-size: 12px;"),
+                        span(paste0(mod_data$percentage, "%"),
+                            style = paste0(
+                              "font-weight: bold; margin-left: 10px; ",
+                              "color: ", 
+                              if(mod_data$percentage >= 70) "#10b981" else "#ef4444"
+                            ))
+                      )
+                    }
+                  })
+                )
+              ),
+              
+              # Overall Performance
+              div(
+                style = "text-align: center; margin: 30px 0; 
+                        background: #eff6ff; padding: 20px; 
+                        border-radius: 10px;",
+                h4("Overall Performance",
+                  style = "color: #1e40af; margin-bottom: 10px;"),
+                
+                div(
+                  style = "font-size: 36px; font-weight: bold; 
+                          color: #3b82f6;",
+                  paste0(overall_average, "%")
+                ),
+                
+                p(paste0("Average score across ", nrow(progress_df), 
+                        " completed modules"),
+                  style = "color: #6b7280; margin-top: 5px;")
+              ),
+              
+              # Completion Date and Signatures
+              div(
+                style = "margin-top: 40px; display: grid; 
+                        grid-template-columns: 1fr 1fr; gap: 40px;",
+                
+                div(
+                  style = "text-align: center;",
+                  p(format(Sys.Date(), "%B %d, %Y"),
+                    style = "font-weight: bold; margin-bottom: 5px;"),
+                  div(style = "border-top: 2px solid #d1d5db; 
+                              margin-top: 40px; padding-top: 10px;",
+                      "Date of Completion")
+                ),
+                
+                div(
+                  style = "text-align: center;",
+                  img(src = "images/signature.png", 
+                      style = "height: 40px; margin-bottom: 5px;",
+                      onerror = "this.style.display='none'"),
+                  div(style = "border-top: 2px solid #d1d5db; 
+                              margin-top: 40px; padding-top: 10px;",
+                      "Program Director")
+                )
+              ),
+              
+              # Certificate ID
+              div(
+                style = "text-align: center; margin-top: 30px; 
+                        color: #9ca3af; font-size: 12px;",
+                paste("Certificate ID:", 
+                      paste0("IFRS17-", 
+                            format(Sys.Date(), "%Y%m"),
+                            "-",
+                            substr(digest::digest(user_data$user_id), 1, 8)))
+              )
+            )
+          ),
+          
+          footer = tagList(
+            actionButton(
+              "print_certificate",
+              "Print Certificate",
+              icon = icon("print"),
+              class = "btn-primary"
+            ),
+            modalButton("Close")
+          )
+        )
+      )
+    }
+  })
+
+  # Add print functionality
+  observeEvent(input$print_certificate, {
+    runjs('
+      var content = document.getElementById("certificate_content").innerHTML;
+      var printWindow = window.open("", "_blank");
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>IFRS 17 Training Certificate</title>
+            <style>
+              @page { size: landscape; margin: 0.5in; }
+              body { 
+                font-family: Arial, sans-serif; 
+                margin: 0; 
+                padding: 20px;
+              }
+              @media print {
+                body { margin: 0; }
+              }
+            </style>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+      }, 250);
+    ')
+  })
+
+
+
+
+
+
+
+
+
+
 }
+
 
 # Run the Shiny app
 shinyApp(ui, server)  
