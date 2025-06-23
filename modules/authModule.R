@@ -1,5 +1,5 @@
 # modules/authModule.R
-# Authentication UI and Server Module
+# Simplified Authentication UI and Server Module
 
 library(shiny)
 library(shinyjs)
@@ -56,13 +56,13 @@ authUI <- function(id) {
             "Login",
             id = ns("login_tab"),
             class = "nav-link active",
-            onclick = paste0("showTab('", ns("login_form"), "', '", ns("register_form"), "', '", ns("login_tab"), "', '", ns("register_tab"), "')")
+            onclick = paste0("showAuthTab('", ns(""), "', 'login')")
           ),
           tags$button(
             "Register",
             id = ns("register_tab"),
             class = "nav-link",
-            onclick = paste0("showTab('", ns("register_form"), "', '", ns("login_form"), "', '", ns("register_tab"), "', '", ns("login_tab"), "')")
+            onclick = paste0("showAuthTab('", ns(""), "', 'register')")
           )
         ),
         
@@ -97,7 +97,15 @@ authUI <- function(id) {
               ns("login_btn"),
               "Sign In",
               class = "btn btn-primary btn-block",
-              style = "width: 100%;"
+              style = "width: 100%; margin-bottom: 10px;"
+            ),
+            
+            # Guest mode button
+            actionButton(
+              ns("guest_btn"),
+              "Continue as Guest",
+              class = "btn btn-secondary btn-block",
+              style = "width: 100%; background-color: #6c757d; border: none;"
             )
           ),
           
@@ -127,15 +135,6 @@ authUI <- function(id) {
               ns("register_email"),
               "Email",
               placeholder = "Enter your email"
-            )
-          ),
-          
-          div(
-            class = "form-group",
-            textInput(
-              ns("register_organization"),
-              "Organization (Optional)",
-              placeholder = "Your organization"
             )
           ),
           
@@ -173,14 +172,21 @@ authUI <- function(id) {
     ),
     
     # JavaScript for tab switching
-    tags$script(HTML("
-      function showTab(showId, hideId, activeTab, inactiveTab) {
-        document.getElementById(showId).style.display = 'block';
-        document.getElementById(hideId).style.display = 'none';
-        document.getElementById(activeTab).classList.add('active');
-        document.getElementById(inactiveTab).classList.remove('active');
+    tags$script(HTML(sprintf("
+      function showAuthTab(nsPrefix, tab) {
+        if (tab === 'login') {
+          document.getElementById(nsPrefix + 'login_form').style.display = 'block';
+          document.getElementById(nsPrefix + 'register_form').style.display = 'none';
+          document.getElementById(nsPrefix + 'login_tab').classList.add('active');
+          document.getElementById(nsPrefix + 'register_tab').classList.remove('active');
+        } else {
+          document.getElementById(nsPrefix + 'register_form').style.display = 'block';
+          document.getElementById(nsPrefix + 'login_form').style.display = 'none';
+          document.getElementById(nsPrefix + 'register_tab').classList.add('active');
+          document.getElementById(nsPrefix + 'login_tab').classList.remove('active');
+        }
       }
-    "))
+    ")))
   )
 }
 
@@ -195,7 +201,8 @@ authServer <- function(id) {
       user_id = NULL,
       email = NULL,
       token = NULL,
-      profile = NULL
+      profile = NULL,
+      is_guest = FALSE
     )
     
     # Show/hide auth overlay based on authentication status
@@ -207,17 +214,50 @@ authServer <- function(id) {
       }
     })
     
+    # Guest mode handler
+    observeEvent(input$guest_btn, {
+      guest_session <- create_guest_session()
+      
+      user_data$is_authenticated <- guest_session$is_authenticated
+      user_data$user_id <- guest_session$user_id
+      user_data$email <- guest_session$email
+      user_data$token <- guest_session$token
+      user_data$profile <- guest_session$profile
+      user_data$is_guest <- guest_session$is_guest
+      
+      showNotification("Continuing as guest. Your progress will not be saved.", 
+                      type = "warning", duration = 5)
+      
+      shinyjs::hide("auth_overlay")
+    })
+    
     # Login handler
     observeEvent(input$login_btn, {
       req(input$login_email, input$login_password)
       
-      # Validate email format
-      if (!grepl("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", input$login_email)) {
-        shinyjs::html("login_message", "Please enter a valid email address")
+      # Clear previous messages
+      shinyjs::hide("login_message")
+      shinyjs::removeClass("login_message", "alert-danger")
+      shinyjs::removeClass("login_message", "alert-success")
+      
+      # Basic validation
+      if (nchar(trimws(input$login_email)) == 0) {
+        shinyjs::html("login_message", "Please enter your email")
         shinyjs::show("login_message")
-        shinyjs::addCssClass("login_message", "alert-danger")
+        shinyjs::addClass("login_message", "alert-danger")
         return()
       }
+      
+      if (nchar(input$login_password) == 0) {
+        shinyjs::html("login_message", "Please enter your password")
+        shinyjs::show("login_message")
+        shinyjs::addClass("login_message", "alert-danger")
+        return()
+      }
+      
+      # Show loading state
+      shinyjs::disable("login_btn")
+      shinyjs::html("login_btn", "Signing in...")
       
       # Attempt login
       result <- supabase_signin(input$login_email, input$login_password)
@@ -227,90 +267,124 @@ authServer <- function(id) {
         user_data$user_id <- result$user$id
         user_data$email <- result$user$email
         user_data$token <- result$session$access_token
-        
-        # Get user profile
-        profile <- get_user_profile(user_data$user_id, user_data$token)
-        user_data$profile <- profile
+        user_data$profile <- result$profile
+        user_data$is_guest <- FALSE
         
         shinyjs::html("login_message", "Login successful! Welcome back.")
         shinyjs::show("login_message")
-        shinyjs::addCssClass("login_message", "alert-success")
+        shinyjs::addClass("login_message", "alert-success")
+        
+        # Clear form
+        updateTextInput(session, "login_email", value = "")
+        updateTextInput(session, "login_password", value = "")
         
         # Hide auth overlay after short delay
         shinyjs::delay(1000, shinyjs::hide("auth_overlay"))
         
       } else {
-        shinyjs::html("login_message", paste("Login failed:", result$error))
+        error_msg <- result$error
+        if (grepl("Invalid login credentials", error_msg, ignore.case = TRUE)) {
+          error_msg <- "Invalid email or password. Please try again."
+        }
+        
+        shinyjs::html("login_message", error_msg)
         shinyjs::show("login_message")
-        shinyjs::addCssClass("login_message", "alert-danger")
+        shinyjs::addClass("login_message", "alert-danger")
       }
+      
+      # Reset button state
+      shinyjs::enable("login_btn")
+      shinyjs::html("login_btn", "Sign In")
     })
     
     # Register handler
     observeEvent(input$register_btn, {
-      req(input$register_name, input$register_email, input$register_password, input$register_confirm)
+      req(input$register_name, input$register_email, 
+          input$register_password, input$register_confirm)
+      
+      # Clear previous messages
+      shinyjs::hide("register_message")
+      shinyjs::removeClass("register_message", "alert-danger")
+      shinyjs::removeClass("register_message", "alert-success")
       
       # Validation
+      if (nchar(trimws(input$register_name)) == 0) {
+        shinyjs::html("register_message", "Please enter your full name")
+        shinyjs::show("register_message")
+        shinyjs::addClass("register_message", "alert-danger")
+        return()
+      }
+      
       if (!grepl("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", input$register_email)) {
         shinyjs::html("register_message", "Please enter a valid email address")
         shinyjs::show("register_message")
-        shinyjs::addCssClass("register_message", "alert-danger")
+        shinyjs::addClass("register_message", "alert-danger")
         return()
       }
       
       if (nchar(input$register_password) < 6) {
         shinyjs::html("register_message", "Password must be at least 6 characters long")
         shinyjs::show("register_message")
-        shinyjs::addCssClass("register_message", "alert-danger")
+        shinyjs::addClass("register_message", "alert-danger")
         return()
       }
       
       if (input$register_password != input$register_confirm) {
         shinyjs::html("register_message", "Passwords do not match")
         shinyjs::show("register_message")
-        shinyjs::addCssClass("register_message", "alert-danger")
+        shinyjs::addClass("register_message", "alert-danger")
         return()
       }
       
+      # Show loading state
+      shinyjs::disable("register_btn")
+      shinyjs::html("register_btn", "Creating account...")
+      
       # Attempt registration
-      result <- supabase_signup(input$register_email, input$register_password)
+      result <- supabase_signup(
+        input$register_email, 
+        input$register_password,
+        input$register_name
+      )
       
       if (result$success) {
-        # Create user profile
-        profile_created <- create_user_profile(
-          result$user$id, 
-          input$register_name, 
-          input$register_organization,
-          result$session$access_token
+        user_data$is_authenticated <- TRUE
+        user_data$user_id <- result$user$id
+        user_data$email <- result$user$email
+        user_data$token <- result$session$access_token
+        user_data$profile <- list(
+          full_name = input$register_name,
+          email = input$register_email
         )
+        user_data$is_guest <- FALSE
         
-        if (profile_created) {
-          user_data$is_authenticated <- TRUE
-          user_data$user_id <- result$user$id
-          user_data$email <- result$user$email
-          user_data$token <- result$session$access_token
-          user_data$profile <- list(
-            full_name = input$register_name,
-            organization = input$register_organization
-          )
-          
-          shinyjs::html("register_message", "Registration successful! Welcome to IFRS 17 Training.")
-          shinyjs::show("register_message")
-          shinyjs::addCssClass("register_message", "alert-success")
-          
-          # Hide auth overlay after short delay
-          shinyjs::delay(1500, shinyjs::hide("auth_overlay"))
-        } else {
-          shinyjs::html("register_message", "Registration successful, but profile creation failed. Please contact support.")
-          shinyjs::show("register_message")
-          shinyjs::addCssClass("register_message", "alert-warning")
-        }
+        shinyjs::html("register_message", "Registration successful! Welcome to IFRS 17 Training.")
+        shinyjs::show("register_message")
+        shinyjs::addClass("register_message", "alert-success")
+        
+        # Clear form
+        updateTextInput(session, "register_name", value = "")
+        updateTextInput(session, "register_email", value = "")
+        updateTextInput(session, "register_password", value = "")
+        updateTextInput(session, "register_confirm", value = "")
+        
+        # Hide auth overlay after short delay
+        shinyjs::delay(1500, shinyjs::hide("auth_overlay"))
         
       } else {
-        shinyjs::html("register_message", paste("Registration failed:", result$error))
+        error_msg <- result$error
+        if (grepl("already registered", error_msg, ignore.case = TRUE)) {
+          error_msg <- "This email is already registered. Please login instead."
+        }
+        
+        shinyjs::html("register_message", error_msg)
         shinyjs::show("register_message")
-        shinyjs::addCssClass("register_message", "alert-danger")
+        shinyjs::addClass("register_message", "alert-danger")
       }
+      
+      # Reset button state
+      shinyjs::enable("register_btn")
+      shinyjs::html("register_btn", "Create Account")
     })
     
     # Return user data for other modules to use
