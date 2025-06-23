@@ -305,7 +305,8 @@ server <- function(input, output, session) {
   module12_result <- IFRS17Module12Server("module12", user_data)
   module13_result <- IFRS17Module13Server("module13", user_data)
   module14_result <- IFRS17Module14Server("module14", user_data)
-
+  module15_result <- IFRS17Module15Server("module15", user_data)
+  
   # Observe progress updates from Module 1
   observeEvent(module1_result$progress_trigger(), {
     if (module1_result$progress_trigger() > 0) {
@@ -418,6 +419,12 @@ server <- function(input, output, session) {
     }
   })
 
+  # Observe progress updates from Module 15
+  observeEvent(module15_result$progress_trigger(), {
+    if (module15_result$progress_trigger() > 0) {
+      progress_refresh_trigger(progress_refresh_trigger() + 1)
+    }
+  })
   
   # When the user clicks “Next: Measurement Models”, jump the sidebar
   observeEvent(intro_nav(), {
@@ -577,23 +584,6 @@ server <- function(input, output, session) {
       selected  = "module15"
     )
   })
-
-  # # This captures the module 15 navigation event
-  # module15_nav <- IFRS17Module15Server("module15")
-  # # When the user clicks “Next: Module 16 - Insurance Finance Income or Expenses”, jump the sidebar
-  # observeEvent(module15_nav(), {
-  #   updateTabItems(
-  #     session,            # THIS session is the **root** session
-  #     inputId   = "sidebar",
-  #     selected  = "cases"
-  #   )
-  # })
-
-  # This captures the module 16 navigation event
-  IFRS17Module15Server("module15", user_data)
-
-  # This captures the Case Studies navigation event 
-  # IFRS17CaseStudiesServer("cases")
 
 
   # This observer is for the progress dashboard:
