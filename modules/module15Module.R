@@ -4,7 +4,7 @@ IFRS17Module15UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -109,18 +109,13 @@ tagList(
       " – Arise when translating the financial results of foreign subsidiaries into the group's reporting currency.")
     ),   
 
-
-
-    box(
-      title = "Answer the following questions to test your understanding of Insurance Finance Income.",
-      status = "white", solidHeader = TRUE, width = 12,
-      p("Please enter your name."),
-      textInput(ns("participant_name"), "Enter your Name:")
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Insurance Finance Income"),
     ),
 
     box(
       title = "1. What are Insurance Finance Income or Expenses (IFIE)?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = NULL , solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
         "Premiums and claims",
         "Acquisition costs and investment income",
@@ -131,7 +126,7 @@ tagList(
 
     box(
       title = "2. How can IFIE be presented in the statement of financial performance?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
         "Either fully in P&L or disaggregated between P&L and OCI",
         "Only in Profit or Loss (P&L)",
@@ -142,7 +137,7 @@ tagList(
 
     box(
       title = "3. Are there any exceptions to the general treatment of IFIE?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
         "No exceptions",
         "Yes, for reinsurance contracts",
@@ -153,7 +148,7 @@ tagList(
 
     box(
       title = "4. If the entity chooses to disaggregate IFIE between P&L and OCI, how should the disaggregation be made?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
         "Based on actual market returns",
         "Using a locked-in discount rate to allocate a portion to P&L",
@@ -164,7 +159,7 @@ tagList(
 
     box(
       title = "5. How should IFIE recorded in OCI be treated when a group of insurance contracts is transferred or derecognized (per paragraph 91)?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
         "They are reversed in the next period",
         "They are transferred to equity",
@@ -175,7 +170,7 @@ tagList(
 
     box(
       title = "6. How should exchange differences on changes in the carrying amount of groups of insurance contracts be treated?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
         "Always in OCI",
         "Always in equity",
@@ -186,7 +181,7 @@ tagList(
 
     box(
       title = "7. Which component is typically included in the effect of the time value of money under IFIE?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
         "Expected claims",
         "Acquisition costs",
@@ -197,7 +192,7 @@ tagList(
 
     box(
       title = "8. Which of the following best describes the treatment of IFIE for contracts with direct participation features?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
         "Must always be presented in OCI",
         "May be presented to eliminate mismatches with underlying items",
@@ -208,7 +203,7 @@ tagList(
 
     box(
       title = "9. If a group of contracts is derecognized and IFIE has been disaggregated under paragraph 89(b), what happens to amounts in OCI?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
         "Remain in OCI",
         "Transferred to P&L",
@@ -219,7 +214,7 @@ tagList(
 
     box(
       title = "10. What type of financial risk would be reflected in IFIE?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
         "Lapse risk",
         "Currency risk",
@@ -230,7 +225,7 @@ tagList(
 
     box(
       title = "11. Why might an entity choose to disaggregate IFIE between P&L and OCI?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL, choices = c(
         "To smooth earnings volatility",
         "To avoid recognizing claims",
@@ -241,7 +236,7 @@ tagList(
 
     box(
       title = "12. Which paragraph of IFRS 17 allows IFIE disaggregation for non-participating contracts?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q12"), label = NULL, choices = c(
         "Paragraph 30",
         "Paragraph 88",
@@ -252,7 +247,7 @@ tagList(
 
     box(
       title = "13. When an entity opts to recognize all IFIE in P&L, the impact on OCI is",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q13"), label = NULL, choices = c(
         "Neutral (no impact)",
         "Positive",
@@ -263,7 +258,7 @@ tagList(
 
     box(
       title = "14. Which type of insurance contract is most likely to involve disaggregation based on underlying item performance?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q14"), label = NULL, choices = c(
         "Group term life insurance",
         "Non-participating whole life",
@@ -358,8 +353,8 @@ IFRS17Module15Server <- (function(id, user_data) {
     ns <- session$ns
 
 
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -390,22 +385,11 @@ IFRS17Module15Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
 
-        final_name(input$participant_name)
 
 
         score(0)
@@ -431,7 +415,70 @@ IFRS17Module15Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 14
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 14 specific calculations
+        total_questions <- length(correct_answers_module15)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module15",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 15 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+            # Trigger progress update
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 15 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ========== 
+
+
     valid_ids <- paste0("q", 1:14)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -445,7 +492,6 @@ IFRS17Module15Server <- (function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module15)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -481,13 +527,6 @@ IFRS17Module15Server <- (function(id, user_data) {
                 color: #343a40;
               "),
               # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -496,6 +535,7 @@ IFRS17Module15Server <- (function(id, user_data) {
             ")
           ),  # ← comma!
 
+          # ——— Results Summary Card ———
           # ——— Results Summary Card ———
           div(
             class = "print-summary",
@@ -508,14 +548,13 @@ IFRS17Module15Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -523,15 +562,14 @@ IFRS17Module15Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
             )
-
           )  
 
         )  
@@ -541,11 +579,8 @@ IFRS17Module15Server <- (function(id, user_data) {
     })  
     })
 
-
-    
-    # # create a reactive for the “Next” click
-    # to_case_studies <- reactive(input$to_case_studies)
-    # # return it so the app can observe it
-    # to_case_studies 
+    return(list(
+      progress_trigger = progress_saved_trigger
+    ))
   })
 })
