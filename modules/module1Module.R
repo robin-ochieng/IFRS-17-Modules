@@ -6,7 +6,7 @@ IFRS17Module1UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -131,17 +131,14 @@ tagList(
       )  
     ),
 
-    box(
-        title = "Answer the following questions to test your understanding of Introduction & Scope of IFRS 17.",
-        status = "white", solidHeader = TRUE, width = 12,
-        p("Please enter your name."),
-        textInput(ns("participant_name"), "Enter your Name:")
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Introduction & Scope of IFRS 17"),
     ),
 
 
     box(
       title = "1. What is the primary objective of IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
         "To standardize insurance accounting globally",
         "To replace IFRS 16",
@@ -152,7 +149,7 @@ tagList(
 
     box(
       title = "2. What does IFRS 17 replace?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
         "IAS 37",
         "IFRS 4",
@@ -163,7 +160,7 @@ tagList(
 
     box(
       title = "3. What was the official date of initial application for IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
         "1st January 2022",
         "31st December 2022",
@@ -174,7 +171,7 @@ tagList(
 
     box(
       title = "4. IFRS 17 applies to?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
         "All insurance entities only",
         "Any entity issuing insurance contracts",
@@ -185,7 +182,7 @@ tagList(
 
     box(
       title = "5. How does IFRS 17 define an insurance contract?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
         "Contract transferring insurance risk",
         "Contract transferring investment risk",
@@ -196,7 +193,7 @@ tagList(
 
     box(
       title = "6. How does IFRS 17 define 'insurance risk'?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
         "The risk of policyholder default",
         "The risk of future investment losses",
@@ -207,7 +204,7 @@ tagList(
 
     box(
       title = "7. Which of the following contracts falls under the scope of IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
         "Product warranty issued by a retailer",
         "Lease contract under IFRS 16",
@@ -218,7 +215,7 @@ tagList(
 
     box(
       title = "8. Which contracts are only within IFRS 17 if the issuer also issues insurance contracts?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
         "Leases",
         "Derivatives",
@@ -229,7 +226,7 @@ tagList(
 
     box(
       title = "9. Are product warranties issued by a retailer within IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
         "Yes, always",
         "No, they fall under IAS 37",
@@ -240,7 +237,7 @@ tagList(
 
     box(
       title = "10. What type of contract is explicitly excluded from IFRS 17 scope?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
         "Group life insurance",
         "Reinsurance contracts",
@@ -313,9 +310,12 @@ correct_answers_module1 <- list(
 # ---- Server ----
 IFRS17Module1Server <- function(id, user_data) {
   moduleServer(id, function(input, output, session) {
+   
     # bring ns into scope
     ns <- session$ns
 
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     # Quiz result output
     final_name <- reactiveVal("")
@@ -349,22 +349,10 @@ IFRS17Module1Server <- function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
 
 
         score(0)
@@ -390,7 +378,68 @@ IFRS17Module1Server <- function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 2
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 2 specific calculations
+        total_questions <- length(correct_answers_module1)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module1",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 1 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+            # Trigger progress update
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 1 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ==========
+
     valid_ids <- paste0("q", 1:10)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -404,8 +453,7 @@ IFRS17Module1Server <- function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module1)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
-      color            <- if (percentage >= 70) "#198754" else "#dc3545"
+      color            <- if (percentage >= 70) "#fff" else "#fff"
 
       tagList(
         div(
@@ -440,12 +488,11 @@ IFRS17Module1Server <- function(id, user_data) {
                 color: #343a40;
               "),
               # recipient name
-          h2(isolate(input$participant_name),
             style = "
               font-family: 'Nunito', sans-serif;
               font-size: 28px;
               margin: 0;
-              color: #198754;
+              color: #fff;
             "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
@@ -467,14 +514,13 @@ IFRS17Module1Server <- function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -482,76 +528,28 @@ IFRS17Module1Server <- function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
-            ),  # ← comma!
-
-            # # ——— Print Button ———
-            # div(
-            #   style = "text-align:center; margin-top:30px;",
-            #   actionButton(
-            #     ns("print_certificate"),
-            #     "Print Results as PDF",
-            #     icon  = icon("print"),
-            #     class = "control-button-tavnav no-print"
-            #   )
-            # )
-
+            )
           )  
-
-        )  
-
       )
 
     })  
     })
 
-    # observeEvent(input$print_certificate, {
-    #   runjs('
-    #     var cert = document.querySelector(".print-area");
-    #     if (!cert) {
-    #       alert("Nothing to print – make sure you have submitted the quiz first.");
-    #     } else {
-    #       // open a blank window
-    #       var w = window.open("", "_blank", "width=800,height=600");
-    #       // build a print-only style to hide .no-print
-    #       var head = `
-    #         <head>
-    #           <title>Participation Certificate</title>
-    #           <style>
-    #             body { margin:20px; font-family:Arial,sans-serif; }
-    #             @media print { .no-print { display: none; } }
-    #           </style>
-    #         </head>`;
-    #       // grab the certificate HTML
-    #       var body = "<body>" + cert.outerHTML +
-    #                 // wrap your button in a no-print div
-    #                 "<div class=\\"no-print\\" style=\\"text-align:center; margin-top:30px;\\">" +
-    #                   "<button onclick=\\"window.print()\\">Print Certificate as PDF</button>" +
-    #                 "</div></body>";
-    #       // write it all
-    #       w.document.write("<!doctype html><html>" + head + body + "</html>");
-    #       w.document.close();
-    #       w.onload = function() {
-    #         w.focus();
-    #         w.print();
-    #       };
-    #     }
-    #   ')
-    # }) 
-
-   
-
     # create a reactive for the “Next” click
     to_module_2 <- reactive(input$to_module_2)
 
-    # return it so the app can observe it
-    to_module_2
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_2,
+      progress_trigger = progress_saved_trigger
+    ))
 
   })
 }
