@@ -4,7 +4,7 @@ IFRS17Module11UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -226,16 +226,14 @@ tagList(
 
     ),
 
-    box(
-      title = "Answer the following questions to test your understanding of Investment Contracts with Discretionary Participation Features.",
-      status = "white", solidHeader = TRUE, width = 12,
-      p("Please enter your name."),
-      textInput(ns("participant_name"), "Enter your Name:")
+
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Investment Contracts with Discretionary Participation Features.")
     ),
 
     box(
       title = "1. Which of the following statements best describes a key difference between insurance contracts with direct participation features and investment contracts with discretionary participation features under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
         "Insurance contracts with direct participation features are accounted for under IFRS 9, while investment contracts with discretionary participation features are accounted for under IFRS 17.",
         "Both contract types are accounted for using the Premium Allocation Approach (PAA) under IFRS 17.",
@@ -246,7 +244,7 @@ tagList(
 
     box(
       title = "2. Which of the following contracts would be classified as an “investment contract with discretionary participation features” under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
         "A savings contract where the insurer retains discretion over bonus payments and the contract does not transfer significant insurance risk.",
         "A unit-linked investment product with guaranteed returns and no discretionary elements.",
@@ -257,7 +255,7 @@ tagList(
 
     box(
       title = "3. Under IFRS 17, what does the coverage period of a Direct Participation Contract (DPC) include?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
         "Only the period during which insurance risk is present.",
         "Only the period over which investment returns are credited to the policyholder.",
@@ -268,7 +266,7 @@ tagList(
 
     box(
       title = "4. Which of the following best defines an \"underlying item\" under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
         "Any asset owned by the insurer",
         "Any amount guaranteed to the policyholder",
@@ -279,7 +277,7 @@ tagList(
 
     box(
       title = "5. According to IFRS 17, what makes a policyholder’s participation in a pool of underlying items valid for DPC classification?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
         "The insurer’s intention to share profits",
         "A strong historical pattern of bonus declarations",
@@ -290,7 +288,7 @@ tagList(
 
     box(
       title = "6. Which of the following contracts is most likely NOT to qualify as having a clearly identified pool of underlying items under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
         "A unit-linked contract where fund allocation is defined",
         "A with-profits contract tied to a disclosed internal asset pool",
@@ -301,7 +299,7 @@ tagList(
 
     box(
       title = "7. When is the assessment of whether an insurance contract qualifies as a Direct Participation Contract (DPC) performed under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
         "At initial recognition and not subsequently repeated",
         "At the date of contract modification",
@@ -312,7 +310,7 @@ tagList(
 
     box(
       title = "8. Which of the following statements is TRUE about discounting in the measurement of Direct Participation Contracts under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
         "DPCs use locked-in discount rates for all adjustments",
         "Adjustments to cash flows not based on underlying items are discounted using current rates",
@@ -323,7 +321,7 @@ tagList(
 
     box(
       title = "9. How does the adjustment of the Contractual Service Margin (CSM) for financial risks differ between contracts with and without direct participation features under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
         "Contracts with direct participation features adjust the CSM for changes in financial risk using the current interest curve, even if unrelated to future service.",
         "Only contracts without direct participation features adjust the CSM for financial risks using the current discount rate.",
@@ -334,7 +332,7 @@ tagList(
 
     box(
       title = "10. What is the appropriate IFRS 17 treatment when a Direct Participation Contract (DPC) is modified such that it no longer meets the definition of a DPC?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
         "The contract continues to be treated as a DPC until expiry.",
         "The contract is reclassified prospectively without derecognition.",
@@ -345,7 +343,7 @@ tagList(
 
     box(
       title = "11. Which of the following best describes an investment contract with discretionary participation features under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL, choices = c(
         "A financial instrument that guarantees fixed returns and is always classified under IFRS 9.",
         "A contract that gives the investor a right to additional amounts determined solely by market interest rates.",
@@ -423,9 +421,8 @@ IFRS17Module11Server <- (function(id, user_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -456,23 +453,10 @@ IFRS17Module11Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
-
 
         score(0)
         feedback <- list()
@@ -497,7 +481,70 @@ IFRS17Module11Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 11
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 2 specific calculations
+        total_questions <- length(correct_answers_module11)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module11",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 11 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+            # Trigger progress update
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 11 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ========== 
+
+
     valid_ids <- paste0("q", 1:11)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -511,7 +558,6 @@ IFRS17Module11Server <- (function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module11)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -546,14 +592,6 @@ IFRS17Module11Server <- (function(id, user_data) {
                 margin-bottom: 20px;
                 color: #343a40;
               "),
-              # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -562,6 +600,7 @@ IFRS17Module11Server <- (function(id, user_data) {
             ")
           ),  # ← comma!
 
+          # ——— Results Summary Card ———
           # ——— Results Summary Card ———
           div(
             class = "print-summary",
@@ -574,14 +613,13 @@ IFRS17Module11Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -589,15 +627,14 @@ IFRS17Module11Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
             )
-
           )  
 
         )  
@@ -610,7 +647,11 @@ IFRS17Module11Server <- (function(id, user_data) {
 
     # create a reactive for the “Next” click
     to_module_12 <- reactive(input$to_module_12)
-    # return it so the app can observe it
-    to_module_12
+
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_12,
+      progress_trigger = progress_saved_trigger
+    ))
   })
 })
