@@ -4,7 +4,7 @@ IFRS17Module14UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -136,16 +136,13 @@ tagList(
         strong("exclude any investment components"), ".")
     ),
 
-    box(
-      title = "Answer the following questions to test your understanding of Insurance Service Result.",
-      status = "white", solidHeader = TRUE, width = 12,
-      p("Please enter your name."),
-      textInput(ns("participant_name"), "Enter your Name:")
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Insurance Service Result."),
     ),
 
     box(
       title = "1. What are the two main components an entity must disaggregate in the statement of financial performance?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
         "Revenue and Expenses",
         "Insurance Profit and Investment Return",
@@ -156,7 +153,7 @@ tagList(
 
     box(
       title = "2. Which of the following is included in the insurance service result?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
         "Change in risk adjustment for non-financial risk",
         "Insurance revenue and insurance service expenses",
@@ -167,7 +164,7 @@ tagList(
 
     box(
       title = "3. How should an entity present income or expenses from reinsurance contracts held?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
         "Separately from insurance contracts issued",
         "Together with insurance contracts issued",
@@ -178,7 +175,7 @@ tagList(
 
     box(
       title = "4. What should insurance revenue reflect?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
         "Premiums received",
         "Claims paid",
@@ -189,7 +186,7 @@ tagList(
 
     box(
       title = "5. Which of the following is NOT included in insurance service expenses?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
         "Incurred claims",
         "Investment components",
@@ -200,7 +197,7 @@ tagList(
 
     box(
       title = "6. When disaggregating the change in the risk adjustment for non-financial risk, what is required?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
         "Mandatory allocation between finance and service result",
         "No allocation is permitted",
@@ -211,7 +208,7 @@ tagList(
 
     box(
       title = "7. Which component may NOT be presented in profit or loss?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
         "Premium information inconsistent with Paragraph 83",
         "Insurance service expenses",
@@ -222,7 +219,7 @@ tagList(
 
     box(
       title = "8. What options does an entity have for presenting reinsurance contracts held?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
         "Only as a single net amount",
         "Only as individual line items",
@@ -233,7 +230,7 @@ tagList(
 
     box(
       title = "9. Under the Premium Allocation Approach (PAA), what is insurance revenue generally similar to?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
         "Earned premium",
         "Written premium",
@@ -244,7 +241,7 @@ tagList(
 
     box(
       title = "10. Under the General Measurement Model (GMM), which of the following is NOT part of insurance service revenue?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
         "Release of the Contractual Service Margin (CSM)",
         "Investment returns",
@@ -255,7 +252,7 @@ tagList(
 
     box(
       title = "11. What are “losses on onerous contracts” classified as under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL, choices = c(
         "Investment finance expenses",
         "Deferred income",
@@ -266,7 +263,7 @@ tagList(
 
     box(
       title = "12. What does IFRS 17 aim to achieve by separating service result and finance result?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q12"), label = NULL, choices = c(
         "Enhanced transparency and comparability",
         "Compliance with local GAAP",
@@ -277,7 +274,7 @@ tagList(
 
     box(
       title = "13. What is the treatment of reinsurance-related cash flows contingent on claims?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q13"), label = NULL, choices = c(
         "Deferred revenue",
         "Presented as part of claims recoverable",
@@ -288,7 +285,7 @@ tagList(
 
     box(
       title = "14. What is the effect of the reversal of losses on onerous contracts?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q14"), label = NULL, choices = c(
         "Increase in insurance finance income",
         "Reduction in insurance service revenue",
@@ -380,10 +377,8 @@ IFRS17Module14Server <- (function(id, user_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-
-
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -414,22 +409,10 @@ IFRS17Module14Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
 
 
         score(0)
@@ -455,7 +438,71 @@ IFRS17Module14Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 14
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 14 specific calculations
+        total_questions <- length(correct_answers_module14)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module14",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 14 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+            # Trigger progress update
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 14 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ========== 
+
+
     valid_ids <- paste0("q", 1:14)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -469,7 +516,6 @@ IFRS17Module14Server <- (function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module14)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -505,13 +551,6 @@ IFRS17Module14Server <- (function(id, user_data) {
                 color: #343a40;
               "),
               # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -520,6 +559,7 @@ IFRS17Module14Server <- (function(id, user_data) {
             ")
           ),  # ← comma!
 
+          # ——— Results Summary Card ———
           # ——— Results Summary Card ———
           div(
             class = "print-summary",
@@ -532,14 +572,13 @@ IFRS17Module14Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -547,15 +586,14 @@ IFRS17Module14Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
             )
-
           )  
 
         )  
@@ -568,8 +606,12 @@ IFRS17Module14Server <- (function(id, user_data) {
 
     # create a reactive for the “Next” click
     to_module_15 <- reactive(input$to_module_15)
-    # return it so the app can observe it
-    to_module_15
+
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_15,
+      progress_trigger = progress_saved_trigger
+    ))
 
   })
 })
