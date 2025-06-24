@@ -4,7 +4,7 @@ IFRS17Module7UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -308,17 +308,13 @@ tagList(
       )
     ),
 
-    box(
-        title = "Answer the following questions to test your understanding of Discounting, CSM & Risk Adjustment.",
-        status = "white", solidHeader = TRUE, width = 12,
-        p("Please enter your name."),
-        textInput(ns("participant_name"), "Enter your Name:")
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Discounting, CSM & Risk Adjustment."),
     ),
-
 
     box(
       title = "1. Which of the following is NOT a required characteristic of the discount rate under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL,
                   choices = c(
                     "Consistency with observable market prices for similar cash flows",
@@ -330,7 +326,7 @@ tagList(
 
     box(
       title = "2. Which of the following is a correct interpretation of IFRS 17's guidance on using market data to determine discount rates?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL,
                   choices = c(
                     "Discount rates must exclude the effect of market variables that do not impact the insurance contract's cash flows.",
@@ -342,7 +338,7 @@ tagList(
 
     box(
       title = "3. What is the primary distinction between the bottom-up and top-down approaches for deriving discount rates under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL,
                   choices = c(
                     "The bottom-up approach starts from asset returns and adjusts for insurance features",
@@ -354,7 +350,7 @@ tagList(
 
     box(
       title = "4. Which statement is TRUE regarding liquidity adjustments in the top-down approach under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL,
                   choices = c(
                     "Liquidity differences between the reference assets and insurance contracts must always be adjusted",
@@ -398,7 +394,7 @@ tagList(
       ),
     box(
       title = " i) What is the total discount rate to be used under the bottom-up approach?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5_part1"), label = NULL,
                   choices = c("A) 3.0%", "B) 2.5%", "C) 3.5%", "D) 2.0%"),
                   selected = character(0))
@@ -406,7 +402,7 @@ tagList(
 
     box(
       title = "5. ii) What is the present value of the expected cash flows using the appropriate discount rate from Part A?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5_part2"), label = NULL,
                   choices = c("A) 3,506.85", "B) 3,477.32", "C) 3,599.25", "D) 3,423.18"),
                   selected = character(0))
@@ -414,7 +410,7 @@ tagList(
 
     box(
       title = "5. iii) If instead the top-down approach was used and the yield on the reference portfolio is 4.5%, and credit & non-insurance-related risks account for 2%, what would be the equivalent discount rate?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5_part3"), label = NULL,
                   choices = c("A) 4.5%", "B) 2.5%", "C) 2.0%", "D) 6.5%"),
                   selected = character(0))
@@ -422,7 +418,7 @@ tagList(
 
     box(
       title = "5. iv) What is the impact on the present value if the liquidity adjustment increases to 1.0%, keeping the risk-free rate constant?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5_part4"), label = NULL,
                   choices = c("A) Present Value increases", "B) Present Value decreases", "C) Present Value stays the same", "D) Present Value becomes negative"),
                   selected = character(0))
@@ -430,7 +426,7 @@ tagList(
 
     box(
       title = "6. When a group of insurance contracts becomes onerous after initial recognition under IFRS 17, what happens to the Contractual Service Margin (CSM)?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL,
                   choices = c(
                     "It is increased to reflect the higher expected losses.",
@@ -442,7 +438,7 @@ tagList(
 
     box(
       title = "7. Can a loss component (LC) established for an onerous group of contracts under IFRS 17 be reversed in subsequent periods?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL,
                   choices = c(
                     "No, once established, a loss component cannot be reversed.",
@@ -454,7 +450,7 @@ tagList(
 
     box(
       title = "8. In the context of IFRS 17, what does the Liability for Remaining Coverage (LRC) represent when the Contractual Service Margin (CSM) is nil?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL,
                   choices = c(
                     "The sum of the fulfilment cash flows and the loss component.",
@@ -466,7 +462,7 @@ tagList(
 
     box(
       title = "9. Which discount rate is used to accrete interest on the CSM?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL,
                   choices = c(
                     "The risk-free rate at the reporting date",
@@ -485,7 +481,7 @@ tagList(
       ),
     box(
       title = "i) What is the initial CSM at 1 January 20X1?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10_part1"), label = NULL,
                   choices = c("A. $ 200", "B. $ 150", "C. $ 250", "D. $ 100"),
                   selected = character(0))
@@ -493,7 +489,7 @@ tagList(
 
     box(
       title = "10. ii) What is the CSM balance at 31 December 20X1, before release, assuming a 5% interest rate?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10_part2"), label = NULL,
                   choices = c("A. $ 150", "B. $ 157.5", "C. $ 160", "D. $ 155"),
                   selected = character(0))
@@ -501,7 +497,7 @@ tagList(
 
     box(
       title = "10. iii) If the CSM is released evenly over the 4-year coverage period, what is the CSM balance after release at 31 December 20X1?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10_part3"), label = NULL,
                   choices = c("A. $ 118.125", "B. $ 120", "C. $ 130", "D. $ 100"),
                   selected = character(0))
@@ -509,7 +505,7 @@ tagList(
 
     box(
       title = "11. Which of the following characteristics would lead to a higher risk adjustment according to IFRS 17 principles?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL,
                   choices = c(
                     "High-frequency, low-severity risks",
@@ -521,7 +517,7 @@ tagList(
 
     box(
       title = "12. Which of the following risks is excluded from the IFRS 17 risk adjustment?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q12"), label = NULL,
                   choices = c(
                     "Lapse risk",
@@ -533,7 +529,7 @@ tagList(
 
     box(
       title = "13. Two otherwise identical contracts differ only in duration: Contract A is 5 years; Contract B is 15 years. Which will have the higher risk adjustment, and why?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q13"), label = NULL,
                   choices = c(
                     "Contract A, due to faster runoff",
@@ -545,7 +541,7 @@ tagList(
 
     box(
       title = "14. Which method is not typically used to quantify the risk adjustment under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q14"), label = NULL,
                   choices = c(
                     "Cost of capital method",
@@ -562,7 +558,7 @@ tagList(
       ),
     box(
       title = "(a) What is the value of the liability at the 75% confidence level? Use z = 0.674",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q15_part1"), label = NULL,
                   choices = c(
                     "A. $10,506,000",
@@ -574,7 +570,7 @@ tagList(
 
     box(
       title = "15. (b) What is the risk adjustment for non-financial risk at the 75% confidence level?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q15_part2"), label = NULL,
                   choices = c(
                     "A. $674,000",
@@ -586,7 +582,7 @@ tagList(
 
     box(
       title = "15. (c) If the insurer increases the confidence level to 90%, what is the new risk adjustment? (Use z = 1.282)",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q15_part3"), label = NULL,
                   choices = c(
                     "A. $1,282,000",
@@ -707,8 +703,8 @@ IFRS17Module7Server <- (function(id, user_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -747,23 +743,10 @@ IFRS17Module7Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
-
 
         score(0)
         feedback <- list()
@@ -782,13 +765,74 @@ IFRS17Module7Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 7
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 2 specific calculations
+        total_questions <- length(correct_answers_module7)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module7",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 7 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+            # Trigger progress update
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 7 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ========== 
+
 
 
     output$result <- renderUI({
       total_questions <- length(correct_answers_module7)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -823,14 +867,6 @@ IFRS17Module7Server <- (function(id, user_data) {
                 margin-bottom: 20px;
                 color: #343a40;
               "),
-              # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -840,10 +876,11 @@ IFRS17Module7Server <- (function(id, user_data) {
           ),  # ← comma!
 
           # ——— Results Summary Card ———
+          # ——— Results Summary Card ———
           div(
             class = "print-summary",
             style = "
-              background-color:rgb(172, 167, 167);
+              background-color: #006AA6;
               padding: 25px;
               border-radius: 10px;
               box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -851,14 +888,13 @@ IFRS17Module7Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -866,27 +902,15 @@ IFRS17Module7Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
-            ),  # ← comma!
-
-            # ——— Print Button ———
-            # div(
-            #   style = "text-align:center; margin-top:30px;",
-            #   actionButton(
-            #     ns("print_certificate"),
-            #     "Print Results as PDF",
-            #     icon  = icon("print"),
-            #     class = "control-button-tavnav no-print"
-            #   )
-            # )
-
-          )  
+            )
+          )   
 
         )  
 
@@ -931,7 +955,12 @@ IFRS17Module7Server <- (function(id, user_data) {
 
     # create a reactive for the “Next” click
     to_module_8 <- reactive(input$to_module_8)
-    # return it so the app can observe it
-    to_module_8
+
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_8,
+      progress_trigger = progress_saved_trigger
+    ))
+
   })
 })
