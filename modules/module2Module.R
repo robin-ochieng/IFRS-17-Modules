@@ -4,7 +4,7 @@ IFRS17Module2UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -148,18 +148,14 @@ tagList(
       )
     ),
 
-
-    box(
-        title = "Answer the following questions to test your understanding of Combination & Separation of Insurance Contracts.",
-        status = "white", solidHeader = TRUE, width = 12,
-        p("Please enter your name."),
-        textInput(ns("participant_name"), "Enter your Name:")
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Combination & Separation of Insurance Contracts."),
     ),
 
 
     box(
       title = "1. An insurer enters into two separate contracts with the same policyholder at the same time. Contract A provides insurance coverage, while Contract B negates the financial exposure of Contract A entirely. According to IFRS 17, how should the insurer report these contracts?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
         "Treat the contracts as a single arrangement because they achieve an overall commercial effect",
         "Report both contracts separately as independent arrangements",
@@ -170,7 +166,7 @@ tagList(
 
     box(
       title = "2. An insurer bundles multiple policies for a corporate client into a package with interdependent pricing. Some policies provide coverage, while others hedge specific risks associated with the insured entity. Under IFRS 17, how should these contracts be accounted for?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
         "Each contract must be evaluated individually regardless of interdependencies",
         "The bundled contracts should be treated as a single unit if they collectively achieve an overall commercial effect",
@@ -181,7 +177,7 @@ tagList(
 
     box(
       title = "3. Which of the following scenarios would not require the combination of contracts under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
         "Two insurance contracts issued simultaneously to the same policyholder, with pricing designed to work together",
         "A reinsurance contract that fully offsets the risk of an insurance policy issued by the same insurer",
@@ -192,7 +188,7 @@ tagList(
 
     box(
       title = "4. A life insurer offers a package where a main policy includes both insurance coverage and an investment component. The investment feature provides financial returns that could exist independently without the insurance portion. How should the insurer treat this arrangement under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
         "Recognize it as a single insurance contract",
         "Treat the entire contract under IFRS 9",
@@ -203,7 +199,7 @@ tagList(
 
     box(
       title = "5. An insurer issues two separate policies to the same corporate client—one covering property damage and another covering business interruption losses linked to that property. The premiums are interdependent and structured as a bundle to provide a cohesive risk solution. What is the appropriate IFRS 17 treatment?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
         "The contracts should always be separated",
         "The contracts should be combined if pricing is interdependent",
@@ -214,7 +210,7 @@ tagList(
 
     box(
       title = "6. An insurance contract includes an embedded derivative feature that alters cash flows based on a financial index. According to IFRS 17, how should this embedded derivative be accounted for?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
         "It must always remain part of the insurance contract",
         "It should be ignored unless the insurer requests separation",
@@ -225,7 +221,7 @@ tagList(
 
     box(
       title = "7. An insurer offers a contract that includes both insurance coverage and an investment component that can exist independently in the market. How should the investment component be treated under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
         "It should remain embedded in the insurance contract",
         "It should be accounted for under IFRS 15",
@@ -236,7 +232,7 @@ tagList(
 
     box(
       title = "8. An insurance contract includes health coverage and an add-on subscription service for wellness programs, such as gym memberships and nutrition consultations. How should this non-insurance component be accounted for under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
         "It must remain part of the insurance contract under IFRS 17",
         "It should be accounted for separately using IFRS 15 if distinct",
@@ -310,8 +306,8 @@ IFRS17Module2Server <- (function(id, user_data) {
     ns <- session$ns
 
 
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -342,24 +338,10 @@ IFRS17Module2Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
-
-
         score(0)
         feedback <- list()
 
@@ -383,7 +365,68 @@ IFRS17Module2Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 2
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 2 specific calculations
+        total_questions <- length(correct_answers_module2)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module2",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 2 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+            # Trigger the reactive to indicate progress was saved
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 2 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ==========        
     valid_ids <- paste0("q", 1:8)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -397,7 +440,6 @@ IFRS17Module2Server <- (function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module2)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -432,14 +474,6 @@ IFRS17Module2Server <- (function(id, user_data) {
                 margin-bottom: 20px;
                 color: #343a40;
               "),
-              # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -460,14 +494,13 @@ IFRS17Module2Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color: #f5f5f5", color, "; font-weight:600; '>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -475,15 +508,14 @@ IFRS17Module2Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
             )
-
           )  
 
         )  
@@ -494,7 +526,11 @@ IFRS17Module2Server <- (function(id, user_data) {
     })
     # create a reactive for the “Next” click
     to_module_3 <- reactive(input$to_module_3)
-    # return it so the app can observe it
-    to_module_3
+
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_3,
+      progress_trigger = progress_saved_trigger
+    ))
   })
 })
