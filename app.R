@@ -82,7 +82,6 @@ ui <- tagList(
             text = textOutput("user_welcome", inline = TRUE),
             icon = icon("user")
           ),
-
           
           # Progress (moved here from outside)
           notificationItem(
