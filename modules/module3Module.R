@@ -5,7 +5,7 @@ IFRS17Module3UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -92,16 +92,14 @@ tagList(
             p("Additionally, once contract groupings are determined at initial recognition, they must remain fixed; the composition of groups cannot be reassessed or changed later.")
         ),
 
-        box(
-            title = "Answer the following questions to test your understanding of Level of Aggregation.",
-            status = "white", solidHeader = TRUE, width = 12,
-            p("Please enter your name."),
-            textInput(ns("participant_name"), "Enter your Name:")
+        div(class = "module-section",
+            h3("📝 Quiz: Answer the following questions to test your understanding of Level of Aggregation."),
         ),
+
 
         box(
           title = "1. What is the main purpose of aggregation under IFRS 17?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q1"), label = NULL, choices = c(
             "To reduce the number of contracts reported",
             "To ensure accurate timing of profit and loss recognition",
@@ -112,7 +110,7 @@ tagList(
 
         box(
           title = "2. Under IFRS 17, contracts grouped into the same portfolio must share:",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q2"), label = NULL, choices = c(
             "The same inception date",
             "The same profit margin",
@@ -123,7 +121,7 @@ tagList(
 
         box(
           title = "3. How far apart can contract issuance dates be within the same group?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q3"), label = NULL, choices = c(
             "Any number of years",
             "Two years",
@@ -134,7 +132,7 @@ tagList(
 
         box(
           title = "4. What is the first step in the aggregation process under IFRS 17?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q4"), label = NULL, choices = c(
             "Grouping by issuance year",
             "Subdividing portfolios",
@@ -145,7 +143,7 @@ tagList(
 
         box(
           title = "5. Under IFRS 17, why are insurers not allowed to reassess contract groups after initial recognition?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q5"), label = NULL, choices = c(
             "To maintain consistency and transparency in reporting",
             "To reduce workload",
@@ -156,7 +154,7 @@ tagList(
 
         box(
           title = "6. How does IFRS 17 recommend handling groups of contracts under the Premium Allocation Approach (PAA)?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q6"), label = NULL, choices = c(
             "Assume they are always profitable",
             "Assume all contracts are onerous",
@@ -167,7 +165,7 @@ tagList(
 
         box(
           title = "7. What additional check must be done for policies eligible for the General Measurement Model (GMM)?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q7"), label = NULL, choices = c(
             "Verification of market premium rates",
             "Sensitivity testing and internal report reviews",
@@ -178,7 +176,7 @@ tagList(
 
         box(
           title = "8. Which of the following best describes a 'portfolio' under IFRS 17?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q8"), label = NULL, choices = c(
             "A collection of policies sold by one agent",
             "Contracts grouped based on risk and management similarity",
@@ -189,7 +187,7 @@ tagList(
 
         box(
           title = "9. What should an entity use to assess whether a contract might become onerous later?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q9"), label = NULL, choices = c(
             "Market interest rates",
             "Past claims history only",
@@ -200,7 +198,7 @@ tagList(
 
         box(
           title = "10. What happens if a contract becomes onerous after initial recognition?",
-          status = "white", solidHeader = TRUE, width = 12,
+          status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q10"), label = NULL, choices = c(
             "The group composition remains unchanged",
             "It is moved to the 'onerous' group retroactively",
@@ -276,8 +274,8 @@ IFRS17Module3Server <- (function(id, user_data) {
     ns <- session$ns
 
 
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -308,22 +306,11 @@ IFRS17Module3Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
+
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
 
 
         score(0)
@@ -349,7 +336,69 @@ IFRS17Module3Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 3
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 2 specific calculations
+        total_questions <- length(correct_answers_module3)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module3",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 3 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+          # Trigger progress update
+          progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 3 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ==========
+
     valid_ids <- paste0("q", 1:10)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -363,7 +412,6 @@ IFRS17Module3Server <- (function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module3)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -399,13 +447,6 @@ IFRS17Module3Server <- (function(id, user_data) {
                 color: #343a40;
               "),
               # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -426,14 +467,13 @@ IFRS17Module3Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -441,15 +481,14 @@ IFRS17Module3Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
             )
-
           )  
 
         )  
@@ -462,7 +501,15 @@ IFRS17Module3Server <- (function(id, user_data) {
 
     # create a reactive for the “Next” click  
     to_module_4 <- reactive(input$to_module_4)
-    # return it so the app can observe it
-    to_module_4
+
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_4,
+      progress_trigger = progress_saved_trigger
+    ))
+
   })
 })
+
+
+
