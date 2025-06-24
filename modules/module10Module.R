@@ -4,7 +4,7 @@ IFRS17Module10UI <- function(id) {
   logo_bar <- fluidRow(
     class = "logo-bar",                     # you’ll style this in CSS
     column(
-      width = 12,
+      width = 12, style = "border-left: 3px solid #DC5A17;",
       tags$div(
         class = "logo-wrapper d-flex justify-content-between align-items-center",
         # left-hand logo
@@ -90,16 +90,13 @@ tagList(
         img(src = "images/reinsuranceContractHeld.png", class = "module-image")
     ),  
 
-    box(
-      title = "Answer the following questions to test your understanding of Reinsurance Contracts Held.",
-      status = "white", solidHeader = TRUE, width = 12,
-      p("Please enter your name."),
-      textInput(ns("participant_name"), "Enter your Name:")
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Reinsurance Contracts Held."),
     ),
 
     box(
       title = "1. What is a reinsurance contract held under IFRS 17?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
         "A contract under which an entity receives compensation for claims from a reinsurer",
         "A contract issued to share profits with partners",
@@ -110,7 +107,7 @@ tagList(
 
     box(
       title = "2. When should a reinsurance contract held be initially recognized?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
         "When the reinsurer pays a claim",
         "At the start of the underlying insurance contract",
@@ -121,7 +118,7 @@ tagList(
 
     box(
       title = "3. Can a gain on purchase of reinsurance be recognized immediately?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
         "Yes, it boosts profit",
         "No, it is included in the CSM",
@@ -132,7 +129,7 @@ tagList(
 
     box(
       title = "4. Which of the following is NOT included in fulfilment cash flows for reinsurance contracts held?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
         "Future claims recoveries",
         "Discounting",
@@ -143,7 +140,7 @@ tagList(
 
     box(
       title = "5. What is the impact of reinsurance on the insurer’s risk exposure?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
         "Increases risk",
         "No impact",
@@ -154,7 +151,7 @@ tagList(
 
     box(
       title = "6. How are changes in fulfilment cash flows for reinsurance contracts treated?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
         "Adjust the CSM or go through P&L",
         "Ignore until contract maturity",
@@ -165,7 +162,7 @@ tagList(
 
     box(
       title = "7. Under the General Model, what happens to the CSM for reinsurance contracts held over time?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
         "It grows with claims paid",
         "It’s released based on services received",
@@ -176,7 +173,7 @@ tagList(
 
     box(
       title = "8. How are reinsurance recoveries presented in the income statement?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
         "Included in insurance revenue",
         "Included in investment income",
@@ -187,7 +184,7 @@ tagList(
 
     box(
       title = "9. How are recoveries for past claims treated under reinsurance contracts held?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
         "Deferred in CSM",
         "Expensed as incurred",
@@ -198,7 +195,7 @@ tagList(
 
     box(
       title = "10. What is the impact of a reinsurance CSM being negative?",
-      status = "white", solidHeader = TRUE, width = 12,
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
         "It represents a loss",
         "It is a liability",
@@ -273,10 +270,8 @@ IFRS17Module10Server <- (function(id, user_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-
-
-    # Quiz result output
-    final_name <- reactiveVal("")
+    # Add a reactive value to track when progress is saved
+    progress_saved_trigger <- reactiveVal(0)
 
     score <- reactiveVal(0)
 
@@ -307,23 +302,10 @@ IFRS17Module10Server <- (function(id, user_data) {
           return()
         }
         
-        # 4. (Optional) also check name
-        if (is.null(input$participant_name) || input$participant_name == "") {
-          showModal(modalDialog(
-            title   = "Participant Name Required",
-            "Please enter your name before you submit the quiz.",
-            easyClose = TRUE,
-            footer    = modalButton("OK")
-          ))
-          return()
-        }
         
         # ———————————
         # 5. All answered: clear any existing modal, then run your scoring code
         removeModal()
-
-        final_name(input$participant_name)
-
 
         score(0)
         feedback <- list()
@@ -348,7 +330,70 @@ IFRS17Module10Server <- (function(id, user_data) {
         feedbackDanger(qid, paste0("Incorrect! Correct answer is: ", correct, ". ", explanation))
       }
     }
+
+      # ========== NEW PROGRESS SAVING SECTION ==========
+      # Save progress for Module 10
+      if (!is.null(user_data) && isTRUE(user_data$is_authenticated) && !isTRUE(user_data$is_guest)) {
+        # Module 2 specific calculations
+        total_questions <- length(correct_answers_module10)
+        final_score <- score()
+        final_percentage <- round((final_score / total_questions) * 100, 1)
         
+        # Save to database
+        tryCatch({
+          progress_saved <- save_user_progress(
+            user_id = user_data$user_id,
+            module_name = "module10",  # Module 2 identifier
+            score = final_score,
+            percentage = final_percentage,
+            completed_at = Sys.time(),
+            token = user_data$token
+          )
+          
+          if (progress_saved) {
+            # Success notification with score
+            showNotification(
+              HTML(paste0(
+                "<strong>✅ Module 10 Progress Saved!</strong><br>",
+                "Score: ", final_score, "/", total_questions, " (", final_percentage, "%)<br>",
+                if(final_percentage >= 70) "Great job!" else "Keep practicing!"
+              )),
+              type = "message",
+              duration = 5
+            )
+
+            # Trigger progress update
+            progress_saved_trigger(progress_saved_trigger() + 1)
+
+          } else {
+            showNotification(
+              "⚠️ Could not save progress. Please check your connection.",
+              type = "warning",
+              duration = 4
+            )
+          }
+        }, error = function(e) {
+          showNotification(
+            "❌ Error saving progress. Please contact support if this persists.",
+            type = "error",
+            duration = 5
+          )
+          print(paste("Module 10 progress save error:", e$message))
+        })
+      } else if (isTRUE(user_data$is_guest)) {
+        # Guest mode notification
+        showNotification(
+          HTML("<strong>ℹ️ Guest Mode</strong><br>
+                Your progress is not being saved.<br>
+                <a href='#' onclick='location.reload();' style='color: #fff; text-decoration: underline;'>
+                Click here to sign up</a>"),
+          type = "message",
+          duration = 6
+        )
+      }
+      # ========== END PROGRESS SAVING SECTION ========== 
+
+
     valid_ids <- paste0("q", 1:10)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
@@ -362,7 +407,6 @@ IFRS17Module10Server <- (function(id, user_data) {
     output$result <- renderUI({
       total_questions <- length(correct_answers_module10)
       percentage       <- round((score() / total_questions) * 100, 1)
-      name             <- isolate(input$participant_name)
       color            <- if (percentage >= 70) "#198754" else "#dc3545"
 
       tagList(
@@ -397,14 +441,6 @@ IFRS17Module10Server <- (function(id, user_data) {
                 margin-bottom: 20px;
                 color: #343a40;
               "),
-              # recipient name
-          h2(isolate(input$participant_name),
-            style = "
-              font-family: 'Nunito', sans-serif;
-              font-size: 28px;
-              margin: 0;
-              color: #198754;
-            "),
             p(format(Sys.Date(), "%B %d, %Y"), 
             style = "
             font-size:14px;
@@ -413,6 +449,7 @@ IFRS17Module10Server <- (function(id, user_data) {
             ")
           ),  # ← comma!
 
+          # ——— Results Summary Card ———
           # ——— Results Summary Card ———
           div(
             class = "print-summary",
@@ -425,14 +462,13 @@ IFRS17Module10Server <- (function(id, user_data) {
             ",
             h3(
               "📊 Results Summary",
-              style = "color:#0d6efd; font-weight:600; margin-bottom:20px;"
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
-              "<p style='font-size:17px;'><strong>👤 Participant:</strong> ", name, "</p>",
-              "<hr style='border-top:1px solid #dee2e6;'>",
-              "<p style='font-size:18px;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<hr style='border-top:1px solid #f5f5f5;'>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
@@ -440,15 +476,14 @@ IFRS17Module10Server <- (function(id, user_data) {
               style = "margin-top:25px;",
               h4(
                 "📘 Detailed Feedback",
-                style = "margin-bottom:15px; color:#343a40;"
+                style = "margin-bottom:15px; color:#fff;"
               ),
               tags$ul(
                 lapply(feedback, function(msg) {
-                  tags$li(style = "margin-bottom:8px;", HTML(msg))
+                  tags$li(style = "margin-bottom:8px; color:#f5f5f5;", HTML(msg))
                 })
               )
             )
-
           )  
 
         )  
@@ -460,7 +495,11 @@ IFRS17Module10Server <- (function(id, user_data) {
 
     # create a reactive for the “Next” click
     to_module_11 <- reactive(input$to_module_11)
-    # return it so the app can observe it
-    to_module_11
+
+    # Return both the navigation trigger and the progress update trigger
+    return(list(
+      navigate = to_module_11,
+      progress_trigger = progress_saved_trigger
+    ))
   })
 })
