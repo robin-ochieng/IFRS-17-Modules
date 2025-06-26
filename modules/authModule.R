@@ -90,7 +90,15 @@ authUI <- function(id) {
               placeholder = "Enter your password"
             )
           ),
-          
+
+          div(
+          class = "form-group text-right",
+          actionLink(
+            ns("forgot_link"),
+            "Forgot Password?",
+            style = "color: #007bff; font-size: 14px;"
+          )
+        ),
           div(
             class = "form-group text-center",
             actionButton(
@@ -167,23 +175,70 @@ authUI <- function(id) {
           ),
           
           div(id = ns("register_message"), class = "alert", style = "display: none;")
+        ),
+        # Forgot Password Form (hidden by default)
+        div(
+          id = ns("forgot_form"),
+          class = "auth-form",
+          style = "display: none;",
+          h4("Reset Password"),
+          p("Enter your email address to receive a password reset link."),
+          
+          div(
+            class = "form-group",
+            textInput(
+              ns("reset_email"),
+              "Email",
+              placeholder = "Enter your registered email"
+            )
+          ),
+          
+          div(
+            class = "form-group text-center",
+            actionButton(
+              ns("send_reset"),
+              "Send Reset Link",
+              class = "btn btn-primary btn-block",
+              style = "width: 100%; margin-bottom: 10px;"
+            ),
+            
+            actionLink(
+              ns("back_to_login_link"),
+              "Back to Login",
+              style = "display: block; margin-top: 10px; color: #007bff;"
+            )
+          ),
+          
+          div(id = ns("reset_message"), class = "alert", style = "display: none;")
         )
+
       )
     ),
     
     # JavaScript for tab switching
     tags$script(HTML(sprintf("
       function showAuthTab(nsPrefix, tab) {
+        // Hide all forms
+        document.getElementById(nsPrefix + 'login_form').style.display = 'none';
+        document.getElementById(nsPrefix + 'register_form').style.display = 'none';
+        
+        // ADD THIS LINE:
+        document.getElementById(nsPrefix + 'forgot_form').style.display = 'none';
+        
         if (tab === 'login') {
           document.getElementById(nsPrefix + 'login_form').style.display = 'block';
-          document.getElementById(nsPrefix + 'register_form').style.display = 'none';
+          document.getElementById(nsPrefix + 'tab_navigation').style.display = 'flex';
           document.getElementById(nsPrefix + 'login_tab').classList.add('active');
           document.getElementById(nsPrefix + 'register_tab').classList.remove('active');
-        } else {
+        } else if (tab === 'register') {
           document.getElementById(nsPrefix + 'register_form').style.display = 'block';
-          document.getElementById(nsPrefix + 'login_form').style.display = 'none';
+          document.getElementById(nsPrefix + 'tab_navigation').style.display = 'flex';
           document.getElementById(nsPrefix + 'register_tab').classList.add('active');
           document.getElementById(nsPrefix + 'login_tab').classList.remove('active');
+        } else if (tab === 'forgot') {
+          // ADD THIS NEW CONDITION:
+          document.getElementById(nsPrefix + 'forgot_form').style.display = 'block';
+          document.getElementById(nsPrefix + 'tab_navigation').style.display = 'none';
         }
       }
     ")))
@@ -386,7 +441,96 @@ authServer <- function(id) {
       shinyjs::enable("register_btn")
       shinyjs::html("register_btn", "Create Account")
     })
+
+    # Forgot Password Link Handler
+    observeEvent(input$forgot_link, {
+      # Show forgot password form inline
+      runjs(sprintf("showAuthTab('%s', 'forgot')", ns("")))
+      
+      # Clear any previous messages
+      shinyjs::hide("reset_message")
+      updateTextInput(session, "reset_email", value = "")
+    })
     
+    # Back to Login Handler
+    observeEvent(input$back_to_login_link, {
+      runjs(sprintf("showAuthTab('%s', 'login')", ns("")))
+    })
+    
+    # Send Reset Email Handler (keep the same)
+    observeEvent(input$send_reset, {
+      req(input$reset_email)
+      
+      # Clear previous messages
+      shinyjs::hide("reset_message")
+      shinyjs::removeClass("reset_message", "alert-danger")
+      shinyjs::removeClass("reset_message", "alert-success")
+      
+      if (grepl("@", input$reset_email)) {
+        # Show loading state
+        shinyjs::disable("send_reset")
+        shinyjs::html("send_reset", "Sending...")
+        
+        success <- supabase_reset_password(input$reset_email)
+        
+        if (success) {
+          shinyjs::html("reset_message", 
+            "If that email exists in our system, you'll receive a reset link shortly.")
+          shinyjs::show("reset_message")
+          shinyjs::addClass("reset_message", "alert-success")
+          
+          # Clear form
+          updateTextInput(session, "reset_email", value = "")
+          
+          # Go back to login after delay
+          shinyjs::delay(3000, {
+            runjs(sprintf("showAuthTab('%s', 'login')", ns("")))
+          })
+        } else {
+          shinyjs::html("reset_message", 
+            "Unable to process request. Please try again later.")
+          shinyjs::show("reset_message")
+          shinyjs::addClass("reset_message", "alert-danger")
+        }
+        
+        # Reset button
+        shinyjs::enable("send_reset")
+        shinyjs::html("send_reset", "Send Reset Link")
+      } else {
+        shinyjs::html("reset_message", "Please enter a valid email address")
+        shinyjs::show("reset_message")
+        shinyjs::addClass("reset_message", "alert-danger")
+      }
+    })
+    
+    # Send Reset Email
+    observeEvent(input$send_reset, {
+      req(input$reset_email)
+      
+      if (grepl("@", input$reset_email)) {
+        success <- supabase_reset_password(input$reset_email)
+        
+        removeModal()
+        
+        if (success) {
+          showNotification(
+            "If that email exists in our system, you'll receive a reset link shortly.",
+            type = "message",
+            duration = 5
+          )
+        } else {
+          showNotification(
+            "Unable to process request. Please try again later.",
+            type = "error",
+            duration = 5
+          )
+        }
+      } else {
+        showNotification("Please enter a valid email address", type = "warning")
+      }
+    })
+
+
     # Return user data for other modules to use
     return(user_data)
   })
