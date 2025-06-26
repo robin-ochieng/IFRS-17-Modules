@@ -4,6 +4,25 @@
               padding: 20px;
               box-sizing: border-box;
             }
+            #auth-reset_message {
+              margin-top: 15px;
+              padding: 12px;
+              border-radius: 4px;
+              font-size: 14px;
+            }
+
+            #auth-reset_message.alert-success {
+              background-color: #d4edda;
+              border: 1px solid #c3e6cb;
+              color: #155724;
+            }
+
+            #auth-reset_message.alert-danger {
+              background-color: #f8d7da;
+              border: 1px solid #f5c6cb;
+              color: #721c24;
+            }
+            
             .auth-container {
               position: relative;
               z-index: 10000;
@@ -33,6 +52,7 @@
             .auth-form {
               padding-top: 20px;
               min-height: 400px;
+              animation: fadeIn 0.3s ease-in;
             }
             .form-group {
               margin-bottom: 15px;
@@ -112,3 +132,13 @@
               }
             }
 
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+                transform: translateY(-10px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
