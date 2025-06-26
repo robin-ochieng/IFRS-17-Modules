@@ -194,12 +194,18 @@ supabase_signout <- function(token) {
 # Simplified Profile Functions
 create_user_profile_simple <- function(user_id, full_name, token) {
   endpoint <- "/user_profiles"
-  
+
+  # Ensure we have a valid full name
+  if (is.null(full_name) || nchar(trimws(full_name)) == 0) {
+    full_name <- "User"  # Default fallback
+  }  
+
   # Use upsert to avoid conflicts
   body <- list(
     user_id = user_id,
-    full_name = full_name,
-    created_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
+    full_name = trimws(full_name),  # Remove any extra whitespace
+    created_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S"),
+    updated_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
   )
   
   response <- make_supabase_request(
@@ -210,7 +216,13 @@ create_user_profile_simple <- function(user_id, full_name, token) {
   )
   
   if (!is.null(response)) {
-    return(status_code(response) %in% c(200, 201))
+    if (status_code(response) %in% c(200, 201)) {
+      print(paste("Profile created/updated for user:", user_id, "with name:", full_name))
+      return(TRUE)
+    } else {
+      print(paste("Failed to create profile. Status:", status_code(response)))
+      print(content(response, "text"))
+    }
   }
   return(FALSE)
 }
@@ -223,7 +235,12 @@ get_or_create_user_profile <- function(user_id, email, token) {
   if (!is.null(response) && status_code(response) == 200) {
     profiles <- content(response, "parsed")
     if (length(profiles) > 0) {
-      return(profiles[[1]])
+      profile <- profiles[[1]]
+      # Ensure we have all necessary fields
+      if (is.null(profile$full_name) || nchar(trimws(profile$full_name)) == 0) {
+        profile$full_name <- profile$email %||% email
+      }
+      return(profile)
     }
   }
   
@@ -240,7 +257,12 @@ get_or_create_user_profile <- function(user_id, email, token) {
     ))
   }
   
-  return(NULL)
+  # If all else fails, return a minimal profile
+  return(list(
+    user_id = user_id,
+    full_name = strsplit(email, "@")[[1]][1],
+    email = email
+  ))
 }
 
 # User Progress Functions
@@ -319,6 +341,29 @@ get_user_progress <- function(user_id, token) {
   return(NULL)
 }
 
+# Function to update user's full name
+
+update_user_full_name <- function(user_id, full_name, token) {
+  if (nchar(SUPABASE_URL) == 0 || nchar(SUPABASE_ANON_KEY) == 0) {
+    return(FALSE)
+  }
+  
+  endpoint <- paste0("/user_profiles?user_id=eq.", user_id)
+  
+  body <- list(
+    full_name = full_name,
+    updated_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
+  )
+  
+  response <- make_supabase_request(endpoint, "PATCH", body, token)
+  
+  if (!is.null(response)) {
+    return(status_code(response) %in% c(200, 204))
+  }
+  return(FALSE)
+}
+
+
 # Guest Mode Support
 create_guest_session <- function() {
   list(
@@ -332,4 +377,31 @@ create_guest_session <- function() {
     ),
     is_guest = TRUE
   )
+}
+
+# Simple password reset - just sends the email
+supabase_reset_password <- function(email) {
+  if (nchar(SUPABASE_URL) == 0 || nchar(SUPABASE_ANON_KEY) == 0) {
+    return(FALSE)
+  }
+  
+  url <- paste0(SUPABASE_AUTH_URL, "/recover")
+  
+  headers <- c(
+    "apikey" = as.character(SUPABASE_ANON_KEY),
+    "Content-Type" = "application/json"
+  )
+  
+  tryCatch({
+    response <- POST(
+      url,
+      add_headers(.headers = headers),
+      body = list(email = email),
+      encode = "json"
+    )
+    
+    return(status_code(response) == 200)
+  }, error = function(e) {
+    return(FALSE)
+  })
 }
