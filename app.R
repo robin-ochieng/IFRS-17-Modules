@@ -210,13 +210,27 @@ server <- function(input, output, session) {
   })
 
   # User welcome message
+# Replace the user welcome message section in app.R with this:
+
+# User welcome message
   output$user_welcome <- renderText({
     if (user_data$is_authenticated && user_data$is_guest) {
       "Guest User"
-    } else if (user_data$is_authenticated && !is.null(user_data$profile)) {
-      paste("Welcome,", user_data$profile$full_name)
     } else if (user_data$is_authenticated) {
-      paste("Welcome,", user_data$email)
+      # Try to get the full name from profile
+      display_name <- NULL
+      
+      # Check if profile exists and has full_name
+      if (!is.null(user_data$profile) && !is.null(user_data$profile$full_name)) {
+        display_name <- user_data$profile$full_name
+      }
+      
+      # If no full name, extract from email
+      if (is.null(display_name) || nchar(trimws(display_name)) == 0) {
+        display_name <- strsplit(user_data$email, "@")[[1]][1]
+      }
+      
+      paste("Welcome,", display_name)
     } else {
       ""
     }
@@ -284,7 +298,6 @@ server <- function(input, output, session) {
       showNotification("Logged out successfully", type = "message")
     }
   })
-
 
   # Modified module servers with user data integration
   intro_nav <- IFRS17TrainingIntroServer("intro", user_data)
@@ -777,7 +790,7 @@ server <- function(input, output, session) {
               "generate_certificate",
               "Generate Certificate",
               icon = icon("certificate"),
-              class = "btn-success"
+              class = "control-button-tavnav"
             )
           },
           modalButton("Close")
@@ -867,9 +880,16 @@ server <- function(input, output, session) {
                 p("This is to certify that", 
                   style = "font-size: 18px; color: #4b5563;"),
                 
-                h2(user_data$profile$full_name,
+                h2(
+                  if (!is.null(user_data$profile) && !is.null(user_data$profile$full_name)) {
+                    user_data$profile$full_name
+                  } else {
+                    # Fallback to email username if full name not available
+                    strsplit(user_data$email, "@")[[1]][1]
+                  },
                   style = "color: #1e40af; font-size: 32px; 
-                            margin: 15px 0; font-weight: bold;"),
+                            margin: 15px 0; font-weight: bold;"
+                ),
                 
                 p("has successfully completed the",
                   style = "font-size: 18px; color: #4b5563;"),
