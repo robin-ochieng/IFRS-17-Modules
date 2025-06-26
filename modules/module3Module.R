@@ -466,14 +466,14 @@ IFRS17Module3Server <- (function(id, user_data) {
               font-family: Arial, sans-serif;
             ",
             h3(
-              "📊 Results Summary",
+              "📊 Module 3 Results Summary",
               style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
             ),
 
             HTML(paste0(
               "<hr style='border-top:1px solid #f5f5f5;'>",
               "<p style='font-size:18px; color:#f5f5f5;'><strong>Total Score:</strong> ", score(), " / ", total_questions, "</p>",
-              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:", color, "; font-weight:600;'>", percentage, "%</span></p>"
+              "<p style='font-size:18px; color:#f5f5f5;'><strong>Percentage Score:</strong> <span style='color:#ffffff; font-weight:600;'>", percentage, "%</span></p>"
             )),
 
             # ——— Detailed Feedback ———
