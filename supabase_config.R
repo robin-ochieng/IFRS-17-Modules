@@ -103,7 +103,12 @@ supabase_signup <- function(email, password, full_name = NULL) {
     if (status_code(response) == 200) {
       # Automatically create profile after signup
       if (!is.null(content$user) && !is.null(full_name)) {
-        create_user_profile_simple(content$user$id, full_name, content$session$access_token)
+        create_user_profile_simple(
+          content$user$id, 
+          full_name, 
+          content$session$access_token,
+          email
+        )
       }
       
       return(list(
@@ -192,7 +197,7 @@ supabase_signout <- function(token) {
 }
 
 # Simplified Profile Functions
-create_user_profile_simple <- function(user_id, full_name, token) {
+create_user_profile_simple <- function(user_id, full_name, token, email = NULL) {
   endpoint <- "/user_profiles"
 
   # Ensure we have a valid full name
@@ -203,7 +208,8 @@ create_user_profile_simple <- function(user_id, full_name, token) {
   # Use upsert to avoid conflicts
   body <- list(
     user_id = user_id,
-    full_name = trimws(full_name),  # Remove any extra whitespace
+    full_name = trimws(full_name),  
+    email = email,
     created_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S"),
     updated_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
   )
@@ -238,8 +244,12 @@ get_or_create_user_profile <- function(user_id, email, token) {
       profile <- profiles[[1]]
       # Ensure we have all necessary fields
       if (is.null(profile$full_name) || nchar(trimws(profile$full_name)) == 0) {
-        profile$full_name <- profile$email %||% email
+        profile$full_name <- strsplit(email, "@")[[1]][1]
       }
+      # Add email if missing
+      if (is.null(profile$email)) {
+        profile$email <- email
+      }      
       return(profile)
     }
   }
@@ -248,7 +258,7 @@ get_or_create_user_profile <- function(user_id, email, token) {
   # Extract name from email if needed
   display_name <- strsplit(email, "@")[[1]][1]
   
-  if (create_user_profile_simple(user_id, display_name, token)) {
+  if (create_user_profile_simple(user_id, display_name, token, email)) {
     # Return basic profile
     return(list(
       user_id = user_id,
@@ -382,6 +392,7 @@ create_guest_session <- function() {
 # Simple password reset - just sends the email
 supabase_reset_password <- function(email) {
   if (nchar(SUPABASE_URL) == 0 || nchar(SUPABASE_ANON_KEY) == 0) {
+    print("Supabase not configured")
     return(FALSE)
   }
   
@@ -392,16 +403,382 @@ supabase_reset_password <- function(email) {
     "Content-Type" = "application/json"
   )
   
+  # Add redirect URL for better compatibility
+  body <- list(
+    email = email,
+    redirect_to = "http://localhost:3838/"  # Update this to your app URL
+  )
+  
   tryCatch({
     response <- POST(
       url,
       add_headers(.headers = headers),
-      body = list(email = email),
+      body = body,
       encode = "json"
     )
     
+    # Debug output
+    print(paste("Reset password response status:", status_code(response)))
+    
+    if (status_code(response) != 200) {
+      # Print error details for debugging
+      error_content <- content(response, "text")
+      print(paste("Supabase error:", error_content))
+    }
+    
     return(status_code(response) == 200)
   }, error = function(e) {
+    print(paste("Reset password error:", e$message))
     return(FALSE)
   })
+}
+
+
+# Add these admin functions to your supabase_config.R file
+
+# Check if user is admin (add admin emails to this list)
+is_admin <- function(email) {
+  admin_emails <- c(
+    "rochieng@kenbright.africa", 
+    "robinochieng73@gmail.com"  
+  )
+  return(tolower(email) %in% tolower(admin_emails))
+}
+
+# Get all users with their profiles
+get_all_users <- function(token) {
+  if (is.null(make_supabase_request)) {
+    return(NULL)
+  }
+  
+  endpoint <- "/user_profiles?select=*&order=created_at.desc"
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (!is.null(response) && status_code(response) == 200) {
+    users <- content(response, "parsed")
+    return(users)
+  }
+  return(NULL)
+}
+
+# Get all progress records
+get_all_progress <- function(token) {
+  if (is.null(make_supabase_request)) {
+    return(NULL)
+  }
+  
+  endpoint <- "/user_progress?select=*"
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (!is.null(response) && status_code(response) == 200) {
+    progress <- content(response, "parsed")
+    return(progress)
+  }
+  return(NULL)
+}
+
+# Get progress summary statistics
+get_progress_stats <- function(token) {
+  progress_data <- get_all_progress(token)
+  if (is.null(progress_data) || length(progress_data) == 0) {
+    return(list(
+      total_users = 0,
+      total_completions = 0,
+      avg_score = 0,
+      modules_stats = list()
+    ))
+  }
+  
+  # Convert to dataframe for easier analysis
+  progress_df <- do.call(rbind, lapply(progress_data, function(x) {
+    data.frame(
+      user_id = x$user_id %||% NA,
+      module_name = x$module_name %||% NA,
+      score = as.numeric(x$score %||% 0),
+      percentage = as.numeric(x$percentage %||% 0),
+      completed_at = x$completed_at %||% NA,
+      stringsAsFactors = FALSE
+    )
+  }))
+  
+  # Calculate statistics
+  stats <- list(
+    total_users = length(unique(progress_df$user_id)),
+    total_completions = nrow(progress_df),
+    avg_score = round(mean(progress_df$percentage, na.rm = TRUE), 1),
+    modules_stats = progress_df %>%
+      group_by(module_name) %>%
+      summarise(
+        completions = n(),
+        avg_score = round(mean(percentage, na.rm = TRUE), 1),
+        pass_rate = round(sum(percentage >= 70) / n() * 100, 1)
+      ) %>%
+      arrange(module_name)
+  )
+  
+  return(stats)
+}
+
+# Get recent activity
+get_recent_activity <- function(token, days = 7) {
+  progress_data <- get_all_progress(token)
+  if (is.null(progress_data) || length(progress_data) == 0) {
+    return(NULL)
+  }
+  
+  # Convert to dataframe
+  activity_df <- do.call(rbind, lapply(progress_data, function(x) {
+    data.frame(
+      user_id = x$user_id %||% NA,
+      module_name = x$module_name %||% NA,
+      percentage = as.numeric(x$percentage %||% 0),
+      completed_at = as.POSIXct(x$completed_at %||% NA),
+      stringsAsFactors = FALSE
+    )
+  }))
+  
+  # Filter recent activity
+  cutoff_date <- Sys.Date() - days
+  recent_activity <- activity_df %>%
+    filter(completed_at >= cutoff_date) %>%
+    arrange(desc(completed_at))
+  
+  return(recent_activity)
+}
+
+# Get user details with progress
+get_user_details <- function(user_id, token) {
+  # Get user profile
+  profile_endpoint <- paste0("/user_profiles?user_id=eq.", user_id)
+  profile_response <- make_supabase_request(profile_endpoint, "GET", token = token)
+  
+  # Get user progress
+  progress_endpoint <- paste0("/user_progress?user_id=eq.", user_id, "&order=module_name")
+  progress_response <- make_supabase_request(progress_endpoint, "GET", token = token)
+  
+  user_info <- list(profile = NULL, progress = NULL)
+  
+  if (!is.null(profile_response) && status_code(profile_response) == 200) {
+    profiles <- content(profile_response, "parsed")
+    if (length(profiles) > 0) {
+      user_info$profile <- profiles[[1]]
+    }
+  }
+  
+  if (!is.null(progress_response) && status_code(progress_response) == 200) {
+    user_info$progress <- content(progress_response, "parsed")
+  }
+  
+  return(user_info)
+}
+
+# Function to insert quiz questions
+insert_quiz_questions <- function(questions_data, token) {
+  endpoint <- "/quiz_questions"
+  
+  # Use upsert to avoid duplicates
+  response <- make_supabase_request(
+    paste0(endpoint, "?on_conflict=module_name,question_number"), 
+    "POST", 
+    questions_data, 
+    token
+  )
+  
+  if (!is.null(response)) {
+    return(status_code(response) %in% c(200, 201))
+  }
+  return(FALSE)
+}
+
+# Function to get all quiz questions
+get_all_quiz_questions <- function(token) {
+  endpoint <- "/quiz_questions?order=module_number,question_number"
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (!is.null(response) && status_code(response) == 200) {
+    return(content(response, "parsed"))
+  }
+  return(NULL)
+}
+
+# Function to get quiz questions by module
+get_module_quiz_questions <- function(module_name, token) {
+  endpoint <- paste0("/quiz_questions?module_name=eq.", module_name, "&order=question_number")
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (!is.null(response) && status_code(response) == 200) {
+    return(content(response, "parsed"))
+  }
+  return(NULL)
+}
+
+# Function to record quiz attempt
+record_quiz_attempt <- function(user_id, module_name, question_id, selected_answer, is_correct, time_spent = NULL, token) {
+  endpoint <- "/quiz_attempts"
+  
+  body <- list(
+    user_id = user_id,
+    module_name = module_name,
+    question_id = question_id,
+    selected_answer = selected_answer,
+    is_correct = is_correct,
+    attempted_at = format(Sys.time(), "%Y-%m-%dT%H:%M:%S")
+  )
+  
+  if (!is.null(time_spent)) {
+    body$time_spent <- time_spent
+  }
+  
+  response <- make_supabase_request(endpoint, "POST", body, token)
+  
+  if (!is.null(response)) {
+    return(status_code(response) %in% c(200, 201))
+  }
+  return(FALSE)
+}
+
+# Function to get quiz statistics
+get_quiz_statistics <- function(token) {
+  # Get all attempts
+  endpoint <- "/quiz_attempts?select=*"
+  response <- make_supabase_request(endpoint, "GET", token = token)
+  
+  if (!is.null(response) && status_code(response) == 200) {
+    attempts <- content(response, "parsed")
+    
+    if (length(attempts) > 0) {
+      # Convert to dataframe for analysis
+      attempts_list <- list()    
+
+      for (i in seq_along(attempts)) {
+        attempt <- attempts[[i]]
+        
+        # Handle is_correct field safely
+        is_correct_value <- attempt$is_correct
+        if (is.character(is_correct_value)) {
+          is_correct_value <- tolower(is_correct_value) %in% c("true", "t", "1")
+        } else if (is.numeric(is_correct_value)) {
+          is_correct_value <- is_correct_value == 1
+        } else if (is.list(is_correct_value)) {
+          is_correct_value <- ifelse(length(is_correct_value) > 0, 
+                                   as.logical(is_correct_value[[1]]), 
+                                   FALSE)
+        }
+        
+        attempts_list[[i]] <- data.frame(
+          user_id = attempt$user_id %||% NA,
+          module_name = attempt$module_name %||% NA,
+          question_id = attempt$question_id %||% NA,
+          is_correct = isTRUE(is_correct_value),
+          attempted_at = attempt$attempted_at %||% NA,
+          stringsAsFactors = FALSE
+        )
+      }      
+
+      # Convert to dataframe for analysis
+      attempts_df <- do.call(rbind, attempts_list) 
+
+      
+      # Calculate statistics
+      stats <- list(
+        total_attempts = nrow(attempts_df),
+        unique_users = length(unique(attempts_df$user_id)),
+        overall_accuracy = round(mean(attempts_df$is_correct) * 100, 1),
+        module_stats = attempts_df %>%
+          group_by(module_name) %>%
+          summarise(
+            attempts = n(),
+            accuracy = round(mean(is_correct) * 100, 1),
+            unique_users = n_distinct(user_id)
+          ) %>%
+          arrange(module_name)
+      )
+      
+      return(stats)
+    }
+  }
+  
+  return(list(
+    total_attempts = 0,
+    unique_users = 0,
+    overall_accuracy = 0,
+    module_stats = data.frame()
+  ))
+}
+
+# Function to get question performance
+get_question_performance <- function(module_name = NULL, token) {
+  # Get questions and attempts
+  questions_endpoint <- if (!is.null(module_name)) {
+    paste0("/quiz_questions?module_name=eq.", module_name, "&select=*")
+  } else {
+    "/quiz_questions?select=*"
+  }
+  
+  attempts_endpoint <- if (!is.null(module_name)) {
+    paste0("/quiz_attempts?module_name=eq.", module_name, "&select=*")
+  } else {
+    "/quiz_attempts?select=*"
+  }
+  
+  questions_response <- make_supabase_request(questions_endpoint, "GET", token = token)
+  attempts_response <- make_supabase_request(attempts_endpoint, "GET", token = token)
+  
+  if (!is.null(questions_response) && status_code(questions_response) == 200 &&
+      !is.null(attempts_response) && status_code(attempts_response) == 200) {
+    
+    questions <- content(questions_response, "parsed")
+    attempts <- content(attempts_response, "parsed")
+    
+    # Create performance summary
+    performance <- lapply(questions, function(q) {
+      q_attempts <- Filter(function(a) a$question_id == q$id, attempts)
+     
+      # Calculate correct attempts safely
+      correct_count <- 0
+      total_attempts <- length(q_attempts)
+      
+      if (total_attempts > 0) {
+        # Safely count correct attempts
+        for (attempt in q_attempts) {
+          # Handle different possible formats of is_correct
+          is_correct_value <- attempt$is_correct
+          
+          # Convert to logical if needed
+          if (is.character(is_correct_value)) {
+            is_correct_value <- tolower(is_correct_value) %in% c("true", "t", "1")
+          } else if (is.numeric(is_correct_value)) {
+            is_correct_value <- is_correct_value == 1
+          } else if (is.list(is_correct_value)) {
+            # If it's a list, try to extract the first element
+            is_correct_value <- ifelse(length(is_correct_value) > 0, 
+                                     as.logical(is_correct_value[[1]]), 
+                                     FALSE)
+          }
+          
+          # Only count if it's TRUE
+          if (isTRUE(is_correct_value)) {
+            correct_count <- correct_count + 1
+          }
+        }
+      }
+
+      list(
+        module_name = q$module_name,
+        question_number = q$question_number,
+        question_text =  q$question_text,
+        total_attempts = total_attempts,
+        correct_attempts = correct_count,
+        accuracy = if(length(q_attempts) > 0) {
+          round((correct_count / total_attempts) * 100, 1)
+        } else {
+          NA
+         }
+      )
+    })
+    
+    return(performance)
+  }
+  
+  return(NULL)
 }
