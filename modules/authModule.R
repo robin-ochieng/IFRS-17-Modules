@@ -44,7 +44,7 @@ authUI <- function(id) {
         
         # Logo
         div(
-          class = "text-center mb-4",
+          class = "text-center mb-2",
           img(src = "images/ira_logo_.png", style = "height: 60px;"),
           h3("IFRS 17 Training Platform", class = "mt-2")
         ),
@@ -218,27 +218,32 @@ authUI <- function(id) {
     # JavaScript for tab switching
     tags$script(HTML(sprintf("
       function showAuthTab(nsPrefix, tab) {
-        // Hide all forms
-        document.getElementById(nsPrefix + 'login_form').style.display = 'none';
-        document.getElementById(nsPrefix + 'register_form').style.display = 'none';
+        // Get all form elements
+        var loginForm = document.getElementById(nsPrefix + 'login_form');
+        var registerForm = document.getElementById(nsPrefix + 'register_form');
+        var forgotForm = document.getElementById(nsPrefix + 'forgot_form');
+        var tabNav = document.getElementById(nsPrefix + 'tab_navigation');
+        var loginTab = document.getElementById(nsPrefix + 'login_tab');
+        var registerTab = document.getElementById(nsPrefix + 'register_tab');
         
-        // ADD THIS LINE:
-        document.getElementById(nsPrefix + 'forgot_form').style.display = 'none';
+        // Hide all forms first
+        if (loginForm) loginForm.style.display = 'none';
+        if (registerForm) registerForm.style.display = 'none';
+        if (forgotForm) forgotForm.style.display = 'none';
         
         if (tab === 'login') {
-          document.getElementById(nsPrefix + 'login_form').style.display = 'block';
-          document.getElementById(nsPrefix + 'tab_navigation').style.display = 'flex';
-          document.getElementById(nsPrefix + 'login_tab').classList.add('active');
-          document.getElementById(nsPrefix + 'register_tab').classList.remove('active');
+          if (loginForm) loginForm.style.display = 'block';
+          if (tabNav) tabNav.style.display = 'flex';
+          if (loginTab) loginTab.classList.add('active');
+          if (registerTab) registerTab.classList.remove('active');
         } else if (tab === 'register') {
-          document.getElementById(nsPrefix + 'register_form').style.display = 'block';
-          document.getElementById(nsPrefix + 'tab_navigation').style.display = 'flex';
-          document.getElementById(nsPrefix + 'register_tab').classList.add('active');
-          document.getElementById(nsPrefix + 'login_tab').classList.remove('active');
+          if (registerForm) registerForm.style.display = 'block';
+          if (tabNav) tabNav.style.display = 'flex';
+          if (registerTab) registerTab.classList.add('active');
+          if (loginTab) loginTab.classList.remove('active');
         } else if (tab === 'forgot') {
-          // ADD THIS NEW CONDITION:
-          document.getElementById(nsPrefix + 'forgot_form').style.display = 'block';
-          document.getElementById(nsPrefix + 'tab_navigation').style.display = 'none';
+          if (forgotForm) forgotForm.style.display = 'block';
+          if (tabNav) tabNav.style.display = 'none';
         }
       }
     ")))
