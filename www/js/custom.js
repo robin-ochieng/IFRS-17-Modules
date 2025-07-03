@@ -49,8 +49,7 @@ Shiny.addCustomMessageHandler("printPage", function(message) {
   window.print();
 });
 
-// Add this JavaScript to your app to handle sidebar collapse
-// Put this in your tags$script() section or in a separate JS file
+
 
 $(document).ready(function() {
   // Function to adjust menu container position based on sidebar state
@@ -63,7 +62,8 @@ $(document).ready(function() {
       // Sidebar is collapsed
       menuContainer.css({
         'left': '0',
-        'width': '60px'  // Typical collapsed sidebar width
+        'width': '60px',
+        'overflow': 'hidden' 
       });
       
       logos.css({
@@ -73,13 +73,19 @@ $(document).ready(function() {
       });
       
       // Hide text in menu items
-      $('.menu-container .nav-link p, .menu-container .nav-link span:not(.fa)').hide();
-      
+      $('.menu-container .nav-link > p').css('display', 'none');
+      $('.menu-container .nav-link > span:not(.fa):not(.fas):not(.far)').css('display', 'none');
+      $('.menu-container .nav-header').css('display', 'none');
+
+      // Adjust menu items for collapsed state
+      $('.menu-container .nav-item').css('white-space', 'nowrap');
+
     } else {
       // Sidebar is expanded
       menuContainer.css({
         'left': '0',
-        'width': '260px'  // Your normal sidebar width
+        'width': '260px',
+        'overflow': 'visible'
       });
       
       logos.css({
@@ -88,31 +94,53 @@ $(document).ready(function() {
         'padding': '20px 10px 10px 10px'
       });
       
-      // Show text in menu items
-      $('.menu-container .nav-link p, .menu-container .nav-link span:not(.fa)').show();
+      // Show text elements with a slight delay to ensure proper rendering
+      setTimeout(function() {
+        $('.menu-container .nav-link > p').css('display', 'block');
+        $('.menu-container .nav-link > span:not(.fa):not(.fas):not(.far)').css('display', 'inline');
+        $('.menu-container .nav-header').css('display', 'block');
+        
+        // Reset menu items for expanded state
+        $('.menu-container .nav-item').css('white-space', 'normal');
+      }, 50);
     }
+    
+    // Force a reflow to ensure changes are applied
+    menuContainer[0].offsetHeight;
   }
   
   // Listen for sidebar toggle button clicks
   $('[data-widget="pushmenu"]').on('click', function() {
-    setTimeout(adjustMenuContainer, 300);  // Wait for animation
+    setTimeout(adjustMenuContainer, 350);  // Wait for animation
   });
   
   // Also listen for body class changes
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.attributeName === "class") {
-        adjustMenuContainer();
+        var oldClasses = mutation.oldValue || "";
+        var newClasses = mutation.target.className;
+        
+        // Check if sidebar-collapse class was added or removed
+        if (oldClasses.includes('sidebar-collapse') !== newClasses.includes('sidebar-collapse')) {
+          setTimeout(adjustMenuContainer, 100);
+        }
       }
     });
   });
   
   observer.observe(document.body, {
     attributes: true,
-    attributeFilter: ['class']
+    attributeFilter: ['class'],
+    attributeOldValue: true
   });
   
   // Initial adjustment
-  adjustMenuContainer();
+  setTimeout(adjustMenuContainer, 100);
+  
+  // Handle window resize
+  $(window).on('resize', function() {
+    setTimeout(adjustMenuContainer, 100);
+  });
 });
 
