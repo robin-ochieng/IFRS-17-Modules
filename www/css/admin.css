@@ -1,0 +1,288 @@
+/* Admin Dashboard Styles - www/css/admin.css */
+    /* Base Admin Dashboard Styling */
+        .admin-light-theme {
+        background-color: #f8f9fa;
+        color: #2d3748;
+        min-height: 100vh;
+        }
+
+
+        .admin-header {
+          background: linear-gradient(135deg, #5b6cd4 0%, #667eea 100%);
+          color: white;
+          padding: 2rem;
+          border-radius: 12px;
+          margin-bottom: 2rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .admin-header h1 {
+          color: white !important;
+          font-weight: 700;
+          font-size: 2.5rem;
+        }
+
+        .admin-header p {
+          color: rgba(255, 255, 255, 0.9) !important;
+          font-size: 1.1rem;
+        }        
+       
+        .metric-card {
+          background: #ffffff;
+          border-radius: 12px;
+          padding: 1.5rem;
+          text-align: center;
+          transition: all 0.3s ease;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+          height: 100%;
+        }
+        
+        .metric-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+          border-color: #cbd5e0;
+        }
+        
+        .metric-number {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin: 0.5rem 0;
+          color: #1a202c;
+        }
+        
+        .metric-label {
+          color: #718096;
+          font-size: 0.875rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          font-weight: 600;
+        }
+        
+        .chart-container {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 1.75rem;
+          margin-bottom: 1rem;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+          transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .chart-container h4 {
+          margin-bottom: 1.25rem !important;
+          padding-bottom: 0.75rem;
+          border-bottom: 2px solid #edf2f7;
+        }        
+        
+        .user-table-container {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 1.75rem;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .activity-item {
+          background: white;
+          border: 1px solid #e2e8f0;
+          border-radius: 10px;
+          padding: 1.25rem;
+          margin-bottom: 0.75rem;
+          transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+          transform: translateX(4px);
+          border-color: #cbd5e0;
+        }
+
+        /* DataTables Dark Theme Override */
+        .dataTables_wrapper {
+        color: #2d3748  !important;
+        }
+
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_processing,
+        .dataTables_wrapper .dataTables_paginate {
+        color: #4a5568  !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: #4a5568 !important;
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 4px;
+        margin: 0 2px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: #edf2f7 !important;
+        border-color: #cbd5e0 !important;
+        color: #2d3748 !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #5b6cd4 !important;
+        border-color: #5b6cd4 !important;
+        color: #ffffff !important;
+        }
+
+        table.dataTable thead th {
+          background-color: #f7fafc !important;
+          color: #2d3748 !important;
+          font-weight: 600 !important;
+          border-bottom: 2px solid #e2e8f0 !important;
+          padding: 12px 18px !important;
+        }
+
+        table.dataTable tbody td {
+          color: #2d3748 !important;
+          border-bottom: 1px solid #edf2f7 !important;
+          padding: 12px 18px !important;
+        }
+
+        table.dataTable tbody tr:hover {
+          background-color: #f7fafc !important;
+        }
+
+        /* Modal styling for admin */
+        .modal-content {
+        background-color: #ffffff;
+        color: #2d3748;
+        }
+
+        .modal-header {
+        background-color: #f7fafc;
+        border-bottom: 1px solid #e2e8f0;
+        color: #2d3748;
+        }
+
+        .modal-title {
+          color: #1a202c;
+          font-weight: 600;
+        }
+
+        .modal-body {
+          background-color: #ffffff;
+          color: #4a5568;
+        }       
+
+        .modal-body h4 {
+          color: #2d3748;
+          font-weight: 600;
+          margin-bottom: 1rem;
+        }
+        .modal-body dl dt {
+          color: #718096;
+          font-weight: 600;
+          margin-bottom: 0.25rem;
+        }
+
+        .modal-body dl dd {
+          color: #2d3748;
+          margin-bottom: 0.75rem;
+        }
+
+        .modal-footer {
+          background-color: #f7fafc;
+          border-top: 1px solid #e2e8f0;
+        }
+
+        /* Plotly Chart Overrides */
+        .plotly .modebar {
+          background-color: rgba(255, 255, 255, 0.9) !important;
+          border: 1px solid #e2e8f0;
+          border-radius: 6px;
+          margin: 8px;
+        }
+
+        .plotly .modebar-btn {
+          color: #4a5568 !important;
+        }
+
+        .plotly .modebar-btn:hover {
+          color: #2d3748 !important;
+        }
+
+        /* Empty State Styling */
+        .text-center-admin {
+          padding: 3rem;
+        }
+
+        .text-center-admin h4 {
+          color: #4a5568;
+          margin-top: 1rem;
+          font-weight: 600;
+        }
+
+        .text-center-admin p {
+          color: #718096;
+        }        
+
+        /* Search box styling */
+        .form-control {
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        color: #333333;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .admin-header h1 {
+            font-size: 2rem;
+          }
+          
+          .metric-card {
+            margin-bottom: 1rem;
+          }
+          
+          .metric-number {
+            font-size: 2rem;
+          }
+          
+          .chart-container {
+            margin-bottom: 1rem;
+          }
+        }
+
+        /* Print Styles */
+        @media print {
+          .admin-light-theme {
+            background-color: white;
+          }
+          
+          .chart-container,
+          .metric-card,
+          .activity-item {
+            box-shadow: none;
+            border: 1px solid #e2e8f0;
+          }
+        }
+
+        /* Loading States */
+        .loading-spinner {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border: 3px solid #e2e8f0;
+          border-radius: 50%;
+          border-top-color: #5b6cd4;
+          animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+
+        /* Smooth Transitions */
+        * {
+          transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
