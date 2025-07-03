@@ -1,5 +1,4 @@
 #app.R
-
 library(shiny)
 library(shinyWidgets)
 library(rmarkdown) 
@@ -17,9 +16,9 @@ library(shinyFeedback)
 shinyjs::useShinyjs()
 
 # Source authentication and database functions
+source("modules/adminModule.R")
 source("supabase_config.R")
 source("modules/authModule.R")
-
 source("modules/introModule.R")
 source("modules/measurementModule.R")
 source("modules/caseStudiesModule.R")
@@ -111,7 +110,11 @@ ui <- tagList(
             # top‐level items
             menuItem("Introduction",  tabName = "intro",  icon = icon("info-circle")),
             menuItem("Foundations and Standards",  tabName = "measurement",  icon = icon("balance-scale")),
-            # grouped IFRS-17 Modules
+            # Admin Dashboard (conditionally displayed)
+            conditionalPanel(
+              condition = "output.show_admin_menu",
+              menuItem("Admin Dashboard", tabName = "admin", icon = icon("user-shield"))
+            ),
             menuItem(
               "IFRS-17 Modules", icon = icon("th-list"),
               menuSubItem(" | Module 1",  tabName = "module1", icon = icon("book")),
@@ -155,6 +158,7 @@ ui <- tagList(
       includeCSS("www/css/module13.css"), 
       includeCSS("www/css/module14.css"),
       includeCSS("www/css/auth.css"),
+      includeCSS("www/css/admin.css"),
       tags$script(src = "js/custom.js"),
       tags$link(rel = "shortcut icon", href = "favicon/kenbright.ico", type = "image/x-icon"),
       tags$link(
@@ -181,7 +185,8 @@ ui <- tagList(
       tabItem(tabName = "module12",    IFRS17Module12UI("module12")),
       tabItem(tabName = "module13",    IFRS17Module13UI("module13")),
       tabItem(tabName = "module14",    IFRS17Module14UI("module14")),
-      tabItem(tabName = "module15",    IFRS17Module15UI("module15"))
+      tabItem(tabName = "module15",    IFRS17Module15UI("module15")),
+      tabItem(tabName = "admin",       adminDashboardUI("admin"))
     ),
     div(
       class = "app-footer",
@@ -1036,7 +1041,25 @@ server <- function(input, output, session) {
     ')
   })
 
+    # Function to check if user is admin
+    # Add output for conditional admin menu display
+    output$show_admin_menu <- reactive({
+      if (user_data$is_authenticated && !user_data$is_guest && !is.null(user_data$email)) {
+        is_admin(user_data$email)
+      } else {
+        FALSE
+      }
+    })
+    outputOptions(output, "show_admin_menu", suspendWhenHidden = FALSE)
 
+    # Add admin dashboard server (add after module servers)
+    observe({
+      if (user_data$is_authenticated && !user_data$is_guest && !is.null(user_data$email)) {
+        if (is_admin(user_data$email)) {
+          adminDashboardServer("admin", user_data)
+        }
+      }
+    })
 
 
 
