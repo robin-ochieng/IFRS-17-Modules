@@ -8,6 +8,7 @@
         border-top: none;
         border-bottom: none;
         width: 260px;
+        zindex: 1000; /* Ensure it is above other elements */
     }
 
     .control-button {
@@ -97,6 +98,7 @@
       padding: 20px 10px 10px 10px; 
       height: 120px;       
       box-sizing: border-box;
+      transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
     }
 
     /* custom_styles.css */
@@ -120,6 +122,8 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
       box-sizing: border-box;
+      transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+      z-index: 1000;
     }
 
     /* ──────────────────────────────────────────────────────────────
@@ -202,6 +206,30 @@
       flex-shrink: 0 !important;         /* ensures icon keeps its size */
     }
 
+    /* Ensure menu items don't wrap in collapsed state */
+    .sidebar-collapse .menu-container .nav-link {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* Smooth opacity transitions for text */
+    .menu-container .nav-link > p,
+    .menu-container .nav-link > span:not(.fa):not(.fas):not(.far) {
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    /* Ensure icons stay visible */
+    .sidebar-collapse .menu-container .nav-link > .fa,
+    .sidebar-collapse .menu-container .nav-link > .fas,
+    .sidebar-collapse .menu-container .nav-link > .far {
+      display: inline-block !important;
+      width: 20px;
+      text-align: center;
+    }
+
+    .menu-container .nav-sidebar {
+      width: 100%;
+    }    
 
 
   /* Style the clock container */
