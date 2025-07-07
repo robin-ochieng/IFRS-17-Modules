@@ -19,24 +19,29 @@ tagList(
   logo_bar,
         div(
             class = "section-header",
-            h2("📘 Module 4: Recognition of Insurance Contracts", class = "section-title-top")
+            h2("📘 Module 4: Recognition", class = "section-title-top")
         ),
 
         div(class = "module-section",
-            h3("📖 Introduction"),
-            p("This module provides an overview of how insurance contracts are recognized as per IFRS 17 paragraph 25 to paragraph 28.")
+            h3(icon("info-circle"), "Module Overview", class = "section-subheading"),
+            p("This module explains how insurance contracts are initially recognized under IFRS 17, specifically referring to the guidance found in paragraphs 25 to 28."),
+            p("The module outlines the timing, criteria, and related considerations that insurers must follow when bringing groups of contracts onto the financial statements.")
         ),
 
+
         div(class = "module-section",
-            h3("📌 Recognition in IFRS 17"),
-            p("IFRS 17 requires insurers to recognize groups of insurance contracts in a timely and structured manner to ensure accurate financial reporting, especially in reflecting risk and acquisition costs."),
+            h3("Recognition in IFRS 17", class = "section-subheading"),
+            p("IFRS 17 establishes clear rules for when and how insurance contracts should be recognized. The goal is to provide a reliable representation of financial performance, particularly in relation to insurance risk and the cost of acquiring contracts."),
             p("Below is a summary of the key recognition principles, including when and how a group of contracts should be accounted for.")
-        ),
-
+          ),
         div(class = "module-section image-timeline-wrapper",
-            h3("1. Timing of Initial Recognition", class = "section-subheading"),
-            h4("IFRS 17: Initial Recognition Timeline", class = "timeline-title"),
-            p("Recognition occurs at the earliest of the following:"),
+            h4("1. Initial Recognition"),
+            p("A group of insurance contracts must be recognized at the earliest of the following three events:"),
+            tags$ul(
+              tags$li("The beginning of the coverage period for any contract in the group"),
+              tags$li("The date when the first payment from a policyholder becomes due"),
+              tags$li("When the group becomes onerous (i.e., expected to generate a loss), if this occurs before the other two events")
+            ),
             div(
                 class = "timeline-image-container",
                 img(
@@ -44,144 +49,164 @@ tagList(
                     alt = "IFRS 17 Initial Recognition Timeline",
                     class = "timeline-image"
                 )
-            )
+            ),
+           p("This ensures timely reporting, particularly when contracts start to impact the entity’s financial position.")           
         ),
 
+
         div(class = "module-section",
-            h3("2. Identification of Onerous Contracts before Recognition", class = "section-subheading"),
-            p("An entity must assess if any contracts are onerous before the earlier of:"),
+            h4("2. Assessing Onerous Contracts before Recognition"),
+            p("Before officially recognizing a group, insurers are required to check whether any contracts within the group are onerous."),
+            p("This assessment must be performed before the earlier of:"),
             tags$ul(
-              tags$li("The beginning of the coverage period, or"),
-              tags$li("The due date of the first payment.")
+              tags$li("The start date of the coverage period, or"),
+              tags$li("The due date of the first premium payment")
+            ),
+            p("Any contract expected to result in a loss at inception must be identified as onerous and recognized immediately."),
+            p("This early recognition ensures that losses are reported promptly, preventing their deferral to future reporting periods.")
+        ),
+
+        div(class = "module-section",
+            h4("3. Insurance Acquisition Cash Flows (IACFs)"),
+            p("Insurance acquisition cash flows refer to the costs associated with acquiring insurance contracts — such as commissions to brokers or agents."),
+            p("When these acquisition costs are paid or received before the group of contracts is formally recognized, they are initially recorded as an asset or liability, depending on the nature of the cash flow."),
+            p("These amounts are only temporary on the balance sheet and are to be reclassified once the group is recognized."),
+            p("Once they are recognized, the acquisition costs are added to the group’s measurement as part of the fulfilment cash flows, and the initial asset or liability is derecognized."),
+            p("This approach ensures that acquisition costs are properly matched to the group of contracts they relate to.")
+        ),
+
+        div(class = "module-section",
+            h4("4. Contracts included in a group"),
+            p("Only contracts that are issued on or before the reporting date can be included in a recognized group."),
+            
+            p("When recognizing the group, entities must also:"),
+            tags$ol(type = "a",
+              tags$li("Determine the discount rate that will be applied to adjust expected future cash flows to present value"),
+              tags$li("Estimate the pattern of insurance service delivery, so that revenue can be appropriately allocated over the coverage period")
+            ),
+            
+            p("Although contracts issued after the reporting date cannot be included retroactively, they may be added in a future period, but only in the period they are actually issued."),
+            
+            p("If this occurs, the insurer must:"),
+            tags$ol(type = "a",
+              tags$li("Reassess and update the discount rate used"),
+              tags$li("Apply the revised rate retrospectively from the start of the reporting period in which the new contracts are added")
             )
         ),
 
-        div(class = "module-section",
-            h3("3. Insurance Acquisition Cash Flows (IACFs)", class = "section-subheading"),
-            p("IACFs refer to costs related to setting up insurance contracts, such as broker or agent fees."),
-            p("Any IACFs paid or received before group recognition are recorded as an asset or liability unless used up immediately."),
-            p("These amounts stay on the books temporarily. Once the group of contracts starts, this money becomes part of the group’s total cost and therefore, the asset or liability can then be derecognized.")
-        ),
 
         div(class = "module-section",
-            h3("4. Contracts Included in a Group", class = "section-subheading"),
-            p("The group should only include contracts issued by the end of the reporting period."),
-            p("When the insurer records a group of insurance contracts, they need to figure out the interest rate they'll use to adjust future cash flows to today's value."),
-            p("They also need to estimate how much insurance services they’ll provide during the period, so they can spread the revenue fairly over time."),
-            p("New contracts may be added to the group after the reporting period, but they are only added in the period they are issued. In the event this happens, the initial discount rate may change, which must then be updated and applied from the start of the reporting period.")
-        ),
-
-        div(class = "module-section",
-            h3("📝 Quiz: Answer the following questions to test your understanding of Recognition of Insurance Contracts."),
+            h3("📝 Quiz: Answer the following questions to test your understanding of Recognition of Insurance Contracts.", class = "section-subheading"),
         ),        
 
+        # UI boxes for Module 4 questions
         box(
-          title = "1. When must a group of insurance contracts be recognized under IFRS 17?",
+          title = "1. When must a group of insurance contracts be recognized at the latest?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q1"), label = NULL, choices = c(
-            "At the end of the reporting period",
-            "When the last payment is received",
-            "When the policyholder signs the contract",
-            "At the earliest of the coverage period start, first payment due, or when the group becomes onerous"
+            "When the group becomes onerous, if earlier than other conditions",
+            "When the financial statements are finalized",
+            "After the coverage period ends",
+            "At the insurer’s discretion"
           ), selected = character(0))
         ),
 
         box(
-          title = "2. If there is no contractual due date for the first payment, when is it considered due?",
+          title = "2. Which is not one of the conditions triggering initial recognition of a group of contracts?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q2"), label = NULL, choices = c(
-            "At the end of the month",
-            "When it is received",
-            "After coverage starts",
-            "When billed"
+            "Beginning of coverage period",
+            "First premium payment due",
+            "End of coverage period",
+            "When the group is onerous"
           ), selected = character(0))
         ),
 
         box(
-          title = "3. When should an insurer assess if a contract is onerous?",
+          title = "3. What happens if a contract is identified as onerous at inception?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q3"), label = NULL, choices = c(
-            "After recognition",
-            "Before the earlier of coverage start or payment due",
-            "At the end of the financial year",
-            "Only when a loss is reported"
+            "Recognition can be delayed",
+            "It must be recognized immediately",
+            "The contract is canceled",
+            "No special accounting is needed"
           ), selected = character(0))
         ),
 
         box(
-          title = "4. What is the treatment if IACFs are not immediately expensed?",
+          title = "4. What are Insurance Acquisition Cash Flows (IACFs)?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q4"), label = NULL, choices = c(
-            "They are recognized as an asset or liability",
-            "They are deferred revenue",
-            "They are added to the CSM",
-            "They are amortized over the contract term"
+            "Costs of acquiring insurance contracts, e.g., commissions",
+            "Premiums paid by policyholders",
+            "Future claim payments",
+            "Reinsurance recoveries"
           ), selected = character(0))
         ),
 
         box(
-          title = "5. When is the acquisition asset or liability removed from the books?",
+          title = "5. How are IACFs treated before group recognition?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q5"), label = NULL, choices = c(
-            "When the last premium is received",
-            "When the policyholder cancels",
-            "When the related group of contracts is recognized",
-            "At the year-end"
+            "Expensed immediately",
+            "Ignored until contract matures",
+            "Added to premiums",
+            "Recorded as asset or liability"
           ), selected = character(0))
         ),
 
         box(
-          title = "6. What is the condition for including a contract in a group?",
+          title = "6. What happens to IACFs once the group is recognized?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q6"), label = NULL, choices = c(
-            "It must be active",
-            "It must be issued by the end of the reporting period",
-            "It must be profitable",
-            "It must be short-term"
+            "They remain on the balance sheet",
+            "They are derecognized and included in fulfilment cash flows",
+            "They are converted to revenue",
+            "They are written off"
           ), selected = character(0))
         ),
 
         box(
-          title = "7. What happens if new contracts added to a group affect the discount rate?",
+          title = "7. Which contracts can be included in a group for reporting purposes?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q7"), label = NULL, choices = c(
-            "The rate must be updated and applied from the start of the reporting period",
-            "Nothing changes",
-            "It only applies to new contracts",
-            "The group must be split"
+            "Only those issued after the reporting date",
+            "All contracts, regardless of issuance date",
+            "Only those issued before or on the reporting date",
+            "Only those with premiums already received"
           ), selected = character(0))
         ),
 
         box(
-          title = "8. Which of the following is TRUE regarding onerous contracts?",
+          title = "8. Why is the discount rate important in recognition?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q8"), label = NULL, choices = c(
-            "They must be recognized immediately",
-            "They are ignored under IFRS 17",
-            "They are grouped with profitable contracts",
-            "They are only assessed annually"
+            "It determines the insurer’s profit",
+            "It calculates taxes",
+            "It sets premium levels",
+            "It adjusts expected cash flows to present value"
           ), selected = character(0))
         ),
 
         box(
-          title = "9. How often can the discount rate be changed for a group?",
+          title = "9. If contracts are issued after the reporting date, when are they added to a group?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q9"), label = NULL, choices = c(
-            "Monthly",
-            "Only if new contracts are added that change it",
-            "Once a year",
-            "Never"
+            "Only in the period they are issued",
+            "Retroactively to the prior period",
+            "When premiums are fully paid",
+            "At the insurer’s discretion"
           ), selected = character(0))
         ),
 
         box(
-          title = "10. Why is the initial recognition timing important under IFRS 17?",
+          title = "10. What must happen if new contracts are added to a group after reporting?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q10"), label = NULL, choices = c(
-            "It determines when revenue and expenses are recorded",
-            "It helps identify reinsurers",
-            "It is used to calculate tax",
-            "It helps with customer satisfaction"
+            "Recognize them as separate contracts",
+            "No changes required",
+            "Reassess discount rate and apply retrospectively from start of period",
+            "Ignore the change"
           ), selected = character(0))
         ),
 
@@ -203,48 +228,51 @@ tagList(
     )
 }
 
-correct_answers_module4 <- list( 
+
+# Correct answers and explanations for Module 4
+correct_answers_module4 <- list(
   q1 = list(
-    answer = "At the earliest of the coverage period start, first payment due, or when the group becomes onerous",
-    explanation = "IFRS 17 requires recognition at the earliest of these three trigger events."
+    answer     = "When the group becomes onerous, if earlier than other conditions",
+    explanation= "Recognition occurs at the earliest of coverage start, first payment due, or when the group becomes onerous."
   ),
   q2 = list(
-    answer = "When it is received",
-    explanation = "IFRS 17 states that if no due date is set, the payment is considered due when received."
+    answer     = "End of coverage period",
+    explanation= "Initial recognition cannot occur after the coverage period ends."
   ),
   q3 = list(
-    answer = "Before the earlier of coverage start or payment due",
-    explanation = "The standard requires a pre-recognition assessment if there's an indication of onerousness."
+    answer     = "It must be recognized immediately",
+    explanation= "Onerous contracts must be recognized immediately to avoid deferring losses."
   ),
   q4 = list(
-    answer = "They are recognized as an asset or liability",
-    explanation = "IACFs are treated separately until the related group is recognized."
+    answer     = "Costs of acquiring insurance contracts, e.g., commissions",
+    explanation= "IACFs cover acquisition costs such as broker or agent commissions."
   ),
   q5 = list(
-    answer = "When the related group of contracts is recognized",
-    explanation = "The asset or liability is derecognized at the point of group recognition."
+    answer     = "Recorded as asset or liability",
+    explanation= "Before group recognition, IACFs are temporarily recorded on the balance sheet."
   ),
   q6 = list(
-    answer = "It must be issued by the end of the reporting period",
-    explanation = "Only contracts issued by the end of the reporting period are included."
+    answer     = "They are derecognized and included in fulfilment cash flows",
+    explanation= "On recognition, acquisition cash flows are added to fulfilment cash flows and removed as an asset/liability."
   ),
   q7 = list(
-    answer = "The rate must be updated and applied from the start of the reporting period",
-    explanation = "The standard requires adjusting the initial discount rate retroactively to the start of the reporting period."
+    answer     = "Only those issued before or on the reporting date",
+    explanation= "Only contracts issued up to the reporting date can be included."
   ),
   q8 = list(
-    answer = "They must be recognized immediately",
-    explanation = "Onerous groups must be recognized as soon as they become onerous."
+    answer     = "It adjusts expected cash flows to present value",
+    explanation= "The discount rate ensures future cash flows are stated at present value."
   ),
   q9 = list(
-    answer = "Only if new contracts are added that change it",
-    explanation = "The rate is updated only if new contracts added after the reporting period affect it."
+    answer     = "Only in the period they are issued",
+    explanation= "New contracts can only be added in the period they are actually issued."
   ),
   q10 = list(
-    answer = "It determines when revenue and expenses are recorded",
-    explanation = "Proper timing ensures that revenue, risk, and costs are reported accurately."
+    answer     = "Reassess discount rate and apply retrospectively from start of period",
+    explanation= "If new contracts are added after reporting, the discount rate must be updated retrospectively."
   )
 )
+
 
 
 
@@ -441,10 +469,7 @@ IFRS17Module4Server <- (function(id, user_data) {
               box-shadow: 0 4px 12px rgba(0,0,0,0.08);
               font-family: Arial, sans-serif;
             ",
-            h3(
-              "📊 Module 4 Results Summary",
-              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
-            ),
+            h3("📊 Module 4 Results Summary", class = "section-subheading"),
 
             HTML(paste0(
               "<hr style='border-top:1px solid #f5f5f5;'>",
