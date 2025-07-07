@@ -22,146 +22,143 @@ tagList(
         h2("📘 Module 5: Measurement on Initial Recognition", class = "section-title-top")
     ),
 
-        div(class = "module-section",
-            h3("📖 Introduction"),
-            p("This module provides an overview of the requirements for measurement on initial recognition of insurance contracts, as set out in paragraphs 32–52 of the IFRS 17 standard.")
-        ),
+      div(class = "module-section",
+          h3(icon("info-circle"), "Module Overview", class = "section-subheading"),
+          p("This module provides an overview of the requirements for measurement on initial recognition of insurance contracts, as set out in paragraphs 32–52 of the IFRS 17 standard.")
+      ),
 
-        div(class = "module-section",
-            h3("📌 Recognition Criteria"),
-            p("Under IFRS 17, Insurance contracts must be recognized at the earliest of:"),
-            tags$ul(
-              tags$li("The beginning of the coverage period;"),
-              tags$li("The date when the first premium is due; or"),
-              tags$li("The date when the group of contracts becomes onerous.")
-            )
-        ),
-        div(class = "module-section",
-          h3("📊 Measurement Approaches Overview"),
-          div(class = "table-responsive",
-            tags$table(class = "measurement-table",
-              tags$thead(
-                tags$tr(
-                  tags$th("Measurement Model"),
-                  tags$th("Applicability"),
-                  tags$th("Key Features")
-                )
-              ),
-              tags$tbody(
-                tags$tr(
-                  tags$td(tags$b("General Measurement Model (GMM)")),
-                  tags$td("Default model for long-duration contracts"),
-                  tags$td("Includes FCF, Discounting, Risk Adjustment, CSM")
-                ),
-                tags$tr(
-                  tags$td(tags$b("Premium Allocation Approach (PAA)")),
-                  tags$td("Optional for short-duration contracts"),
-                  tags$td("Simplified method, no explicit CSM")
-                ),
-                tags$tr(
-                  tags$td(tags$b("Variable Fee Approach (VFA)")),
-                  tags$td("For contracts with direct participation features"),
-                  tags$td("CSM adjusts based on underlying asset returns")
-                )
-              )
-            )
+      div(class = "module-section",
+          h3("📝 Recognition Criteria", class = "section-subheading"),
+          p("An insurance contract is recognized at the earliest of the following:"),
+          tags$ul(
+            tags$li("The beginning of the coverage period;"),
+            tags$li("When the first premium becomes due;"),
+            tags$li("When it is determined that a group of contracts will be onerous.")
           )
-        ),
-
-        div(class = "module-section",
-          h3("🔍 Components of Measurement at Initial Recognition"),
-          p("Under the General Measurement Model (GMM), the initial measurement of a group of insurance contracts is the sum of:"),
-          tags$ol(type = "i",
-            tags$li(
-              strong("Fulfilment Cash Flows (FCF):"),
-              tags$ol(type = "a",
-                tags$li("Future Cash Flows: Best estimates of expected premiums, claims, benefits, and expenses."),
-                tags$li("Discounting: Adjustment to reflect the time value of money and financial risks."),
-                tags$li("Risk Adjustment: Compensation for being uncertainty in non-financial risks (e.g. mortality, lapse).")
-              )
-            ),
-            tags$li(
-              tagList(
-                strong("Contractual Service Margin (CSM): "),
-              tags$ol(type = "a",
-                tags$li("Represents the unearned profit that the entity will recognize as it provides insurance contract services over the duration of the contract."),
-                p("The standard states under paragraph 53 that the PAA is designed for insurance contracts with a coverage period of one year or less, or where it can be demonstrated that using the PAA would not materially differ from applying the General Measurement Model (GMM)."),
-                p("At initial recognition:"),
-                tags$ol(type = "a",
-                  tags$li("The liability is measured as: premiums received (or due) less insurance acquisition cash flows"),
-                  tags$li("Acquisition costs are treated based on the entity’s accounting policy—they may either be deferred or expensed immediately in the Profit and Loss.")
-                )
-              )
-              )
-            )
-          )
-        ),
-
-
-
-        div(class = "module-section",
-            h3("🧮 Contractual Service Margin (CSM)"),
-            p("The CSM is the key component that defers recognition of profits until insurance services are provided."),
-            p("At initial recognition:"),
-            tags$ul(
-              tags$li("a)	CSM=Discounted cash inflows -discounted cash outflows-risk adjustment."),
-              tags$li("b)	If the result is negative; the contract is onerous, and a loss is recognized immediately in profit or loss.")
-            )
-        ),
-
-        div(class = "info-box scenario-box",
-          div(class = "scenario-calc-row",
-            # Left column
-            div(class = "scenario-col",
-              tags$h4("📌 Illustration:"),
-              tags$ul(
-                tags$li("Expected premiums: KES 1,200"),
-                tags$li("Expected claims & expenses: KES 900"),
-                tags$li("Risk Adjustment: KES 50"),
-                tags$li("Discounting impact: KES 100")
-              )
-            ),
-            # Right column
-            div(class = "calc-col",
-              tags$h4("🧮 Calculation:"),
-              tags$ul(
-                tags$li("Fulfilment Cash Flows = KES 1,200 - KES 900 - KES 100 - KES 50 = KES 150"),
-                tags$li(tags$strong("CSM = KES 150"), " which is to be released over the coverage period.")
-              )
-            )
-          )
-        ),
-     
-
-        div(class = "module-section",
-            h3("⚠️ Treatment of Onerous Contracts"),
-            p("If the total of expected outflows plus the risk adjustment exceeds the expected inflows, the contract is considered onerous."),
-          tags$ol(type = "a",
-            tags$li("No CSM is recognized , as the CSM cannot be negative."),
-            tags$li("A loss component is established to reflect the immediate loss."),
-            tags$li("The loss is recorded in profit or loss.")
-          )            
-        ),
-      
-        div(class = "module-section summary-box",
-            h3("📌 Key Takeaways"),
-            tags$ol(type = "a",
-              tags$li("Contracts are recognized when the earliest of:"),
-              tags$ol(type = "i",
-                tags$li("The beginning of the coverage period"),
-                tags$li("The date when the first premium is due; or"),
-                tags$li("The date when the group of contracts becomes onerous")
-              ),
-              tags$li("Measurement includes future cash flows, discounting, risk adjustment, ULAE, and CSM(under GMM)."),
-              tags$li("The CSM ensures no upfront profit. and is adjusted only for changes in future service."),
-              tags$li("Onerous contracts result in immediate loss recognition."),
-              tags$li("Choosing between the GMM and PAA depends on contract duration and PAA eligibility test."),
-              tags$li("Acquisition costs are handled differently under GMM and VFA (included in FCFs) and PAA (either deferred or expensed).")
-            )
-        ),
+      ),
 
         div(class = "module-section image-summary-wrapper",
-            h3("📋 Summary of Measurement at Initial Recognition"),
+            h3("📋 Measurement Approaches Overview", class = "section-subheading"),
+
+              img(
+                src = "images/measurementApproaches.png",
+                alt = "Measurement Approaches Overview",
+                class = "module-image"
+              )
+        ),
+
+        # Components of Measurement at Initial Recognition
+        div(class = "module-section",
+            h3("📊 Components of Measurement at Initial Recognition", class = "section-subheading"),
+
+            h4("General Measurement Model (GMM)"),
+            p("Under the General Measurement Model (GMM), the initial measurement of a group of insurance contracts is the sum of:"),
+
+            tags$ul(
+              tags$li(strong("Fulfilment Cash Flows (FCF)")),
+              tags$li("Future Cash Flows – Projections of inflows (premiums) and outflows (claims, benefits, and expenses)"),
+              tags$li("Discounting – Adjustment to reflect the time value of money and financial risks"),
+              tags$li("Risk Adjustment – Adjustment for uncertainties in non-financial assumptions (e.g., lapse rates)")
+            )
+        ),
+
+        # Contractual Service Margin (CSM)
+        div(class = "module-section",
+            h3("💼 Contractual Service Margin (CSM)", class = "section-subheading"),
+
+            tags$ul(
+              tags$li("Represents the unearned profit that the entity will recognize as it provides insurance contract services over the duration of the contract"),
+              tags$li("Ensures that no day-one gain is recognized in profit or loss"),
+              tags$li("If the cash fulfilment flows result in a net cost (i.e., a loss), the group of contracts is considered onerous and the loss is recognized immediately in profit or loss (no CSM is recognized)"),
+              tags$li("CSM = Present value of expected inflows – (present value of expected outflows + risk adjustment)"),
+              tags$li("If the resulting value is negative, the contract is considered onerous and a loss is immediately recognized in profit or loss")
+            ),
+
+            h4("Illustration:"),
+            tags$ul(
+              tags$li("Expected premiums: BWP 3,000"),
+              tags$li("Expected claims & expenses: BWP 2,100"),
+              tags$li("Risk Adjustment: BWP 150"),
+              tags$li("Discounting impact: BWP 250")
+            ),
+
+            h4("Calculation:"),
+            tags$ol(
+              tags$li(strong("Fulfilment Cash Flows (FCF) = BWP 3,000 – BWP 2,100 – BWP 250 – BWP 150 = BWP 500")),
+              tags$li(strong("CSM = BWP 500, which is to be released over the coverage period"))
+            )
+        ),
+
+        # Treatment of Onerous Contracts  
+        div(class = "module-section",
+            h3("⚠️ Treatment of Onerous Contracts", class = "section-subheading"),
+            p("When the total of expected cash outflows and the risk adjustment exceeds the expected cash inflows, the contract is deemed onerous."),
+            tags$ul(
+              tags$li("In such cases, no Contractual Service Margin (CSM) is recognized, since the CSM cannot be negative."),
+              tags$li("Instead, a loss component is recognized to reflect the immediate financial loss."),
+              tags$li("This loss is immediately recorded in the profit or loss statement.")
+            ),
+            h4("Illustration:"),
+            tags$ul(
+              tags$li("Expected future cash inflows (Premiums): ", strong("BWP 9,000")),
+              tags$li("Expected future cash outflows (Claims & expenses): ", strong("BWP 10,000")),
+              tags$li("Risk Adjustment for non-financial risk: ", strong("BWP 500")),
+              tags$li("Effect of discounting: ", strong("BWP (200)")),
+              tags$li("Acquisition costs: ", strong("BWP 300"))
+            )
+        ),
+
+        # Onerous Loss Calculation  
+        div(class = "module-section",
+            h3("🧮 Onerous Loss Calculation", class = "section-subheading"),
+            tags$ol(
+              tags$li(strong("FCF = Expected outflows + Risk Adjustment + Discounting adjustment = 10,000 + 500 – 200 = BWP 10,300")),
+              tags$li("Since the fulfilment cash flows (liability) of BWP 10,300 exceed the expected premiums (inflows) of BWP 9,000, this group is onerous."),
+              tags$li(strong("Onerous Loss = 10,300 – 9,000 = BWP 1,300")),
+              tags$li("The entity recognizes a loss of ", strong("BWP 1,300"), " immediately in profit or loss."),
+              tags$li("No Contractual Service Margin (CSM) is recognized."),
+              tags$li("The initial liability for the group of contracts is BWP 10,300.")
+            )
+        ),
+
+        # Key Takeaways  
+        div(class = "module-section",
+            h3("🔑 Key Takeaways", class = "section-subheading"),
+            tags$ul(
+              tags$li(
+                "A group of insurance contracts must be recognized at the earliest of:",
+                tags$ul(
+                  tags$li("The start of the coverage period"),
+                  tags$li("The due date of the first premium"),
+                  tags$li("The date the group becomes onerous")
+                )
+              ),
+              tags$li("Initial measurement includes expected future cash flows, discounting for time value of money, risk adjustment, unallocated loss adjustment expenses (ULAE), and a CSM (under the GMM)."),
+              tags$li("CSM ensures profits are deferred and recognized only as insurance services are provided; adjustments to CSM relate only to future service."),
+              tags$li("Onerous contracts lead to immediate recognition of a loss, with no CSM created."),
+              tags$li("Choosing between GMM and PAA depends on the contract duration and whether the PAA yields results not materially different from GMM."),
+              tags$li(
+                "Acquisition costs treatment varies by model:",
+                tags$ul(
+                  tags$li("Under GMM and VFA, included in fulfilment cash flows."),
+                  tags$li("Under PAA, may be deferred or expensed immediately based on the entity’s accounting policy.")
+                )
+              )
+            )
+        ),
+
+        # Premium Allocation Approach (PAA)  
+        div(class = "module-section",
+            h3("💡 Premium Allocation Approach (PAA)", class = "section-subheading"),
+            p("Per paragraph 53 of IFRS 17, the PAA applies to insurance contracts with a coverage period of one year or less, or where results are not materially different from the GMM."),
+            p("At initial recognition:"),
+            tags$ul(
+              tags$li("Liability is measured as premiums received (or due) less insurance acquisition cash flows."),
+              tags$li("Acquisition costs are treated per the entity’s policy—either deferred or expensed immediately in profit or loss.")
+            )
+        ),
+        div(class = "module-section image-summary-wrapper",
+            h3("📋 Summary of Measurement at Initial Recognition", class = "section-subheading"),
 
               img(
                 src = "images/summaryofMeasurementonInitialRecognition.png",
@@ -172,117 +169,117 @@ tagList(
         ),
 
         div(class = "module-section",
-            h3("📝 Quiz: Answer the following questions to test your understanding of Measurement on Initial Recognition."),
+            h3("📝 Quiz: Answer the following questions to test your understanding of Measurement on Initial Recognition.", class = "section-subheading"),
         ),
 
 
         box(
-          title = "1. Which of the following is NOT a component of fulfilment cash flows?",
+          title = "1. Under IFRS 17, fulfilment cash flows include all cash flows directly attributable to fulfilling the contract. Which of the following would NOT be included?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q1"), label = NULL, choices = c(
-            "Future cash flows",
-            "Discount rate",
-            "Risk adjustment",
-            "Insurance acquisition commission bonus pool"
+            "Probabilistic estimates of future premiums, claims, and benefits expected under the contract terms",
+            "The discount rate applied to reflect the time value of money and financial risks not accounted for elsewhere",
+            "A risk adjustment reflecting the compensation the entity requires for bearing non-financial uncertainty in cash flows",
+            "A commission-based staff bonus pool linked to overall company sales targets for the year"
           ), selected = character(0))
         ),
 
         box(
-          title = "2. Which cash flows should be included in the measurement of the contract at initial recognition?",
+          title = "2. Which of the following cash flows should be included when measuring an insurance contract at initial recognition?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q2"), label = NULL, choices = c(
-            "Past claims only",
-            "Cash flows related to investment returns",
-            "Future premiums and claim payments",
+            "Expected future premiums and claims",
+            "Only historical claim amounts",
+            "Cash flows arising from investment income",
             "Marketing expenses"
           ), selected = character(0))
         ),
 
         box(
-          title = "3. If the fulfilment cash flows are negative, what does IFRS 17 require?",
+          title = "3. What action does IFRS 17 require if the fulfilment cash flows result in a negative amount?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q3"), label = NULL, choices = c(
-            "Defer the difference",
-            "Recognize a loss immediately",
-            "Recognize a CSM",
-            "Reduce the asset balance"
+            "Postpone recognition of the shortfall",
+            "Immediately record a loss",
+            "Establish a Contractual Service Margin (CSM)",
+            "Adjust the asset balance downward"
           ), selected = character(0))
         ),
 
         box(
-          title = "4. What happens to a day-1 gain under IFRS 17?",
+          title = "4. How does IFRS 17 require entities to account for a Day-1 gain on initial recognition of an insurance contract?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q4"), label = NULL, choices = c(
-            "Deferred in CSM",
-            "Recognized as revenue",
-            "Transferred to retained earnings",
-            "Recorded as OCI"
+            "Recognized immediately in the statement of profit or loss",
+            "Recorded in Other Comprehensive Income (OCI)",
+            "Deferred as part of the Contractual Service Margin (CSM) and released over time",
+            "Credited directly to retained earnings in equity"
           ), selected = character(0))
         ),
 
         box(
-          title = "5. Why is discounting applied to future cash flows?",
+          title = "5. What is the main reason for applying discounting to future cash flows under IFRS 17?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q5"), label = NULL, choices = c(
-            "To increase liabilities",
-            "To reflect time value of money",
-            "To reduce reporting volatility",
-            "To comply with IFRS 9"
+            "To inflate the value of liabilities",
+            "To account for the time value of money",
+            "To minimize fluctuations in financial reporting",
+            "To meet IFRS 9 requirements"
           ), selected = character(0))
         ),
 
         box(
-          title = "6. Which discount rate is used for initial measurement?",
+          title = "6. Under IFRS 17, how is the discount rate determined at initial recognition?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q6"), label = NULL, choices = c(
-            "Zero-coupon rate",
-            "Locked-in discount rate",
-            "Market average rate",
-            "Prime lending rate"
+            "Based on a zero-coupon government bond rate only",
+            "It is locked in at the date the insurance contract is initially recognized and used consistently for related measurements",
+            "Based on an average of short-term and long-term market rates",
+            "Derived from the central bank’s prime lending rate at year-end"
           ), selected = character(0))
         ),
 
         box(
-          title = "7. Which cost is not included in initial measurement?",
+          title = "7. Which of the following costs is excluded from the initial measurement of insurance contract liabilities under IFRS 17?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q7"), label = NULL, choices = c(
-            "Direct acquisition costs",
-            "Expected claims",
-            "Indirect administrative costs",
-            "Risk adjustment"
+            "Acquisition expenses that are directly linked to the contract",
+            "Anticipated claims and benefits",
+            "Overhead and general administrative expenses",
+            "Adjustment for non-financial risk"
           ), selected = character(0))
         ),
 
         box(
-          title = "8. Which cost is typically excluded from fulfilment cash flows?",
+          title = "8. What is the result when the FCF = BWP 1,000 and outflows (including risk and acquisition) = BWP 750?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q8"), label = NULL, choices = c(
-            "Advertising and marketing",
-            "Future claims",
-            "Premiums",
-            "Claim handling costs"
+            "CSM = BWP 250",
+            "CSM = BWP 1,000",
+            "Immediate loss of BWP 750",
+            "No CSM, contract is onerous"
           ), selected = character(0))
         ),
 
         box(
-          title = "9. Under which model is no CSM typically recognized?",
+          title = "9. An insurer writes six-month travel insurance and applies PAA. No CSM is recorded. Why is this acceptable?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q9"), label = NULL, choices = c(
-            "GMM",
-            "PAA",
-            "VFA",
-            "Modified GMM"
+            "Because CSM only applies to long-term health policies",
+            "Because the PAA does not require explicit CSM recognition for non-onerous short-term contracts",
+            "Because all insurance contracts under IFRS 17 are measured without CSM",
+            "Because travel insurance is exempt from IFRS 17 requirements"
           ), selected = character(0))
         ),
 
         box(
-          title = "10. Which of the following is a valid reason to apply the Premium Allocation Approach (PAA) at initial recognition?",
+          title = "10. A one-year motor policy yields very similar liability estimates under PAA and GMM. What justifies using PAA?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q10"), label = NULL, choices = c(
-            "It results in higher revenue.",
-            "The contract has a coverage period of more than one year",
-            "The simplification does not significantly differ from GMM results",
-            "It avoids recognition of acquisition costs"
+            "PAA always leads to a higher CSM",
+            "The contract includes profit-sharing features",
+            "The measurement outcome under PAA is not materially different from GMM",
+            "PAA automatically excludes all acquisition costs"
           ), selected = character(0))
         ),
 
@@ -303,46 +300,46 @@ tagList(
   )
 }
 
-correct_answers_module5 <- list( 
+correct_answers_module5 <- list(
   q1 = list(
-    answer = "Insurance acquisition commission bonus pool",
-    explanation = "The bonus pool is not part of fulfilment cash flows. The correct components are expected cash flows, discounting, and risk adjustment."
+    answer = "A commission-based staff bonus pool linked to overall company sales targets for the year",
+    explanation = "Staff bonus pools tied to general sales targets are not directly attributable to fulfilling the contract and are treated as administrative overhead."
   ),
   q2 = list(
-    answer = "Future premiums and claim payments",
-    explanation = "Fulfilment cash flows include expected future premiums and claims."
+    answer = "Expected future premiums and claims",
+    explanation = "Fulfilment cash flows include expected future premiums and claims that are directly related to the contract."
   ),
   q3 = list(
-    answer = "Recognize a loss immediately",
-    explanation = "Negative fulfilment cash flows indicate an onerous contract; a loss is recognized in profit or loss."
+    answer = "Immediately record a loss",
+    explanation = "Negative fulfilment cash flows indicate an onerous contract; IFRS 17 requires immediate recognition of the loss in profit or loss."
   ),
   q4 = list(
-    answer = "Deferred in CSM",
-    explanation = "CSM defers day-1 gains and recognizes them over the service period."
+    answer = "Deferred as part of the Contractual Service Margin (CSM) and released over time",
+    explanation = "Day-1 gains are deferred in the CSM and recognized systematically over the coverage period."
   ),
   q5 = list(
-    answer = "To reflect time value of money",
-    explanation = "Discounting ensures that future cash flows are presented in today’s money, reflecting the time value of money."
+    answer = "To account for the time value of money",
+    explanation = "Discounting adjusts future cash flows to present value, reflecting the time value of money and financial risks."
   ),
   q6 = list(
-    answer = "Locked-in discount rate",
-    explanation = "The locked-in rate at initial recognition is used to discount fulfilment cash flows and accrete CSM."
+    answer = "It is locked in at the date the insurance contract is initially recognized and used consistently for related measurements",
+    explanation = "The discount rate is fixed at initial recognition and used both for discounting fulfilment cash flows and unwinding the CSM."
   ),
   q7 = list(
-    answer = "Indirect administrative costs",
-    explanation = "Only directly attributable acquisition costs are included. Indirect costs like general admin are excluded."
+    answer = "Overhead and general administrative expenses",
+    explanation = "Only costs directly attributable to contract issuance (e.g., acquisition costs) are included; general Admin costs are excluded."
   ),
   q8 = list(
-    answer = "Advertising and marketing",
-    explanation = "General marketing expenses are not part of fulfilment cash flows under IFRS 17."
+    answer = "CSM = BWP 250",
+    explanation = "CSM = FCF (1,000) – outflows (750) = BWP 250."
   ),
   q9 = list(
-    answer = "PAA",
-    explanation = "PAA does not require a CSM unless the contract is deemed onerous."
+    answer = "Because the PAA does not require explicit CSM recognition for non-onerous short-term contracts",
+    explanation = "Under PAA, CSM is typically not recognized for non-onerous short-duration contracts."
   ),
   q10 = list(
-    answer = "The simplification does not significantly differ from GMM results",
-    explanation = "PAA may be used if it would not materially differ from the GMM measurement. This is especially relevant for short-duration contracts."
+    answer = "The measurement outcome under PAA is not materially different from GMM",
+    explanation = "PAA may be applied when it produces results not materially different from the GMM, simplifying the measurement."
   )
 )
 
