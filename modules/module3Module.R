@@ -24,73 +24,39 @@ tagList(
       ),
 
         div(class = "module-section",
-            h3("📖 Introduction"),
-            p("This module provides an overview on how insurance contracts are grouped for measurement and reporting as per IFRS 17 paragraph 14 to paragraph 24.")
+            h3("📖 Introduction", class = "section-subheading"),
+            p("This module introduces the principles behind how insurance contracts are grouped for measurement and reporting purposes in accordance with IFRS 17.")
         ),
         
         div(class = "module-section",
-            h3("What is Aggregation in IFRS 17?"),
+            h3("What is Aggregation in IFRS 17?", class = "section-subheading"),
+            p("In IFRS 17, aggregation involves organizing insurance contracts that exhibit similar risk profiles and are managed collectively. This structure supports appropriate timing of profit recognition and early identification of losses."),
             p("Under IFRS 17, aggregation refers to the grouping of insurance contracts that share similar risks and are managed together. This helps ensure accurate loss recognition and profit timing in financial reporting.")
-        ),
-        
-        div(class = "module-section",
-            h3(class = "step-title", "Step 1: Grouping by Portfolio"),
-            p("A portfolio consists of insurance contracts that share:"),
-            tags$ol(
-                tags$li("Similar characteristics – e.g., motor insurance, term life products"),
-                tags$li("Similar management structure")
-            )
-        ),
-        
-        div(class = "module-section",
-            h3(class = "step-title", "Step 2: Subdividing Portfolios into Groups"),
-            p("Once portfolios are defined, each must further be split into at least three distinct groups:"),
-            tags$ol(
-                tags$li(strong("Onerous Contracts at Initial Recognition – "), "These contracts are expected to generate a loss from the beginning"),
-                tags$li(strong("Contracts with no significant risk of becoming onerous – "), "Expected to remain profitable or at least break even"),
-                tags$li(strong("Remaining Contracts – "), "Not considered loss-making upfront, but might become onerous over time")
-            )
-        ),
-        
-        div(class = "module-section",
-            h3(class = "step-title", "Step 3: Breakdown of Cohorts"),
-            p("After subdivision, contracts shall be grouped into cohorts based on issue dates. All contracts issued within the same calendar year shall form a single cohort.")
-        ),
-        
-        div(class = "module-section",
-            h3("The Grouping Process"),
-            img(src = "images/portfolioContracts.png", 
-                alt = "IFRS 17 Level of Aggregation Diagram", 
-                class = "aggregation-image")
         ),
 
         div(class = "module-section",
-            h3("🔍 Assessing Onerous Contracts under Premium Allocation Approach", class = "subheading-highlight"),
-            
-            p("Under the Premium Allocation Approach (PAA), it is assumed that no contracts in a portfolio are onerous at initial recognition ",
-              strong("unless facts and circumstance indicate otherwise.")),
-            
-            p("Contracts that are not onerous initially must also be assessed on whether they might become onerous later, by evaluating ",
-              strong("potential changes in facts and circumstances.")),
-            
-            p("For contracts which do not apply the premium allocation approach, ",
-              a(href = "#", "the contracts"),
-              " that are not onerous at initial recognition must be assessed whether they have any significant probability of becoming onerous."),
-            
-            p("This shall be based on:"),
-            
-            tags$ul(
-              tags$li("Likelihood of changes in assumptions which may result in the contract becoming onerous"),
-              tags$li(HTML('Information provided by an entity’s internal <a href="#">reporting</a>.'))
-            )
+            p("The grouping of these contracts follows the process below:"),
+            img(src = "images/groupingContractsProcess.png", 
+                alt = "Grouping of Insurance Contracts Process", 
+                class = "groupingContractsProcess-image")
+        ),        
+        div(class = "module-section",
+            h3("Use of Premium Allocation Approach (PAA)", class = "section-subheading"),
+            p("When applying the PAA, it is generally assumed that contracts are not onerous at initial recognition unless evidence suggests otherwise."),
+            p("Insurers must regularly reassess these assumptions and evaluate whether changing circumstances or risks could make contracts onerous over time.")
         ),
-        div(class = "module-section",            
-            h3("📌 Grouping Timeframe and Consistency", class = "step-title"),
-            
-            p("While grouping, contracts issued more than one year apart must not be included in the same group."),
-            
-            p("Additionally, once contract groupings are determined at initial recognition, they must remain fixed; the composition of groups cannot be reassessed or changed later.")
-        ),
+
+        div(class = "module-section",
+            h3("Contracts Outside the Premium Allocation Approach", class = "section-subheading"),
+            p("For contracts not using the PAA, even those not considered onerous at initial recognition must be assessed for the risk of becoming onerous. This should be based on:"),
+            tags$ol(type = "a",
+              tags$li("Possible changes in assumptions that could lead to a loss"),
+              tags$li("Information derived from the entity’s internal reporting systems")
+            ),
+            h3("Consistency and Grouping Duration", class = "section-subheading"),
+            p("Contracts issued more than 12 months apart must not be included in the same group."),
+            p("Once contracts are grouped at initial recognition, the composition of the group is fixed and cannot be changed later.")
+        ),        
 
         div(class = "module-section",
             h3("📝 Quiz: Answer the following questions to test your understanding of Level of Aggregation."),
@@ -98,112 +64,112 @@ tagList(
 
 
         box(
-          title = "1. What is the main purpose of aggregation under IFRS 17?",
+          title = "1. What is the primary objective of aggregation under IFRS 17?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q1"), label = NULL, choices = c(
-            "To reduce the number of contracts reported",
-            "To ensure accurate timing of profit and loss recognition",
-            "To make contract management easier",
-            "To avoid having to assess individual contracts"
+            "Maximize premium income",
+            "Organize insurance contracts for taxation purposes",
+            "Group contracts with similar risk profiles for financial reporting",
+            "Simplify customer service operations"
           ), selected = character(0))
         ),
 
         box(
-          title = "2. Under IFRS 17, contracts grouped into the same portfolio must share:",
+          title = "2. According to IFRS 17, contracts in a portfolio must:",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q2"), label = NULL, choices = c(
-            "The same inception date",
-            "The same profit margin",
-            "The same policyholder",
-            "Similar risk characteristics and management structure"
+            "Share common features and be under the same management strategy",
+            "Have similar geographical locations",
+            "Be managed by the same investor",
+            "Be issued by the same insurance agent"
           ), selected = character(0))
         ),
 
         box(
-          title = "3. How far apart can contract issuance dates be within the same group?",
+          title = "3. How are insurance contracts first grouped under IFRS 17?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q3"), label = NULL, choices = c(
-            "Any number of years",
-            "Two years",
-            "Not more than one year",
-            "Three years if risk is similar"
+            "By insurer location",
+            "Into portfolios",
+            "By premium size",
+            "By policyholder's age"
           ), selected = character(0))
         ),
 
         box(
-          title = "4. What is the first step in the aggregation process under IFRS 17?",
+          title = "4. What is the purpose of creating annual cohorts?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q4"), label = NULL, choices = c(
-            "Grouping by issuance year",
-            "Subdividing portfolios",
-            "Grouping by portfolio",
-            "Assessing profitability"
+            "Divide grouped contracts based on the year they were issued",
+            "Simplify reinsurance procedures",
+            "Classify contracts by region",
+            "Separate high-risk and low-risk contracts"
           ), selected = character(0))
         ),
 
         box(
-          title = "5. Under IFRS 17, why are insurers not allowed to reassess contract groups after initial recognition?",
+          title = "5. Contracts issued in the same calendar year:",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q5"), label = NULL, choices = c(
-            "To maintain consistency and transparency in reporting",
-            "To reduce workload",
-            "To allow for more flexibility later",
-            "Because contracts cannot change after issuance"
+            "Must be grouped in one portfolio",
+            "Form a distinct cohort",
+            "Must be re-evaluated monthly",
+            "Cannot be grouped under IFRS 17"
           ), selected = character(0))
         ),
 
         box(
-          title = "6. How does IFRS 17 recommend handling groups of contracts under the Premium Allocation Approach (PAA)?",
+          title = "6. What assumption is made when applying the Premium Allocation Approach (PAA)?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q6"), label = NULL, choices = c(
-            "Assume they are always profitable",
-            "Assume all contracts are onerous",
-            "Group them based on product type only",
-            "Assume none are onerous at initial recognition unless facts suggest otherwise"
+            "Contracts are always onerous",
+            "All contracts are short-term",
+            "Contracts must be reinsured",
+            "Contracts are not onerous at initial recognition"
           ), selected = character(0))
         ),
 
         box(
-          title = "7. What additional check must be done for policies eligible for the General Measurement Model (GMM)?",
+          title = "7. What must be assessed for contracts outside the PAA?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q7"), label = NULL, choices = c(
-            "Verification of market premium rates",
-            "Sensitivity testing and internal report reviews",
-            "Reinsurance matching",
-            "Underwriter interviews"
+            "Tax compliance",
+            "Policyholder credit score",
+            "Risk of becoming onerous",
+            "Employee performance"
           ), selected = character(0))
         ),
 
         box(
-          title = "8. Which of the following best describes a 'portfolio' under IFRS 17?",
+          title = "8. What could trigger a contract to be considered onerous later?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q8"), label = NULL, choices = c(
-            "A collection of policies sold by one agent",
-            "Contracts grouped based on risk and management similarity",
-            "Contracts grouped by coverage period",
-            "All insurance contracts issued in one year"
+            "Change in marketing team",
+            "Changes in assumptions leading to losses",
+            "Policyholder complaints",
+            "Reduced customer engagement"
           ), selected = character(0))
         ),
 
         box(
-          title = "9. What should an entity use to assess whether a contract might become onerous later?",
+          title = "9. Which of the following supports assessment of onerous contracts?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q9"), label = NULL, choices = c(
-            "Market interest rates",
-            "Past claims history only",
-            "Likelihood of changes in applicable facts and circumstances",
-            "Broker recommendations"
+            "Customer feedback surveys",
+            "Competitor sales reports",
+            "Social media data",
+            "Internal reporting systems"
           ), selected = character(0))
         ),
 
         box(
-          title = "10. What happens if a contract becomes onerous after initial recognition?",
+          title = "10. What is stated about grouping duration under IFRS 17?",
           status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
           radioButtons(ns("q10"), label = NULL, choices = c(
-            "The group composition remains unchanged",
-            "It is moved to the 'onerous' group retroactively",
-            "The contract is cancelled",
-            "A new group is created"
+            "Contracts can be grouped at any time",
+            "Contracts from different years can be combined",
+            "Contracts issued over 12 months apart must not be in the same group",
+            "Contracts should be grouped every quarter"
           ), selected = character(0))
         ),
 
@@ -224,49 +190,48 @@ tagList(
 )
 }
 
-correct_answers_module3 <- list( 
+correct_answers_module3 <- list(
   q1 = list(
-    answer = "To ensure accurate timing of profit and loss recognition",
-    explanation = "Aggregation helps ensure that profits and losses are recognized accurately and consistently in financial reporting."
+    answer     = "Group contracts with similar risk profiles for financial reporting",
+    explanation = "IFRS 17 aggregation aims to group contracts with similar risks to ensure accurate loss recognition and profit timing."
   ),
   q2 = list(
-    answer = "Similar risk characteristics and management structure",
-    explanation = "Portfolios are formed based on risk similarity and being managed together."
+    answer     = "Share common features and be under the same management strategy",
+    explanation = "Portfolios include contracts with similar features that are managed together under a consistent strategy."
   ),
   q3 = list(
-    answer = "Not more than one year",
-    explanation = "IFRS 17 requires that all contracts in a group are issued no more than one year apart."
+    answer     = "Into portfolios",
+    explanation = "The first step in grouping under IFRS 17 is establishing portfolios of contracts."
   ),
   q4 = list(
-    answer = "Grouping by portfolio",
-    explanation = "Aggregation begins by forming portfolios based on similar risks and management structures."
+    answer     = "Divide grouped contracts based on the year they were issued",
+    explanation = "Annual cohorts ensure that contracts from different years are not grouped together."
   ),
   q5 = list(
-    answer = "To maintain consistency and transparency in reporting",
-    explanation = "Fixing the groupings at initial recognition supports consistent, unbiased financial reporting over time."
+    answer     = "Form a distinct cohort",
+    explanation = "Contracts issued in the same calendar year form a distinct annual cohort under IFRS 17."
   ),
   q6 = list(
-    answer = "Assume none are onerous at initial recognition unless facts suggest otherwise",
-    explanation = "IFRS 17 allows insurers applying the PAA to assume contracts are not onerous at initial recognition, unless evidence indicates otherwise."
+    answer     = "Contracts are not onerous at initial recognition",
+    explanation = "The PAA allows insurers to assume contracts are non-onerous at initial recognition unless evidence suggests otherwise."
   ),
   q7 = list(
-    answer = "Sensitivity testing and internal report reviews",
-    explanation = "Sensitivity testing and internal reporting are used to confirm profitability assumptions for GMM-eligible contracts."
+    answer     = "Risk of becoming onerous",
+    explanation = "Contracts outside the PAA must be assessed for the risk of becoming onerous over time."
   ),
   q8 = list(
-    answer = "Contracts grouped based on risk and management similarity",
-    explanation = "A portfolio consists of contracts that have similar risk characteristics and are managed together."
+    answer     = "Changes in assumptions leading to losses",
+    explanation = "New or changing assumptions that indicate potential losses may trigger a contract to be classified as onerous."
   ),
   q9 = list(
-    answer = "Likelihood of changes in applicable facts and circumstances",
-    explanation = "Entities must consider whether new or changing circumstances might render a contract onerous in the future."
+    answer     = "Internal reporting systems",
+    explanation = "Internal systems provide the data used to assess whether contracts may become onerous."
   ),
   q10 = list(
-    answer = "The group composition remains unchanged",
-    explanation = "Group compositions are fixed at initial recognition, even if a contract’s status changes later."
+    answer     = "Contracts issued over 12 months apart must not be in the same group",
+    explanation = "IFRS 17 requires that contracts more than 12 months apart are not grouped together."
   )
 )
-
 
 
 IFRS17Module3Server <- (function(id, user_data) {
