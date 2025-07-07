@@ -24,19 +24,15 @@ tagList(
         h2("📘 Module 1 – Introduction & Scope of IFRS 17", class = "section-title-top")
     ),
     div(class = "module-section",
-          h3("🎯 Module Objective"),
-          p("This module aims to provide an overview of the introduction and scope of IFRS 17, as outlined in Paragraphs 1–8 of the Standard.")
+          h3(icon("info-circle"), "Module Overview", class = "section-subheading"),
+          p(HTML("This module gives an overview of the introduction and scope of IFRS 17, as outlined in <strong>IFRS 17 Insurance Contracts</strong> of the Standard."))
     ),    
     div(class = "module-section",
-      h3("📖 Introduction"),
-      p("International Accounting Standards Board (IASB) introduced IFRS 17 Standard in May 2017 to replace IFRS 4."),
-      p(HTML("The Standard sets out comprehensive requirements for the <strong>recognition, measurement, presentation, and disclosure</strong> of insurance contracts. It aims to ensure that an entity provides relevant information that faithfully represents those contracts.")),
+      h3("📖 Introduction", class = "section-subheading"),
+      p(HTML("The International Accounting Standards Board (IASB) introduced IFRS 17 Standard in May 2017 to replace IFRS 4, which had served as an interim standard. IFRS 17 establishes a consistent and detailed framework for the <strong>recognition, measurement, presentation, and disclosure</strong> of insurance contracts, aiming to enhance transparency and comparability in financial reporting.")),
+      p(HTML("Initially set to become effective on <strong>1 January 2022</strong>, the standard’s implementation was deferred in March 2020 to allow insurers more time to prepare. The revised effective date was <strong>1 January 2023</strong>, with <strong>1 January 2022</strong> designated as the transition date. During this period, insurers were expected to conduct parallel runs and system testing to ensure a smooth shift to the new standard.")),
+      p(HTML("IFRS 17 became effective on <strong>1 January 2023</strong>, where full compliance was required for all entities issuing insurance contracts."))
     ),
-    div(class = "module-section",
-      p(HTML("In March 2020, IASB extended the implementation deadline from <strong>1<sup>st</sup> January 2022</strong> to <strong>1<sup>st</sup> January 2023</strong>.")),
-      p(HTML("Insurers adopted the IFRS 17 reporting standard with the transition date being <strong>1<sup>st</sup> January 2022</strong>, and date of initial application being <strong>1<sup>st</sup> January 2023</strong>. Companies were expected to carry out testing and parallel runs of IFRS 17 processes and systems.")),
-      p(HTML("IFRS 17 became effective on <strong>1<sup>st</sup> January 2023</strong>, and full compliance in financial reporting was required."))
-    ),    
     div(class = "module-section image-timeline-wrapper",
           h3("🗓️ IFRS 17 Timeline", class = "section-subheading"),
           div(
@@ -49,8 +45,8 @@ tagList(
           )
     ),
     div(class = "module-section",
-      h3("🌐 Scope of IFRS 17"),
-      p("An insurer is required to apply the Standard to the following:"),
+      h3("🌐 Scope of IFRS 17", class = "section-subheading"),
+      p("An insurer must apply the Standard to the following:"),
       tags$ul(
         tags$li("Insurance contracts, including ", strong("reinsurance contracts"), ", it issues"),
         tags$li("Reinsurance contracts it holds; and"),
@@ -58,78 +54,41 @@ tagList(
           strong("Investment contracts with discretionary participation features"),
           " it issues, provided the entity also issues insurance contracts."
         )
-      ),
-      p("Discretionary participation features give policyholders the right to receive additional benefits at the discretion of the insurer. ",
-        em("For example, bonuses added to participating life insurance policies based on the insurer’s investment performance.")
-      ),
-      p("Under IFRS 17, an insurance contract must involve an uncertain future event and significant insurance risk."),
-      p("A key requirement is the transfer of risk, where the insurer must compensate the policyholder if the insured event has a negative impact on them.")
-    ),
-
-    div(class = "module-section image-timeline-wrapper",
-      h3("🌐 Contracts outside the scope of IFRS 17", class = "section-subheading"),
-      tags$div(class = "table-responsive",
-      tags$table(class = "ifrs-table-module1",
-        tags$thead(
-          tags$tr(
-            tags$th("Excluded Contract Type"),
-            tags$th("Description"),
-            tags$th("Treated Under")
-          )
-        ),
-        tags$tbody(
-          tags$tr(
-            tags$td("Product warranties"),
-            tags$td("Warranties provided by a manufacturer, dealer, or retailer linked to a sale"),
-            tags$td("IFRS 15")
-          ),
-          tags$tr(
-            tags$td("Employee benefits"),
-            tags$td("Employer obligations under benefit plans for example pensions"),
-            tags$td("IAS 19, IFRS 2, IAS 26")
-          ),
-          tags$tr(
-            tags$td("Use of non-financial items"),
-            tags$td("Rights/obligations based on future use of non-financial items, such as license fees, lease contingents"),
-            tags$td("IFRS 15, IFRS 16, IAS 38")
-          ),
-          tags$tr(
-            tags$td("Residual value guarantees"),
-            tags$td("Often part of leasing or sales contracts"),
-            tags$td("IFRS 15, IFRS 16")
-          ),
-          tags$tr(
-            tags$td("Financial guarantee contracts"),
-            tags$td("Unless the issuer opts to treat them as insurance"),
-            tags$td("IFRS 9, IFRS 7, IAS 32")
-          ),
-          tags$tr(
-            tags$td("Business Combinations"),
-            tags$td("Contingent consideration receivable/payable"),
-            tags$td("IFRS 3")
-          ),
-          tags$tr(
-            tags$td("Policyholder Contracts"),
-            tags$td("Insurance contracts where the entity is the policyholder, unless it's reinsurance held"),
-            tags$td("Excluded from IFRS 17")
-          )
+      )),
+      div(class = "module-section",
+        h3("🛡️ Insurance contracts under IFRS 17", class = "section-subheading"),
+        p("A contract is considered an insurance contract under IFRS 17 if:"),
+        tags$ul(
+          tags$li("It involves an ", strong("uncertain future event"), " (the insured event)."),
+          tags$li("It transfers ", strong("significant insurance risk"), " which requires the insurer to compensate the policyholder for adverse impacts.")
         )
-      )
-     ),
+      ),
 
-      # Highlighted note below table
-      p(em("*Description of various standards have been provided in the List of IFRS & IAS Standards"),
-        style = "font-style: italic; color: #DC5A17; margin-top: 10px;")   
-    ),
+      div(class = "module-section",
+        h3("🌐 Contracts outside the scope of IFRS 17", class = "section-subheading"),
+        p("Certain contracts, although they may appear similar to insurance in nature, fall outside the scope of IFRS 17 and are addressed under other accounting standards:"),
+        tags$ol(type = "i",
+          tags$li(HTML("<strong>Product warranties</strong>, typically provided by manufacturers or retailers as part of a sale, are not treated as insurance contracts and are accounted for under <strong>IFRS 15</strong>.")),
+          tags$li(HTML("<strong>Employee benefit obligations</strong>, such as pensions or share-based payments, are governed by <strong>IAS 19</strong>, <strong>IFRS 2</strong>, and <strong>IAS 26</strong>, reflecting their role as employer-employee arrangements rather than insurance.")),
+          tags$li(HTML("<strong>Contracts involving the right to use non-financial assets</strong> (e.g. licenses or leased equipment) are excluded and instead addressed under <strong>IFRS 15</strong>, <strong>IFRS 16</strong>, or <strong>IAS 38</strong>, depending on their nature.")),
+          tags$li(HTML("<strong>Residual value guarantees</strong>, often embedded within leasing or sales arrangements, are accounted for under <strong>IFRS 15</strong> or <strong>IFRS 16</strong>, as they do not meet the definition of insurance risk.")),
+          tags$li(HTML("<strong>Financial guarantee contracts</strong> typically fall under <strong>IFRS 9</strong> (and <strong>IFRS 7</strong> for disclosure), unless the issuer irrevocably elects to treat them as insurance under IFRS 17.")),
+          tags$li(HTML("In <strong>business combinations</strong>, contingent consideration that becomes payable or receivable is scoped under <strong>IFRS 3</strong>.")),
+          tags$li(HTML("Contracts where the entity is the <strong>policyholder</strong>, such as when insurance is purchased rather than issued, do not fall within IFRS 17, unless they represent <strong>reinsurance held</strong>, which is explicitly included in the standard."))
+        )
+      ),
 
-    div(class = "module-section",
-    p("Some contracts may meet the definition of insurance contracts but are mainly meant to provide services for a fixed fee. An entity can apply IFRS 15 instead of IFRS 17 to these contracts if the conditions below exist:"),
-      tags$ul(
-        tags$li("The price set is not based on the risk of each individual customer."),
-        tags$li("The contract provides compensation in the form of services, not cash payments."),
-        tags$li("The insurance risk arises primarily from the customer's use of services, and not uncertainty about service cost.")
-      )  
-    ),
+
+      div(class = "module-section",
+        h3("🔧 Service-based contracts accounted for under IFRS 15", class = "section-subheading"),
+        p(HTML("Some contracts, while technically insurance contracts, are primarily meant to provide services for a fixed fee, and may be accounted for under <strong>IFRS 15</strong> if the conditions below exist:")),
+        tags$ol(type = "a",
+          tags$li("The pricing does not vary based on the individual risk profile of the customer."),
+          tags$li("Compensation provided is in the form of services, not cash payments."),
+          tags$li("The insurance risk arises mainly from the customer’s use of services, rather than the uncertainty about service costs.")
+        )
+      ),
+
 
     div(class = "module-section",
         h3("📝 Quiz: Answer the following questions to test your understanding of Introduction & Scope of IFRS 17"),
@@ -137,112 +96,112 @@ tagList(
 
 
     box(
-      title = "1. What is the primary objective of IFRS 17?",
+      title = "1. Which of the following best describes the purpose of IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
-        "To standardize insurance accounting globally",
-        "To replace IFRS 16",
-        "To define financial instruments",
-        "To measure investment property"
+        "To prescribe lease accounting principles for lessors and lessees",
+        "To standardize accounting for insurance contracts across entities and jurisdictions",
+        "To classify and measure financial assets",
+        "To consolidate group insurance financials"
       ), selected = character(0))
     ),
 
     box(
-      title = "2. What does IFRS 17 replace?",
+      title = "2. What is the transition date under IFRS 17 for most insurers adopting the standard in 2023?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
-        "IAS 37",
-        "IFRS 4",
-        "IFRS 9",
-        "IAS 40"
+        "31 December 2022",
+        "1 January 2022",
+        "1 January 2023",
+        "31 December 2023"
       ), selected = character(0))
     ),
 
     box(
-      title = "3. What was the official date of initial application for IFRS 17?",
+      title = "3. Which of the following is not considered an insurance contract under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
-        "1st January 2022",
-        "31st December 2022",
-        "1st January 2023",
-        "1st January 2021"
+        "A health insurance policy",
+        "A product warranty issued by a manufacturer",
+        "A life insurance contract",
+        "A reinsurance contract issued"
       ), selected = character(0))
     ),
 
     box(
-      title = "4. IFRS 17 applies to?",
+      title = "4. Under IFRS 17, what characteristic must a contract have to be within scope?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
-        "All insurance entities only",
-        "Any entity issuing insurance contracts",
-        "Reinsurers only",
-        "Investment banks only"
+        "Investment guarantees",
+        "Transfer of insurance risk",
+        "Premium collection",
+        "Asset management services"
       ), selected = character(0))
     ),
 
     box(
-      title = "5. How does IFRS 17 define an insurance contract?",
+      title = "5. Under what conditions might a contract that appears to transfer insurance risk be accounted for under IFRS 15 instead of IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
-        "Contract transferring insurance risk",
-        "Contract transferring investment risk",
-        "Contract transferring liquidity risk",
-        "Contract for investment advice"
+        "When the contract includes a financial guarantee",
+        "When the issuer is not a licensed insurer",
+        "When compensation is provided through services, pricing is fixed, and risk depends on service use",
+        "When the contract involves pooling of investment returns"
       ), selected = character(0))
     ),
 
     box(
-      title = "6. How does IFRS 17 define 'insurance risk'?",
+      title = "6. Which of the following would trigger the application of IFRS 17 to an investment contract?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
-        "The risk of policyholder default",
-        "The risk of future investment losses",
-        "The risk transferred from the policyholder to the insurer due to uncertain future events",
-        "Exchange rate risk"
+        "It includes an embedded derivative",
+        "It carries no guaranteed benefits",
+        "It has discretionary participation features and is issued by an insurer",
+        "It is backed by financial instruments"
       ), selected = character(0))
     ),
 
     box(
-      title = "7. Which of the following contracts falls under the scope of IFRS 17?",
+      title = "7. Which of the following would likely be excluded from IFRS 17 scope, even if issued by an insurer?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
-        "Product warranty issued by a retailer",
-        "Lease contract under IFRS 16",
-        "Financial guarantee contract under IFRS 9",
-        "Reinsurance contract held by an insurer"
+        "Group annuity",
+        "Property cover with risk pooling",
+        "Credit card insurance",
+        "Service contract with no significant insurance risk"
       ), selected = character(0))
     ),
 
     box(
-      title = "8. Which contracts are only within IFRS 17 if the issuer also issues insurance contracts?",
+      title = "8. Which contract is explicitly included in IFRS 17 scope?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
-        "Leases",
-        "Derivatives",
-        "Term Deposits",
-        "Investment contracts with discretionary participation features"
+        "Reinsurance contracts held",
+        "Employee benefit obligations",
+        "Derivatives on mortality rates",
+        "Financial guarantee contracts under IFRS 9"
       ), selected = character(0))
     ),
 
     box(
-      title = "9. Are product warranties issued by a retailer within IFRS 17?",
+      title = "9. What determines whether a contract qualifies as an insurance contract under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
-        "Yes, always",
-        "No, they fall under IAS 37",
-        "Only for 12-month terms",
-        "Yes, if embedded in insurance"
+        "Whether it's regulated by an insurance authority",
+        "The presence of an underwriting process",
+        "The existence of a pool of assets",
+        "Transfer of risk due to uncertain future insured events"
       ), selected = character(0))
     ),
 
     box(
-      title = "10. What type of contract is explicitly excluded from IFRS 17 scope?",
+      title = "10. Which of the following scenarios would be clearly outside the scope of IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
-        "Group life insurance",
-        "Reinsurance contracts",
-        "Insurance-linked investments",
-        "Financial guarantees (under IFRS 9)"
+        "A reinsurer assuming risk from a direct insurer",
+        "A government grant for primary healthcare services",
+        "An insurer issuing a policy with both investment and insurance components",
+        "A life insurance company issuing participating contracts"
       ), selected = character(0))
     ),
 
@@ -262,46 +221,46 @@ tagList(
   )
 }
 
-correct_answers_module1 <- list( 
+correct_answers_module1 <- list(
   q1 = list(
-    answer = "To standardize insurance accounting globally",
-    explanation = "IFRS 17 aims to create a consistent accounting framework for insurance contracts to improve transparency and comparability."
+    answer = "To standardize accounting for insurance contracts across entities and jurisdictions",
+    explanation = "IFRS 17 was developed to bring consistency and comparability to insurance contract accounting worldwide."
   ),
   q2 = list(
-    answer = "IFRS 4",
-    explanation = "IFRS 17 replaced IFRS 4, which was an interim standard."
+    answer = "1 January 2022",
+    explanation = "The transition date under IFRS 17 for comparative figures was 1 January 2022."
   ),
   q3 = list(
-    answer = "1st January 2023",
-    explanation = "The initial application date for IFRS 17 was 1st January 2023."
+    answer = "A product warranty issued by a manufacturer",
+    explanation = "Product warranties issued directly by manufacturers are accounted for under IAS 37, not IFRS 17."
   ),
   q4 = list(
-    answer = "Any entity issuing insurance contracts",
-    explanation = "This reflects IFRS 17's scope, which applies to any entity that issues insurance contracts."
+    answer = "Transfer of insurance risk",
+    explanation = "A contract must transfer insurance risk from the policyholder to the issuer to be within IFRS 17 scope."
   ),
   q5 = list(
-    answer = "Contract transferring insurance risk",
-    explanation = "This captures the essential element of IFRS 17: transferring insurance risk from policyholder to insurer."
+    answer = "When compensation is provided through services, pricing is fixed, and risk depends on service use",
+    explanation = "IFRS 15 may apply if the contract is service-based, pricing is not risk-adjusted, and benefits are delivered through services rather than cash, even if some insurance-like risk exists."
   ),
   q6 = list(
-    answer = "The risk transferred from the policyholder to the insurer due to uncertain future events",
-    explanation = "Insurance risk under IFRS 17 involves uncertainty about future events that may trigger insurer payment."
+    answer = "It has discretionary participation features and is issued by an insurer",
+    explanation = "Investment contracts with discretionary participation features fall under IFRS 17 only if issued by entities that also issue insurance contracts."
   ),
   q7 = list(
-    answer = "Reinsurance contract held by an insurer",
-    explanation = "Reinsurance contracts held are explicitly included under IFRS 17's scope."
+    answer = "Service contract with no significant insurance risk",
+    explanation = "Contracts that do not transfer significant insurance risk are excluded from IFRS 17 scope, even if issued by an insurer."
   ),
   q8 = list(
-    answer = "Investment contracts with discretionary participation features",
-    explanation = "These contracts are only within the scope of IFRS 17 if issued by entities that also issue insurance contracts."
+    answer = "Reinsurance contracts held",
+    explanation = "Reinsurance contracts held involve risk transfer between insurers and are explicitly within IFRS 17 scope."
   ),
   q9 = list(
-    answer = "No, they fall under IAS 37",
-    explanation = "Retail product warranties are covered by IAS 37, not IFRS 17."
+    answer = "Transfer of risk due to uncertain future insured events",
+    explanation = "The defining characteristic of an insurance contract under IFRS 17 is the transfer of insurance risk due to uncertain future events."
   ),
   q10 = list(
-    answer = "Financial guarantees (under IFRS 9)",
-    explanation = "Financial guarantee contracts are usually treated under IFRS 9 unless specifically designated as insurance."
+    answer = "A government grant for primary healthcare services",
+    explanation = "Government grants for non-insurance services (like healthcare subsidies) do not meet the definition of an insurance contract under IFRS 17 and typically fall under IAS 20 or IPSAS frameworks."
   )
 )
 
