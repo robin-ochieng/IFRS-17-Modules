@@ -23,12 +23,13 @@ tagList(
     ),
 
     div(class = "module-section",  
-        h3("📖 Introduction"),
-        p("This module provides an overview of the subsequent measurement requirements for insurance contracts, as set out in paragraphs 40–52 of IFRS 17."),
-        p("It covers how entities update the carrying amount of insurance contracts over time, including updates to fulfilment cash flows, adjustments to the contractual service margin (CSM), and the recognition of insurance revenue and expenses.")
-     ),
+        h3(icon("balance-scale"), "Module Objective", class = "section-subheading"),
+        p("This module outlines the requirements for subsequent measurement of insurance contracts, as detailed in paragraphs 40–52 of IFRS 17."),
+        p("It explains how insurers revise the carrying amount of insurance contracts over time, including updates to fulfilment cash flows, changes to the Contractual Service Margin (CSM), and the recognition of insurance-related revenue and expenses.")
+    ),
+
     div(class = "module-section",
-        h3("Overview of Subsequent Measurement"),
+        h3("Overview of Subsequent Measurement", class = "section-subheading"),
         p("After initial recognition, insurance contract liabilities must be updated to reflect:"),
         tags$ol(type = "a",
           tags$li("Changes in estimates of future cash flows"),
@@ -41,7 +42,7 @@ tagList(
     ),
 
     div(class = "module-section",
-        h3("Liability for Remaining Coverage (LRC)"),
+        h3("Liability for Remaining Coverage (LRC)", class = "section-subheading"),
         p("The LRC reflects the insurer’s obligation to provide coverage in the future. At each reporting date, it is updated for:"),
         tags$ol(type = "a",
           tags$li("Premiums received"),
@@ -53,6 +54,8 @@ tagList(
         p("The GMM and VFA both measure insurance contract liabilities based on fulfilment cash flows and a contractual service margin; however, VFA applies to contracts with direct participation features and adjusts the CSM to reflect changes in the insurer’s share of underlying items ")
     ),
     div(class = "module-section",
+        h3(icon("balance-scale"), "General Measurement Model (GMM)", class = "section-subheading"),
+        p("The General Measurement Model (GMM) and the Variable Fee Approach (VFA) both determine insurance contract liabilities using fulfilment cash flows and a Contractual Service Margin (CSM). However, the VFA is specifically designed for contracts with direct participation features and modifies the CSM to capture changes in the insurer’s share of the underlying items."),
         p("The LRC will be adjusted as follows:"),
         tags$ol(type = "a",
           tags$li("Opening LRC balance: Starting point for the period."),
@@ -64,7 +67,7 @@ tagList(
         ),
     ),
     div(class = "module-section",
-        h3("Adjusting the Contractual Service Margin (CSM)"),
+        h3("Adjusting the Contractual Service Margin (CSM)", class = "section-subheading"),
         p("The CSM is adjusted for:"),
         tags$ol(type = "a",
           tags$li("Changes in fulfilment cash flows related to future service"),
@@ -82,24 +85,52 @@ tagList(
             div(class = "scenario-col",
               tags$h4("📌 Illustration:"),
               tags$ol( type = "a",
-                tags$li("Opening CSM: KES 150,000"),
-                tags$li("Interest accretion: KES 5,000"),
-                tags$li("Adjustment from change in future cash flows: KES -30,000"),
-                tags$li("Release based on service provided: KES 20,000")
+                tags$li("Opening CSM: BWP 200,000"),
+                tags$li("Interest accretion: BWP 8,000"),
+                tags$li("Adjustment from change in future cash flows: BWP -25,000"),
+                tags$li("Release based on service provided: BWP 30,000")
               )
             ),
             # Right column
             div(class = "calc-col",
               tags$h4("🧮 Calculation:"),
               tags$ul( type = "a",
-                tags$li("Adjusted CSM = 150,000 + 5,000 - 30,000 - 20,000 = KES 105,000"),
-                tags$li("If the change in future cash flow estimates and adjustment relating to future coverage exceeded the CSM after allowance of interest accretion and the excess amounts above CSM are recognised as losses in the Profit or Loss.")
+                tags$li("Adjusted CSM = BWP 200,000 + BWP 8,000 - BWP 30,000 = BWP 153,000"),
+                tags$li("If the adjustments for changes in expected future cash flows related to future coverage exceed the available CSM (after accounting for interest accretion), the excess is treated as a loss and is immediately recognized in the Profit or Loss statement.")
               )
             )
           )
         )
       ),
-    div(class = "module-section",      
+      div(class = "module-section",
+          h3(icon("exclamation-triangle"), "Treatment of Onerous Contracts", class = "section-subheading"),
+          p("Under IFRS 17, a contract becomes onerous when the updated fulfilment cash flows (FCF) exceed the carrying amount of the liability."),
+          tags$ol(type = "a",
+            tags$li(
+              "In subsequent measurement, an entity must:",
+              tags$ol(type = "i",
+                tags$li("Reduce the CSM to zero if it is insufficient to absorb unfavourable changes in future cash flows."),
+                tags$li("Recognise the excess as a loss in the profit or loss statement."),
+                tags$li("Establish or increase the loss component of the Liability for Remaining Coverage (LRC).")
+              )
+            ),
+            tags$li(
+              "The loss component ensures that future revenue is correctly allocated and tracked against the loss already recognised."
+            ),
+            tags$li(
+              "Once a group of contracts is classified as onerous, this classification remains fixed even if future estimates improve."
+            ),
+            tags$li(
+              "If the expected cash flows improve in subsequent periods:",
+              tags$ol(type = "i",
+                tags$li("No new CSM is created."),
+                tags$li("The loss component is reversed through profit or loss to reflect the improvement.")
+              )
+            )
+          )
+      ),
+    div(class = "module-section",   
+        h3(icon("coins"), "Premium Allocation Approach (PAA)", class = "section-subheading"),   
         p("For contracts measured under the PAA, an entity shall measure the Liability for Remaining Coverage at the end of each subsequent reporting period as follows:"),
         tags$ol( type = "a",
           tags$li("Opening LRC balance"),
@@ -112,7 +143,7 @@ tagList(
         img(src = "images/subsequent_lrc.png", class = "module-image"),
     ),
     div(class = "module-section",
-        h3("Liability for Incurred Claims (LIC)"),
+        h3("Liability for Incurred Claims (LIC)", class = "section-subheading"),
         p("The LIC reflects the insurer’s obligation for claims arising from past coverage that have been incurred but not yet paid. Updates to LIC include:"),
         tags$ol( type = "a",
           tags$li("Claims incurred"),
@@ -125,62 +156,62 @@ tagList(
       ),
 
     div(class = "module-section summary-box",
-        h3("🔍 Key Takeaways"),
+        h3("🔍 Key Takeaways", class = "section-subheading"),
         tags$ul(
-          tags$li("Subsequent measurement ensures that liabilities reflect the current expectations of future service and incurred obligations."),
-          tags$li("The LRC and LIC are updated continuously as new information becomes available."),
-          tags$li("The CSM plays a critical role in spreading profit recognition over the service period."),
-          tags$li("Onerous contract assessments continue throughout the life of the contract and may change from profitable to onerous, or vice versa; however, contracts are not reclassified after initial recognition."),
-          tags$li("ULAE should be included in the fulfilment cash flows for incurred claims and for the LRC, as it forms part of the claim-related cash flows and should be estimated using sound actuarial techniques.")
+          tags$li("Subsequent measurement ensures that insurance liabilities reflect up-to-date expectations regarding future services and obligations already incurred."),
+          tags$li("The Liability for Remaining Coverage (LRC) and the Liability for Incurred Claims (LIC) are regularly updated as new data and experience emerge."),
+          tags$li("The Contractual Service Margin (CSM) is essential for deferring and allocating profit recognition over the duration of insurance coverage."),
+          tags$li("d)	Ongoing assessments are performed to identify onerous contracts, which can shift between profitable and loss-making over time; however, their classification remains fixed from initial recognition."),
+          tags$li("e)	Unallocated Loss Adjustment Expenses (ULAE) must be included in fulfilment cash flows for both claims incurred and the LRC, as they are part of the expected claim-related outflows and should be estimated using robust actuarial methods.")
         )
     ),
 
     div(class = "module-section",
-        h3("📝 Quiz: Answer the following questions to test your understanding of Subsequent Measurement."),
+        h3("📝 Quiz: Answer the following questions to test your understanding of Subsequent Measurement.", class = "section-subheading"),
     ),
 
 
     box(
-      title = "1. What does subsequent measurement refer to under IFRS 17?",
+      title = "1. An insurer initially recognized a group of health insurance contracts with projected cash outflows of BWP 1,200. Six months later, actual claims experience and revised assumptions suggest the outflows will increase to BWP 1,350. What IFRS 17 process does this update represent?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
-        "The reassessment of reinsurance cash flows",
-        "The update of contract liabilities after initial recognition",
-        "Only the measurement of incurred claims",
-        "Determining if premiums are received"
+        "Premium verification",
+        "Subsequent measurement of insurance liabilities",
+        "Recognition of new contracts",
+        "Adjustment of reinsurance assets"
       ), selected = character(0))
     ),
 
     box(
-      title = "2. An insurance company issues a 4-year term life insurance contract with a total expected Contractual Service Margin (CSM) of $8,000 at initial recognition. The company expects to provide insurance services evenly over the 4 years. How much CSM revenue should be recognized at the end of each year, assuming no changes in estimates or contract modifications?",
+      title = "2. A Botswana-based insurer issues a 3-year agricultural insurance contract. Based on expected seasonal risk patterns, the insurer determines that 50% of insurance services will be provided in year 1, 30% in year 2, and 20% in year 3. The Contractual Service Margin (CSM) at initial recognition is BWP 6,000. Assuming no changes in estimates or modifications, how much CSM revenue should be recognized each year?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
-        "$2,000 per year for 4 years",
-        "$0 in year 1 and $8,000 in year 4",
-        "$4,000 in the first year and $1,333 in each of the following years",
-        "$8,000 immediately at contract inception"
+        "BWP 3,000 in year 1, BWP 1,800 in year 2, BWP 1,200 in year 3",
+        "BWP 2,000 per year for 3 years",
+        "BWP 6,000 immediately at inception",
+        "No CSM revenue is recognized under IFRS 17"
       ), selected = character(0))
     ),
 
     box(
-      title = "3. How often are fulfilment cash flows updated?",
+      title = "3. Under IFRS 17, when must an entity revise its estimates of fulfilment cash flows?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
-        "Once a year",
-        "Monthly",
-        "At each reporting date",
-        "Never after initial recognition"
+        "Only when there is a change in accounting policy",
+        "On a fixed annual schedule",
+        "At each financial reporting date",
+        "Only during contract inception and termination"
       ), selected = character(0))
     ),
 
     box(
-      title = "4. How are claims incurred shown in financials?",
+      title = "4. When an insurer settles a claim for a loss event that has already occurred, how is this transaction reflected under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
-        "In CSM",
-        "In OCI",
-        "In fulfilment cash flows",
-        "In profit or loss"
+        "As a reduction of the Contractual Service Margin (CSM)",
+        "Through Other Comprehensive Income (OCI)",
+        "As an adjustment to the fulfilment cash flows for future coverage",
+        "As an expense in the profit or loss statement"
       ), selected = character(0))
     ),
 
@@ -207,24 +238,24 @@ tagList(
     ),
 
     box(
-      title = "7. Which of the following affects the Liability for Incurred Claims (LIC)?",
+      title = "7. What component directly impacts the measurement of the Liability for Incurred Claims (LIC) under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
-        "Future service premiums",
-        "Reinsurance commissions",
-        "Claims already incurred",
-        "Profit emergence"
+        "Premiums for future coverage",
+        "Reinsurance commission income",
+        "Claims that have been incurred but not yet settled",
+        "Expected future profit from the contract"
       ), selected = character(0))
     ),
 
     box(
-      title = "8. What does the Liability for Remaining Coverage (LRC) include?",
+      title = "8. At initial recognition, a Botswana insurer issues a 2-year home insurance contract. The expected future claims and expenses (fulfilment cash flows) are estimated at BWP 30,000, and the Contractual Service Margin (CSM) is calculated to be BWP 10,000. What is the amount of the Liability for Remaining Coverage (LRC) to be reported on the balance sheet?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
-        "CSM + premiums received",
-        "Fulfilment cash flows + CSM",
-        "Only claims paid",
-        "Gross income"
+        "BWP 30,000 only (just the fulfilment cash flows)",
+        "BWP 40,000 (BWP 30,000 FCF + BWP 10,000 CSM)",
+        "BWP 10,000 only (just the CSM)",
+        "BWP 0 (no liability until claims arise)"
       ), selected = character(0))
     ),
 
@@ -240,24 +271,24 @@ tagList(
     ),
 
     box(
-      title = "10. What role does the risk adjustment play in subsequent measurement?",
+      title = "10. In the context of IFRS 17, how does the risk adjustment for non-financial risk influence the valuation of insurance contract liabilities during subsequent measurement?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
-        "Reduces cash flows",
-        "Defers tax",
-        "Adjusts for uncertainty in non-financial risks",
-        "Ignores future inflation"
+        "It directly reduces expected future cash inflows",
+        "It creates a deferred tax asset for timing differences",
+        "It represents the compensation an entity requires for bearing the uncertainty of non-financial risks and is updated at each reporting date",
+        "It excludes the impact of future inflation assumptions"
       ), selected = character(0))
     ),
 
     box(
-      title = "11. How is ULAE treated in subsequent measurement?",
+      title = "11. An insurer has ongoing claims on a group of insurance contracts and estimates that it will incur BWP 500,000 in salaries and operational costs for its claims handling department over the next reporting period. These costs are not linked to specific claims but are expected to support overall claims management. How should these expected costs be treated under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL, choices = c(
-        "Expensed in full",
-        "Included in LIC and updated",
-        "Ignored unless incurred",
-        "Deferred to maturity"
+        "Expensed immediately in full",
+        "Included in the liability for incurred claims (LIC) and updated at each reporting period",
+        "Ignored unless individually linked to a claim",
+        "Deferred until claim settlement is completed"
       ), selected = character(0))
     ),
 
@@ -277,50 +308,50 @@ tagList(
   )
 }
 
-correct_answers_module6 <- list( 
+correct_answers_module6 <- list(
   q1 = list(
-    answer = "The update of contract liabilities after initial recognition",
-    explanation = "Subsequent measurement involves updating the carrying amounts of insurance liabilities after initial recognition."
+    answer     = "Subsequent measurement of insurance liabilities",
+    explanation = "This situation illustrates subsequent measurement under IFRS 17: updating insurance liabilities to reflect new experience and assumptions."
   ),
   q2 = list(
-    answer = "$2,000 per year for 4 years",
-    explanation = "Since the insurance company expects to provide services evenly over the 4-year coverage period and the total CSM is $8,000, the revenue should be recognized on a straight-line basis—$2,000 each year."
+    answer     = "BWP 3,000 in year 1, BWP 1,800 in year 2, BWP 1,200 in year 3",
+    explanation = "CSM is released based on coverage units (50%, 30%, 20% of BWP 6,000)."
   ),
   q3 = list(
-    answer = "At each reporting date",
-    explanation = "Entities must reassess fulfilment cash flows using current estimates at each reporting period."
+    answer     = "At each financial reporting date",
+    explanation = "IFRS 17 requires fulfilment cash flows to be updated at every reporting date using current estimates."
   ),
   q4 = list(
-    answer = "In profit or loss",
-    explanation = "Claims that relate to past service are recognized directly in the profit or loss statement."
+    answer     = "As an expense in the profit or loss statement",
+    explanation = "Settled claims are recognized as expenses in profit or loss, reflecting fulfillment of obligations."
   ),
   q5 = list(
-    answer = "Changes in uncertainty of future service",
-    explanation = "Changes in the level of uncertainty about future cash flows affect the risk adjustment."
+    answer     = "Changes in uncertainty of future service",
+    explanation = "Risk adjustment changes when the level of uncertainty about future cash flows changes."
   ),
   q6 = list(
-    answer = "Time value updates",
-    explanation = "Changes due to the passage of time (e.g., interest accretion) do not adjust the CSM — they affect finance income/expense."
+    answer     = "Time value updates",
+    explanation = "Passage of time (interest accretion) affects finance income/expense, not the CSM."
   ),
   q7 = list(
-    answer = "Claims already incurred",
-    explanation = "LIC represents obligations from past events (claims already incurred but not yet paid)."
+    answer     = "Claims that have been incurred but not yet settled",
+    explanation = "LIC measures the insurer’s obligation for claims already incurred but unpaid."
   ),
   q8 = list(
-    answer = "Fulfilment cash flows + CSM",
-    explanation = "LRC includes fulfilment cash flows for future coverage and the CSM."
+    answer     = "BWP 40,000 (BWP 30,000 FCF + BWP 10,000 CSM)",
+    explanation = "LRC equals fulfilment cash flows for future coverage plus the unearned CSM."
   ),
   q9 = list(
-    answer = "Claims already incurred",
-    explanation = "LIC reflects the insurer’s obligation for incurred claims not yet settled."
+    answer     = "Claims already incurred",
+    explanation = "LIC captures obligations for claims that have already occurred."
   ),
   q10 = list(
-    answer = "Adjusts for uncertainty in non-financial risks",
-    explanation = "Risk adjustment reflects uncertainty in cash flows and is re-evaluated each period."
+    answer     = "It represents the compensation an entity requires for bearing the uncertainty of non-financial risks and is updated at each reporting date",
+    explanation = "The risk adjustment reflects required compensation for non-financial risk uncertainty and is remeasured each period."
   ),
   q11 = list(
-    answer = "Included in LIC and updated",
-    explanation = "Unallocated Loss Adjustment Expenses (ULAE) are included in LIC and updated regularly."
+    answer     = "Included in the liability for incurred claims (LIC) and updated at each reporting period",
+    explanation = "Unallocated Loss Adjustment Expenses (ULAE) are included in LIC and reassessed each reporting date."
   )
 )
 
