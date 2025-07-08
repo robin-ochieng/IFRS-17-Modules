@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "locale": "C",
+  "platform": "4.4.3",
+  "metadata": {
+    "appmode": "shiny",
+    "primary_rmd": null,
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "environment": {
+    "r": {
+      "requires": ">= 4.0.0"
+    }
+  },
+  "packages": {
+    "digest": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "digest",
+        "Authors@R": "c(person(\"Dirk\", \"Eddelbuettel\", role = c(\"aut\", \"cre\"), email = \"edd@debian.org\",\n                    comment = c(ORCID = \"0000-0001-6419-907X\")),\n             person(\"Antoine\", \"Lucas\", role=\"ctb\"),\n             person(\"Jarek\", \"Tuszynski\", role=\"ctb\"),\n             person(\"Henrik\", \"Bengtsson\", role=\"ctb\", comment = c(ORCID = \"0000-0002-7579-5165\")),\n             person(\"Simon\", \"Urbanek\", role=\"ctb\", comment = c(ORCID = \"0000-0003-2297-1732\")),\n             person(\"Mario\", \"Frasca\", role=\"ctb\"),\n             person(\"Bryan\", \"Lewis\", role=\"ctb\"),\n             person(\"Murray\", \"Stokely\", role=\"ctb\"),\n             person(\"Hannes\", \"Muehleisen\", role=\"ctb\"),\n             person(\"Duncan\", \"Murdoch\", role=\"ctb\"),\n             person(\"Jim\", \"Hester\", role=\"ctb\"),\n             person(\"Wush\", \"Wu\", role=\"ctb\", comment = c(ORCID = \"0000-0001-5180-0567\")),\n             person(\"Qiang\", \"Kou\", role=\"ctb\", comment = c(ORCID = \"0000-0001-6786-5453\")),\n             person(\"Thierry\", \"Onkelinx\", role=\"ctb\", comment = c(ORCID = \"0000-0001-8804-4216\")),\n             person(\"Michel\", \"Lang\", role=\"ctb\", comment = c(ORCID = \"0000-0001-9754-0393\")),\n             person(\"Viliam\", \"Simko\", role=\"ctb\"),\n             person(\"Kurt\", \"Hornik\", role=\"ctb\", comment = c(ORCID = \"0000-0003-4198-9911\")),\n             person(\"Radford\", \"Neal\", role=\"ctb\", comment = c(ORCID = \"0000-0002-2473-3407\")),\n             person(\"Kendon\", \"Bell\", role=\"ctb\", comment = c(ORCID = \"0000-0002-9093-8312\")),\n             person(\"Matthew\", \"de Queljoe\", role=\"ctb\"),\n             person(\"Dmitry\", \"Selivanov\", role=\"ctb\"),\n             person(\"Ion\", \"Suruceanu\", role=\"ctb\"),\n             person(\"Bill\", \"Denney\", role=\"ctb\"),\n             person(\"Dirk\", \"Schumacher\", role=\"ctb\"),\n             person(\"András\", \"Svraka\", role=\"ctb\"),\n             person(\"Sergey\", \"Fedorov\", role=\"ctb\"),\n             person(\"Will\", \"Landau\", role=\"ctb\", comment = c(ORCID = \"0000-0003-1878-3253\")),\n             person(\"Floris\", \"Vanderhaeghe\", role=\"ctb\", comment = c(ORCID = \"0000-0002-6378-6229\")),\n             person(\"Kevin\", \"Tappe\", role=\"ctb\"),\n             person(\"Harris\", \"McGehee\", role=\"ctb\"),\n             person(\"Tim\", \"Mastny\", role=\"ctb\"),\n             person(\"Aaron\", \"Peikert\", role=\"ctb\", comment = c(ORCID = \"0000-0001-7813-818X\")),\n             person(\"Mark\", \"van der Loo\", role=\"ctb\", comment = c(ORCID = \"0000-0002-9807-4686\")),\n             person(\"Chris\", \"Muir\", role=\"ctb\", comment = c(ORCID = \"0000-0003-2555-3878\")),\n             person(\"Moritz\", \"Beller\", role=\"ctb\", comment = c(ORCID = \"0000-0003-4852-0526\")),\n             person(\"Sebastian\", \"Campbell\", role=\"ctb\"),\n             person(\"Winston\", \"Chang\", role=\"ctb\", comment = c(ORCID = \"0000-0002-1576-2126\")),\n             person(\"Dean\", \"Attali\", role=\"ctb\", comment = c(ORCID = \"0000-0002-5645-3493\")),\n             person(\"Michael\", \"Chirico\", role=\"ctb\", comment = c(ORCID = \"0000-0003-0787-087X\")),\n             person(\"Kevin\", \"Ushey\", role=\"ctb\"))",
+        "Version": "0.6.37",
+        "Date": "2024-08-19",
+        "Title": "Create Compact Hash Digests of R Objects",
+        "Description": "Implementation of a function 'digest()' for the creation of hash\n digests of arbitrary R objects (using the 'md5', 'sha-1', 'sha-256', 'crc32',\n 'xxhash', 'murmurhash', 'spookyhash', 'blake3', 'crc32c', 'xxh3_64', and 'xxh3_128'\n algorithms) permitting easy comparison of R language objects, as well as functions\n such as'hmac()' to create hash-based message authentication code. Please note that\n this package is not meant to be deployed for cryptographic purposes for which more\n comprehensive (and widely tested) libraries such as 'OpenSSL' should be used.",
+        "URL": "https://github.com/eddelbuettel/digest,\nhttps://dirk.eddelbuettel.com/code/digest.html",
+        "BugReports": "https://github.com/eddelbuettel/digest/issues",
+        "Depends": "R (>= 3.3.0)",
+        "Imports": "utils",
+        "License": "GPL (>= 2)",
+        "Suggests": "tinytest, simplermarkdown",
+        "VignetteBuilder": "simplermarkdown",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "yes",
+        "Packaged": "2024-08-19 12:16:05 UTC; edd",
+        "Author": "Dirk Eddelbuettel [aut, cre] (<https://orcid.org/0000-0001-6419-907X>),\n  Antoine Lucas [ctb],\n  Jarek Tuszynski [ctb],\n  Henrik Bengtsson [ctb] (<https://orcid.org/0000-0002-7579-5165>),\n  Simon Urbanek [ctb] (<https://orcid.org/0000-0003-2297-1732>),\n  Mario Frasca [ctb],\n  Bryan Lewis [ctb],\n  Murray Stokely [ctb],\n  Hannes Muehleisen [ctb],\n  Duncan Murdoch [ctb],\n  Jim Hester [ctb],\n  Wush Wu [ctb] (<https://orcid.org/0000-0001-5180-0567>),\n  Qiang Kou [ctb] (<https://orcid.org/0000-0001-6786-5453>),\n  Thierry Onkelinx [ctb] (<https://orcid.org/0000-0001-8804-4216>),\n  Michel Lang [ctb] (<https://orcid.org/0000-0001-9754-0393>),\n  Viliam Simko [ctb],\n  Kurt Hornik [ctb] (<https://orcid.org/0000-0003-4198-9911>),\n  Radford Neal [ctb] (<https://orcid.org/0000-0002-2473-3407>),\n  Kendon Bell [ctb] (<https://orcid.org/0000-0002-9093-8312>),\n  Matthew de Queljoe [ctb],\n  Dmitry Selivanov [ctb],\n  Ion Suruceanu [ctb],\n  Bill Denney [ctb],\n  Dirk Schumacher [ctb],\n  András Svraka [ctb],\n  Sergey Fedorov [ctb],\n  Will Landau [ctb] (<https://orcid.org/0000-0003-1878-3253>),\n  Floris Vanderhaeghe [ctb] (<https://orcid.org/0000-0002-6378-6229>),\n  Kevin Tappe [ctb],\n  Harris McGehee [ctb],\n  Tim Mastny [ctb],\n  Aaron Peikert [ctb] (<https://orcid.org/0000-0001-7813-818X>),\n  Mark van der Loo [ctb] (<https://orcid.org/0000-0002-9807-4686>),\n  Chris Muir [ctb] (<https://orcid.org/0000-0003-2555-3878>),\n  Moritz Beller [ctb] (<https://orcid.org/0000-0003-4852-0526>),\n  Sebastian Campbell [ctb],\n  Winston Chang [ctb] (<https://orcid.org/0000-0002-1576-2126>),\n  Dean Attali [ctb] (<https://orcid.org/0000-0002-5645-3493>),\n  Michael Chirico [ctb] (<https://orcid.org/0000-0003-0787-087X>),\n  Kevin Ushey [ctb]",
+        "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-08-19 14:10:07 UTC",
+        "Built": "R 4.4.3; x86_64-pc-linux-gnu; 2025-07-08 08:28:59 UTC; unix"
+      }
+    },
+    "jsonlite": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "jsonlite",
+        "Version": "2.0.0",
+        "Title": "A Simple and Robust JSON Parser and Generator for R",
+        "License": "MIT + file LICENSE",
+        "Depends": "methods",
+        "Authors@R": "c(\n    person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), email = \"jeroenooms@gmail.com\",\n      comment = c(ORCID = \"0000-0002-4035-0289\")),\n    person(\"Duncan\", \"Temple Lang\", role = \"ctb\"),\n    person(\"Lloyd\", \"Hilaiel\", role = \"cph\", comment=\"author of bundled libyajl\"))",
+        "URL": "https://jeroen.r-universe.dev/jsonlite\nhttps://arxiv.org/abs/1403.2805",
+        "BugReports": "https://github.com/jeroen/jsonlite/issues",
+        "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+        "VignetteBuilder": "knitr, R.rsp",
+        "Description": "A reasonably fast JSON parser and generator, optimized for statistical \n    data and the web. Offers simple, flexible tools for working with JSON in R, and\n    is particularly powerful for building pipelines and interacting with a web API. \n    The implementation is based on the mapping described in the vignette (Ooms, 2014).\n    In addition to converting JSON data from/to R objects, 'jsonlite' contains \n    functions to stream, validate, and prettify JSON data. The unit tests included \n    with the package verify that all edge cases are encoded and decoded consistently \n    for use with dynamic data in systems and applications.",
+        "Suggests": "httr, vctrs, testthat, knitr, rmarkdown, R.rsp, sf",
+        "RoxygenNote": "7.3.2",
+        "Encoding": "UTF-8",
+        "NeedsCompilation": "yes",
+        "Packaged": "2025-03-26 11:36:10 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>),\n  Duncan Temple Lang [ctb],\n  Lloyd Hilaiel [cph] (author of bundled libyajl)",
+        "Repository": "CRAN",
+        "Date/Publication": "2025-03-27 06:40:02 UTC",
+        "Built": "R 4.4.3; x86_64-pc-linux-gnu; 2025-07-08 08:29:07 UTC; unix"
+      }
+    }
+  },
+  "files": {
+    ".Renviron": {
+      "checksum": "cdda00da824a7db1994c63da841581b0"
+    },
+    ".Rprofile": {
+      "checksum": "d54c82894f41006cdf98efa221142b63"
+    },
+    "app.R": {
+      "checksum": "46fd3b8b54b9a34495cb368c6e480a6c"
+    },
+    "DESCRIPTION": {
+      "checksum": "15e5acdf419e64eb04fe388a85431369"
+    },
+    "modules/adminModule.R": {
+      "checksum": "8cd453ddc6ea24e504c4eb23525e1e1c"
+    },
+    "modules/authModule.R": {
+      "checksum": "8dc24bc5b9e4c2f6ee6e5d38ffd98aee"
+    },
+    "modules/caseStudiesModule.R": {
+      "checksum": "402a77000f81d950c65f3e1c644569af"
+    },
+    "modules/introModule.R": {
+      "checksum": "5aafcd56ce7c299470487bfd03c0e76f"
+    },
+    "modules/measurementModule.R": {
+      "checksum": "2a57d10fdd4855cfb00bdac29bd49d1f"
+    },
+    "modules/Module - Template.R": {
+      "checksum": "150f970d09689b6a3bd2a23bee6a3e63"
+    },
+    "modules/module10Module.R": {
+      "checksum": "e62d97b9b8ba14f71909cb9890da2724"
+    },
+    "modules/module11Module.R": {
+      "checksum": "b975a1f214ae226cfb0dd841d719fef2"
+    },
+    "modules/module12Module.R": {
+      "checksum": "846d2570ba1c691c000741e07dac0f89"
+    },
+    "modules/module13Module.R": {
+      "checksum": "a8be30e2d036e987138b0b3beca87d15"
+    },
+    "modules/module14Module.R": {
+      "checksum": "1ff0f8ad4a202661ad4fbd6ab5f487ce"
+    },
+    "modules/module15Module.R": {
+      "checksum": "97713ba42b90e1c28ce890f7d5b4058e"
+    },
+    "modules/module1Module.R": {
+      "checksum": "f4771810c818e2e9f18e93b8f3dfb37a"
+    },
+    "modules/module2Module.R": {
+      "checksum": "b45440edc24922fd1e9bf3f0171687f5"
+    },
+    "modules/module3Module.R": {
+      "checksum": "abbdf3d3543aa629919b12443de78ff9"
+    },
+    "modules/module4Module.R": {
+      "checksum": "a08b9372f17ae4d29c50469e36aec8be"
+    },
+    "modules/module5Module.R": {
+      "checksum": "41ed938bd3734b3c34e0e0fede04b11e"
+    },
+    "modules/module6Module.R": {
+      "checksum": "887ae9a30a6b9868bebf3c972b364114"
+    },
+    "modules/module7Module.R": {
+      "checksum": "adc0c681e496367af6fcb48755642587"
+    },
+    "modules/module8Module.R": {
+      "checksum": "fca0eabc00c30cefc9fb56a92aadeaae"
+    },
+    "modules/module9Module.R": {
+      "checksum": "e3a1f5c72d9f324e0773568c857d2b57"
+    },
+    "quiz_data.R": {
+      "checksum": "71edc64db2f5b3392bc9185b48ca087b"
+    },
+    "README.md": {
+      "checksum": "87ac2d7ae0c3992e7beb7b3b41e8ef05"
+    },
+    "resources/Exam Marking - Working File v3.xlsx": {
+      "checksum": "3042828b2a1dfaa4b1b089a91de8bae7"
+    },
+    "resources/IFRS 17 PAA Training module 1.docx": {
+      "checksum": "5df722053fe7cc037ccf03b9a2020e84"
+    },
+    "resources/IFRS 17 Training Module_Reinsurance contracts held.docx": {
+      "checksum": "2c495de422f02eba241d6a6b7f44ad8e"
+    },
+    "resources/Initial recognition.docx": {
+      "checksum": "debee447f9d2c8bb7fa5e7481594327a"
+    },
+    "resources/questions.pdf": {
+      "checksum": "4e66a6f2efc530fbf6b02754ee7925fc"
+    },
+    "resources/Subsequent Measurement.docx": {
+      "checksum": "15d9e39f699a4b117d46a8db7d26270d"
+    },
+    "supabase_config.R": {
+      "checksum": "e5845fc6cce9a20d8ee3e4634a479758"
+    },
+    "supabase_config.R.backup": {
+      "checksum": "990b8fe8a29c5077ff5cd9cb4103d628"
+    },
+    "supabase_diagnostic.R": {
+      "checksum": "c81d54de3a7f6aa6efbf8b34f11792be"
+    },
+    "test_connection.R": {
+      "checksum": "a92d76b8931fd25c3ea842c3b701a444"
+    },
+    "test_connection.R.backup": {
+      "checksum": "a92d76b8931fd25c3ea842c3b701a444"
+    },
+    "titles.txt": {
+      "checksum": "483e907e52fa516abba07b935c5a7727"
+    },
+    "www/css/admin.css": {
+      "checksum": "3465904957d9e27d0304b1bcbdb1f73f"
+    },
+    "www/css/auth.css": {
+      "checksum": "800e6331f1146db536492153658b9d13"
+    },
+    "www/css/custom_styles.css": {
+      "checksum": "8126563363d4a9e252426766d45c3e19"
+    },
+    "www/css/intro.css": {
+      "checksum": "c0fb51529117e7a87f924662b720896f"
+    },
+    "www/css/measurement.css": {
+      "checksum": "a27e8080e94d6c3bfed759a98c6d1c31"
+    },
+    "www/css/media_queries.css": {
+      "checksum": "cc713199a0c92804119f14055d9eb252"
+    },
+    "www/css/module1.css": {
+      "checksum": "46eb70219461b43d1f72037b5071d835"
+    },
+    "www/css/module11.css": {
+      "checksum": "505be2d8ba5c520f465904991507c291"
+    },
+    "www/css/module13.css": {
+      "checksum": "38bd1d476635d1edcb07bfe0b8820158"
+    },
+    "www/css/module14.css": {
+      "checksum": "38e52776cf06b0d7fe8ae09b8a4871b6"
+    },
+    "www/css/module2.css": {
+      "checksum": "350e9732b8100646f60fc07c4a968f46"
+    },
+    "www/css/module3.css": {
+      "checksum": "deeb20f48ced94c34ed8287fae4e25b7"
+    },
+    "www/css/module4.css": {
+      "checksum": "6434cdf9fe45f8fb6ec5d4f8116c9e7c"
+    },
+    "www/css/module5.css": {
+      "checksum": "0c8bae8eaa7b89b1321eb2d777a691c6"
+    },
+    "www/css/module6.css": {
+      "checksum": "acd6e02be78c1cd73afbe813667188a3"
+    },
+    "www/css/module7.css": {
+      "checksum": "0c9573a2738658060e212aaff85bd634"
+    },
+    "www/css/module9.css": {
+      "checksum": "f58caaf8cee3f6d471e94f77a172ab70"
+    },
+    "www/favicon/kenbright.ico": {
+      "checksum": "88bdbb3603c1e0f0ee71c91192698205"
+    },
+    "www/images/app.R": {
+      "checksum": "684159d59c28d8cf42b98d0b82c89a5f"
+    },
+    "www/images/contractsOutsideScopeofIFRS17.png": {
+      "checksum": "d3ae75f7bd7610eeb04df97e2e273377"
+    },
+    "www/images/csmatInitialRecognition.png": {
+      "checksum": "4bfdd253e6a672feb9c71479b018bfe4"
+    },
+    "www/images/discountingApproaches.png": {
+      "checksum": "3f47de36f03e394dc8957ae3ce70b34a"
+    },
+    "www/images/fulfilmentCashFlows.png": {
+      "checksum": "324a43ab75254debd9eb7d4ad3e25a5b"
+    },
+    "www/images/groupingContractsProcess.png": {
+      "checksum": "1a41a8bc78c8761e0a8117b69c99bb7b"
+    },
+    "www/images/ifrs17timeline.png": {
+      "checksum": "efa5b865f2b804a55d465bf650d528b1"
+    },
+    "www/images/ifrs17timeline2.png": {
+      "checksum": "ab1ee9bc9a12b787f3931da1574795b5"
+    },
+    "www/images/ifrs4VSifrs17.png": {
+      "checksum": "915196260d687e6b8bfb57325f55dc4a"
+    },
+    "www/images/IFRS4vsIFRS17BalanceSheet.png": {
+      "checksum": "b5d3faf6e8642d9fff66ac1dae66adb1"
+    },
+    "www/images/initialRecognitionTimeline.png": {
+      "checksum": "4e64009883dcb731cb8abe8b59b0512c"
+    },
+    "www/images/ira_logo_.png": {
+      "checksum": "3b4d9edc0d9186622cae36d596469ab1"
+    },
+    "www/images/kenbright.png": {
+      "checksum": "58a952de116d66697523af34f80d5117"
+    },
+    "www/images/measurementApproaches.png": {
+      "checksum": "b8090fb47faf22b40859b9071a0d2e0d"
+    },
+    "www/images/modificationaandDerecognition.png": {
+      "checksum": "0d31e5da1a9633c35b3c293d7d1f7ece"
+    },
+    "www/images/module_14_option_1.png": {
+      "checksum": "36ffe3fe147429ff7f18ebb6350c095b"
+    },
+    "www/images/module_14_option_2.png": {
+      "checksum": "b1fdbdfc46a894636012c2735ef992bc"
+    },
+    "www/images/module_15_option_1.png": {
+      "checksum": "34d7b86c64455d162fd4e0a9e94edbf5"
+    },
+    "www/images/module_15_option_2.png": {
+      "checksum": "23fd2d0435eadd3b83e07e8ba3ed9552"
+    },
+    "www/images/module11Introduction.png": {
+      "checksum": "c5924648bc48ad20ba954ca4825ecdee"
+    },
+    "www/images/onerousContracts.png": {
+      "checksum": "eb93b20cd17e955b84e35abf54ccf2ea"
+    },
+    "www/images/paaImage.png": {
+      "checksum": "8cee0ef0f42f9260cabcd1b5077d4e7c"
+    },
+    "www/images/paaTable.png": {
+      "checksum": "5f5a3b4c2ca90d58715d060e60f2f4bb"
+    },
+    "www/images/portfolioContracts.png": {
+      "checksum": "103c9ecd72067a400640261e16b94379"
+    },
+    "www/images/reinsuranceContractHeld.png": {
+      "checksum": "3eb53059492589149f62d69d8a651105"
+    },
+    "www/images/riskAdjustmentApproaches.jpeg": {
+      "checksum": "c00ca89ad9b1af896a5efecc96ab7a01"
+    },
+    "www/images/riskAdjustmentFactors.png": {
+      "checksum": "849b3c7febb8d38fe191b204a4c6d9b6"
+    },
+    "www/images/riskAdjustmentMethods.png": {
+      "checksum": "aa2a572961842d9cca558c556a5cb252"
+    },
+    "www/images/separatingComponents.png": {
+      "checksum": "aa7630c70309d8b278b404c8cfdec401"
+    },
+    "www/images/statement_of_financial_position.png": {
+      "checksum": "48ec7e85d7541243108794f228b78595"
+    },
+    "www/images/subsequent_lic.png": {
+      "checksum": "865380db1e707fc7ee8bfe9e272c86ab"
+    },
+    "www/images/subsequent_lrc.png": {
+      "checksum": "bd82bf46787628eecb3da9ff622cea7d"
+    },
+    "www/images/summaryofMeasurementonInitialRecognition.png": {
+      "checksum": "c3c26a05434d6766000eca96287d9e5e"
+    },
+    "www/js/custom.js": {
+      "checksum": "dab49aff0a04255c61d8e5eb9e722be0"
+    },
+    "www/Modules Q&A/Modules Questions and Answers.txt": {
+      "checksum": "fbfd8a851637b55a8fdc66e15e5050d8"
+    },
+    "www/retirementCalculator.txt": {
+      "checksum": "4f9f240e8ac726f426540a29685df475"
+    }
+  },
+  "users": null
+}
