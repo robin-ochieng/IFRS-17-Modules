@@ -1,20 +1,23 @@
-Package: IFRS17TrainingModule
+Package: ifrs17trainingmodule
 Type: Shiny
 Title: IFRS 17 Digital Training Module
 Version: 1.0.0
 Author: Robin Ochieng
 Maintainer: Robin Ochieng <robinochieng73@gmail.com>
-Description: A comprehensive training module on IFRS 17 using interactive Shiny dashboards.
+Description: A Shiny training module for IFRS 17 with interactive features.
 License: MIT
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
 Depends:
     R (>= 4.0.0)
 Imports:
     shiny,
-    shinyWidgets,
+    httpuv,
     rmarkdown,
+    knitr,
+    jsonlite,
+    htmltools,
+    shinyWidgets,
     bs4Dash,
     ggplot2,
     bslib,
@@ -27,5 +30,5 @@ Imports:
     scales,
     shinyFeedback,
     httr,
-    jsonlite,
     stringr
+
