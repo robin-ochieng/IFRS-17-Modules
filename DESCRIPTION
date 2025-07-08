@@ -10,21 +10,23 @@ LazyData: true
 Depends: 
     R (>= 4.0.0)
 Imports:
-    shiny,
-    shinyWidgets,
-    rmarkdown,
-    bs4Dash,
-    ggplot2,
-    bslib,
-    plotly,
-    DT,
-    dplyr,
-    lubridate,
-    shinyjs,
-    shinyBS,
-    scales,
-    shinyFeedback,
-    httr,
-    jsonlite,
-    stringr
+  shiny,
+  shinyWidgets,
+  rmarkdown,
+  bs4Dash,
+  ggplot2,
+  bslib,
+  plotly,
+  DT,
+  dplyr,
+  lubridate,
+  shinyjs,
+  shinyBS,
+  scales,
+  shinyFeedback,
+  httr,
+  jsonlite,
+  stringr
+
+    
     
