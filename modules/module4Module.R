@@ -469,7 +469,10 @@ IFRS17Module4Server <- (function(id, user_data) {
               box-shadow: 0 4px 12px rgba(0,0,0,0.08);
               font-family: Arial, sans-serif;
             ",
-            h3("📊 Module 4 Results Summary", class = "section-subheading"),
+            h3(
+              "📊 Module 6 Results Summary",
+              style = "color:#f5f5f5; font-weight:600; margin-bottom:20px;"
+            ),
 
             HTML(paste0(
               "<hr style='border-top:1px solid #f5f5f5;'>",
