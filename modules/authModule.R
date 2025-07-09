@@ -109,12 +109,12 @@ authUI <- function(id) {
             ),
             
             # Guest mode button
-            actionButton(
-              ns("guest_btn"),
-              "Continue as Guest",
-              class = "btn btn-secondary btn-block",
-              style = "width: 100%; background-color: #6c757d; border: none;"
-            )
+            # actionButton(
+            #   ns("guest_btn"),
+            #   "Continue as Guest",
+            #   class = "btn btn-secondary btn-block",
+            #   style = "width: 100%; background-color: #6c757d; border: none;"
+            # )
           ),
           
           div(id = ns("login_message"), class = "alert", style = "display: none;")
