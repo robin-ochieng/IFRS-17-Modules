@@ -21,63 +21,66 @@ tagList(
       class = "section-header",
       h2("📘 Module 8: Onerous Contracts", class = "section-title-top")
     ),
+    div(class = "module-section",
+        h3(icon("info-circle"), "Module Objective", class = "section-subheading"),
+        p("This module gives a detailed summary of onerous contracts as outlined in ",
+          tags$strong("paragraphs 47–52 of the standard"), "."),
+        p("An onerous contract refers to an insurance contract (or a group of such contracts)
+          where the anticipated total outgoing—such as payments for claims, associated costs,
+          and the risk adjustment—are greater than the premiums charged. Meaning, the expected
+          cash payments exceed the expected cash receipts.")
+    ),
+
     div(class = "module-section",  
-        h3("📖 Introduction"),
-        p("This module provides an in-depth overview of onerous contracts, as set out in paragraphs 47-52 of IFRS 17."),
-        p("An onerous contract is an insurance contract (or group of contracts) where expected costs (including claims, expenses, and risk margin) exceed the premiums received i.e. cash outflows are greater than cash inflows.")
-     ),
-    div(class = "module-section",  
-        h3("At Initial Recognition"),
-        p("A contract (or group of contracts) is onerous at initial recognition if the expected outflows (claims, expenses, risk margin + acquisition costs) exceed inflows (premiums)."),
+        h3("At Initial Recognition", class = "section-title-top"),
         p("If contracts are onerous at initial recognition, IFRS 17 requires the insurer to:"),
         tags$ol(
           type = "a",
-          tags$li("Group them separately from profitable contracts."),
-          tags$li("Recognize loss immediately in the profit and loss."),
-          tags$li("Set the Contractual Service Margin (CSM) to zero."),
-          tags$li("Recognize full expected cost as a liability."),
-          tags$li("Establish a Loss Component to track the loss.")
+          tags$li("Immediately report the financial loss in the profit and loss statement."),
+          tags$li("Group them separately from contracts that are expected to generate profits."),
+          tags$li("Record the entire expected cost as a liability on the balance sheet."),
+          tags$li("Set the Contractual Service Margin (CSM) to zero, reflecting that no unearned profit exists."),
+          tags$li("Create a loss component to monitor and account for the recognized loss over time.")
         )
     ),
-    div(class = "module-section",  
-        h3("At Subsequent Measurement"),
-        p("A group of contracts becomes onerous, or more onerous, after initial recognition if:"),
-        tags$ol(
-          type = "a",
-          tags$li("The expected future costs or claims increase, e.g. worse assumptions or;"),
-          tags$li("For participation contracts, the expected investment returns decrease")
-        )
-    ),
-    div(class = "module-section", 
-        p("If this happens:"),
-        tags$ol(
-          type = "a",
-          tags$li("Recognize additional loss in P&L"),
-          tags$li("Use any remaining CSM to offset the loss"),
-          tags$li("Increase or add the Loss Component in the liability")
-        )
-    ),
-    div(class = "module-section", 
-        p("The loss component is a part of the liability for remaining coverage that represents the recognized losses in the profit or loss."),
-        p("The role of the Loss Component:"),
-        tags$ol(
-            type = "a",
-            tags$li("Holds the loss recognized in the P&L"),
-            tags$li(HTML("Is <strong>released gradually</strong> as coverage is provided")),
-            tags$li(HTML("Is <strong>reduced</strong> if future assumptions improve"))
+
+    div(class = "module-section",
+        h3(icon("stopwatch"), "At Subsequent Measurement", class = "section-subheading"),
+        h4("When do contracts become (more) onerous?"),
+        p("A group of contracts becomes onerous, or increasingly so, after initial recognition if certain unfavorable developments occur, such as:"),
+        tags$ul(
+          tags$li("A rise in anticipated future claims or servicing costs, often due to deteriorating assumptions; or"),
+          tags$li("In the case of contracts with direct participation features, a decline in the expected investment return.")
         ),
-        tags$p(
-            tags$strong("Note: "),
-            span(style = "color:#006AA6; font-style:italic;",
-                "The CSM can only increase after the loss component is cleared"
-            )
+        p("When this occurs, IFRS 17 requires the entity to:"),
+        tags$ul(
+          tags$li("First, utilize any remaining Contractual Service Margin (CSM) to absorb the loss."),
+          tags$li("Record any excess loss directly in the profit and loss account."),
+          tags$li("Reflect the loss within the liability for remaining coverage by either increasing or establishing a Loss Component.")
+        )
+    ),
+
+    div(class = "module-section",
+        h3(icon("layer-group"), "Loss Component", class = "section-subheading"),
+        p("The Loss Component is a specific element within the liability for remaining coverage that captures losses already recognized in profit or loss."),
+        p("Its key purpose is to:"),
+        tags$ul(
+          tags$li("Track losses that have been recognized in the Profit or Loss statement"),
+          tags$li("Ensure losses are gradually released over time as insurance services are provided"),
+          tags$li("Reflect the improvement in future assumptions by reducing the Loss Component if expected losses decrease")
+        ),
+        p(
+          tags$em("Point to note: "),
+          tags$strong("The CSM cannot be increased until the entire Loss Component has been fully reversed.")
         ),
         img(src = "images/onerousContracts.png", class = "module-image")
     ),
+
     div(class = "module-section", 
-        p("Changes in assumptions (e.g. future claims, expenses, risk margin) are proportionally allocated between the loss component, and the remaining liability for coverage."),
-        p("The aim is to release the loss component by the end of the coverage period."),
-        p("The insurer will consider a contract to be onerous if the expected combined ratio for the portfolio exceeds 100%. The combined ratio is calculated as:"),
+        h3(icon("file-invoice-dollar"), "Assessing Onerous Contracts and Impact of Assumption Changes", class = "section-subheading"),
+        p("When assumptions such as future claims, operating costs, or risk margins change, the resulting impact is split proportionally between the loss component and the remaining part of the liability for remaining coverage."),
+        p("This approach ensures that the loss component is gradually reduced and fully released by the end of the contract's coverage duration."),
+        p("An insurer will classify a group of insurance contracts as onerous if the projected combined ratio for the portfolio goes above 100%. The combined ratio is determined as follows:"),
         
         # Combined Ratio Formula
         div(
@@ -85,131 +88,136 @@ tagList(
             HTML("Combined ratio = <u>Insurance service expenses</u> / <u>Insurance revenue</u> × 100")
         )
     ),
-    div(class = "module-section", 
-        p("The insurance service expenses include:"),
-        tags$ol(
-            type = "a",
-            tags$li("Incurred claims and other directly attributable expenses"),
-            tags$li("Adjustments to the Liability for Incurred Claims (LIC)"),
-            tags$li("Losses on onerous contracts"),
-            tags$li("Insurance acquisition cash flows amortization")
-        ),
-        p("The assessment will also include consideration of the combined ratios of previous cohorts, providing a historical perspective on performance.")
-    ),
 
     div(class = "module-section",
-        h3("📝 Quiz: Answer the following questions to test your understanding of Onerous Contracts"),
+        p("The insurance service expenses include:"),
+        tags$ul(
+          tags$li("Incurred claims and other directly attributable outflows"),
+          tags$li("Adjustments made to the Liability for Incurred Claims (LIC)"),
+          tags$li("Recognized losses related to onerous contracts"),
+          tags$li("Amortization of insurance acquisition cash flows")
+        ),
+        p("In making this assessment, insurers also review combined ratios from earlier cohorts. 
+          This historical view helps provide context and identify trends in portfolio performance.")
     ),
 
-      box(
-        title = "1. When is a contract classified as an onerous contract under IFRS 17?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q1"), label = NULL, choices = c(
-          "When the contract is expected to lapse early",
-          "When the contract has no Contractual Service Margin (CSM)",
-          "When the contract is expected to incur a loss",
-          "When the contract has no insurance risk"
-        ), selected = character(0))
-      ),
 
-      box(
-        title = "2. How is the CSM treated for onerous contracts?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q2"), label = NULL, choices = c(
-          "Deferred",
-          "Reversed",
-          "Released to profit",
-          "Set to zero"
-        ), selected = character(0))
-      ),
 
-      box(
-        title = "3. Which component is recognized when a group is onerous at initial recognition?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q3"), label = NULL, choices = c(
-          "Contractual Service Margin",
-          "Risk Adjustment",
-          "Loss Component",
-          "Investment Return"
-        ), selected = character(0))
-      ),
 
-      box(
-        title = "4. How is the loss component recognized?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q4"), label = NULL, choices = c(
-          "As an asset",
-          "Through OCI",
-          "As an adjustment to the CSM",
-          "In profit or loss"
-        ), selected = character(0))
-      ),
 
-      box(
-        title = "5. What happens if cash flow estimates improve?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q5"), label = NULL, choices = c(
-          "Loss component is reversed first",
-          "CSM increases",
-          "Risk adjustment decreases",
-          "Premiums are restated"
-        ), selected = character(0))
-      ),
+    div(class = "module-section",
+        h3("📝 Quiz: Answer the following questions to test your understanding of Onerous Contracts", class = "section-subheading"),
+    ),
 
-      box(
-        title = "6. When is a contract classified as onerous?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q6"), label = NULL, choices = c(
-          "When risk adjustment is high",
-          "When expected profit is low",
-          "When fulfilment cash flows exceed premiums",
-          "When lapse rate is high"
-        ), selected = character(0))
-      ),
+    box(
+      title = "1. How is an insurance contract identified as onerous at initial recognition?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q1"), label = NULL, choices = c(
+        "If the policy is likely to be cancelled before its coverage ends",
+        "If the contract does not include a Contractual Service Margin (CSM)",
+        "If the contract is expected to generate a loss for the insurer",
+        "If the contract does not transfer significant insurance risk"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "7. What happens to the CSM if a group of contracts becomes onerous after initial recognition?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q7"), label = NULL, choices = c(
-          "It is increased",
-          "It is set to zero and loss is recognized",
-          "It is locked in",
-          "It is recalculated using old assumptions"
-        ), selected = character(0))
-      ),
+    box(
+      title = "2. What is required when a contract is identified as onerous at initial recognition?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q2"), label = NULL, choices = c(
+        "Delay recognition until claims are paid",
+        "Recognize a loss in profit or loss and continue standard measurement",
+        "Group the contract with profitable contracts",
+        "Recognize the loss immediately and create a Loss Component"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "8. Which of the following changes can make a previously profitable contract group onerous?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q8"), label = NULL, choices = c(
-          "Increase in administrative expenses",
-          "Drop in discount rates",
-          "Revised premium allocation method",
-          "Change in accounting policy"
-        ), selected = character(0))
-      ),
+    box(
+      title = "3. What triggers a contract to become onerous after initial recognition?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q3"), label = NULL, choices = c(
+        "Reduction in acquisition expenses",
+        "A deterioration in future assumptions, such as higher claims or lower returns",
+        "A decrease in expected claims",
+        "An increase in investment income"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "9. How does the loss component affect future insurance revenue?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q9"), label = NULL, choices = c(
-          "No effect",
-          "Increases revenue",
-          "It reduces future revenue",
-          "It replaces CSM in revenue recognition"
-        ), selected = character(0))
-      ),
+    box(
+      title = "4. What happens if a group of insurance contracts becomes more onerous after initial recognition?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q4"), label = NULL, choices = c(
+        "Reverse the previously recognized loss",
+        "Ignore the change until coverage ends",
+        "Recognize additional loss and increase the Loss Component",
+        "Increase the CSM to offset the loss"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "10. What causes a change in the loss component?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q10"), label = NULL, choices = c(
-          "Increase in discount rate",
-          "Change in reinsurance treaty",
-          "Adverse claims development",
-          "Policyholder death"
-        ), selected = character(0))
-      ),
+    box(
+      title = "5. What is the purpose of the Loss Component?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q5"), label = NULL, choices = c(
+        "To track losses recognized in P&L and manage their release over time",
+        "To offset unearned premiums",
+        "To hold investment income",
+        "To reduce insurance acquisition costs"
+      ), selected = character(0))
+    ),
+
+    box(
+      title = "6. What happens to the Contractual Service Margin (CSM) at initial recognition if a contract is classified as onerous?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q6"), label = NULL, choices = c(
+        "It is set to zero, and the full loss is recognized immediately",
+        "It is used to offset expected future profits",
+        "It is deferred and recognized over the coverage period",
+        "It is added to the liability for incurred claims"
+      ), selected = character(0))
+    ),
+
+    box(
+      title = "7. What happens to the Contractual Service Margin (CSM) when a contract becomes onerous?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q7"), label = NULL, choices = c(
+        "It continues to be amortized normally",
+        "It is used (to the extent available) to offset the loss before setting up a Loss Component",
+        "It is increased to offset the loss",
+        "It is ignored and a new CSM is created"
+      ), selected = character(0))
+    ),
+
+    box(
+      title = "8. How is the Loss Component released?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q8"), label = NULL, choices = c(
+        "When investment returns improve",
+        "All at once when coverage ends",
+        "When a new contract is issued",
+        "Over time, insurance services are provided"
+      ), selected = character(0))
+    ),
+
+    box(
+      title = "9. Which of the following statements is true about the CSM and the Loss Component?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q9"), label = NULL, choices = c(
+        "The CSM cannot increase until the Loss Component is fully reversed",
+        "The CSM can increase as long as premiums are received",
+        "The CSM and the Loss Component can be increased simultaneously",
+        "The Loss Component offsets insurance acquisition cash flows"
+      ), selected = character(0))
+    ),
+
+    box(
+      title = "10. What is the combined ratio used for in assessing whether contracts are onerous?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q10"), label = NULL, choices = c(
+        "To measure the profitability of investment income",
+        "To determine the adequacy of acquisition costs",
+        "To evaluate if expected insurance expenses exceed insurance revenue",
+        "To calculate the CSM at initial recognition"
+      ), selected = character(0))
+    ),
 
       actionButton(ns("submit"), "Submit Quiz", icon = icon("check"), class = "btn-primary control-button-submit" ),
       br(), 
@@ -227,50 +235,52 @@ tagList(
     )
 }
 
-correct_answers_module8 <- list( 
+correct_answers_module8 <- list(
   q1 = list(
-    answer = "When the contract is expected to incur a loss",
-    explanation = "An onerous contract is one where fulfilment cash flows exceed expected premiums, resulting in a loss."
+    answer = "If the contract is expected to generate a loss for the insurer",
+    explanation = "An insurance contract is considered onerous when expected fulfilment cash outflows exceed expected inflows (premiums), resulting in an immediate loss."
   ),
   q2 = list(
-    answer = "Set to zero",
-    explanation = "The CSM is set to zero since no future profits are expected."
+    answer = "Recognize the loss immediately and create a Loss Component",
+    explanation = "At initial recognition, an onerous group must recognize the loss in profit or loss and establish a Loss Component."
   ),
   q3 = list(
-    answer = "Loss Component",
-    explanation = "The loss component is set up to represent losses on onerous contracts and is recognized immediately in profit or loss."
+    answer = "A deterioration in future assumptions, such as higher claims or lower returns",
+    explanation = "After initial recognition, a contract becomes onerous if adverse changes in assumptions (e.g., higher claims or lower investment returns) worsen fulfilment cash flows."
   ),
   q4 = list(
-    answer = "In profit or loss",
-    explanation = "The loss component is recognized immediately in profit or loss."
+    answer = "Recognize additional loss and increase the Loss Component",
+    explanation = "If a group becomes more onerous, entities must recognize the additional loss in profit or loss and adjust the Loss Component upward."
   ),
   q5 = list(
-    answer = "Loss component is reversed first",
-    explanation = "Improvements first reduce the loss component before adjusting the CSM."
+    answer = "To track losses recognized in P&L and manage their release over time",
+    explanation = "The Loss Component captures losses already recognized and ensures they are released gradually as services are provided."
   ),
   q6 = list(
-    answer = "When fulfilment cash flows exceed premiums",
-    explanation = "A contract is onerous when the fulfilment cash flows exceed the expected inflows (e.g., premiums), indicating a net loss."
+    answer = "It is set to zero, and the full loss is recognized immediately",
+    explanation = "When a contract is onerous at inception, the CSM is set to zero because no future profit remains."
   ),
   q7 = list(
-    answer = "It is set to zero and loss is recognized",
-    explanation = "If contracts become onerous after initial recognition, the CSM is reduced to zero and any further loss is recognized in profit or loss."
+    answer = "It is used (to the extent available) to offset the loss before setting up a Loss Component",
+    explanation = "When contracts become onerous post-recognition, any remaining CSM offsets the loss before creating or increasing the Loss Component."
   ),
   q8 = list(
-    answer = "Increase in administrative expenses",
-    explanation = "Increases in expected expenses can raise fulfilment cash flows, potentially making the group onerous."
+    answer = "Over time, insurance services are provided",
+    explanation = "The Loss Component is released gradually over the coverage period as the insurer provides services."
   ),
   q9 = list(
-    answer = "It replaces CSM in revenue recognition",
-    explanation = "For onerous groups, the loss component replaces the CSM and is released as insurance revenue as coverage is provided."
+    answer = "The CSM cannot increase until the Loss Component is fully reversed",
+    explanation = "IFRS 17 prohibits increases in CSM while any Loss Component remains, ensuring losses are fully unwound first."
   ),
   q10 = list(
-    answer = "Adverse claims development",
-    explanation = "Any adverse change in fulfilment cash flows increases the loss component."
+    answer = "To evaluate if expected insurance expenses exceed insurance revenue",
+    explanation = "A combined ratio above 100% indicates expenses exceed revenue, signaling potential onerous contracts."
   )
 )
 
 
+# This is the server logic for the IFRS 17 Module 8
+# It handles the quiz submission, scoring, and feedback display.
 IFRS17Module8Server <- (function(id, user_data) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
