@@ -19,275 +19,213 @@ tagList(
   logo_bar,
     div(
       class = "section-header",
-      h2("📘 Module 9: Premium Allocation Approach", class = "section-title-top")
+      h2("📘 Module 9: Premium Allocation Approach", class = "section-title-top"),
+      h3(icon("info-circle"), "Module Objective", class = "section-subheading"),
+      p("This module provides a comprehensive overview of the Premium Allocation Approach (PAA) as per IFRS 17 paragraphs 53 to 59."),
+      p("The Premium Allocation Approach (PAA) is a simplified method for measuring insurance contract liabilities under IFRS 17."),
+      p("It is primarily applied to short-term contracts—usually those with coverage periods of 12 months or less—such as motor, travel, health, and various general insurance policies."),
+      p("Conceptually, the PAA resembles the unearned premium reserve (UPR) approach previously used under IFRS 4."),
+      p("Contracts must initially be grouped into portfolios that share similar risk characteristics and are managed under the same strategy. Each portfolio is then classified into the following categories:"),
+      tags$ul(
+        tags$li("Onerous at inception"),
+        tags$li("No significant risk of becoming onerous"),
+        tags$li("Profitable contracts")
+      ),
+      p("Contracts issued more than 12 months apart cannot be grouped together.")
     ),
+
     div(class = "module-section",  
-        h3("📖 Introduction"),
-        p("This module provides an in-depth overview of the Premium Allocation Approach (PAA) as per IFRS 17 paragraphs 53 to 59."),
-        p("The Premium Allocation Approach (PAA) is a simplified measurement model for insurance contract liabilities under IFRS 17."),
-        p("It is typically used for short-duration contracts (generally 12 months or less) such as motor, travel, health, and other general insurance products.")
-     ),
-    div(class = "module-section",  
-        p("PAA is similar in concept to the unearned premium reserve (UPR) approach under IFRS 4."),
-        p("Contracts must be grouped into portfolios with similar risk and management practices"),
-        p("Then further split into:"),
-        tags$ol(
-            type = "a",
-            tags$li("Onerous at inception"),
-            tags$li("No significant risk of becoming onerous"),
-            tags$li("Profitable contracts")
-        ),
-        p("Contracts issued more than 12 months apart cannot be grouped together.")        
+      h3("Eligibility Criteria", class = "section-subtitle"),
+      p("According to the standard, PAA can be applied if either of the following conditions is met:"),
+      tags$ol(
+        tags$li("If the coverage period for each contract within the group is no longer than one year; or"),
+        tags$li("If the entity reasonably expects that applying the PAA would result in a measurement of the liability for remaining coverage (LRC) that is not materially different from that produced by the General Measurement Model (GMM).")
+      ),
+      img(src = "images/paaImage.png", class = "module-image")
      ),
 
-    div(class = "module-section",
-        h3("📋 Eligibility Criteria"),
-        p("According to the standard, PAA can be applied under these two conditions:"),
-        tags$ol(
-            type = "a",
-            tags$li("If the coverage period of each contract in the group is one year or less, or"),
-            tags$li("If the entity reasonably expects that using the PAA would produce a measurement of the liability for remaining coverage (LRC) that does not differ materially from the General Measurement Model (GMM).")
+      div(
+        h3("Measurement Under PAA", class = "section-subtitle"),
+        p("There are two primary components of liability to consider:"),
+        
+        tags$strong("A. Liability for Remaining Coverage (LRC)"),
+        p("This reflects the portion of premiums that pertains to future periods of coverage, adjusted for acquisition costs."),
+        tags$ol(type = "a",
+          tags$li("Opening LRC balance: The starting balance at the beginning of the period."),
+          tags$li("Add: Premium Received: Additional premiums collected during the period."),
+          tags$li("Less: Amortization of insurance time value of money and financial risks: Amortized acquisition costs deducted."),
+          tags$li("Less: Insurance Revenue: Revenue recognized over time as insurance services are provided.")
         ),
-        img(src = "images/paaImage.png", class = "module-image")
+        p("**LRC formula:**  
+          LRC = Opening LRC + Premium received – Earned Premium – Change in Deferred Acquisition Costs (DAC)"),
+        p("**Where Premium received =** Gross Written Premium (GWP) + Prior premium receivables – Current premium receivables."),
+        
+        tags$strong("B. Liability for Incurred Claims (LIC)"),
+        p("This is measured in a manner similar to the General Measurement Model (GMM):"),
+        tags$ol(type = "a",
+          tags$li("Present value of future cash flows"),
+          tags$li("Risk adjustment for non-financial risk")
+        )
+      ),
+
+
+      div(
+        h3("Treatment of Acquisition Cash Flows", class = "section-subtitle"),
+        p("Entities have the option to either expense acquisition costs immediately when the coverage period is one year or less, or to defer and amortize these costs over the coverage period if it exceeds one year."),
+        p("Deferring acquisition costs reduces the Liability for Remaining Coverage (LRC), but this may lead to a higher recognition of losses for onerous contracts."),
+        
+        h3("Discounting and Risk Adjustment", class = "section-subsubtitle"),
+        p("Discounting of the LRC is not required unless there is a significant delay between receipt of premiums and the provision of insurance services."),
+        p("Risk adjustment applies solely to the Liability for Incurred Claims (LIC) and not to the LRC."),
+        
+        h3("Onerous Contracts", class = "section-subsubtitle"),
+        p("Even under PAA, entities must assess whether contracts are onerous at initial recognition or subsequently."),
+        p("If a contract is deemed onerous, a loss component must be recognized immediately in profit or loss."),
+        
+        h3("Revenue Recognition", class = "section-subsubtitle"),
+        p("Revenue is recognized over the coverage period in line with the pattern of service delivery, typically on a straight-line basis.")
+      ),
+
+
+
+    div(class = "module-section",
+        h3("📋 Comparison of PAA and GMM", class = "section-subsubtitle"),
+        img(src = "images/paaTable.png", class = "module-image")
     ),
   
-    div(class = "module-section",
-        h3("📐 Measurement Under PAA"),
-        p("There are two components:"),
-        
-        tags$ol(
-            # 1. Liability for Remaining Coverage
-            tags$li(
-                strong("Liability for Remaining Coverage (LRC)"),
-                tags$ol(
-                    type = "a",
-                    tags$li("Opening LRC balance: Starting point for the period."),
-                    tags$li("Add: Premium Received – Additional premiums collected during the period."),
-                    tags$li("Less: Amortization of Insurance Time value of money and financial risks: Amortized acquisition costs deducted."),
-                    tags$li("Less: Insurance Revenue – Revenue recognized over time as insurance services are provided.")
-                ),
-                tags$ul(
-                    tags$li("LRC = Opening LRC + Premium received – Earned Premium – Change in DAC"),
-                    tags$li("Premium received = GWP + Prior premium receivables – Current premium receivables")
-                )
-            ),
-            
-            # 2. Liability for Incurred Claims
-            tags$li(
-                strong("Liability for Incurred Claims (LIC)"),
-                tags$ol(
-                    type = "a",
-                    tags$li("Measured similarly to GMM:"),
-                    tags$ul(
-                        tags$li("Present value of future cash flows"),
-                        tags$li("Risk adjustment for non-financial risk")
-                    )
-                )
-            )
-        )
-    ),
-
-    div(class = "module-section",
-        h3("💰 Acquisition Cashflow Treatment"),
-        p("Entities can choose to ",
-          tags$a(href = "#", "expense"), 
-          " acquisition costs immediately if the coverage period of contracts is one year or less."),
-        p("Otherwise, acquisition costs can be deferred and amortized over the coverage period."),
-        p("Deferring acquisition costs reduces LRC but may increase loss recognition for onerous contracts.")
-    ),
-
-    div(class = "module-section",
-        h3("📉 Discounting and Risk Adjustment"),
-        p("Discounting of LRC is not required unless there is a significant time lag between receiving the premium and providing services."),
-        p("Risk adjustment is only applicable to the liability for claims incurred, not LRC.")
-    ),
-
-    div(class = "module-section",
-        h3("⚠️ Onerous Contracts"),
-        p("Even under PAA, entities must assess whether contracts are onerous at initial recognition or subsequently."),
-        p("If onerous, a loss component must be recognized immediately in P&L.")
-    ),
-
-    div(class = "module-section",
-        h3("💵 Revenue Recognition"),
-        p("Revenue is recognized over the coverage period in line with the pattern of transfer of services (typically straight-line).")
-    ),
-
-    div(class = "module-section",
-        h3("⚖️ Comparison of PAA and GMM"),
-        tags$div(class = "table-responsive",
-        tags$table(class = "comparison-table",
-            tags$thead(
-                tags$tr(
-                    tags$th("Feature"),
-                    tags$th("PAA"),
-                    tags$th("GMM")
-                )
-            ),
-            tags$tbody(
-                tags$tr(
-                    tags$td("Complexity"),
-                    tags$td("Low"),
-                    tags$td("High")
-                ),
-                tags$tr(
-                    tags$td("Intended for"),
-                    tags$td("Short-term contracts"),
-                    tags$td("All types")
-                ),
-                tags$tr(
-                    tags$td("Discounting"),
-                    tags$td("Usually not required for LRC"),
-                    tags$td("Required")
-                ),
-                tags$tr(
-                    tags$td("Risk Adjustment"),
-                    tags$td("Only for incurred claims"),
-                    tags$td("Required for all liabilities")
-                ),
-                tags$tr(
-                    tags$td("Onerous contract test"),
-                    tags$td("Required"),
-                    tags$td("Required")
-                )
-            )
-        )
+    div(
+      h3("Disclosure Requirements", class = "section-subtitle"),
+      p("IFRS 17 mandates the following disclosures:"),
+      tags$ol(type = "a",
+        tags$li("A transparent presentation of revenue, incurred claims, and movements in insurance liabilities."),
+        tags$li("Disclosure of confidence levels used in measuring liabilities."),
+        tags$li("An option to present changes in discount rates through Other Comprehensive Income (OCI).")
       )
     ),
 
-
-    div(class = "module-section",
-        tags$h4("📑 Disclosure Requirements"),
-        p("IFRS 17 requires:"),
-        tags$ol(
-            type = "a",
-            tags$li("Clear presentation of revenue, incurred claims, and movements in liabilities."),
-            tags$li("Disclosure of confidence levels used in measuring liabilities."),
-            tags$li("OCI option for presenting changes in discount rates.")
-        )
+    div(
+      h3("Practical Application Examples", class = "section-subtitle"),
+      tags$ul(
+        tags$li("Ideal for group life, group credit, and general insurance with short coverage."),
+        tags$li("May also be applied to reinsurance contracts held, provided they meet the same eligibility criteria.")
+      )
     ),
-
-    div(class = "module-section",
-        h3("🧪  Practical Application Examples"),
-        p("Ideal for group life, group credit, and general insurance with short coverage."),
-        p("Can also apply to reinsurance contracts held, provided the same eligibility rules are met.")
-    ),
-
 
     div(class = "module-section",
         h3("📝 Quiz: Answer the following questions to test your understanding of Premium Allocation Approach."),
     ),
 
 
-      box(
-        title = "1. When is an entity allowed to apply the Premium Allocation Approach (PAA)?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q1"), label = NULL, choices = c(
-          "Only for life insurance contracts",
-          "For all investment contracts",
-          "If the contract duration is ≤12 months or if results are similar to GMM",
-          "For contracts with no risk adjustment"
-        ), selected = character(0))
-      ),
+    # Quiz Boxes for Module 9
+    box(
+      title = "1. Under the PAA, which of the following components is NOT included when calculating the Liability for Remaining Coverage (LRC)?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q1"), label = NULL, choices = c(
+        "Opening LRC balance",
+        "Risk adjustment for non-financial risk",
+        "Premiums received",
+        "Insurance revenue recognized"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "2. What does the liability for remaining coverage (LRC) under PAA represent?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q2"), label = NULL, choices = c(
-          "Future claims paid",
-          "Present value of premiums",
-          "The unearned portion of premiums minus acquisition costs",
-          "Incurred claims"
-        ), selected = character(0))
-      ),
+    box(
+      title = "2. Which contracts are generally suitable for the application of PAA?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q2"), label = NULL, choices = c(
+        "Contracts with coverage period exceeding 5 years",
+        "Long-term life insurance contracts",
+        "Short-duration contracts such as travel insurance",
+        "Investment contracts without discretionary participation features"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "3. Which of the following requires risk adjustment under PAA?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q3"), label = NULL, choices = c(
-          "Liability for incurred claims",
-          "Acquisition cost asset",
-          "Liability for remaining coverage",
-          "Premium receivable"
-        ), selected = character(0))
-      ),
+    box(
+      title = "3. What happens if the PAA measurement materially differs from the General Measurement Model (GMM) and the coverage period exceeds 12 months?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q3"), label = NULL, choices = c(
+        "The entity must use GMM",
+        "PAA remains applicable",
+        "Only LIC is adjusted",
+        "Deferred costs are written off"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "4. What happens if the liability for remaining coverage is lower than fulfilment cash flows?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q4"), label = NULL, choices = c(
-          "Create a contractual service margin",
-          "Defer acquisition costs",
-          "Recognize a loss",
-          "Discount more"
-        ), selected = character(0))
-      ),
+    box(
+      title = "4. When discounting the LRC under PAA, what is the determining factor for applying discounting?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q4"), label = NULL, choices = c(
+        "If the contract is life insurance",
+        "If there is a significant financing component",
+        "If reinsurance contracts are involved",
+        "If premiums are received quarterly"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "5. What are fulfilment cash flows made up of?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q5"), label = NULL, choices = c(
-          "Future premiums only",
-          "Future claims and profits",
-          "Expected future inflows and outflows, discounted, plus risk adjustment",
-          "Written premium minus expenses"
-        ), selected = character(0))
-      ),
+    box(
+      title = "5. Acquisition costs under PAA can be treated in what way for contracts of less than 12 months coverage?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q5"), label = NULL, choices = c(
+        "Must always be deferred",
+        "Can be expensed immediately",
+        "Must be capitalized over 5 years",
+        "Must be refunded to the policyholder"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "6. How is insurance revenue recognized under PAA?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q6"), label = NULL, choices = c(
-          "All at inception",
-          "When claims are paid",
-          "Evenly over the coverage period",
-          "At contract expiry"
-        ), selected = character(0))
-      ),
+    box(
+      title = "6. In measuring Liability for Incurred Claims (LIC) under PAA, what adjustments are included?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q6"), label = NULL, choices = c(
+        "Only expected claims without risk adjustment",
+        "Expected claims discounted with risk adjustment",
+        "Future premiums and claims without discounting",
+        "Only acquisition costs"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "7. Can insurers offset profitable and onerous contracts within a portfolio under PAA?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q7"), label = NULL, choices = c(
-          "No, grouping rules prevent offsetting",
-          "Only with auditor approval",
-          "Yes",
-          "Only for reinsurance"
-        ), selected = character(0))
-      ),
+    box(
+      title = "7. Which is NOT a required disclosure under IFRS 17 for entities using PAA?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q7"), label = NULL, choices = c(
+        "Revenue recognized",
+        "Confidence level of risk adjustment",
+        "Discount rate changes in OCI (if applicable)",
+        "Fair value of investment properties"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "8. What is a key disclosure requirement under IFRS 17 even when using PAA?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q8"), label = NULL, choices = c(
-          "No disclosure required",
-          "Confidence level of liabilities",
-          "Market value of assets",
-          "Tax provision for each contract"
-        ), selected = character(0))
-      ),
+    box(
+      title = "8. How are contracts grouped under PAA for measurement purposes?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q8"), label = NULL, choices = c(
+        "Based on customer demographics",
+        "According to similar risk characteristics and management practices",
+        "By geographical region only",
+        "By policyholder nationality"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "9. Can PAA be used for reinsurance contracts held?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q9"), label = NULL, choices = c(
-          "Yes, if eligibility criteria are met",
-          "No, PAA is only for direct contracts",
-          "Yes, but only in life insurance",
-          "Only if premiums exceed claims"
-        ), selected = character(0))
-      ),
+    box(
+      title = "9. When assessing onerous contracts under PAA, which of the following is TRUE?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q9"), label = NULL, choices = c(
+        "The assessment is not required under PAA",
+        "The test must be done both at inception and subsequently",
+        "Onerous contracts can be offset by profitable ones",
+        "Only required if acquisition costs are high"
+      ), selected = character(0))
+    ),
 
-      box(
-        title = "10. What happens when acquisition costs are deferred for an onerous group?",
-        status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-        radioButtons(ns("q10"), label = NULL, choices = c(
-          "The loss reduces",
-          "It offsets the fulfilment cash flows",
-          "It increases the recognized loss",
-          "It increases future profits"
-        ), selected = character(0))
-      ),
+    box(
+      title = "10. Which of the following best describes the 'Fulfilment Cash Flows' under IFRS 17?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
+      radioButtons(ns("q10"), label = NULL, choices = c(
+        "Past incurred claims",
+        "Future expected cash inflows and outflows, discounted and adjusted for risk",
+        "Only the expected claims amount",
+        "Premiums received but not yet earned"
+      ), selected = character(0))
+    ),
     
 
       actionButton(ns("submit"), "Submit Quiz", icon = icon("check"), class = "btn-primary control-button-submit" ),
@@ -306,48 +244,50 @@ tagList(
     )
 }
 
-  correct_answers_module9 <- list(
-    q1 = list(
-      answer = "If the contract duration is ≤12 months or if results are similar to GMM",
-      explanation = "PAA can be used if the coverage period is 12 months or less, or if using PAA would yield results that are not materially different from the General Measurement Model (GMM)."
-    ),
-    q2 = list(
-      answer = "The unearned portion of premiums minus acquisition costs",
-      explanation = "LRC under PAA reflects the simplified unearned premium approach, adjusted for amortized acquisition costs."
-    ),
-    q3 = list(
-      answer = "Liability for incurred claims",
-      explanation = "The risk adjustment under PAA is only applied to the liability for incurred claims, to account for uncertainty in non-financial risk."
-    ),
-    q4 = list(
-      answer = "Recognize a loss",
-      explanation = "If fulfilment cash flows exceed the liability for remaining coverage, the contract is deemed onerous and the excess must be recognized as a loss."
-    ),
-    q5 = list(
-      answer = "Expected future inflows and outflows, discounted, plus risk adjustment",
-      explanation = "Fulfilment cash flows under IFRS 17 reflect the present value of expected future inflows and outflows, with a risk adjustment for non-financial risk."
-    ),
-    q6 = list(
-      answer = "Evenly over the coverage period",
-      explanation = "Under PAA, revenue is recognized as insurance services are provided, typically on a straight-line basis over the coverage period."
-    ),
-    q7 = list(
-      answer = "No, grouping rules prevent offsetting",
-      explanation = "IFRS 17 requires separate grouping of onerous and profitable contracts; losses cannot be offset by profitable ones."
-    ),
-    q8 = list(
-      answer = "Confidence level of liabilities",
-      explanation = "Disclosure of the confidence level used to determine the risk adjustment is required, even under the simplified PAA model."
-    ),
-    q9 = list(
-      answer = "Yes, if eligibility criteria are met",
-      explanation = "PAA can be applied to reinsurance contracts held if the contract meets the same criteria as direct contracts."
-    ),
-    q10 = list(
-      answer = "It increases the recognized loss",
-      explanation = "Deferring acquisition costs reduces the LRC, which may increase the difference from fulfilment cash flows, leading to a higher recognized loss."
-    )
+# Correct answers and explanations for Module 9
+correct_answers_module9 <- list(
+  q1 = list(
+    answer      = "Risk adjustment for non-financial risk",
+    explanation = "Under PAA, risk adjustment applies only to the Liability for Incurred Claims (LIC), not to the Liability for Remaining Coverage (LRC)."
+  ),
+  q2 = list(
+    answer      = "Short-duration contracts such as travel insurance",
+    explanation = "The PAA is designed for short-duration insurance contracts, typically 12 months or less (e.g. motor, travel, health)."
+  ),
+  q3 = list(
+    answer      = "The entity must use GMM",
+    explanation = "If PAA measurement materially differs from GMM for contracts longer than 12 months, the General Measurement Model must be used."
+  ),
+  q4 = list(
+    answer      = "If there is a significant financing component",
+    explanation = "Discounting of the LRC is required only when there is a significant financing component (i.e. material time difference between premium receipt and service delivery)."
+  ),
+  q5 = list(
+    answer      = "Can be expensed immediately",
+    explanation = "For contracts with coverage of one year or less, acquisition costs may be expensed immediately or deferred at the insurer’s discretion."
+  ),
+  q6 = list(
+    answer      = "Expected claims discounted with risk adjustment",
+    explanation = "LIC under PAA includes the present value of expected future cash flows plus a risk adjustment for non-financial risk."
+  ),
+  q7 = list(
+    answer      = "Fair value of investment properties",
+    explanation = "IFRS 17 disclosures focus on insurance liabilities; it does not require disclosure of investment property fair values in the context of PAA."
+  ),
+  q8 = list(
+    answer      = "According to similar risk characteristics and management practices",
+    explanation = "Contracts must be grouped into portfolios based on similar risk characteristics and managed under the same strategy."
+  ),
+  q9 = list(
+    answer      = "The test must be done both at inception and subsequently",
+    explanation = "IFRS 17 requires entities to assess whether contracts are onerous both at initial recognition and on an ongoing basis."
+  ),
+  q10 = list(
+    answer      = "Future expected cash inflows and outflows, discounted and adjusted for risk",
+    explanation = "Fulfilment Cash Flows include future cash flows (inflows and outflows) discounted to present value and adjusted for non-financial risk."
   )
+)
+
 
 
 IFRS17Module9Server <- (function(id, user_data) {
