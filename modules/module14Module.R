@@ -22,11 +22,11 @@ tagList(
       h2("📘 Module 14: Insurance Service Result", class = "section-title-top")
     ),
     div(class = "module-section",
-        h3("📖 Introduction"),
-        p("This module provides an overview of insurance service result as defined under IFRS 17 paragraphs 83 to 86.")    
+        h3("📖 Module Objective", class = "section-subtitle"),
+        p("This module outlines the components and treatment of the insurance service result as specified in IFRS 17 paragraphs 83 to 86.")    
     ),  
     div(class = "module-section",
-      h3("📊 Presentation in the Statement of Financial Performance"),
+      h3("📊 Presentation in the Statement of Financial Performance", class = "section-subtitle"),
       p("As per the standard, insurance companies shall disaggregate (split) their financial results into two main categories parts:"),
       tags$ol(type = "a",
         tags$li("Insurance Service Result"),
@@ -54,7 +54,7 @@ tagList(
 
 
     div(class = "module-section",
-      h3("📊 Option 1"),
+      h3("📊 Option 1", class = "section-subtitle"),
       div(class = "table-responsive",
         tags$table(class = "income-statement-table",
           tags$thead(
@@ -78,7 +78,7 @@ tagList(
 
 
     div(class = "module-section",
-      h3("📊 Option 2"),
+      h3("📊 Option 2", class = "section-subtitle"),
       div(class = "table-responsive",
         tags$table(class = "income-statement-table",
           tags$thead(
@@ -141,123 +141,123 @@ tagList(
     ),
 
     box(
-      title = "1. What are the two main components an entity must disaggregate in the statement of financial performance?",
+      title = "1. What is the primary objective of separating the Insurance Service Result from Insurance Finance Income or Expenses under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
-        "Revenue and Expenses",
-        "Insurance Profit and Investment Return",
-        "Earned Premium and Unearned Premium",
-        "Insurance Service Result and Insurance Finance Income or Expenses"
+        "To complicate financial reporting for insurers.",
+        "To align with previous accounting standards.",
+        "To provide a clearer and more transparent view of an insurer's operational performance versus financial market impacts.",
+        "To reduce the overall profit reported by insurers."
       ), selected = character(0))
     ),
 
     box(
-      title = "2. Which of the following is included in the insurance service result?",
+      title = "2. Which of the following components is NOT generally included in Insurance Service Revenue under the General Measurement Model (GMM)?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
-        "Change in risk adjustment for non-financial risk",
-        "Insurance revenue and insurance service expenses",
-        "Investment income",
-        "Premium refunds"
+        "Expected claims and expenses for the coverage provided in the period",
+        "Release of the contractual service margin",
+        "Investment components that do not transfer significant insurance risk",
+        "Recovery of insurance acquisition cash flows"
       ), selected = character(0))
     ),
 
     box(
-      title = "3. How should an entity present income or expenses from reinsurance contracts held?",
+      title = "3. How should reinsurance contracts held be presented in the financial statements?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
-        "Separately from insurance contracts issued",
         "Together with insurance contracts issued",
+        "Separately from insurance contracts issued",
         "Only in other comprehensive income",
         "As a deferred liability"
       ), selected = character(0))
     ),
 
     box(
-      title = "4. What should insurance revenue reflect?",
+      title = "4. Under IFRS 17, the Insurance Service Result represents?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
-        "Premiums received",
-        "Claims paid",
-        "The consideration expected in exchange for coverage and services",
-        "Cash flow timing"
+        "The total investment return of the insurance company",
+        "The difference between premiums received and claims paid",
+        "The finance income from investment contracts",
+        "The operational profit from insurance services"
       ), selected = character(0))
     ),
 
     box(
-      title = "5. Which of the following is NOT included in insurance service expenses?",
+      title = "5. Insurance Service Expenses include which of the following?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
-        "Incurred claims",
-        "Investment components",
-        "Other incurred insurance service expenses",
-        "Amounts in paragraph 103(b)"
+        "Investment income",
+        "Incurred claims and changes in fulfilment cash flows",
+        "Premiums received from policyholders",
+        "Recovered amounts from reinsurers"
       ), selected = character(0))
     ),
 
     box(
-      title = "6. When disaggregating the change in the risk adjustment for non-financial risk, what is required?",
+      title = "6. When an entity does not disaggregate the change in risk adjustment, how is it treated?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
-        "Mandatory allocation between finance and service result",
-        "No allocation is permitted",
-        "Optional disaggregation; otherwise, include fully in the insurance service result",
-        "Include entirely in finance income"
+        "Entire amount is included in the insurance service result",
+        "Must be split between finance and service result",
+        "Cannot be included in any result",
+        "Classified under insurance finance income"
       ), selected = character(0))
     ),
 
     box(
-      title = "7. Which component may NOT be presented in profit or loss?",
+      title = "7. Which of the following may not be reported in profit or loss if inconsistent with IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
-        "Premium information inconsistent with Paragraph 83",
-        "Insurance service expenses",
-        "Reinsurance income",
-        "Risk adjustment"
+        "Income from reinsurance contracts",
+        "Risk adjustments",
+        "Premium details not aligned with Paragraph 83",
+        "Insurance service expenses"
       ), selected = character(0))
     ),
 
     box(
-      title = "8. What options does an entity have for presenting reinsurance contracts held?",
+      title = "8. How can entities present reinsurance contracts held in the financial statements?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
-        "Only as a single net amount",
-        "Only as individual line items",
-        "Either as a net amount or split into recovered amounts and premium allocations",
-        "As part of investment income"
+        "Either as a net total or split into recoveries and premium allocations",
+        "As part of investment income",
+        "Only as a single combined amount",
+        "Only as separate line items"
       ), selected = character(0))
     ),
 
     box(
-      title = "9. Under the Premium Allocation Approach (PAA), what is insurance revenue generally similar to?",
+      title = "9. When using the Premium Allocation Approach (PAA), Insurance service revenue is often similar to?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
-        "Earned premium",
+        "Contractual Service Margin release",
         "Written premium",
         "Total premiums received",
-        "Premium receivable"
+        "Earned premium over the coverage period"
       ), selected = character(0))
     ),
 
     box(
-      title = "10. Under the General Measurement Model (GMM), which of the following is NOT part of insurance service revenue?",
+      title = "10. If a group of insurance contracts transitions from profitable to onerous, how is the loss recognized in the Insurance Service Result under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
-        "Release of the Contractual Service Margin (CSM)",
-        "Investment returns",
-        "Risk adjustment for non-financial risk",
-        "Recovery of acquisition cash flows"
+        "The entire expected loss is deferred and recognized over the remaining contract period",
+        "The loss is recognized immediately in the Insurance Service Expenses in the period the contracts become onerous",
+        "The loss is added to the Contractual Service Margin",
+        "The loss is presented in Other Comprehensive Income (OCI)"
       ), selected = character(0))
     ),
 
     box(
-      title = "11. What are “losses on onerous contracts” classified as under IFRS 17?",
+      title = "11. Losses on onerous groups of contracts and reversals of such losses are components of Insurance Service Expenses related to?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL, choices = c(
-        "Investment finance expenses",
-        "Deferred income",
-        "Premium liability",
-        "Insurance service expenses"
+        "Incurred claims",
+        "Amortization of acquisition cash flows",
+        "Risk adjustment",
+        "Future service"
       ), selected = character(0))
     ),
 
@@ -273,18 +273,18 @@ tagList(
     ),
 
     box(
-      title = "13. What is the treatment of reinsurance-related cash flows contingent on claims?",
+      title = "13. What does “operational profit” in the context of Insurance Service Result refer to?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q13"), label = NULL, choices = c(
-        "Deferred revenue",
-        "Presented as part of claims recoverable",
-        "Included in insurance finance income",
-        "Excluded from the financial statements"
+        "Profit generated from selling investment products",
+        "Profit derived directly from the core business of providing insurance coverage",
+        "Profit before deducting any financial expenses",
+        "Profit from non-insurance-related activities"
       ), selected = character(0))
     ),
 
     box(
-      title = "14. What is the effect of the reversal of losses on onerous contracts?",
+      title = "14. If an entity reverses a previous loss on onerous contracts, which impact will this have?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q14"), label = NULL, choices = c(
         "Increase in insurance finance income",
@@ -312,62 +312,62 @@ tagList(
     )
 }
 
-correct_answers_module14 <- list( 
+correct_answers_module14 <- list(
   q1 = list(
-    answer = "Insurance Service Result and Insurance Finance Income or Expenses",
-    explanation = "IFRS 17 requires disaggregation into Insurance Service Result and Insurance Finance Income or Expenses in the statement of financial performance."
+    answer = "To provide a clearer and more transparent view of an insurer's operational performance versus financial market impacts.",
+    explanation = "IFRS 17 aims for enhanced transparency by separating core underwriting profit (Insurance Service Result) from finance impacts (Paragraph 83)."
   ),
   q2 = list(
-    answer = "Insurance revenue and insurance service expenses",
-    explanation = "The insurance service result comprises insurance revenue and insurance service expenses (Paragraph 83)."
+    answer = "Investment components that do not transfer significant insurance risk",
+    explanation = "IFRS 17 states that insurance revenue shall exclude any investment components (Paragraph 84)."
   ),
   q3 = list(
     answer = "Separately from insurance contracts issued",
-    explanation = "Reinsurance contract results must be presented separately from insurance contracts issued (Paragraph 85)."
+    explanation = "Reinsurance contracts held must be presented separately from insurance contracts issued (Paragraph 85)."
   ),
   q4 = list(
-    answer = "The consideration expected in exchange for coverage and services",
-    explanation = "Insurance revenue should depict the consideration to which the entity expects to be entitled for providing insurance coverage and services (Paragraph 83)."
+    answer = "The operational profit from insurance services",
+    explanation = "Insurance Service Result equals Insurance Service Revenue minus Insurance Service Expenses—i.e., operational profit (Paragraph 83)."
   ),
   q5 = list(
-    answer = "Investment components",
-    explanation = "Insurance service expenses exclude investment components (Paragraph 84)."
+    answer = "Incurred claims and changes in fulfilment cash flows",
+    explanation = "Insurance Service Expenses include incurred claims, amortization of acquisition costs, and changes in fulfilment cash flows (Paragraph 84)."
   ),
   q6 = list(
-    answer = "Optional disaggregation; otherwise, include fully in the insurance service result",
-    explanation = "If not disaggregated, the entire change is included in the insurance service result (Paragraph 82)."
+    answer = "Entire amount is included in the insurance service result",
+    explanation = "If risk adjustment changes are not disaggregated, the full amount is recognized in the Insurance Service Result (Paragraph 82)."
   ),
   q7 = list(
-    answer = "Premium information inconsistent with Paragraph 83",
-    explanation = "Premium information should not be presented if inconsistent with how revenue is defined under Paragraph 83."
+    answer = "Premium details not aligned with Paragraph 83",
+    explanation = "Premature or inconsistent premium disclosures are not allowed in profit or loss (Paragraph 83)."
   ),
   q8 = list(
-    answer = "Either as a net amount or split into recovered amounts and premium allocations",
-    explanation = "The entity may present a net amount or separate amounts (recoveries and premium allocations) as long as they total the same net amount."
+    answer = "Either as a net total or split into recoveries and premium allocations",
+    explanation = "Entities may present reinsurance held either net or disaggregated, provided they reconcile (Paragraph 85)."
   ),
   q9 = list(
-    answer = "Earned premium",
-    explanation = "Under PAA, insurance revenue is generally similar to earned premium over the coverage period."
+    answer = "Earned premium over the coverage period",
+    explanation = "Under the PAA, Insurance Service Revenue is generally similar to earned premium (Paragraph 74)."
   ),
   q10 = list(
-    answer = "Investment returns",
-    explanation = "Investment returns are excluded; insurance service revenue includes claims, risk adjustment, CSM release, and acquisition cost recovery."
+    answer = "The loss is recognized immediately in the Insurance Service Expenses in the period the contracts become onerous",
+    explanation = "Onerous losses must be recognized immediately to avoid deferring expected losses (Paragraph 79)."
   ),
   q11 = list(
-    answer = "Insurance service expenses",
-    explanation = "Losses on onerous contracts are part of insurance service expenses as they relate to future service obligations."
+    answer = "Future service",
+    explanation = "Losses on onerous contracts relate to future service obligations and form part of Insurance Service Expenses (Paragraph 84)."
   ),
   q12 = list(
     answer = "Enhanced transparency and comparability",
-    explanation = "IFRS 17 aims to enhance transparency and comparability by clearly separating insurance services from financial effects."
+    explanation = "Separating service and finance results improves comparability across insurers (Objective of IFRS 17)."
   ),
   q13 = list(
-    answer = "Presented as part of claims recoverable",
-    explanation = "Per paragraph 86(a), such cash flows are part of the expected claims to be reimbursed under the reinsurance contract."
+    answer = "Profit derived directly from the core business of providing insurance coverage",
+    explanation = "‘Operational profit’ refers to profit from the primary activity of underwriting, i.e., Insurance Service Result."
   ),
   q14 = list(
     answer = "Decrease in liabilities and increase in insurance service result",
-    explanation = "A reversal of losses on onerous contracts reduces liabilities and increases the insurance service result (Paragraph 84(c))."
+    explanation = "Reversing an onerous loss reduces liabilities and boosts the Insurance Service Result (Paragraph 84(c))."
   )
 )
 
