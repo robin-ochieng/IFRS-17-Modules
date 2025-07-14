@@ -23,59 +23,57 @@ tagList(
     ),
 
     div(class = "module-section",
-        h3("📖 Introduction"),
-        p("This module provides an in-depth overview of the modification and derecognition requirements for insurance contracts, as set out in paragraphs 72–77 of IFRS 17."),
-        p("Modification is a change in the terms of an insurance contract after it has been initially recognized. These changes may result from mutual agreement between the insurer and policyholder, or as a result of changes in regulation.")
-    ),  
+        h3("📖 Introduction", class = "section-subtitle"),
+        p("This module provides a **detailed overview of the requirements for modifying and derecognizing insurance contracts**, as per IFRS 17 (paragraphs 72–77)."),
+        p("Modification refers to a change in the contractual terms of an insurance contract after it has been initially recognized. Such changes may result either from a mutual agreement between the insurer and the policyholder or as a result of changes in regulation.")
+    ),
 
 
     div(class = "module-section",
-        h3("📉 When a Contract is Derecognized"),
-        p("Under IFRS 17, an insurer must ", strong("derecognize the original contract and recognize a new one"), " if and only if:"),
+        h3("🔄 When a Contract is Derecognized", class = "section-subtitle"),
+        p("According to IFRS 17, an insurance contract must be derecognized and replaced with a new contract only if one or more of the following conditions are met:"),
         tags$ol(type = "a",
-          tags$li("Modification terms were included at inception."),
-          tags$li("The contract is no longer within IFRS 17 scope."),
-          tags$li("The contract boundary changes significantly."),
-          tags$li("The contract moves to a different group (e.g., new cohort or portfolio, or becomes onerous)."),
-          tags$li("The modified contract now includes distinct non-insurance components (e.g., goods/services)."),
-          tags$li("It no longer qualifies for the Premium Allocation Approach (PAA)."),
-          tags$li("It gains or loses direct participation features.")
+          tags$li("The modified contract now contains distinct non-insurance components, such as separate goods or services."),
+          tags$li("The contract is no longer eligible to be measured using the PAA."),
+          tags$li("The contract either acquires or loses the variable fee features."),
+          tags$li("The contract included modification terms when the contract was initially issued."),
+          tags$li("The contract no longer falls within the scope of IFRS 17."),
+          tags$li("There are substantial changes to the contract boundary."),
+          tags$li("The contract must be transferred to a different group —for example, a new cohort, portfolio, or due to it becoming onerous.")
         ),
-        p("If none of the above apply, treat the change as an update to expected cash flows. These changes are accounted for using normal subsequent measurement rules under IFRS 17."),
-        p(strong("A contract is derecognized if:")),
+        p("Changes that do not meet the specified conditions are treated as updates to expected future cash flows and are accounted for in line with IFRS 17 subsequent measurement requirements."),
+        p(strong("When is a contract derecognized?")),
         tags$ol(type = "a",
-          tags$li("The insurer has no further obligation to the policyholder (e.g., it expired, was cancelled or fully settled), or"),
-          tags$li("The modification criteria for derecognition (above) are met.")
+          tags$li("Any of the above derecognition criteria are met; or"),
+          tags$li("The insurer has fully discharged, cancelled, or the obligations to the policyholder have expired; or")
+          # add further criteria here if needed
         )
     ),
 
     div(class = "module-section",
-        h3("💼 Accounting Treatment for Derecognition"),
-
-        tags$ol(type = "a",
-            tags$li(
-                strong("Derecognition of a contract from within a group"),
-                tags$ul(
-                    tags$li("Remove the contract’s share of present value of future cash flows and risk adjustment."),
-                    tags$li("Adjust the Contractual Service Margin (CSM), to reflect the resulting change in fulfilment cash flows, where applicable."),
-                    tags$li("Update the coverage units and profit recognition based on the revised number of units.")
-                )
-            ),
-            tags$li(
-                strong("Derecognition from Modification or Transfer"),
-                tags$ul(
-                    tags$li("Adjust the CSM based on the difference between:"),
-                    tags$ul(
-                        tags$li("The change in carrying amount, and"),
-                        tags$li("The premium charged by a third party (if transferred), or"),
-                        tags$li("The premium the insurer would have charged for the modified contract")
-                    )
-                )
-            )
-        ),
-
+        h3("📋 Accounting Treatment for Derecognition", class = "section-subtitle"),
+        
+        ## a) Derecognition within a Group
+        h4("a) Derecognition of a Contract Within a Group"),
+        p("When a contract is removed from a group (e.g., due to expiry or cancellation), the insurer must:"),
         tags$ul(
-            tags$li("Recognize the new contract as if that calculated premium had been received on the modification date.")
+          tags$li("Eliminate the contract’s portion of the present value of future cash flows and the associated risk adjustment."),
+          tags$li("Recalculate coverage units and revise profit recognized, based on the updated number of contracts in the group."),
+          tags$li("Reflect the change in fulfilment cash flows by updating the Contractual Service Margin (CSM), where applicable.")
+        ),
+        
+        ## b) Derecognition due to Modification or Transfer
+        h4("b) Derecognition Due to Modification or Transfer"),
+        p("If derecognition results from a modification or a transfer to another entity:"),
+        tags$ul(
+          tags$li(strong("The CSM must be updated to reflect the difference between:"), 
+            tags$ul(
+              tags$li("The change in the carrying amount of the contract, and"),
+              tags$li("Either the premium set by a third party (for a transfer), or"),
+              tags$li("The premium the insurer would have required if issuing the modified contract as new.")
+            )
+          ),
+          tags$li("Account for the modified contract as if this premium had been received on the modification date.")
         ),
         img(src = "images/modificationaandDerecognition.png", alt = "Modification and Derecognition", class = "module-image")
     ),
@@ -85,156 +83,112 @@ tagList(
     ),
 
     box(
-      title = "1. When is a contract considered modified under IFRS 17?",
+      title = "1. Under what conditions should a modified insurance contract be derecognized and replaced with a new contract?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
-        "When it is extended",
-        "When contractual cash flows change",
-        "When insurer and policyholder agree on new terms",
-        "When premiums change"
+        "If the policyholder changes their payment frequency",
+        "If there are substantial changes to the contract terms affecting scope, boundary, or group classification",
+        "If the policyholder changes their preferred mode of communication",
+        "If the contract experiences delays in premium payment"
       ), selected = character(0))
     ),
 
     box(
-      title = "2. What is the first step when assessing a contract modification under IFRS 17?",
+      title = "2. What must be done if a modified contract is recognized as a new contract?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
-        "Recognize as new contract",
-        "Adjust the CSM",
-        "Assess whether modification is substantial",
-        "Update the risk adjustment"
+        "Recognize it as if issued on the date of modification",
+        "Use the same measurement model as the old one",
+        "Record a retrospective adjustment",
+        "Keep the original contract in the books"
       ), selected = character(0))
     ),
 
     box(
-      title = "3. If a contract modification results in substantially different terms, what is the accounting treatment?",
+      title = "3. What is the correct accounting treatment when a contract is derecognized due to modification?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
-        "Adjust liability only",
-        "Derecognize old and recognize new contract",
-        "Adjust insurance revenue",
-        "Disclose in notes only"
+        "The existing balances are carried forward to the new contract",
+        "Only the Contractual Service Margin (CSM) is retained",
+        "The original contract balances (CSM, LRC, LIC) are removed and the modified contract is recognized as new",
+        "No changes are made in accounting"
       ), selected = character(0))
     ),
 
     box(
-      title = "4. What is the impact on CSM if a modification is not substantial?",
+      title = "4. What happens if a change in an insurance contract does not meet the derecognition criteria?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
-        "It is reversed",
-        "It is remeasured",
-        "It is released to profit",
-        "It is written off"
+        "The change is ignored for accounting purposes",
+        "The contract is still derecognized as a precaution",
+        "The change is reflected as a change in cash flow estimates",
+        "The insurer must issue a new contract"
       ), selected = character(0))
     ),
 
     box(
-      title = "5. Under IFRS 17, what causes derecognition of an insurance contract?",
+      title = "5. Which of the following changes would NOT trigger derecognition of an insurance contract?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
-        "Claims payment",
-        "Expiry of coverage",
-        "Settlement or cancellation",
-        "Change in accounting policy"
+        "The policyholder switches to a different communication language",
+        "The contract boundary is significantly changed",
+        "The contract is modified to include distinct non-insurance components",
+        "The contract is moved to a different group due to becoming onerous"
       ), selected = character(0))
     ),
 
     box(
-      title = "6. Which of the following changes is considered substantial?",
+      title = "6. Which condition would lead to derecognition of a contract even without modification?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
-        "Adding a new coverage type",
-        "Change in billing address",
-        "Change in payment date",
-        "Update to claims contact"
+        "Policyholder requests fewer policy documents",
+        "Insurer no longer has obligations to the policyholder",
+        "Policyholders update their address",
+        "The insurer upgrades internal systems"
       ), selected = character(0))
     ),
 
     box(
-      title = "7. How is the carrying amount of the derecognized contract treated?",
+      title = "7. What does Paragraph 72 of IFRS 17 NOT include as a reason for derecognition?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
-        "It is capitalized",
-        "It is transferred to reserves",
-        "It is removed from the balance sheet",
-        "It is restated"
+        "Exclusion from IFRS 17 scope",
+        "Change in contract boundary",
+        "Movement to a different group",
+        "Change in payment currency"
       ), selected = character(0))
     ),
 
     box(
-      title = "8. How is a new contract initially recognized?",
+      title = "8. What must an insurer do when removing a contract from a group due to expiry or cancellation?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
-        "Based on old values",
-        "Using fair value",
-        "Using fulfilment cash flows at date of modification",
-        "Not recognized separately"
+        "Recalculate coverage units and revise profit",
+        "Transfer the contract to a suspense account",
+        "Add a new policy to replace it",
+        "Record a gain immediately"
       ), selected = character(0))
     ),
 
     box(
-      title = "9. How are derecognised contracts due to full settlement treated?",
+      title = "9. When derecognizing a contract due to modification, how should the adjustment to the CSM be calculated?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
-        "CSM is amortized",
-        "Recognize gain/loss",
-        "Asset revaluation",
-        "Insurance revenue restated"
+        "Based on the claims already paid",
+        "As the difference between the old carrying amount and the premium for the modified or transferred contract",
+        "Using the historical premium received",
+        "Based on market value of the policy"
       ), selected = character(0))
     ),
 
     box(
-      title = "10. What is the primary difference between substantial and non-substantial modifications?",
+      title = "10. What is the key difference in accounting when a contract modification requires derecognition versus when it does not?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
-        "Impact on reinsurance",
-        "Change in timing of premium",
-        "Need for derecognition",
-        "Claims experience"
-      ), selected = character(0))
-    ),
-
-    box(
-      title = "11. Which of the following is NOT a reason for derecognition?",
-      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-      radioButtons(ns("q11"), label = NULL, choices = c(
-        "Contract lapses",
-        "Contract is modified substantially",
-        "Policy is cancelled",
-        "Policyholder pays premium early"
-      ), selected = character(0))
-    ),
-
-    box(
-      title = "12. What is the derecognition criteria under IFRS 17 for insurance contract liabilities?",
-      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-      radioButtons(ns("q12"), label = NULL, choices = c(
-        "Legal cancellation",
-        "Transfer to another insurer",
-        "Extinguishment of obligation",
-        "Policyholder request"
-      ), selected = character(0))
-    ),
-
-    box(
-      title = "13. What must be disclosed upon derecognition of a contract?",
-      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-      radioButtons(ns("q13"), label = NULL, choices = c(
-        "Nothing",
-        "Reason for derecognition and financial impact",
-        "Transition adjustments",
-        "Future premiums"
-      ), selected = character(0))
-    ),
-
-    box(
-      title = "14. Which modification would not be considered substantial?",
-      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
-      radioButtons(ns("q14"), label = NULL, choices = c(
-        "Adding a new benefit",
-        "Removing a major risk cover",
-        "Changing claim limits significantly",
-        "Changing policyholder address"
+        "The risk adjustment is recalculated in both cases",
+        "The insurer retains the original fulfilment cash flows in both cases",
+        "In derecognition, the original contract is removed; in non-derecognition, only future cash flows are updated",
+        "Both cases require reporting to the insurance supervisor"
       ), selected = character(0))
     ),
 
@@ -256,62 +210,46 @@ tagList(
     )
 }
 
-correct_answers_module12 <- list( 
+correct_answers_module12 <- list(
   q1 = list(
-    answer = "When contractual cash flows change",
-    explanation = "A contract is modified when the terms change in a way that affects fulfilment cash flows, not just administrative details."
+    answer = "If there are substantial changes to the contract terms affecting scope, boundary, or group classification",
+    explanation = "A modified contract must be derecognized and replaced only when changes are substantial under IFRS 17."
   ),
   q2 = list(
-    answer = "Assess whether modification is substantial",
-    explanation = "Before deciding the accounting treatment, the insurer must assess if the modification significantly changes the contract terms."
+    answer = "Recognize it as if issued on the date of modification",
+    explanation = "The new contract is recognized as if issued on the modification date, per IFRS 17 rules."
   ),
   q3 = list(
-    answer = "Derecognize old and recognize new contract",
-    explanation = "If the modification leads to substantially different terms, the original contract is derecognized, and a new one is recognized."
+    answer = "The original contract balances (CSM, LRC, LIC) are removed and the modified contract is recognized as new",
+    explanation = "Upon derecognition due to modification, all original balances are removed and the modified contract is treated as new."
   ),
   q4 = list(
-    answer = "It is remeasured",
-    explanation = "If the modification is not substantial, the Contractual Service Margin (CSM) is adjusted (remeasured) without derecognition."
+    answer = "The change is reflected as a change in cash flow estimates",
+    explanation = "If derecognition criteria are not met, modifications are accounted for as updates to future cash flows."
   ),
   q5 = list(
-    answer = "Settlement or cancellation",
-    explanation = "Derecognition occurs when the insurer’s obligation ends, such as through settlement, cancellation, or expiration."
+    answer = "The policyholder switches to a different communication language",
+    explanation = "Administrative changes like language preference do not trigger derecognition."
   ),
   q6 = list(
-    answer = "Adding a new coverage type",
-    explanation = "Adding a new coverage type alters the risk profile, which is considered a substantial modification under IFRS 17."
+    answer = "Insurer no longer has obligations to the policyholder",
+    explanation = "A contract is derecognized when the insurer’s obligations end, such as upon settlement or expiry."
   ),
   q7 = list(
-    answer = "It is removed from the balance sheet",
-    explanation = "Upon derecognition, the contract liability is derecognized and removed from the statement of financial position."
+    answer = "Change in payment currency",
+    explanation = "IFRS 17 paragraph 72 does not list currency changes as a derecognition criterion."
   ),
   q8 = list(
-    answer = "Using fulfilment cash flows at date of modification",
-    explanation = "The new contract is measured based on fulfilment cash flows as at the modification date."
+    answer = "Recalculate coverage units and revise profit",
+    explanation = "When removing a contract from a group, coverage units and profit recognized must be updated."
   ),
   q9 = list(
-    answer = "Recognize gain/loss",
-    explanation = "Derecognition from full settlement leads to recognizing a gain or loss from the difference in cash flows."
+    answer = "As the difference between the old carrying amount and the premium for the modified or transferred contract",
+    explanation = "CSM adjustments on derecognition are based on the difference between carrying amount and new premium."
   ),
   q10 = list(
-    answer = "Need for derecognition",
-    explanation = "Substantial modifications require derecognition; non-substantial ones do not."
-  ),
-  q11 = list(
-    answer = "Policyholder pays premium early",
-    explanation = "Early premium payment does not end the insurer’s contractual obligation and thus is not a derecognition trigger."
-  ),
-  q12 = list(
-    answer = "Extinguishment of obligation",
-    explanation = "A contract liability is derecognized when the insurer’s obligation to the policyholder is fully extinguished."
-  ),
-  q13 = list(
-    answer = "Reason for derecognition and financial impact",
-    explanation = "IFRS 17 requires disclosure of the reasons for derecognition and its impact on the financial statements."
-  ),
-  q14 = list(
-    answer = "Changing policyholder address",
-    explanation = "Administrative changes like address updates are not substantial modifications affecting the contract terms."
+    answer = "In derecognition, the original contract is removed; in non-derecognition, only future cash flows are updated",
+    explanation = "Substantial modifications lead to removal of the original contract; non-substantial ones only update cash flows."
   )
 )
 
@@ -330,7 +268,7 @@ IFRS17Module12Server <- (function(id, user_data) {
     observeEvent(input$submit, {
         removeModal()
         # 1. List out all your question input IDs
-        question_ids <- paste0("q", 1:14)
+        question_ids <- paste0("q", 1:10)
         
         # 2. Find which ones are missing
         missing <- vapply(question_ids, function(qid) {
@@ -444,7 +382,7 @@ IFRS17Module12Server <- (function(id, user_data) {
       # ========== END PROGRESS SAVING SECTION ========== 
 
 
-    valid_ids <- paste0("q", 1:14)
+    valid_ids <- paste0("q", 1:10)
     feedback <- lapply(valid_ids, function(qid) {
       if (!is.null(feedback[[qid]])) {
         feedback[[qid]]
