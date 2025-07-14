@@ -39,7 +39,6 @@ tagList(
         tags$li(
           strong("Contractual Service Margin (CSM), representing the unearned profit from the contracts.")
         ),
-        ,
       img(src = "images/fulfilmentCashFlows.png", alt = "Fulfilment Cash Flows", class = "module-image")
       )
     ),
@@ -188,7 +187,6 @@ tagList(
         tags$li("The method chosen must be consistent with the entity’s own risk assessment — it should reflect how the entity would internally price and manage non-financial risk.")
       ),
       p("The three most common approaches:"),
-      
       h4("1. Confidence Level Approach (Quantile Method)", class = "section-subtitle"),
       p("Sets the Risk Adjustment based on a selected confidence level — e.g., determining the value of future cash flows such that the entity is 75% or 90% confident it can meet its obligations."),
       
@@ -199,7 +197,6 @@ tagList(
         tags$li("Capital holding period"),
         tags$li("Cost of capital rate (e.g., 6%)")
       ),
-      
       h4("3. Conditional Tail Expectation (CTE)", class = "section-subtitle"),
       p("Also known as Tail Value at Risk, this method looks at the average loss beyond a selected confidence level, capturing extreme outcomes.")
     ),
