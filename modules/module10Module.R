@@ -22,25 +22,25 @@ tagList(
       h2("📘 Module 10: Reinsurance Contracts Held", class = "section-title-top")
     ),
     div(class = "module-section",  
-        h3("📖 Introduction"),
+        h3(icon("info-circle"), "Module Objective", class = "section-subtitle"),
         p("This module provides an in-depth overview of the Reinsurance contracts held as per ", strong("IFRS 17"), " paragraphs 60 to 70."),
         
-        p("Reinsurance contract held refers to a contract under which one entity (the cedant) receives compensation from another entity (the reinsurer) for one or more claims arising from insurance contracts it has issued."),
+        p("A reinsurance contract held refers to an arrangement where one entity (the cedant) receives compensation from another entity (the reinsurer) for one or more claims arising from insurance contracts that the cedant has issued."),
         
-        p("Reinsurance contracts held are measured independently from the underlying insurance contracts issued."),
+        p("Reinsurance contracts held are measured separately from the underlying insurance contracts issued."),
         
-        p("The ", em('"mirroring approach"'), " used under IFRS 4 is no longer applied. Instead, IFRS 17 requires a stand-alone assessment of reinsurance contracts held."),
+        p("The ", em('"mirroring approach"'), " previously applied under IFRS 4 is no longer used. Under IFRS 17, reinsurance contracts held require an independent assessment."),
         
         p("We account for reinsurance contracts held to:"),
         
-        tags$ul(
-            tags$li("a) Reflect the risk mitigation effect in financial statements."),
-            tags$li("b) Show consistent measurement with underlying insurance contracts."),
-            tags$li("c) Recognize gains or losses on risk transfer at initial recognition.")
+        tags$ol(type = "a",
+            tags$li("Reflect the risk mitigation effect in financial statements."),
+            tags$li("Ensure consistent measurement with the related underlying insurance contracts."),
+            tags$li("Recognize gains or losses on risk transfer at initial recognition.")
         )
     ),
     div(class = "module-section",
-        h3("📏 Measurement of Reinsurance Contracts Held"),
+        h3("📏 Measurement of Reinsurance Contracts Held", class = "section-subtitle"),
         
         h4(style = "color: #7BAF34;", "Initial Recognition"),
         
@@ -48,159 +48,161 @@ tagList(
         
         p("The measurement components include:"),
         
-        tags$ul(
-            tags$li("a) Fulfilment cash flows, which are the expected present value of future inflows and outflows related to the reinsurance contract, adjusted for the time value of money and the risk of counterparty default."),
-            tags$li("b) A risk adjustment, which reflects the uncertainty in the amount and timing of the cash flows from the reinsurer."),
-            tags$li("c) A Contractual Service Margin (CSM), which is established if the present value of future inflows from the reinsurer exceeds the ceded premiums. This CSM represents the unearned gain and is deferred and recognized as income over the coverage period."),
-            tags$li("d) Loss-recovery component if the underlying contracts are onerous.")
+        tags$ol(type = "a",
+            tags$li("Fulfilment cash flows, which are the expected present value of future inflows and outflows related to the reinsurance contract, adjusted for the time value of money and the risk of counterparty default."),
+            tags$li("A risk adjustment, which reflects the uncertainty in the amount and timing of the cash flows from the reinsurer."),
+            tags$li("A Contractual Service Margin (CSM), which is recognized if the present value of future inflows from the reinsurer exceeds the ceded premiums. This CSM represents the unearned gain and is deferred and recognized as income over the coverage period."),
+            tags$li("Loss-recovery component if the underlying contracts are onerous.")
         )
     ),
     div(class = "module-section",
-        h4(style = "color: #7BAF34;", "Subsequent Measurement"),
+        h3("Subsequent Measurement", class = "section-subtitle"),
         
-        p("After initial recognition, reinsurance contracts held are remeasured at each reporting date. The measurement continues to follow the GMM (or PAA if applicable), which requires updating the key components which include:"),
+        p("Following initial recognition, reinsurance contracts held are remeasured at each reporting date. The measurement continues to apply the General Measurement Model (GMM), or the Premium Allocation Approach (PAA) where applicable, and requires updates to the following key components:"),
         
-        tags$ul(
-            tags$li("a) Fulfilment cash flows"),
-            tags$li("b) Risk adjustment"),
-            tags$li("c) CSM"),
-            tags$li("d) Loss-recovery component"),
-            tags$li("e) Experience adjustments"),
-            tags$li("f) Changes in discount rates")
+        tags$ol(type = "a",
+            tags$li("Fulfilment cash flows"),
+            tags$li("Risk adjustment"),
+            tags$li("CSM"),
+            tags$li("Loss-recovery component"),
+            tags$li("Experience adjustments"),
+            tags$li("Changes in discount rates")
         ),
         p("If a group of insurance contracts is onerous and there's a related reinsurance contract, the cedant recognizes a recovery asset known as loss-recovery component."),
     ),
     div(class = "module-section",
-        h3("Presentation in Financial Statements"),
+        h3("Presentation in Financial Statements", class = "section-subtitle"),
         p("Assets and liabilities from reinsurance contracts are presented separately from insurance contracts issued."),
-        p("Revenue and expenses from reinsurance are also presented separately in the statement of profit or loss."),
-        p("Income and expenses from reinsurance are shown separately from insurance contracts issued per IFRS 17 disclosure requirements.")
+        p("Similarly, income and expenses related to reinsurance are disclosed separately in the statement of profit or loss."),
+        p("IFRS 17 requires that all income and expenses from reinsurance be distinctly shown apart from insurance contracts issued.")
     ),
+    
     div(class = "module-section",
         h3("Disclosures"),
-        p("Entities must disclose:"),
-        tags$ul(
-            tags$li("a) An explanation of how reinsurance contracts affect the amounts in financial statements"),
-            tags$li("b) Significant judgments made in applying IFRS 17 to reinsurance."),
-            tags$li("c) Reconciliations of opening and closing balances of assets and liabilities.")
+        p("Entities are required to disclose:"),
+        tags$ol(type = "a",
+            tags$li("A description of how reinsurance contracts impact amounts reported in the financial statements."),
+            tags$li("Key judgments made in applying IFRS 17 to reinsurance contracts."),
+            tags$li("Reconciliations of the opening and closing balances of related assets and liabilities.")
         )
     ),
+
     div(class = "module-section",
-        h3("Disclosures"),
+        h3("Illustration of reinsurance contracts held."),
         img(src = "images/reinsuranceContractHeld.png", class = "module-image")
-    ),  
+    ),      
 
     div(class = "module-section",
         h3("📝 Quiz: Answer the following questions to test your understanding of Reinsurance Contracts Held."),
     ),
 
     box(
-      title = "1. What is a reinsurance contract held under IFRS 17?",
+      title = "1. What is the purpose of holding a reinsurance contract under IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
-        "A contract under which an entity receives compensation for claims from a reinsurer",
-        "A contract issued to share profits with partners",
-        "Contract issued to insure customers",
-        "A contract for investment-linked business"
+        "To increase the insurer’s liability",
+        "To transfer and reduce insurance risk",
+        "To provide investment returns",
+        "To cover policyholder dividends"
       ), selected = character(0))
     ),
 
     box(
-      title = "2. When should a reinsurance contract held be initially recognized?",
+      title = "2. Under IFRS 17, how is the reinsurance contract held measured?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
-        "When the reinsurer pays a claim",
-        "At the start of the underlying insurance contract",
-        "At the earlier of coverage start or when underlying contracts are onerous",
-        "At the end of the reporting period"
+        "Together with the underlying insurance contracts",
+        "Separately from the underlying insurance contracts",
+        "Using the reinsurer’s financial statements",
+        "Using IFRS 4 guidelines"
       ), selected = character(0))
     ),
 
     box(
-      title = "3. Can a gain on purchase of reinsurance be recognized immediately?",
+      title = "3. What replaces the “mirroring approach” from IFRS 4 in IFRS 17 for reinsurance contracts?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
-        "Yes, it boosts profit",
-        "No, it is included in the CSM",
-        "Only if the reinsurer agrees",
-        "Yes, under PAA"
+        "Aggregation method",
+        "Separate stand-alone measurement",
+        "Asset-based approach",
+        "Direct debit method"
       ), selected = character(0))
     ),
 
     box(
-      title = "4. Which of the following is NOT included in fulfilment cash flows for reinsurance contracts held?",
+      title = "4. What component of measurement reflects the uncertainty in future cash flows from the reinsurer?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
-        "Future claims recoveries",
-        "Discounting",
-        "Reinsurer’s risk appetite",
-        "Risk adjustment"
+        "Loss-recovery component",
+        "Contractual Service Margin",
+        "Risk Adjustment",
+        "Discount rate"
       ), selected = character(0))
     ),
 
     box(
-      title = "5. What is the impact of reinsurance on the insurer’s risk exposure?",
+      title = "5. What is the Contractual Service Margin (CSM) for reinsurance contracts held?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q5"), label = NULL, choices = c(
-        "Increases risk",
-        "No impact",
-        "Transfers and reduces risk",
-        "Creates an additional liability"
+        "liability for claims incurred",
+        "The unearned profit from the reinsurance contract",
+        "An expense item",
+        "The reinsurer’s fee"
       ), selected = character(0))
     ),
 
     box(
-      title = "6. How are changes in fulfilment cash flows for reinsurance contracts treated?",
+      title = "6. When is the loss-recovery component recognized?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
-        "Adjust the CSM or go through P&L",
-        "Ignore until contract maturity",
-        "Expensed as acquisition costs",
-        "Deferred indefinitely"
+        "When the underlying insurance contracts are profitable",
+        "Only when the reinsurer fails to pay",
+        "When the underlying insurance contracts are onerous",
+        "When premiums are overdue"
       ), selected = character(0))
     ),
 
     box(
-      title = "7. Under the General Model, what happens to the CSM for reinsurance contracts held over time?",
+      title = "7. What happens to the CSM of a reinsurance contract held over time?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
-        "It grows with claims paid",
-        "It’s released based on services received",
-        "It remains constant",
-        "It is immediately expensed"
+        "It increases automatically",
+        "It is released as services are received",
+        "It becomes part of equity",
+        "It is expensed immediately"
       ), selected = character(0))
     ),
 
     box(
-      title = "8. How are reinsurance recoveries presented in the income statement?",
+      title = "8. Which of the following is NOT included in fulfilment cash flows?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
-        "Included in insurance revenue",
-        "Included in investment income",
-        "Separately from insurance revenue",
-        "Net of insurance service expenses"
+        "Risk adjustment",
+        "Discounted expected cash flows",
+        "Reinsurer’s profitability forecasts",
+        "Credit risk of the reinsurer"
       ), selected = character(0))
     ),
 
     box(
-      title = "9. How are recoveries for past claims treated under reinsurance contracts held?",
+      title = "9. How should assets and liabilities from reinsurance contracts be presented?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
-        "Deferred in CSM",
-        "Expensed as incurred",
-        "Recognized in profit or loss immediately",
-        "Deducted from LRC"
+        "Net with insurance liabilities",
+        "Separately from insurance contracts issued",
+        "Offset against claims reserves",
+        "As part of investment property"
       ), selected = character(0))
     ),
 
     box(
-      title = "10. What is the impact of a reinsurance CSM being negative?",
+      title = "10. How are experience adjustments in reinsurance contracts handled?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
-        "It represents a loss",
-        "It is a liability",
-        "It is not allowed",
-        "It’s treated as an asset, not a liability"
+        "Deferred to the end of the contract",
+        "Ignored in measurement",
+        "Included in the remeasurement at each reporting date",
+        "Treated as financing costs"
       ), selected = character(0))
     ),
 
@@ -221,49 +223,48 @@ tagList(
     )
 }
 
-correct_answers_module10 <- list( 
+correct_answers_module10 <- list(
   q1 = list(
-    answer = "A contract under which an entity receives compensation for claims from a reinsurer",
-    explanation = "A reinsurance contract held is one where the insurer (cedant) transfers insurance risk and receives compensation from the reinsurer for claims."
+    answer = "To transfer and reduce insurance risk",
+    explanation = "The main purpose is to transfer and reduce the insurer's risk exposure to claims."
   ),
   q2 = list(
-    answer = "At the earlier of coverage start or when underlying contracts are onerous",
-    explanation = "Recognition occurs at the earlier of when reinsurance coverage begins or when the reinsurance covers a recognized loss from onerous contracts."
+    answer = "Separately from the underlying insurance contracts",
+    explanation = "IFRS 17 requires that reinsurance contracts held be measured independently of the underlying insurance contracts."
   ),
   q3 = list(
-    answer = "No, it is included in the CSM",
-    explanation = "Gains on the purchase of reinsurance are deferred within the Contractual Service Margin (CSM) and recognized over the coverage period."
+    answer = "Separate stand-alone measurement",
+    explanation = "IFRS 17 eliminates the mirroring approach and mandates separate stand-alone valuation."
   ),
   q4 = list(
-    answer = "Reinsurer’s risk appetite",
-    explanation = "Fulfilment cash flows include expected recoveries, discounting, and risk adjustment—not subjective elements like reinsurer's risk appetite."
+    answer = "Risk Adjustment",
+    explanation = "The risk adjustment represents uncertainty in the timing and amount of reinsurance cash flows."
   ),
   q5 = list(
-    answer = "Transfers and reduces risk",
-    explanation = "Reinsurance helps the insurer reduce and manage their insurance risk by transferring a portion of it to the reinsurer."
+    answer = "The unearned profit from the reinsurance contract",
+    explanation = "The CSM represents unearned profit, recognized over the period of coverage."
   ),
   q6 = list(
-    answer = "Adjust the CSM or go through P&L",
-    explanation = "Changes in fulfilment cash flows adjust the CSM if they relate to future services, or are recognized in profit or loss otherwise."
+    answer = "When the underlying insurance contracts are onerous",
+    explanation = "The loss-recovery component arises when the underlying insurance contracts are loss-making (onerous)."
   ),
   q7 = list(
-    answer = "It’s released based on services received",
-    explanation = "The CSM for reinsurance contracts held is released over time based on the receipt of reinsurance services."
+    answer = "It is released as services are received",
+    explanation = "The CSM is gradually released to profit or loss as the reinsurance services are provided."
   ),
   q8 = list(
-    answer = "Separately from insurance revenue",
-    explanation = "IFRS 17 requires that reinsurance income and expenses be presented separately from insurance revenue and service expenses."
+    answer = "Reinsurer’s profitability forecasts",
+    explanation = "The reinsurer’s own profitability forecasts are not part of the cedant’s fulfilment cash flows."
   ),
   q9 = list(
-    answer = "Recognized in profit or loss immediately",
-    explanation = "Recoveries for past claims are immediately recognized in profit or loss as they relate to events that have already occurred."
+    answer = "Separately from insurance contracts issued",
+    explanation = "IFRS 17 requires separate presentation of reinsurance contracts held."
   ),
   q10 = list(
-    answer = "It’s treated as an asset, not a liability",
-    explanation = "A negative CSM on a reinsurance contract held represents a net cost to the insurer and is treated as an asset."
+    answer = "Included in the remeasurement at each reporting date",
+    explanation = "Experience adjustments affect the remeasurement of reinsurance contracts."
   )
 )
-
 
 
 IFRS17Module10Server <- (function(id, user_data) {
