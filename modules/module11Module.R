@@ -23,19 +23,18 @@ tagList(
     ),
 
     div(class = "module-section",
-        h3("📖 Introduction"),
-        p("This module explores the treatment of investment contracts with discretionary participation features (DPF) under IFRS 17, focusing on their recognition, measurement, and presentation."),
-        img(src = "images/module11Introduction.png", class = "module-image")
-    ),  
-
-    div(class = "module-section",
-        p("Under IFRS 17, the following refences cover on Investment Contracts with Discretionary Participation Features:"),
-        p("The underlying items are items that determine some of the amounts payable to a policyholder. These can include a reference portfolio, net assets, or even external indices—not limited to physical assets. IFRS 17 requires the pool of underlying items to be fixed and clearly identified—retrospective changes to the pool violate this requirement. The module also discusses the treatment of investment contracts with DPF, which are contracts that provide a return linked to the performance of underlying items, such as mutual funds or unit-linked insurance products.")
-    ),
-
-    div(class = "module-section",
-        p("These contracts may include both insurance and non-insurance components, and their measurement often involves significant judgement due to the discretionary nature of certain cash flows. The Variable Fee Approach (VFA) may be applicable for eligible contracts, where the entity’s fee is considered to vary with the underlying asset returns. This module also outlines the conditions required for applying the VFA, and sets the stage for understanding how these unique contract types are integrated into IFRS 17's overall framework"),
-        p("The underlying items are items that determine some of the amounts payable to a policyholder. These can include a reference portfolio, net assets, or even external indices—not limited to physical assets. IFRS 17 requires the pool of underlying items to be fixed and clearly identified—retrospective changes to the pool violate this requirement. The module also discusses the treatment of investment contracts with DPF, which are contracts that provide a return linked to the performance of underlying items, such as mutual funds or unit-linked insurance products.")
+      h3(icon("info-circle"), "Introduction", class = "section-title-top"),
+      p("This module provides an overview on the treatment of investment contracts with discretionary participation features (DPF) under IFRS 17."),
+      p("Investment contracts with discretionary participation features are financial instruments where investors receive additional benefits, in addition to guaranteed amounts, based on the issuer’s discretion and the performance of a specified pool of assets or contracts. These benefits are not fixed and are determined by the issuer, impacting the overall investment return."),
+      p("These contracts can contain both insurance-related and non-insurance elements, and their valuation often requires considerable judgment due to the discretionary nature of some expected cash flows. Where eligible, the Variable Fee Approach (VFA) may apply—this approach treats the insurer’s compensation as a variable amount tied to returns from underlying assets."),
+      p("The underlying items refer to elements that influence the amounts owed to policyholders. These may include a reference portfolio, the insurer’s net assets, or external benchmarks such as indices—not just tangible assets. IFRS 17 requires that these items be explicitly defined and unchangeable after contract inception; altering them retrospectively would breach this requirement."),
+      p("Participating investment contracts and participating insurance contracts are often backed by the same underlying pool of assets. Applying a consistent accounting approach to both provides more meaningful and comparable information to financial statement users while also reducing complexity."),
+      p("Although one is classified as an investment product and the other as insurance, these contracts frequently share key features such as:"),
+      tags$ul(
+        tags$li("Long durations (maturities)"),
+        tags$li("Recurring premium payments"),
+        tags$li("High acquisition costs")
+      )
     ),
 
     div(class = "module-section",
@@ -90,47 +89,45 @@ tagList(
     )
     ),
 
+    div(class = "module-section",
+      h3(icon("info-circle"), "Investment Contract with Discretionary Participation Features (DPF)", class = "section-title-top"),
 
-    div(
-      class = "module-section",
-      h3("What is an Investment Contract with Discretionary Participation Features (DPF)?"),
-      p("An Investment Contract with DPF is a financial contract that:"),
-      tags$ul(
-        tags$li("Does not transfer significant insurance risk,"),
+      p("An Investment Contract with DPF is a contract that:"),
+
+      # Lettered list for A & B
+      tags$ol(type = "A",
+        tags$li("Does not involve significant insurance risk"),
         tags$li(
-          HTML("But gives the policyholder a contractual right to receive additional benefits that are:"),
-          tags$ol(
-            tags$li("Significant,"),
-            tags$li("Discretionary (the issuer has some freedom in determining them),"),
-            tags$li("And based on the performance of a pool of underlying items (like assets, other contracts, or profits of the entity).")
+          "But grants the policyholder a contractual right to receive additional benefits that are:",
+          # Nested bullet‐points under B
+          tags$ul(
+            tags$li("Material in value"),
+            tags$li("Discretionary (the issuer has some freedom in determining them)"),
+            tags$li("Linked to the performance of a pool of underlying items")
           )
         )
       ),
-      p("IFRS 17 requires that such contracts be accounted for, but with some modifications, only if the issuer also issues insurance contracts.")
-    ),
-    div(
-      class = "module-section",
-      p("Examples of Investment Contract with Discretionary Participation Features:"),
-      tags$ol(
+
+      p("IFRS 17 requires that such contracts be accounted for, but—with some modifications—only if the issuer also issues insurance contracts."),
+
+      p("Examples of Investment Contracts with Discretionary Participation Features:"),
+      # Lettered examples with italic descriptions
+      tags$ol(type = "A",
         tags$li(
-          tags$strong("With-profits savings policies (no insurance risk)"),
-          tags$br(),
-          tags$em("Bonuses based on fund performance, no life cover.")
+          strong("With-profits savings policies"), br(),
+          em("Offers bonuses tied to fund performance, with no insurance coverage.")
         ),
         tags$li(
-          tags$strong("Deferred annuities (investment only)"),
-          tags$br(),
-          tags$em("Accumulates value, bonuses discretionary, no guarantees.")
+          strong("Deferred annuities (investment only)"), br(),
+          em("Value grows over time; discretionary bonuses apply, but no guaranteed returns or insurance elements.")
         ),
         tags$li(
-          tags$strong("Participating in deposit contracts"),
-          tags$br(),
-          tags$em("Base return + discretionary top-up from profits.")
+          strong("Participating deposit contracts"), br(),
+          em("Provide a basic return plus a discretionary bonus derived from company profits.")
         ),
         tags$li(
-          tags$strong("Group savings plans"),
-          tags$br(),
-          tags$em("Employees share in pooled investment performance; bonuses are discretionary.")
+          strong("Group savings plans"), br(),
+          em("Contributions pooled and invested; participants receive discretionary bonuses based on investment outcomes.")
         )
       )
     ),
