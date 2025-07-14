@@ -1120,28 +1120,182 @@ server <- function(input, output, session) {
                 size: 11in 8.5in landscape; 
                 margin: 0;
               }
-              /* Added print color preservation */
               * {
+                box-sizing: border-box;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+              }            
+              body { 
+                margin: 0; 
+                padding: 0;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
+                font-family: Georgia, "Times New Roman", serif;
+               }
+              @media print {
+                body { 
+                margin: 0;
+                padding: 0;
+                }
+                
+                /* Scale down the certificate to fit on one page */
+                #certificate_wrapper {
+                  width: 11in;
+                  height: 8.5in;
+                  margin: 0;
+                  padding: 0.1in;
+                  transform: scale(0.75);
+                  transform-origin: top center;
+                }
+              }
+              
+              /* Preserve all the certificate styles */
+              #certificate_wrapper {
+                background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+                padding: 30px;
+                position: relative;
+                min-height: auto;
+                max-height: 8in;
+                overflow: hidden;
+              }
+              
+              /* Hide elements that should not print */
+              .no-print {
+                display: none !important;
+              }
+              
+              /* Ensure images print */
+              img {
+                max-width: 100%;
+                height: auto;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+              }
+              
+              /* Adjust font sizes for print */
+              h1 { font-size: 32px !important; }
+              h2 { font-size: 26px !important; }
+              h3 { font-size: 20px !important; }
+              h4 { font-size: 14px !important; }
+              p { font-size: 12px !important; }
+              
+              /* Ensure backgrounds print */
+              div[style*="background"] {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
               }
-              /* Added wrapper with scaling */
-              #certificate_wrapper {
-                transform: scale(0.9);
-                transform-origin: top center;
-              }              
-              body { 
-                font-family: Arial, sans-serif; 
-                margin: 0; 
-                padding: 20px;
+              
+              /* Module grid adjustments */
+              div[style*="grid-template-columns"] {
+                font-size: 10px !important;
               }
-              @media print {
-                body { margin: 0; }
+              
+              /* Reduce spacing for print */
+              div[style*="margin: 40px"] {
+                margin: 15px !important;
+              }
+              
+              div[style*="margin: 30px"] {
+                margin: 15px !important;
+              }
+              
+              div[style*="margin: 25px"] {
+                margin: 12px !important;
+              }
+              
+              div[style*="margin-top: 50px"] {
+                margin-top: 20px !important;
+              }
+              
+              div[style*="margin-top: 45px"] {
+                margin-top: 15px !important;
+              }
+              
+              div[style*="margin-top: 35px"] {
+                margin-top: 15px !important;
+              }
+              
+              div[style*="margin-top: 30px"] {
+                margin-top: 12px !important;
+              }
+              
+              div[style*="margin-bottom: 25px"] {
+                margin-bottom: 12px !important;
+              }
+              
+              /* Performance box adjustment */
+              div[style*="padding: 25px"] {
+                padding: 12px !important;
+              }
+              
+              div[style*="padding: 20px"] {
+                padding: 10px !important;
+              }
+              
+              /* Signature section adjustments */
+              div[style*="gap: 60px"] {
+                gap: 30px !important;
+              }
+              
+              div[style*="gap: 50px"] {
+                gap: 30px !important;
+              }
+              
+              /* Override specific elements */
+              div[style*="font-size: 36px"] {
+                font-size: 28px !important;
+              }
+              
+              div[style*="font-size: 32px"] {
+                font-size: 26px !important;
+              }
+              
+              div[style*="height: 70px"] {
+                height: 60px !important;
+              }
+              
+              /* Watermark adjustment */
+              div[style*="font-size: 80px"] {
+                font-size: 60px !important;
+              }
+              
+              /* Module performance table specific */
+              span[style*="font-size: 12px"] {
+                font-size: 9px !important;
+              }
+              
+              span[style*="font-size: 13px"] {
+                font-size: 10px !important;
+              }
+              
+              /* Overall container height constraint */
+              div[style*="min-height: 600px"] {
+                min-height: auto !important;
+                max-height: 7.5in !important;
+              }
+              
+              /* Border and padding adjustments */
+              div[style*="padding: 40px"] {
+                padding: 20px !important;
+              }
+              
+              /* Prevent page breaks */
+              * {
+                page-break-inside: avoid !important;
+              }
+              
+              #certificate_wrapper > div {
+                page-break-inside: avoid !important;
+                page-break-after: avoid !important;
               }
             </style>
           </head>
           <body>
-            ${content}
+            <div id="certificate_wrapper">
+              ${content}
+            </div>
           </body>
         </html>
       `);
