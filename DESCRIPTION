@@ -1,15 +1,18 @@
+Package: ifrs17trainingmodule
 Title: IFRS 17 Digital Training Module
 Version: 1.0.0
-Author: Robin Ochieng
-Maintainer: Robin Ochieng <robinochieng73@gmail.com>
-Description: A comprehensive digital training module for IFRS 17 insurance standards
-    with interactive learning modules, progress tracking, and Supabase authentication.
+Authors@R:
+  person("Robin", "Ochieng", email = "robinochieng73@gmail.com",
+         role = c("aut", "cre"))
+Description: A Shiny training module for IFRS 17 with interactive
+  learning modules, progress tracking, and Supabase authentication.
 License: MIT
 Encoding: UTF-8
 LazyData: true
-Depends: 
-    R (>= 4.0.0)
+Depends:
+  R (>= 4.0.0)
 Imports:
+<<<<<<< HEAD
     shiny,
     shinyWidgets,
     rmarkdown,
@@ -29,3 +32,25 @@ Imports:
     stringr
 
     
+=======
+  shiny,
+  httpuv,
+  rmarkdown,
+  knitr,
+  jsonlite,
+  htmltools,
+  shinyWidgets,
+  bs4Dash,
+  ggplot2,
+  bslib,
+  plotly,
+  DT,
+  dplyr,
+  lubridate,
+  shinyjs,
+  shinyBS,
+  scales,
+  shinyFeedback,
+  httr,
+  stringr
+>>>>>>> d98e48eb7505351914b14b7399fd6bf5e8298349

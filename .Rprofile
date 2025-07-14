@@ -1,3 +1,4 @@
+source("renv/activate.R")
 # .Rprofile
 # This file ensures that R uses the CRAN repository for package installation
 options(repos = c(CRAN = "https://cran.rstudio.com"))
