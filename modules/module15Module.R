@@ -23,140 +23,152 @@ tagList(
     ),
 
     div(class = "module-section",
-        h3("📖 Introduction"),
-        p("This module provides an overview of insurance finance income or expenses as defined under IFRS 17 paragraphs 87 to 92.")    
+        h3("📖 Module Objective", class = "section-subheading"),
+        p("This module focuses on insurance finance income or expenses as defined under IFRS 17 paragraphs 87 to 92.")    
     ), 
 
     # Definition section
     div(class = "module-section",
-        h3("Definition"),
-        p("Insurance finance income or expenses reflect how the value of insurance contract liabilities changes over time due to:"),
-        tags$ol( type = "a",
-            tags$li("Time value of money – the effect of interest over time."),
-            tags$li("Financial risks – changes in interest rates or market movements.")
-        ),
-        p("These changes affect how much insurers expect to pay in the future.")
+        h3("Definition", class = "section-subheading"),
+        p("Insurance finance income or expenses refer to changes in the carrying amount of insurance contract liabilities (or assets) due to:"),
+        tags$ol(type = "a",
+            tags$li(
+              tags$b("The Time Value of Money (Discounting) –"), 
+              "This represents the accretion of interest on insurance contract liabilities, as future cash flows are discounted to their present value. As time progresses, this discount unwinds, impacting the financial results."
+            ),
+            tags$li(
+              tags$b("Changes in Financial Assumptions –"), 
+              "This includes the impact of movements in key financial variables, such as:",
+              tags$ol(type = "i",
+                  tags$li(
+                    tags$b("Interest Rates:"), 
+                    "Fluctuations in market interest rates directly affect the present value of future cash flows."
+                  ),
+                  tags$li(
+                    tags$b("Inflation:"), 
+                    "If inflation is a factor in future cash flows, changes in inflation assumptions will also be reflected here."
+                  )
+              )
+            )
+        )
     ),
-    
-    # What's not included section
     div(class = "module-section",
-        h3("What's not included?"),
-        p("Some changes in assumptions (like interest rates) are not treated as finance income or expense if:"),
-        tags$ol( type = "a",
-            tags$li("The contract has direct participating features, and"),
-            tags$li("The change would normally adjust the Contractual Service Margin (CSM), but IFRS 17 rules prevent that.")
+        h3("What’s Excluded from Insurance Finance Income or Expenses?", class = "section-subheading"),
+        p("Not all changes in financial assumptions are classified as insurance finance income or expenses. In particular, changes are excluded when:"),
+        tags$ol(type = "a",
+            tags$li("The contract possesses direct participating features (meaning policyholders share directly in the returns of underlying items held by the insurer)."),
+            tags$li("The change would ordinarily adjust the Contractual Service Margin (CSM), but specific IFRS 17 rules prevent this adjustment.")
         ),
-        p("These are instead reported as insurance service expenses.")
+        p("In such specific scenarios, these changes are instead recognized as insurance service expenses to ensure appropriate matching.")
     ),
 
+    # A. Non-Participating Contracts
     div(class = "module-section",
-        h3("💡 How to Present Insurance Finance Income or Expense"),
-        
-        p("Companies have ", strong("two main options"), " for showing these amounts in their financial statements, depending on the type of insurance contract:"),
-        
-        tags$h4("A. Non-Participating Contracts (no direct link to underlying assets):"),
-        tags$ol( type = "a",
-            tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L)"),
-            tags$li(HTML("Option 2 – Split Between P&amp;L and OCI:"),
-                    tags$ol(type = "i",
-                        tags$li(HTML("In P&amp;L: Show a steady, expected amount based on a fixed (&ldquo;locked-in&rdquo;) discount rate from when the contract began.")),
-                        tags$li("In OCI: Put the difference between actual changes and the expected amount.")
-                    )
-            )
-        ),
-        
-        tags$h4("B. Participating Contracts (with underlying assets the insurer holds):"),
-        tags$ol( type = "a",
-            tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L). All finance income/expenses go in the income statement."),
-            tags$li(HTML("Option 2 – Match Underlying Items:"),
-                    tags$ol(type = "i",
-                        tags$li("In P&L: Show an amount that matches the investment returns on the underlying items (to avoid mismatches)."),
-                        tags$li("In OCI: The rest of the financial result (the part that doesn’t match the assets).")
-                    )
+        h3("How to Present Insurance Finance Income or Expense", class = "section-subheading"),
+        h4("A. For Non-Participating Contracts (Contracts without Direct Participation Features)"),
+        p("These are contracts where the policyholder’s returns are not directly linked to the returns of specific underlying assets held by the insurer."),
+        tags$ol(type = "a",
+            tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L)."),
+            tags$li(
+              "Option 2 – Split Between P&L and OCI:",
+              tags$ol(type = "i",
+                  tags$li(
+                    tags$b("In P&L:"), 
+                    "A systematic and expected amount of insurance finance income or expense is recognized. This is typically calculated using the discount rate “locked-in” at the inception of the contract.  
+                    This provides a more stable and predictable measure of the core financial performance."
+                  ),
+                  tags$li(
+                    tags$b("In OCI:"), 
+                    "The remaining portion—representing the difference between the total actual insurance finance income or expense and the systematic amount recognized in P&L—is presented in Other Comprehensive Income.  
+                    This mitigates the volatility in P&L that can arise from significant fluctuations in current market discount rates."
+                  )
+              )
             )
         )
     ),
 
+    # B. Participating Contracts
     div(class = "module-section",
-        h3("🌍 Foreign Currency Translation"),
-        
-        div(class = "currency-translation",
-            tags$h4(style = "color:#006AA6;", "Foreign Currency Translation"),
-            p("Insurance contracts are treated as ", strong("monetary items"), " under IAS 21 (The Effects of Changes in Foreign Exchange Rates)."),
-            p("Any exchange differences (due to currency changes) go to P&L, unless they relate to amounts already in OCI.")
+        h4("B. For Participating Contracts (Contracts with Direct Participation Features)"),
+        p("These are contracts where policyholders directly participate in the returns of underlying assets held by the insurer (e.g., unit-linked policies)."),
+        tags$ol(type = "a",
+            tags$li("Option 1 – Similar to non-participating contracts, all insurance finance income or expenses for the period can be recognized entirely in the Profit or Loss statement."),
+            tags$li(
+              "Option 2 – Match Underlying Items:",
+              tags$ol(type = "i",
+                  tags$li(
+                    tags$b("In P&L:"), 
+                    "Show an amount that matches the investment returns on the underlying items (to avoid mismatches)."
+                  ),
+                  tags$li(
+                    tags$b("In OCI:"), 
+                    "Recognize the rest of the financial result (the part that doesn’t match the assets)."
+                  )
+              )
+            )
         )
     ),
 
-
+    # C. Foreign Currency Translation
     div(class = "module-section",
-      h3("📊 Option 1"),
-      img(src = "images/module_15_option_1.png", 
-          alt = "IFRS 17 Module 15 Option 1",
-          class = "module-image"
-      )
+        h4("Foreign Currency Translation", class = "section-subheading"),
+        p("Insurance contracts are treated as ", tags$b("monetary items"), " under IAS 21 (The Effects of Changes in Foreign Exchange Rates)."),
+        p("Any exchange differences (due to currency changes) are recognized in P&L, unless they relate to amounts already in OCI.")
     ),
 
-    div(class = "module-section",
-      h3("📊 Option 2"),
-      img(src = "images/module_15_option_2.png", 
-          alt = "IFRS 17 Module 15 Option 2",
-          class = "module-image"
-      ),
-      p(tags$strong("Exchange differences on insurance contract liabilities (P&L portion)"), 
-      " – Arise when converting foreign currency balances into the reporting currency."),
-    
-      p(tags$strong("Exchange differences on retranslation of foreign operations"), 
-      " – Arise when translating the financial results of foreign subsidiaries into the group's reporting currency.")
-    ),   
 
     div(class = "module-section",
         h3("📝 Quiz: Answer the following questions to test your understanding of Insurance Finance Income"),
     ),
 
     box(
-      title = "1. What are Insurance Finance Income or Expenses (IFIE)?",
-      status = NULL , solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
+      title = "1. Insurance finance income or expenses refer to changes in the carrying amount of insurance contract liabilities (or assets) due to which two main factors?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q1"), label = NULL, choices = c(
-        "Premiums and claims",
-        "Acquisition costs and investment income",
-        "Changes in non-financial assumptions",
-        "Time value of money and financial risk impacts"
+        "Premium collection and claims payment.",
+        "Time Value of Money (Discounting) and Changes in Financial Assumptions",
+        "Investment performance and operational efficiency",
+        "Acquisition costs and contract renewals"
       ), selected = character(0))
     ),
 
+    # 2
     box(
-      title = "2. How can IFIE be presented in the statement of financial performance?",
-      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;", style = "border-left: 3px solid #DC5A17;",
+      title = "2. A change in market interest rates affects insurance finance income by?",
+      status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q2"), label = NULL, choices = c(
-        "Either fully in P&L or disaggregated between P&L and OCI",
-        "Only in Profit or Loss (P&L)",
-        "Only in Other Comprehensive Income (OCI)",
-        "Only in the notes to the financial statements"
+        "Modifying service revenue",
+        "Adjusting the CSM",
+        "Changing the present value of future cash flows",
+        "Triggering immediate premium refunds"
       ), selected = character(0))
     ),
 
+    # 3
     box(
-      title = "3. Are there any exceptions to the general treatment of IFIE?",
+      title = "3. When changes in financial assumptions are excluded from IFIE because the contract has direct participating features and IFRS 17 rules prevent CSM adjustment, these changes are recognized in which part of the financial statements?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q3"), label = NULL, choices = c(
-        "No exceptions",
-        "Yes, for reinsurance contracts",
-        "Yes, for insurance contracts with direct participation features and certain assumptions that would adjust CSM but don’t",
-        "Yes, if the policyholder is a related party"
+        "Directly in equity",
+        "In a separate reserve account",
+        "As part of investment income",
+        "As insurance service expenses"
       ), selected = character(0))
     ),
 
+    # 4
     box(
-      title = "4. If the entity chooses to disaggregate IFIE between P&L and OCI, how should the disaggregation be made?",
+      title = "4. For non-participating contracts, if an entity chooses to split IFIE between P&L and OCI, the portion recognized in OCI is specifically designed to mitigate volatility arising from which factors?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q4"), label = NULL, choices = c(
-        "Based on actual market returns",
-        "Using a locked-in discount rate to allocate a portion to P&L",
-        "Arbitrarily",
-        "Based on revenue recognition patterns"
+        "Unexpected claims events",
+        "Significant fluctuations in current market discount rates",
+        "Changes in policyholder lapse rates",
+        "Administrative cost overruns"
       ), selected = character(0))
     ),
 
+    # 5
     box(
       title = "5. How should IFIE recorded in OCI be treated when a group of insurance contracts is transferred or derecognized (per paragraph 91)?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
@@ -168,102 +180,111 @@ tagList(
       ), selected = character(0))
     ),
 
+    # 6
     box(
-      title = "6. How should exchange differences on changes in the carrying amount of groups of insurance contracts be treated?",
+      title = "6. According to IAS 21, insurance contracts are classified as?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q6"), label = NULL, choices = c(
-        "Always in OCI",
-        "Always in equity",
-        "Not recognized",
-        "In P&L unless they relate to OCI-recorded IFIE, in which case they go to OCI"
+        "Non-monetary items",
+        "Monetary items",
+        "Equity instruments",
+        "Derivatives"
       ), selected = character(0))
     ),
 
+    # 7
     box(
-      title = "7. Which component is typically included in the effect of the time value of money under IFIE?",
+      title = "7. Which of the following best illustrates the time value of money in the context of IFRS 17?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q7"), label = NULL, choices = c(
-        "Expected claims",
-        "Acquisition costs",
-        "Interest accretion on insurance liabilities",
-        "Reinsurance asset recoveries"
+        "Claims development",
+        "Risk adjustment for non-financial risk",
+        "Accretion of interest on discounted future cash flows",
+        "Amortization of acquisition costs"
       ), selected = character(0))
     ),
 
+    # 8
     box(
-      title = "8. Which of the following best describes the treatment of IFIE for contracts with direct participation features?",
+      title = "8. Under IFRS 17, how should an entity handle IFIE if the underlying items are measured at fair value through OCI?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q8"), label = NULL, choices = c(
-        "Must always be presented in OCI",
-        "May be presented to eliminate mismatches with underlying items",
-        "Not applicable to participating contracts",
-        "Must always be presented in P&L"
+        "Present IFIE fully in equity",
+        "Present IFIE fully in P&L",
+        "Present IFIE in OCI to match the measurement of the underlying items",
+        "Do not recognize IFIE"
       ), selected = character(0))
     ),
 
+    # 9
     box(
-      title = "9. If a group of contracts is derecognized and IFIE has been disaggregated under paragraph 89(b), what happens to amounts in OCI?",
+      title = "9. What is the effect on the profit or loss statement when a group of contracts with OCI-disaggregated IFIE is derecognized?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q9"), label = NULL, choices = c(
-        "Remain in OCI",
-        "Transferred to P&L",
-        "Reversed",
-        "Transferred to retained earnings"
+        "P&L remains unaffected by OCI balances",
+        "P&L shows a spike in IFIE",
+        "P&L includes cumulative OCI",
+        "P&L shows a reversal of finance expenses"
       ), selected = character(0))
     ),
 
+    # 10
     box(
-      title = "10. What type of financial risk would be reflected in IFIE?",
+      title = "10. If an entity is exposed to equity risk, how would this risk typically manifest within IFIE?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q10"), label = NULL, choices = c(
-        "Lapse risk",
-        "Currency risk",
-        "Inflation risk",
-        "Equity or interest rate risk impacting discount rates"
+        "Through changes in policyholder behavior",
+        "Through fluctuations in foreign exchange rates",
+        "Through unexpected increases in operational expenses",
+        "Through its impact on discount rates, which affect the present value of liabilities"
       ), selected = character(0))
     ),
 
+    # 11
     box(
-      title = "11. Why might an entity choose to disaggregate IFIE between P&L and OCI?",
+      title = "11. Which of the following is not a valid reason for choosing to disaggregate IFIE between P&L and OCI?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q11"), label = NULL, choices = c(
-        "To smooth earnings volatility",
-        "To avoid recognizing claims",
-        "To increase policyholder bonuses",
-        "To reduce insurance liabilities"
+        "To eliminate the need for tracking changes in financial assumptions",
+        "To improve the comparability of financial statements over time",
+        "To reflect the impact of market changes in OCI instead of P&L",
+        "To match the reporting of liabilities with asset valuation"
       ), selected = character(0))
     ),
 
+    # 12
     box(
-      title = "12. Which paragraph of IFRS 17 allows IFIE disaggregation for non-participating contracts?",
+      title = "12. Which of the following contract types is most directly affected by the accounting policy choice in IFRS 17 paragraph 88?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q12"), label = NULL, choices = c(
-        "Paragraph 30",
-        "Paragraph 88",
-        "Paragraph 45",
-        "Paragraph 135"
+        "Contracts with direct participation features",
+        "Non-participating insurance contracts",
+        "Reinsurance held",
+        "Investment contracts without Direct Participation Features"
       ), selected = character(0))
     ),
 
+    # 13
     box(
-      title = "13. When an entity opts to recognize all IFIE in P&L, the impact on OCI is",
+      title = "13. If an entity chooses to recognize all IFIE in P&L, why is the impact on OCI considered neutral?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q13"), label = NULL, choices = c(
-        "Neutral (no impact)",
-        "Positive",
-        "Negative",
-        "Deferred to future periods"
+        "Because all recognition of IFIE occurs within the P&L, leaving no component to affect OCI",
+        "Because OCI is only affected by non-cash items",
+        "Because IFIE are always considered immaterial for OCI",
+        "Because the impact is offset by other comprehensive income items"
       ), selected = character(0))
     ),
 
+    # 14
     box(
-      title = "14. Which type of insurance contract is most likely to involve disaggregation based on underlying item performance?",
+      title = "14. Why is disaggregation between profit or loss and OCI particularly relevant for contracts with direct participation features?",
       status = "white", solidHeader = TRUE, width = 12, style = "border-left: 3px solid #DC5A17;",
       radioButtons(ns("q14"), label = NULL, choices = c(
-        "Group term life insurance",
-        "Non-participating whole life",
-        "Universal life insurance with direct participation features",
-        "Reinsurance contracts held"
+        "To increase reported profit margins",
+        "To reflect fair value changes in liabilities linked to market movements",
+        "To simplify accounting for non-financial risks",
+        "Because they are exempt from IFRS 17 disclosures"
       ), selected = character(0))
     ),
 
@@ -290,60 +311,60 @@ tagList(
 
 correct_answers_module15 <- list(
   q1 = list(
-    answer = "Time value of money and financial risk impacts",
-    explanation = "IFIE represent changes in the carrying amount of insurance contracts due to the effect of the time value of money and financial risk, such as interest accretion and changes in discount rates."
+    answer    = "Time Value of Money (Discounting) and Changes in Financial Assumptions",
+    explanation = "Insurance finance income or expenses reflect the impact of discounting (time value of money) and changes in financial assumptions like interest rates or inflation."
   ),
   q2 = list(
-    answer = "Either fully in P&L or disaggregated between P&L and OCI",
-    explanation = "IFRS 17 allows a policy choice: present all IFIE in P&L or disaggregate them between P&L and OCI, depending on the approach selected."
+    answer    = "Changing the present value of future cash flows",
+    explanation = "Interest rate movements impact the discounting of expected future cash flows, altering the carrying amount."
   ),
   q3 = list(
-    answer = "Yes, for insurance contracts with direct participation features and certain assumptions that would adjust CSM but don’t",
-    explanation = "IFRS 17 excludes from IFIE those changes in financial assumptions that would adjust the contractual service margin (CSM) but do not do so due to application of specific paragraphs (45(b)(ii), etc.)."
+    answer    = "As insurance service expenses",
+    explanation = "When direct participation features prevent CSM adjustment, those changes are recognized as insurance service expenses to ensure appropriate matching."
   ),
   q4 = list(
-    answer = "Using a locked-in discount rate to allocate a portion to P&L",
-    explanation = "A systematic allocation using a locked-in discount rate at initial recognition is applied. The portion not recognized in P&L is reported in OCI."
+    answer    = "Significant fluctuations in current market discount rates",
+    explanation = "The OCI portion is designed to absorb volatility arising from large changes in market discount rates."
   ),
   q5 = list(
-    answer = "They are reclassified to P&L if Option 2 under paragraph 88 was applied",
-    explanation = "If the disaggregation under paragraph 88(b) was used, the remaining OCI balance is reclassified to P&L as a reclassification adjustment."
+    answer    = "They are reclassified to P&L if Option 2 under paragraph 88 was applied",
+    explanation = "Paragraph 91 requires that OCI balances from a split under paragraph 88(b) be recycled into profit or loss upon derecognition."
   ),
   q6 = list(
-    answer = "In P&L unless they relate to OCI-recorded IFIE, in which case they go to OCI",
-    explanation = "Under IAS 21, insurance contracts are monetary items. Exchange differences are included in P&L, except when they relate to amounts in OCI (then they stay in OCI)."
+    answer    = "Monetary items",
+    explanation = "IAS 21 treats insurance contracts as monetary items; exchange differences go to P&L unless they pertain to amounts already in OCI."
   ),
   q7 = list(
-    answer = "Interest accretion on insurance liabilities",
-    explanation = "Interest accretion reflects the unwinding of the discount on insurance liabilities, part of the time value of money in IFIE."
+    answer    = "Accretion of interest on discounted future cash flows",
+    explanation = "Accretion of interest represents the unwinding of the discount and exemplifies the time value of money under IFRS 17."
   ),
   q8 = list(
-    answer = "May be presented to eliminate mismatches with underlying items",
-    explanation = "Entities can choose to disaggregate IFIE in a way that eliminates accounting mismatches with underlying items."
+    answer    = "Present IFIE in OCI to match the measurement of the underlying items",
+    explanation = "When underlying assets are FVOCI, presenting IFIE in OCI avoids mismatches and aligns with asset measurement."
   ),
   q9 = list(
-    answer = "Remain in OCI",
-    explanation = "Under paragraph 91(b), OCI amounts from paragraph 89(b) are not reclassified to P&L."
+    answer    = "P&L remains unaffected by OCI balances",
+    explanation = "If IFIE was split and OCI held under paragraph 89(b), those OCI amounts are not recycled, so P&L is unaffected on derecognition."
   ),
   q10 = list(
-    answer = "Equity or interest rate risk impacting discount rates",
-    explanation = "IFIE includes effects of financial risk, such as interest rate or equity risk, which influence the present value of insurance liabilities."
+    answer    = "Through its impact on discount rates, which affect the present value of liabilities",
+    explanation = "Equity risk can influence the discount rates used to measure liabilities, impacting IFIE."
   ),
   q11 = list(
-    answer = "To smooth earnings volatility",
-    explanation = "Disaggregation helps reduce volatility in P&L from market-driven movements in discount rates and financial assumptions."
+    answer    = "To eliminate the need for tracking changes in financial assumptions",
+    explanation = "This is incorrect—entities must still track all changes in financial assumptions even if they split IFIE."
   ),
   q12 = list(
-    answer = "Paragraph 88",
-    explanation = "Paragraph 88 provides the accounting policy choice for disaggregating IFIE for non-participating contracts."
+    answer    = "Non-participating insurance contracts",
+    explanation = "Paragraph 88 gives a presentation policy choice specifically for non-participating contracts."
   ),
   q13 = list(
-    answer = "Neutral (no impact)",
-    explanation = "If all IFIE are recognized in P&L, there is no effect on OCI."
+    answer    = "Because all recognition of IFIE occurs within the P&L, leaving no component to affect OCI",
+    explanation = "If IFIE is wholly recognized in P&L, there is by design no resulting OCI impact."
   ),
   q14 = list(
-    answer = "Universal life insurance with direct participation features",
-    explanation = "Contracts with direct participation features (e.g., universal life tied to asset performance) often use disaggregation aligned with underlying items."
+    answer    = "To reflect fair value changes in liabilities linked to market movements",
+    explanation = "For direct participation contracts, disaggregation allows liabilities to move in OCI alongside asset fair value changes, avoiding profit volatility."
   )
 )
 
