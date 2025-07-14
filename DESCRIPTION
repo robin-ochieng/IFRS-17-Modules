@@ -12,27 +12,6 @@ LazyData: true
 Depends:
   R (>= 4.0.0)
 Imports:
-<<<<<<< HEAD
-    shiny,
-    shinyWidgets,
-    rmarkdown,
-    bs4Dash,
-    ggplot2,
-    bslib,
-    plotly,
-    DT,
-    dplyr,
-    lubridate,
-    shinyjs,
-    shinyBS,
-    scales,
-    shinyFeedback,
-    httr,
-    jsonlite,
-    stringr
-
-    
-=======
   shiny,
   httpuv,
   rmarkdown,
@@ -53,4 +32,5 @@ Imports:
   shinyFeedback,
   httr,
   stringr
->>>>>>> d98e48eb7505351914b14b7399fd6bf5e8298349
+
+  
