@@ -808,24 +808,7 @@ table.dataTable tr.shown {
   .no-print {
     display: none !important;
   }
-
-  .modal-footer,
-  .btn,
-  button {
-    display: none !important;
-  }
-  
-  .certificate-container {
-    width: 11in;
-    height: 8.5in;
-    margin: 0;
-    padding: 0.5in;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-  }
+ 
 }
 
 
