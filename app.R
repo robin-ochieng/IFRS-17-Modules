@@ -1009,23 +1009,23 @@ server <- function(input, output, session) {
               # Overall Performance with enhanced design
               div(
                 style = "text-align: center; margin: 25px auto; 
-                        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                        background: white; border: 1px solid #e5e7eb;
                         padding: 20px; border-radius: 12px; max-width: 350px;
                         box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);",
                 
                 h4("OVERALL PERFORMANCE",
-                  style = "color: white; margin-bottom: 15px; 
+                  style = "color: #1e40af; margin-bottom: 15px; 
                           letter-spacing: 2px; font-size: 14px;"),
                 
                 div(
                   style = "font-size: 36px; font-weight: bold; 
-                          color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);",
+                          color: #1e40af; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);",
                   paste0(overall_average, "%")
                 ),
                 
                 p(paste0("Average score across ", nrow(progress_df), 
                         " completed modules"),
-                  style = "color: rgba(255,255,255,0.9); margin-top: 10px;
+                  style = "color: #1e40af; margin-top: 10px;
                           font-size: 14px;")
               ),
               
@@ -1116,186 +1116,45 @@ server <- function(input, output, session) {
           <head>
             <title>IFRS 17 Training Certificate</title>
             <style>
-              @page { 
-                size: 11in 8.5in landscape; 
-                margin: 0;
-              }
-              * {
-                box-sizing: border-box;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                color-adjust: exact !important;
-              }            
-              body { 
-                margin: 0; 
-                padding: 0;
-                width: 100%;
-                height: 100vh;
-                overflow: hidden;
-                font-family: Georgia, "Times New Roman", serif;
-               }
-              @media print {
-                body { 
-                margin: 0;
-                padding: 0;
+                @page {
+                  size: 11in 8.5in landscape;
+                  margin: 0;
                 }
-                
-                /* Scale down the certificate to fit on one page */
+                html, body {
+                  width: 100%;
+                  height: 100%;
+                  margin: 0;
+                  padding: 0;
+                  overflow: hidden;
+                }
+                /* Wrap the entire certificate so it’s scaled to exactly one page */
                 #certificate_wrapper {
                   width: 11in;
                   height: 8.5in;
-                  margin: 0;
-                  padding: 0.1in;
-                  transform: scale(0.75);
-                  transform-origin: top center;
+                  transform: scale(0.77);  
+                  transform-origin: top left;
+                  page-break-inside: avoid;
                 }
-              }
-              
-              /* Preserve all the certificate styles */
-              #certificate_wrapper {
-                background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
-                padding: 30px;
-                position: relative;
-                min-height: auto;
-                max-height: 8in;
-                overflow: hidden;
-              }
-              
-              /* Hide elements that should not print */
-              .no-print {
-                display: none !important;
-              }
-              
-              /* Ensure images print */
-              img {
-                max-width: 100%;
-                height: auto;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-              }
-              
-              /* Adjust font sizes for print */
-              h1 { font-size: 32px !important; }
-              h2 { font-size: 26px !important; }
-              h3 { font-size: 20px !important; }
-              h4 { font-size: 14px !important; }
-              p { font-size: 12px !important; }
-              
-              /* Ensure backgrounds print */
-              div[style*="background"] {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-              }
-              
-              /* Module grid adjustments */
-              div[style*="grid-template-columns"] {
-                font-size: 10px !important;
-              }
-              
-              /* Reduce spacing for print */
-              div[style*="margin: 40px"] {
-                margin: 15px !important;
-              }
-              
-              div[style*="margin: 30px"] {
-                margin: 15px !important;
-              }
-              
-              div[style*="margin: 25px"] {
-                margin: 12px !important;
-              }
-              
-              div[style*="margin-top: 50px"] {
-                margin-top: 20px !important;
-              }
-              
-              div[style*="margin-top: 45px"] {
-                margin-top: 15px !important;
-              }
-              
-              div[style*="margin-top: 35px"] {
-                margin-top: 15px !important;
-              }
-              
-              div[style*="margin-top: 30px"] {
-                margin-top: 12px !important;
-              }
-              
-              div[style*="margin-bottom: 25px"] {
-                margin-bottom: 12px !important;
-              }
-              
-              /* Performance box adjustment */
-              div[style*="padding: 25px"] {
-                padding: 12px !important;
-              }
-              
-              div[style*="padding: 20px"] {
-                padding: 10px !important;
-              }
-              
-              /* Signature section adjustments */
-              div[style*="gap: 60px"] {
-                gap: 30px !important;
-              }
-              
-              div[style*="gap: 50px"] {
-                gap: 30px !important;
-              }
-              
-              /* Override specific elements */
-              div[style*="font-size: 36px"] {
-                font-size: 28px !important;
-              }
-              
-              div[style*="font-size: 32px"] {
-                font-size: 26px !important;
-              }
-              
-              div[style*="height: 70px"] {
-                height: 60px !important;
-              }
-              
-              /* Watermark adjustment */
-              div[style*="font-size: 80px"] {
-                font-size: 60px !important;
-              }
-              
-              /* Module performance table specific */
-              span[style*="font-size: 12px"] {
-                font-size: 9px !important;
-              }
-              
-              span[style*="font-size: 13px"] {
-                font-size: 10px !important;
-              }
-              
-              /* Overall container height constraint */
-              div[style*="min-height: 600px"] {
-                min-height: auto !important;
-                max-height: 7.5in !important;
-              }
-              
-              /* Border and padding adjustments */
-              div[style*="padding: 40px"] {
-                padding: 20px !important;
-              }
-              
-              /* Prevent page breaks */
-              * {
-                page-break-inside: avoid !important;
-              }
-              
-              #certificate_wrapper > div {
-                page-break-inside: avoid !important;
-                page-break-after: avoid !important;
-              }
+                .certificate-container {
+                  padding: 5px !important;
+                  border: 2px double #1e40af !important;
+                  margin: 0; !important;
+                }
+                /* hide all your modal chrome */
+                .modal-header,
+                .modal-footer,
+                .btn,
+                button {
+                  display: none !important;
+                }
+                .modal-content {
+                  border: none !important;
+                  box-shadow: none !important;
+                }
             </style>
           </head>
           <body>
-            <div id="certificate_wrapper">
-              ${content}
-            </div>
+           <div id="certificate_wrapper">${content}</div> 
           </body>
         </html>
       `);
