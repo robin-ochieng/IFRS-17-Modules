@@ -123,52 +123,6 @@ adminDashboardUI <- function(id) {
         )
       ),
       
-      # Module Analytics Tab
-      tabPanel("Module Analytics",
-        icon = icon("chart-bar"),
-        br(),
-        fluidRow(
-          column(12,
-            div(
-              class = "chart-container",
-              h4("📊 Module Completion Rates", style = "color: #2d3748; margin-bottom: 1rem; font-weight: 600;"),
-              plotlyOutput(ns("module_completion_rates"), height = "400px")
-            )
-          )
-        ),
-        br(),
-        fluidRow(
-          column(6,
-            div(
-              class = "chart-container",
-              h4("🎯 Pass/Fail Distribution", style = "color: #2d3748; margin-bottom: 1rem; font-weight: 600;"),
-              plotlyOutput(ns("pass_fail_chart"), height = "350px")
-            )
-          ),
-          column(6,
-            div(
-              class = "chart-container",
-              h4("⏱️ Module Difficulty Analysis", style = "color: #2d3748; margin-bottom: 1rem; font-weight: 600;"),
-              plotlyOutput(ns("difficulty_chart"), height = "350px")
-            )
-          )
-        )
-      ),
-      
-      # Recent Activity Tab
-      tabPanel("Recent Activity",
-        icon = icon("clock"),
-        br(),
-        fluidRow(
-          column(12,
-            div(
-              h4("🔔 Recent Activity (Last 7 Days)", style = "color: 2d3748; margin-bottom: 1rem; font-weight: 600;"),
-              div(id = ns("activity_feed"))
-            )
-          )
-        )
-      ),
-      
       # Quiz Analytics Tab
       tabPanel("Quiz Analytics",
         icon = icon("question-circle"),
@@ -273,6 +227,52 @@ adminDashboardUI <- function(id) {
                 )
               ),
               DTOutput(ns("questions_answers_table"))
+            )
+          )
+        )
+      ),
+      
+      # Module Analytics Tab
+      tabPanel("Module Analytics",
+        icon = icon("chart-bar"),
+        br(),
+        fluidRow(
+          column(12,
+            div(
+              class = "chart-container",
+              h4("📊 Module Completion Rates", style = "color: #2d3748; margin-bottom: 1rem; font-weight: 600;"),
+              plotlyOutput(ns("module_completion_rates"), height = "400px")
+            )
+          )
+        ),
+        br(),
+        fluidRow(
+          column(6,
+            div(
+              class = "chart-container",
+              h4("🎯 Pass/Fail Distribution", style = "color: #2d3748; margin-bottom: 1rem; font-weight: 600;"),
+              plotlyOutput(ns("pass_fail_chart"), height = "350px")
+            )
+          ),
+          column(6,
+            div(
+              class = "chart-container",
+              h4("⏱️ Module Difficulty Analysis", style = "color: #2d3748; margin-bottom: 1rem; font-weight: 600;"),
+              plotlyOutput(ns("difficulty_chart"), height = "350px")
+            )
+          )
+        )
+      ),
+      
+      # Recent Activity Tab
+      tabPanel("Recent Activity",
+        icon = icon("clock"),
+        br(),
+        fluidRow(
+          column(12,
+            div(
+              h4("🔔 Recent Activity (Last 7 Days)", style = "color: 2d3748; margin-bottom: 1rem; font-weight: 600;"),
+              div(id = ns("activity_feed"))
             )
           )
         )

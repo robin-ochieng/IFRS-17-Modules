@@ -5,7 +5,7 @@ account: robinochieng
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 14952048
-bundleId: 10477245
+bundleId: 10502748
 url: https://robinochieng.shinyapps.io/IFRS17-Training-Module/
 version: 1
 asMultiple: FALSE
