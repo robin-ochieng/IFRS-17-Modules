@@ -859,14 +859,14 @@ server <- function(input, output, session) {
           div(
             id = "certificate_content",
             style = "background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%); 
-                    padding: 40px; position: relative; min-height: 600px;
+                    padding: 50px; position: relative; min-height: 842px;
                     font-family: 'Georgia', 'Times New Roman', serif;",
             
             # Watermark background
             div(
               style = "position: absolute; top: 50%; left: 50%; 
                       transform: translate(-50%, -50%) rotate(-45deg);
-                      opacity: 0.03; font-size: 80px; font-weight: bold;
+                      opacity: 0.03; font-size: 120px; font-weight: bold;
                       color: #1e40af; z-index: 1; pointer-events: none;
                       letter-spacing: 20px;",
               "CERTIFIED"
@@ -881,43 +881,43 @@ server <- function(input, output, session) {
               
               # Decorative corner ornaments
               div(style = "position: absolute; top: 10px; left: 10px; 
-                          width: 30px; height: 30px; 
-                          border-top: 2px solid #d4af37; 
-                          border-left: 2px solid #d4af37;"),
+                          width: 40px; height: 40px; 
+                          border-top: 3px solid #d4af37; 
+                          border-left: 3px solid #d4af37;"),
               div(style = "position: absolute; top: 10px; right: 10px; 
-                          width: 30px; height: 30px; 
-                          border-top: 2px solid #d4af37; 
-                          border-right: 2px solid #d4af37;"),
+                          width: 40px; height: 40px; 
+                          border-top: 3px solid #d4af37; 
+                          border-right: 3px solid #d4af37;"),
               div(style = "position: absolute; bottom: 10px; left: 10px; 
-                          width: 30px; height: 30px; 
-                          border-bottom: 2px solid #d4af37; 
-                          border-left: 2px solid #d4af37;"),
+                          width: 40px; height: 40px; 
+                          border-bottom: 3px solid #d4af37; 
+                          border-left: 3px solid #d4af37;"),
               div(style = "position: absolute; bottom: 10px; right: 10px; 
-                          width: 30px; height: 30px; 
-                          border-bottom: 2px solid #d4af37; 
-                          border-right: 2px solid #d4af37;"),
+                          width: 40px; height: 40px; 
+                          border-bottom: 3px solid #d4af37; 
+                          border-right: 3px solid #d4af37;"),
               
               # Header with enhanced styling
               div(
-                style = "text-align: center; margin-bottom: 25px;",
+                style = "text-align: center; margin-bottom: 35px;",
                 
                 # Logo with shadow effect
                 div(
                   style = "margin-bottom: 25px;",
                   img(src = "images/ira_logo_.png", 
-                      style = "height: 70px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));")
+                      style = "height: 90px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));")
                 ),
                 
                 # Certificate title with enhanced typography
                 h1("CERTIFICATE OF COMPLETION",
-                  style = "color: #1e40af; font-size: 36px; 
-                          font-weight: 300; letter-spacing: 6px;
+                  style = "color: #1e40af; font-size: 42px; 
+                          font-weight: 300; letter-spacing: 8px;
                           margin: 15px 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
                           font-family: 'Georgia', serif;"),
                 
                 # Decorative line with gradient
                 div(
-                  style = "width: 300px; height: 2px; 
+                  style = "width: 350px; height: 2px; 
                           background: linear-gradient(to right, 
                           transparent, #d4af37 20%, #d4af37 80%, transparent);
                           margin: 25px auto;"
@@ -926,10 +926,10 @@ server <- function(input, output, session) {
               
               # Recipient Information with enhanced styling
               div(
-                style = "text-align: center; margin: 30px 0;",
+                style = "text-align: center; margin: 40px 0;",
                 
                 p("This is to certify that", 
-                  style = "font-size: 18px; color: #4b5563; 
+                  style = "font-size: 20px; color: #4b5563; 
                           font-style: italic; margin-bottom: 20px;"),
                 
                 # Name with decorative underline
@@ -941,7 +941,7 @@ server <- function(input, output, session) {
                     } else {
                       strsplit(user_data$email, "@")[[1]][1]
                     },
-                    style = "color: #1e40af; font-size: 32px; 
+                    style = "color: #1e40af; font-size: 36px; 
                             margin: 20px 0; font-weight: 600;
                             text-transform: uppercase; letter-spacing: 2px;"
                   ),
@@ -958,27 +958,27 @@ server <- function(input, output, session) {
                           font-style: italic; margin-bottom: 15px;"),
                 
                 h3("IFRS 17 DIGITAL TRAINING PROGRAM",
-                  style = "color: #1e40af; font-size: 24px; 
+                  style = "color: #1e40af; font-size: 28px; 
                           margin: 20px 0; font-weight: 600;
-                          letter-spacing: 2px;")
+                          letter-spacing: 3px;")
               ),
               
               # Performance Summary with premium table design
               div(
-                style = "margin: 30px 15px; 
+                style = "margin: 40px 20px; 
                         background: linear-gradient(to bottom, #f8f9fa, #ffffff);
                         border: 1px solid #e5e7eb; border-radius: 8px;
-                        padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);",
+                        padding: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);",
                 
                 h4("MODULE PERFORMANCE SUMMARY",
                   style = "text-align: center; color: #1e40af; 
-                          margin-bottom: 25px; font-size: 16px;
+                          margin-bottom: 25px; font-size: 18px;
                           letter-spacing: 2px; font-weight: 600;"),
                 
                 # Enhanced module grid
                 div(
                   style = "display: grid; grid-template-columns: 1fr 1fr; 
-                          gap: 8px; font-size: 11px;",
+                          gap: 12px; font-size: 13px;",
                   
                   lapply(names(module_display_names), function(mod_id) {
                     mod_data <- progress_df[progress_df$module == mod_id, ]
@@ -986,7 +986,7 @@ server <- function(input, output, session) {
                       div(
                         style = paste0(
                           "display: flex; justify-content: space-between; 
-                          padding: 6px 12px; background: white;
+                          padding: 8px 15px; background: white;
                           border-left: 3px solid ",
                           if(mod_data$percentage >= 70) "#10b981" else "#ef4444",
                           "; border-radius: 0 4px 4px 0;
@@ -1008,31 +1008,31 @@ server <- function(input, output, session) {
               
               # Overall Performance with enhanced design
               div(
-                style = "text-align: center; margin: 25px auto; 
-                        background: white; border: 1px solid #e5e7eb;
-                        padding: 20px; border-radius: 12px; max-width: 350px;
+                style = "text-align: center; margin: 35px auto; 
+                        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                        padding: 25px; border-radius: 12px; max-width: 400px;
                         box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);",
                 
                 h4("OVERALL PERFORMANCE",
-                  style = "color: #1e40af; margin-bottom: 15px; 
-                          letter-spacing: 2px; font-size: 14px;"),
+                  style = "color: white; margin-bottom: 15px; 
+                          letter-spacing: 2px; font-size: 16px;"),
                 
                 div(
-                  style = "font-size: 36px; font-weight: bold; 
-                          color: #1e40af; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);",
+                  style = "font-size: 48px; font-weight: bold; 
+                          color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);",
                   paste0(overall_average, "%")
                 ),
                 
                 p(paste0("Average score across ", nrow(progress_df), 
                         " completed modules"),
-                  style = "color: #1e40af; margin-top: 10px;
+                  style = "color: rgba(255,255,255,0.9); margin-top: 10px;
                           font-size: 14px;")
               ),
               
               # Signatures section with enhanced layout
               div(
-                style = "margin-top: 35px; display: grid; 
-                        grid-template-columns: 1fr 1fr; gap: 50px;",
+                style = "margin-top: 50px; display: grid; 
+                        grid-template-columns: 1fr 1fr; gap: 60px;",
                 
                 # Date section
                 div(
@@ -1051,11 +1051,11 @@ server <- function(input, output, session) {
                 div(
                   style = "text-align: center;",
                   img(src = "images/signature.png", 
-                      style = "height: 35px; margin-bottom: 10px; opacity: 0.8;",
+                      style = "height: 45px; margin-bottom: 10px; opacity: 0.8;",
                       onerror = "this.style.display='none'"),
                   div(style = "border-top: 2px solid #1e40af; 
-                              margin-top: 30px; padding-top: 12px;
-                              font-size: 12px; color: #6b7280;
+                              margin-top: 45px; padding-top: 12px;
+                              font-size: 14px; color: #6b7280;
                               text-transform: uppercase; letter-spacing: 1px;",
                       "Program Director")
                 )
@@ -1063,10 +1063,10 @@ server <- function(input, output, session) {
               
               # Certificate ID with enhanced styling
               div(
-                style = "text-align: center; margin-top: 30px; 
-                        padding-top: 15px; border-top: 1px solid #e5e7eb;",
+                style = "text-align: center; margin-top: 40px; 
+                        padding-top: 20px; border-top: 1px solid #e5e7eb;",
                 div(
-                  style = "color: #9ca3af; font-size: 10px; 
+                  style = "color: #9ca3af; font-size: 11px; 
                           text-transform: uppercase; letter-spacing: 1px;",
                   paste("Certificate ID:", 
                         paste0("IFRS17-", 
@@ -1083,8 +1083,8 @@ server <- function(input, output, session) {
               # Bottom right corner image as requested
               div(
                 style = "position: absolute; bottom: 20px; right: 20px;",
-                img(src = "images/kenbright.png", 
-                    style = "max-height: 30px; opacity: 0.7;",
+                img(src = "images/bottom_right_logo.png", 
+                    style = "max-height: 40px; opacity: 0.7;",
                     onerror = "this.style.display='none'")
               )
             )
@@ -1116,45 +1116,19 @@ server <- function(input, output, session) {
           <head>
             <title>IFRS 17 Training Certificate</title>
             <style>
-                @page {
-                  size: 11in 8.5in landscape;
-                  margin: 0;
-                }
-                html, body {
-                  width: 100%;
-                  height: 100%;
-                  margin: 0;
-                  padding: 0;
-                  overflow: hidden;
-                }
-                /* Wrap the entire certificate so it’s scaled to exactly one page */
-                #certificate_wrapper {
-                  width: 11in;
-                  height: 8.5in;
-                  transform: scale(0.77);  
-                  transform-origin: top left;
-                  page-break-inside: avoid;
-                }
-                .certificate-container {
-                  padding: 5px !important;
-                  border: 2px double #1e40af !important;
-                  margin: 0; !important;
-                }
-                /* hide all your modal chrome */
-                .modal-header,
-                .modal-footer,
-                .btn,
-                button {
-                  display: none !important;
-                }
-                .modal-content {
-                  border: none !important;
-                  box-shadow: none !important;
-                }
+              @page { size: landscape; margin: 0.5in; }
+              body { 
+                font-family: Arial, sans-serif; 
+                margin: 0; 
+                padding: 20px;
+              }
+              @media print {
+                body { margin: 0; }
+              }
             </style>
           </head>
           <body>
-           <div id="certificate_wrapper">${content}</div> 
+            ${content}
           </body>
         </html>
       `);

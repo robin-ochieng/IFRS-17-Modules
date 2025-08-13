@@ -64,47 +64,29 @@ tagList(
 
     # A. Non-Participating Contracts
     div(class = "module-section",
-        h3("How to Present Insurance Finance Income or Expense", class = "section-subheading"),
-        h4("A. For Non-Participating Contracts (Contracts without Direct Participation Features)"),
-        p("These are contracts where the policyholder’s returns are not directly linked to the returns of specific underlying assets held by the insurer."),
-        tags$ol(type = "a",
-            tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L)."),
-            tags$li(
-              "Option 2 – Split Between P&L and OCI:",
-              tags$ol(type = "i",
-                  tags$li(
-                    tags$b("In P&L:"), 
-                    "A systematic and expected amount of insurance finance income or expense is recognized. This is typically calculated using the discount rate “locked-in” at the inception of the contract.  
-                    This provides a more stable and predictable measure of the core financial performance."
-                  ),
-                  tags$li(
-                    tags$b("In OCI:"), 
-                    "The remaining portion—representing the difference between the total actual insurance finance income or expense and the systematic amount recognized in P&L—is presented in Other Comprehensive Income.  
-                    This mitigates the volatility in P&L that can arise from significant fluctuations in current market discount rates."
-                  )
-              )
+        h3("💡 How to Present Insurance Finance Income or Expense"),
+        
+        p("Companies have ", strong("two main options"), " for showing these amounts in their financial statements, depending on the type of insurance contract:"),
+        
+        tags$h4("A. Non-Participating Contracts (no direct link to underlying assets):"),
+        tags$ol( type = "a",
+            tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L)"),
+            tags$li(HTML("Option 2 – Split Between P&amp;L and OCI:"),
+                    tags$ol(type = "i",
+                        tags$li(HTML("In P&amp;L: Show a steady, expected amount based on a fixed (&ldquo;locked-in&rdquo;) discount rate from when the contract began.")),
+                        tags$li("In OCI: Put the difference between actual changes and the expected amount.")
+                    )
             )
-        )
-    ),
-
-    # B. Participating Contracts
-    div(class = "module-section",
-        h4("B. For Participating Contracts (Contracts with Direct Participation Features)"),
-        p("These are contracts where policyholders directly participate in the returns of underlying assets held by the insurer (e.g., unit-linked policies)."),
-        tags$ol(type = "a",
-            tags$li("Option 1 – Similar to non-participating contracts, all insurance finance income or expenses for the period can be recognized entirely in the Profit or Loss statement."),
-            tags$li(
-              "Option 2 – Match Underlying Items:",
-              tags$ol(type = "i",
-                  tags$li(
-                    tags$b("In P&L:"), 
-                    "Show an amount that matches the investment returns on the underlying items (to avoid mismatches)."
-                  ),
-                  tags$li(
-                    tags$b("In OCI:"), 
-                    "Recognize the rest of the financial result (the part that doesn’t match the assets)."
-                  )
-              )
+        ),
+        
+        tags$h4("B. Participating Contracts (with underlying assets the insurer holds):"),
+        tags$ol( type = "a",
+            tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L). All finance income/expenses go in the income statement."),
+            tags$li(HTML("Option 2 – Match Underlying Items:"),
+                    tags$ol(type = "i",
+                        tags$li("In P&L: Show an amount that matches the investment returns on the underlying items (to avoid mismatches)."),
+                        tags$li("In OCI: The rest of the financial result (the part that doesn’t match the assets).")
+                    )
             )
         )
     ),
