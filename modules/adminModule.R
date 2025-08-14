@@ -15,57 +15,30 @@ get_total_users_count <- function(token) {
   }
   
   tryCatch({
-    # Use REST API with count=exact to get total count without fetching all records
-    # This is more efficient than fetching all user profiles
-    endpoint <- "/user_profiles?select=id"
+    # Use the existing get_all_users function for consistency
+    # This ensures we count the same users displayed in the Users tab
+    users <- get_all_users(token)
     
-    headers <- c(
-      "apikey" = as.character(SUPABASE_ANON_KEY),
-      "Content-Type" = "application/json",
-      "Prefer" = "count=exact"  # This header requests the total count in Content-Range
-    )
-    
-    if (!is.null(token) && token != "guest-token") {
-      headers["Authorization"] <- paste("Bearer", as.character(token))
-    }
-    
-    url <- paste0(SUPABASE_REST_URL, endpoint)
-    
-    response <- httr::GET(url, add_headers(.headers = headers))
-    
-    if (status_code(response) == 200) {
-      # Parse Content-Range header to get total count
-      # Format: "0-n/total" where total is what we want
-      content_range <- headers(response)$`content-range`
-      if (!is.null(content_range)) {
-        # Extract total from "0-n/total" format using simple string splitting
-        parts <- strsplit(content_range, "/")[[1]]
-        if (length(parts) >= 2) {
-          total_str <- parts[length(parts)]  # Get the last part (total)
-          total_count <- as.integer(total_str)
-          
-          # Validate the count before returning
-          if (!is.na(total_count) && validate_total_users(total_count)) {
-            return(total_count)
-          }
-        }
+    # Debug: Log the actual data we receive
+    message("Debug - get_total_users_count: users data type: ", class(users))
+    if (!is.null(users)) {
+      message("Debug - get_total_users_count: users length: ", length(users))
+      if (length(users) > 0 && is.list(users)) {
+        message("Debug - get_total_users_count: first user fields: ", paste(names(users[[1]]), collapse = ", "))
       }
     }
     
-    # Fallback: if Content-Range parsing fails, count records manually
-    # Filter out test accounts if is_test field exists
-    endpoint_fallback <- "/user_profiles?select=id&is_test=eq.false"
-    response_fallback <- make_supabase_request(endpoint_fallback, "GET", token = token)
-    
-    if (!is.null(response_fallback) && status_code(response_fallback) == 200) {
-      users <- content(response_fallback, "parsed")
+    if (!is.null(users) && is.list(users)) {
       user_count <- length(users)
       
+      # Validate the count before returning
       if (validate_total_users(user_count)) {
+        message("Debug - get_total_users_count: returning count: ", user_count)
         return(user_count)
       }
     }
     
+    message("Debug - get_total_users_count: returning NULL")
     return(NULL)
     
   }, error = function(e) {
@@ -409,9 +382,9 @@ adminDashboardServer <- function(id, user_data) {
       }
     })
     
-    # Reactive poll for total users count - updates every 60 seconds
+    # Reactive poll for total users count - updates every 30 seconds for testing
     total_users_reactive <- reactivePoll(
-      intervalMillis = 60000,  # 60 seconds
+      intervalMillis = 30000,  # 30 seconds for testing, change to 60000 later
       session = session,
       checkFunc = function() {
         # Simple timestamp-based check
@@ -660,52 +633,71 @@ adminDashboardServer <- function(id, user_data) {
     
     # Users Table
     output$users_table <- renderDT({
-      req(admin_data$users, admin_data$progress)
+      req(admin_data$users)
       
-      # Create user summary
+      # Create user summary with proper field handling
       users_df <- do.call(rbind, lapply(admin_data$users, function(user) {
-        user_progress <- Filter(function(p) p$user_id == user$user_id, admin_data$progress)
+        # Count progress for this user
+        user_progress <- if (!is.null(admin_data$progress)) {
+          Filter(function(p) p$user_id == user$user_id, admin_data$progress)
+        } else {
+          list()
+        }
 
-        # Handle missing email gracefully
-        user_email <- user$email %||% user$user_id %||% "No email"       
+        # Get email from user_id if it looks like an email, otherwise show user_id
+        display_email <- if (!is.null(user$user_id) && grepl("@", user$user_id)) {
+          user$user_id
+        } else {
+          user$user_id %||% "Unknown ID"
+        }
         
         data.frame(
-          Name = user$full_name %||% "Unknown",
-          Email = user_email,
+          Name = user$full_name %||% "Unknown User",
+          Email = display_email,
           `Modules Completed` = length(user_progress),
           `Average Score` = if(length(user_progress) > 0) {
             round(mean(sapply(user_progress, function(p) as.numeric(p$percentage %||% 0))), 1)
           } else { 0 },
           `Joined` = format(as.Date(user$created_at %||% Sys.Date()), "%b %d, %Y"),
+          Organization = user$organization %||% "",
           user_id = user$user_id,
           stringsAsFactors = FALSE,
           check.names = FALSE
         )
       }))
       
-      # Apply search filter
+      # Apply search filter if provided
       if (!is.null(input$user_search) && nchar(input$user_search) > 0) {
         search_term <- tolower(input$user_search)
         users_df <- users_df[
           grepl(search_term, tolower(users_df$Name)) | 
-          grepl(search_term, tolower(users_df$Email)),
+          grepl(search_term, tolower(users_df$Email)) |
+          grepl(search_term, tolower(users_df$Organization)),
         ]
       }
 
-      # Select only the columns we want to display
-      display_columns <- c("Name", "Email", "Modules Completed", "Average Score", "Joined")
+      # Select columns to display - include Organization if it has values
+      has_organization <- any(nchar(users_df$Organization) > 0)
+      
+      if (has_organization) {
+        display_columns <- c("Name", "Email", "Organization", "Modules Completed", "Average Score", "Joined")
+      } else {
+        display_columns <- c("Name", "Email", "Modules Completed", "Average Score", "Joined")
+      }
 
       datatable(
         users_df[, display_columns, drop = FALSE],
         options = list(
           pageLength = 10,
           dom = 'rtip',
+          searching = FALSE,  # We handle search manually
           initComplete = JS(
             "function(settings, json) {",
             "  $(this.api().table().container()).find('th').css({",
             "     'background-color': '#f7fafc',",
             "     'color': '#2d3748',",
-            "     'font-weight': '600'",
+            "     'font-weight': '600',",
+            "     'border-bottom': '2px solid #e2e8f0'",
             "  });",
             "}"
           )
@@ -715,7 +707,7 @@ adminDashboardServer <- function(id, user_data) {
         selection = 'single'
       ) %>%
         formatStyle(
-          columns = 1:5,
+          columns = 1:length(display_columns),
           color = '#2d3748',
           backgroundColor = '#ffffff'
         ) %>%
