@@ -51,7 +51,7 @@ tagList(
         div(class = "module-section",
             h3("📊 Components of Measurement at Initial Recognition", class = "section-subheading"),
 
-            h4("General Measurement Model (GMM)"),
+            h5("General Measurement Model (GMM)"),
             p("Under the General Measurement Model (GMM), the initial measurement of a group of insurance contracts is the sum of:"),
 
             tags$ul(
@@ -74,7 +74,7 @@ tagList(
               tags$li("If the resulting value is negative, the contract is considered onerous and a loss is immediately recognized in profit or loss")
             ),
 
-            h4("Illustration:"),
+            h5("Illustration:"),
             tags$ul(
               tags$li("Expected premiums: BWP 3,000"),
               tags$li("Expected claims & expenses: BWP 2,100"),
@@ -82,7 +82,7 @@ tagList(
               tags$li("Discounting impact: BWP 250")
             ),
 
-            h4("Calculation:"),
+            h5("Calculation:"),
             tags$ol(
               tags$li(strong("Fulfilment Cash Flows (FCF) = BWP 3,000 – BWP 2,100 – BWP 250 – BWP 150 = BWP 500")),
               tags$li(strong("CSM = BWP 500, which is to be released over the coverage period"))
@@ -98,7 +98,7 @@ tagList(
               tags$li("Instead, a loss component is recognized to reflect the immediate financial loss."),
               tags$li("This loss is immediately recorded in the profit or loss statement.")
             ),
-            h4("Illustration:"),
+            h5("Illustration:"),
             tags$ul(
               tags$li("Expected future cash inflows (Premiums): ", strong("BWP 9,000")),
               tags$li("Expected future cash outflows (Claims & expenses): ", strong("BWP 10,000")),
