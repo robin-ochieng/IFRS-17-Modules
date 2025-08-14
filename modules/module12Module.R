@@ -54,7 +54,7 @@ tagList(
         h3("📋 Accounting Treatment for Derecognition", class = "section-subtitle"),
         
         ## a) Derecognition within a Group
-        h4("a) Derecognition of a Contract Within a Group"),
+        h5("a) Derecognition of a Contract Within a Group"),
         p("When a contract is removed from a group (e.g., due to expiry or cancellation), the insurer must:"),
         tags$ul(
           tags$li("Eliminate the contract’s portion of the present value of future cash flows and the associated risk adjustment."),
@@ -63,7 +63,7 @@ tagList(
         ),
         
         ## b) Derecognition due to Modification or Transfer
-        h4("b) Derecognition Due to Modification or Transfer"),
+        h5("b) Derecognition Due to Modification or Transfer"),
         p("If derecognition results from a modification or a transfer to another entity:"),
         tags$ul(
           tags$li(strong("The CSM must be updated to reflect the difference between:"), 
