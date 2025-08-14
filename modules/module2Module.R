@@ -27,7 +27,7 @@ tagList(
         
         p("Paragraphs 9 to 13 of IFRS 17 set out when insurance contracts should be combined or separated, so that financial reporting reflects the economic substance of the arrangements rather than merely their legal form."),
         
-        h4("Key areas covered include:"),
+        h5("Key areas covered include:"),
         tags$ul(
           tags$li(strong("Combination of Contracts:"), " criteria for combining contracts designed to achieve an overall commercial effect—e.g., interdependent pricing or one contract offsetting another’s risk"),
           tags$li(strong("Pricing Dependencies:"), " recognition that interdependent pricing structures may require treating multiple contracts as a single arrangement"),
@@ -35,7 +35,7 @@ tagList(
           tags$li(strong("Cross-Standard Application:"), " application of IFRS 9 and IFRS 15 to embedded derivatives and non-insurance services within insurance contracts")
         ),
         
-        h4("Related standards:"),
+        h5("Related standards:"),
         tags$ul(
           tags$li(strong("IFRS 9:"), " classification, measurement and recognition of financial assets and liabilities"),
           tags$li(strong("IFRS 15:"), " framework for recognizing revenue from contracts involving the transfer of goods or services")
@@ -118,7 +118,7 @@ tagList(
         
         p("Under IFRS 17, the decision to combine or separate insurance contracts hinges on their economic interdependence and commercial intent. The presence or absence of pricing and risk dependencies plays a critical role in determining the appropriate accounting treatment."),
         
-        tags$h4("When Contracts Should Be Combined"),
+        tags$h5("When Contracts Should Be Combined"),
         tags$ul(
           tags$li(strong("Interdependent Pricing:"), " multiple contracts priced together or structured as a bundled package are economically linked and may require combined reporting"),
           tags$li(strong("Risk Neutralization:"), " one contract offsets or eliminates the financial exposure of another, so the contracts are viewed as interrelated and should be accounted for together"),
@@ -126,7 +126,7 @@ tagList(
         ),
         p(em("\"Commercial effect\" refers to the overall economic impact of a group of contracts that are structured to work in tandem.")),
         
-        tags$h4("When Contracts Should Be Separated"),
+        tags$h5("When Contracts Should Be Separated"),
         tags$ul(
           tags$li(strong("Independent Pricing:"), " each contract is priced on its own without reference to the others and is considered distinct for reporting purposes"),
           tags$li(strong("Standalone Risk Profiles:"), " contracts carrying separate and unrelated insurance risks should be treated independently"),
