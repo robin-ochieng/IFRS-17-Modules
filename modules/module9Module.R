@@ -45,7 +45,7 @@ tagList(
      ),
 
       div(
-        h3("Measurement Under PAA", class = "section-subtitle"),
+        h3("Measurement Under PAA", class = "section-title-top"),
         p("There are two primary components of liability to consider:"),
         
         tags$strong("A. Liability for Remaining Coverage (LRC)"),
@@ -70,7 +70,7 @@ tagList(
 
 
       div(
-        h3("Treatment of Acquisition Cash Flows", class = "section-subtitle"),
+        h3("Treatment of Acquisition Cash Flows", class = "section-title-top"),
         p("Entities have the option to either expense acquisition costs immediately when the coverage period is one year or less, or to defer and amortize these costs over the coverage period if it exceeds one year."),
         p("Deferring acquisition costs reduces the Liability for Remaining Coverage (LRC), but this may lead to a higher recognition of losses for onerous contracts."),
         
@@ -94,7 +94,7 @@ tagList(
     ),
   
     div(
-      h3("Disclosure Requirements", class = "section-subtitle"),
+      h3("Disclosure Requirements", class = "section-title-top"),
       p("IFRS 17 mandates the following disclosures:"),
       tags$ol(type = "a",
         tags$li("A transparent presentation of revenue, incurred claims, and movements in insurance liabilities."),
@@ -104,7 +104,7 @@ tagList(
     ),
 
     div(
-      h3("Practical Application Examples", class = "section-subtitle"),
+      h3("Practical Application Examples", class = "section-title-top"),
       tags$ul(
         tags$li("Ideal for group life, group credit, and general insurance with short coverage."),
         tags$li("May also be applied to reinsurance contracts held, provided they meet the same eligibility criteria.")
