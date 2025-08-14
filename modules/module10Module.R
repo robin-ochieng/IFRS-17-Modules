@@ -42,7 +42,7 @@ tagList(
     div(class = "module-section",
         h3("📏 Measurement of Reinsurance Contracts Held", class = "section-subtitle"),
         
-        h4(style = "color: #7BAF34;", "Initial Recognition"),
+        h4("Initial Recognition"),
         
         p("At initial recognition, the reinsurance contract is measured using the General Measurement Model (GMM) unless the Premium Allocation Approach (PAA) is applied and meets the eligibility criteria."),
         
