@@ -46,7 +46,7 @@ tagList(
 
     div(class = "module-section",
         h3(icon("stopwatch"), "At Subsequent Measurement", class = "section-subheading"),
-        h4("When do contracts become (more) onerous?"),
+        h5("When do contracts become (more) onerous?"),
         p("A group of contracts becomes onerous, or increasingly so, after initial recognition if certain unfavorable developments occur, such as:"),
         tags$ul(
           tags$li("A rise in anticipated future claims or servicing costs, often due to deteriorating assumptions; or"),
