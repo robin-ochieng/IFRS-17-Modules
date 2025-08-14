@@ -68,7 +68,7 @@ tagList(
         
         p("Companies have ", strong("two main options"), " for showing these amounts in their financial statements, depending on the type of insurance contract:"),
         
-        tags$h4("A. Non-Participating Contracts (no direct link to underlying assets):"),
+        tags$h5("A. Non-Participating Contracts (no direct link to underlying assets):"),
         tags$ol( type = "a",
             tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L)"),
             tags$li(HTML("Option 2 – Split Between P&amp;L and OCI:"),
@@ -79,7 +79,7 @@ tagList(
             )
         ),
         
-        tags$h4("B. Participating Contracts (with underlying assets the insurer holds):"),
+        tags$h5("B. Participating Contracts (with underlying assets the insurer holds):"),
         tags$ol( type = "a",
             tags$li("Option 1 – Include all insurance finance income or expenses for the period entirely in Profit or Loss (P&L). All finance income/expenses go in the income statement."),
             tags$li(HTML("Option 2 – Match Underlying Items:"),
