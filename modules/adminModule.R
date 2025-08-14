@@ -1,5 +1,86 @@
 # modules/adminModule.R
 
+# Helper function to validate total users count
+validate_total_users <- function(n) {
+  if (is.null(n) || !is.numeric(n) || n < 0 || !is.integer(as.integer(n))) {
+    return(FALSE)
+  }
+  return(TRUE)
+}
+
+# Function to get total users count from database
+get_total_users_count <- function(token) {
+  if (is.null(make_supabase_request) || is.null(token)) {
+    return(NULL)
+  }
+  
+  tryCatch({
+    # Use REST API with count=exact to get total count without fetching all records
+    # This is more efficient than fetching all user profiles
+    endpoint <- "/user_profiles?select=id"
+    
+    headers <- c(
+      "apikey" = as.character(SUPABASE_ANON_KEY),
+      "Content-Type" = "application/json",
+      "Prefer" = "count=exact"  # This header requests the total count in Content-Range
+    )
+    
+    if (!is.null(token) && token != "guest-token") {
+      headers["Authorization"] <- paste("Bearer", as.character(token))
+    }
+    
+    url <- paste0(SUPABASE_REST_URL, endpoint)
+    
+    response <- httr::GET(url, add_headers(.headers = headers))
+    
+    if (status_code(response) == 200) {
+      # Parse Content-Range header to get total count
+      # Format: "0-n/total" where total is what we want
+      content_range <- headers(response)$`content-range`
+      if (!is.null(content_range)) {
+        # Extract total from "0-n/total" format using simple string splitting
+        parts <- strsplit(content_range, "/")[[1]]
+        if (length(parts) >= 2) {
+          total_str <- parts[length(parts)]  # Get the last part (total)
+          total_count <- as.integer(total_str)
+          
+          # Validate the count before returning
+          if (!is.na(total_count) && validate_total_users(total_count)) {
+            return(total_count)
+          }
+        }
+      }
+    }
+    
+    # Fallback: if Content-Range parsing fails, count records manually
+    # Filter out test accounts if is_test field exists
+    endpoint_fallback <- "/user_profiles?select=id&is_test=eq.false"
+    response_fallback <- make_supabase_request(endpoint_fallback, "GET", token = token)
+    
+    if (!is.null(response_fallback) && status_code(response_fallback) == 200) {
+      users <- content(response_fallback, "parsed")
+      user_count <- length(users)
+      
+      if (validate_total_users(user_count)) {
+        return(user_count)
+      }
+    }
+    
+    return(NULL)
+    
+  }, error = function(e) {
+    if (getOption("shiny.dev", FALSE)) {
+      showNotification(
+        paste("Error fetching user count:", e$message),
+        type = "error",
+        duration = 5
+      )
+    }
+    message("Error in get_total_users_count: ", e$message)
+    return(NULL)
+  })
+}
+
 # Admin Dashboard UI
 adminDashboardUI <- function(id) {
   ns <- NS(id)
@@ -328,12 +409,32 @@ adminDashboardServer <- function(id, user_data) {
       }
     })
     
+    # Reactive poll for total users count - updates every 60 seconds
+    total_users_reactive <- reactivePoll(
+      intervalMillis = 60000,  # 60 seconds
+      session = session,
+      checkFunc = function() {
+        # Simple timestamp-based check
+        Sys.time()
+      },
+      valueFunc = function() {
+        if (is_admin_user() && !is.null(user_data$token)) {
+          count <- get_total_users_count(user_data$token)
+          return(count)
+        }
+        return(NULL)
+      }
+    )
+    
     # Key Metrics Outputs
     output$total_users <- renderText({
-      if (!is.null(admin_data$users)) {
-        length(admin_data$users)
+      # Get the reactive count
+      user_count <- total_users_reactive()
+      
+      if (!is.null(user_count) && validate_total_users(user_count)) {
+        as.character(user_count)
       } else {
-        "0"
+        "—"  # Show dash on error or when data unavailable
       }
     })
     
@@ -354,8 +455,10 @@ adminDashboardServer <- function(id, user_data) {
     })
     
     output$completion_rate <- renderText({
-      if (!is.null(admin_data$users) && !is.null(admin_data$stats)) {
-        total_possible <- length(admin_data$users) * 15  # 15 modules
+      user_count <- total_users_reactive()
+      
+      if (!is.null(user_count) && validate_total_users(user_count) && !is.null(admin_data$stats)) {
+        total_possible <- user_count * 15  # 15 modules
         if (total_possible > 0) {
           rate <- round((admin_data$stats$total_completions / total_possible) * 100, 1)
           paste0(rate, "%")
@@ -363,7 +466,7 @@ adminDashboardServer <- function(id, user_data) {
           "0%"
         }
       } else {
-        "0%"
+        "—"  # Show dash when user count is unavailable
       }
     })
     
@@ -627,15 +730,19 @@ adminDashboardServer <- function(id, user_data) {
     
     # Module Completion Rates
     output$module_completion_rates <- renderPlotly({
-      req(admin_data$stats, admin_data$users)
+      req(admin_data$stats)
+      user_count <- total_users_reactive()
       
-      if (!is.null(admin_data$stats$modules_stats) && nrow(admin_data$stats$modules_stats) > 0) {
-        # Calculate completion rate for each module
-        total_users <- length(admin_data$users)
+      if (!is.null(admin_data$stats$modules_stats) && 
+          nrow(admin_data$stats$modules_stats) > 0 && 
+          !is.null(user_count) && 
+          validate_total_users(user_count) &&
+          user_count > 0) {
         
+        # Calculate completion rate for each module using reactive user count
         module_rates <- admin_data$stats$modules_stats %>%
           mutate(
-            completion_rate = round((completions / total_users) * 100, 1),
+            completion_rate = round((completions / user_count) * 100, 1),
             module_num = as.numeric(gsub("module", "", module_name))
           ) %>%
           arrange(module_num)
