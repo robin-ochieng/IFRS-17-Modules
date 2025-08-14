@@ -35,7 +35,7 @@ tagList(
             p("Below is a summary of the key recognition principles, including when and how a group of contracts should be accounted for.")
           ),
         div(class = "module-section image-timeline-wrapper",
-            h4("1. Initial Recognition"),
+            h5("1. Initial Recognition"),
             p("A group of insurance contracts must be recognized at the earliest of the following three events:"),
             tags$ul(
               tags$li("The beginning of the coverage period for any contract in the group"),
@@ -55,7 +55,7 @@ tagList(
 
 
         div(class = "module-section",
-            h4("2. Assessing Onerous Contracts before Recognition"),
+            h5("2. Assessing Onerous Contracts before Recognition"),
             p("Before officially recognizing a group, insurers are required to check whether any contracts within the group are onerous."),
             p("This assessment must be performed before the earlier of:"),
             tags$ul(
@@ -67,7 +67,7 @@ tagList(
         ),
 
         div(class = "module-section",
-            h4("3. Insurance Acquisition Cash Flows (IACFs)"),
+            h5("3. Insurance Acquisition Cash Flows (IACFs)"),
             p("Insurance acquisition cash flows refer to the costs associated with acquiring insurance contracts — such as commissions to brokers or agents."),
             p("When these acquisition costs are paid or received before the group of contracts is formally recognized, they are initially recorded as an asset or liability, depending on the nature of the cash flow."),
             p("These amounts are only temporary on the balance sheet and are to be reclassified once the group is recognized."),
@@ -76,7 +76,7 @@ tagList(
         ),
 
         div(class = "module-section",
-            h4("4. Contracts included in a group"),
+            h5("4. Contracts included in a group"),
             p("Only contracts that are issued on or before the reporting date can be included in a recognized group."),
             
             p("When recognizing the group, entities must also:"),
