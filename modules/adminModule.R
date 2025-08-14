@@ -1,5 +1,27 @@
 # modules/adminModule.R
 
+# Helper function to create empty plots
+create_empty_plot <- function(message = "No data available") {
+  plot_ly() %>%
+    add_annotations(
+      x = 0.5,
+      y = 0.5,
+      text = message,
+      xref = "paper",
+      yref = "paper",
+      xanchor = "center",
+      yanchor = "middle",
+      showarrow = FALSE,
+      font = list(size = 16, color = "#6c757d")
+    ) %>%
+    layout(
+      xaxis = list(showgrid = FALSE, showticklabels = FALSE, zeroline = FALSE),
+      yaxis = list(showgrid = FALSE, showticklabels = FALSE, zeroline = FALSE),
+      plot_bgcolor = "rgba(0,0,0,0)",
+      paper_bgcolor = "rgba(0,0,0,0)"
+    )
+}
+
 # Helper function to validate total users count
 validate_total_users <- function(n) {
   if (is.null(n) || !is.numeric(n) || n < 0 || !is.integer(as.integer(n))) {
@@ -19,26 +41,15 @@ get_total_users_count <- function(token) {
     # This ensures we count the same users displayed in the Users tab
     users <- get_all_users(token)
     
-    # Debug: Log the actual data we receive
-    message("Debug - get_total_users_count: users data type: ", class(users))
-    if (!is.null(users)) {
-      message("Debug - get_total_users_count: users length: ", length(users))
-      if (length(users) > 0 && is.list(users)) {
-        message("Debug - get_total_users_count: first user fields: ", paste(names(users[[1]]), collapse = ", "))
-      }
-    }
-    
     if (!is.null(users) && is.list(users)) {
       user_count <- length(users)
       
       # Validate the count before returning
       if (validate_total_users(user_count)) {
-        message("Debug - get_total_users_count: returning count: ", user_count)
         return(user_count)
       }
     }
     
-    message("Debug - get_total_users_count: returning NULL")
     return(NULL)
     
   }, error = function(e) {
@@ -366,9 +377,14 @@ adminDashboardServer <- function(id, user_data) {
       return(FALSE)
     })
     
-    # Load admin data
-    observe({
-      if (is_admin_user() && !is.null(user_data$token)) {
+    # Load admin data with debouncing to prevent rapid updates
+    admin_data_loaded <- reactiveVal(FALSE)
+    
+    observeEvent(is_admin_user(), {
+      if (is_admin_user() && !is.null(user_data$token) && !admin_data_loaded()) {
+        # Set loading flag to prevent multiple simultaneous calls
+        admin_data_loaded(TRUE)
+        
         # Get all data
         admin_data$users <- get_all_users(user_data$token)
         admin_data$progress <- get_all_progress(user_data$token)
@@ -380,7 +396,7 @@ adminDashboardServer <- function(id, user_data) {
         admin_data$quiz_stats <- get_quiz_statistics(user_data$token)
         admin_data$question_performance <- get_question_performance(NULL, user_data$token)        
       }
-    })
+    }, once = TRUE)  # Load only once per session
     
     # Reactive poll for total users count - updates every 30 seconds for testing
     total_users_reactive <- reactivePoll(
@@ -443,27 +459,44 @@ adminDashboardServer <- function(id, user_data) {
       }
     })
     
-    # Module Performance Chart
+    # Module Performance Chart with proper error handling
     output$module_performance_chart <- renderPlotly({
-      req(admin_data$stats)
-      
-      if (!is.null(admin_data$stats$modules_stats) && nrow(admin_data$stats$modules_stats) > 0) {
-        # Extract module numbers for ordering
-        admin_data$stats$modules_stats$module_num <- as.numeric(gsub("module", "", admin_data$stats$modules_stats$module_name))
-        admin_data$stats$modules_stats <- admin_data$stats$modules_stats[order(admin_data$stats$modules_stats$module_num), ]
+      # Add error handling and validation
+      tryCatch({
+        validate(
+          need(admin_data$stats, "Loading data..."),
+          need(!is.null(admin_data$stats$modules_stats), "No module statistics available"),
+          need(nrow(admin_data$stats$modules_stats) > 0, "No module data found")
+        )
         
+        # Safely process the data
+        modules_data <- admin_data$stats$modules_stats
+        
+        # Extract module numbers for ordering with error handling
+        modules_data$module_num <- suppressWarnings(
+          as.numeric(gsub("module", "", modules_data$module_name))
+        )
+        
+        # Handle any NA values from the conversion
+        modules_data$module_num[is.na(modules_data$module_num)] <- 999
+        
+        # Order the data
+        modules_data <- modules_data[order(modules_data$module_num), ]
+        
+        # Create the plot with additional error handling
         p <- plot_ly(
-          data = admin_data$stats$modules_stats,
+          data = modules_data,
           x = ~module_name,
           y = ~completions,
           type = 'bar',
           name = 'Completions',
           marker = list(color = '#5b6cd4'),
-          hovertemplate = 'Module: %{x}<br>Completions: %{y}<extra></extra>'
+          hovertemplate = 'Module: %{x}<br>Completions: %{y}<extra></extra>',
+          source = "module_performance"  # Add source for better tracking
         ) %>%
           add_trace(
             y = ~avg_score,
-            name = 'Avg Score',
+            name = 'Avg Score (%)',
             yaxis = 'y2',
             type = 'scatter',
             mode = 'lines+markers',
@@ -512,17 +545,34 @@ adminDashboardServer <- function(id, user_data) {
               font = list(color = "#2d3748")
             )
           )
-      } else {
-        empty_plot("No module data available")
-      }
+        
+        return(p)
+        
+      }, error = function(e) {
+        # Log error for debugging
+        message("Error in module_performance_chart: ", e$message)
+        
+        # Return empty plot on error
+        return(create_empty_plot("Error loading chart data"))
+      })
     })
     
-    # Score Distribution Chart
+    # Score Distribution Chart with error handling
     output$score_distribution <- renderPlotly({
-      req(admin_data$progress)
-      
-      if (length(admin_data$progress) > 0) {
+      tryCatch({
+        validate(
+          need(admin_data$progress, "Loading progress data..."),
+          need(length(admin_data$progress) > 0, "No progress data available")
+        )
+        
         scores <- sapply(admin_data$progress, function(x) as.numeric(x$percentage %||% 0))
+        
+        # Filter out invalid scores
+        scores <- scores[!is.na(scores) & scores >= 0 & scores <= 100]
+        
+        if (length(scores) == 0) {
+          return(create_empty_plot("No valid scores found"))
+        }
         
         p <- plot_ly(
           x = scores,
@@ -532,7 +582,8 @@ adminDashboardServer <- function(id, user_data) {
             color = '#00a896',
             line = list(color = '#ffffff', width = 1)
           ),
-          hovertemplate = 'Score Range: %{x}<br>Count: %{y}<extra></extra>'
+          hovertemplate = 'Score Range: %{x}<br>Count: %{y}<extra></extra>',
+          source = "score_distribution"
         ) %>%
           layout(
             title = NULL,
@@ -565,9 +616,13 @@ adminDashboardServer <- function(id, user_data) {
     
     # Activity Timeline
     output$activity_timeline <- renderPlotly({
-      req(admin_data$progress)
-      
-      if (length(admin_data$progress) > 0) {
+      tryCatch({
+        req(admin_data$progress)
+        validate(
+          need(admin_data$progress, "Progress data unavailable"),
+          need(length(admin_data$progress) > 0, "No progress data found")
+        )
+        
         # Convert to dataframe for easier manipulation
         activity_df <- do.call(rbind, lapply(admin_data$progress, function(x) {
           data.frame(
@@ -575,6 +630,8 @@ adminDashboardServer <- function(id, user_data) {
             stringsAsFactors = FALSE
           )
         }))
+        
+        validate(need(nrow(activity_df) > 0, "No activity timeline data"))
         
         # Count by date
         daily_counts <- activity_df %>%
@@ -625,22 +682,32 @@ adminDashboardServer <- function(id, user_data) {
               font = list(color = "#2d3748")
             )
           )
+        
+        return(p)
       } else {
-        empty_plot("No activity data available")
+        return(empty_plot("No activity data available"))
       }
+      }, error = function(e) {
+        return(empty_plot(paste("Chart error:", e$message)))
+      })
     })
 
     
     # Users Table
     output$users_table <- renderDT({
-      req(admin_data$users)
-      
-      # Create user summary with proper field handling
-      users_df <- do.call(rbind, lapply(admin_data$users, function(user) {
-        # Count progress for this user
-        user_progress <- if (!is.null(admin_data$progress)) {
-          Filter(function(p) p$user_id == user$user_id, admin_data$progress)
-        } else {
+      tryCatch({
+        req(admin_data$users)
+        validate(
+          need(admin_data$users, "User data unavailable"),
+          need(length(admin_data$users) > 0, "No users found")
+        )
+        
+        # Create user summary with proper field handling
+        users_df <- do.call(rbind, lapply(admin_data$users, function(user) {
+          # Count progress for this user
+          user_progress <- if (!is.null(admin_data$progress)) {
+            Filter(function(p) p$user_id == user$user_id, admin_data$progress)
+          } else {
           list()
         }
 
@@ -718,18 +785,30 @@ adminDashboardServer <- function(id, user_data) {
           backgroundRepeat = 'no-repeat',
           backgroundPosition = 'center'
         )
+      }, error = function(e) {
+        # Return empty datatable on error
+        datatable(
+          data.frame(Message = paste("Error loading users:", e$message)),
+          options = list(pageLength = 5, dom = 'rt'),
+          class = 'cell-border stripe hover',
+          rownames = FALSE
+        )
+      })
     })
     
     # Module Completion Rates
     output$module_completion_rates <- renderPlotly({
-      req(admin_data$stats)
-      user_count <- total_users_reactive()
-      
-      if (!is.null(admin_data$stats$modules_stats) && 
-          nrow(admin_data$stats$modules_stats) > 0 && 
-          !is.null(user_count) && 
-          validate_total_users(user_count) &&
-          user_count > 0) {
+      tryCatch({
+        req(admin_data$stats)
+        user_count <- total_users_reactive()
+        
+        validate(
+          need(admin_data$stats$modules_stats, "Module statistics unavailable"),
+          need(nrow(admin_data$stats$modules_stats) > 0, "No module completion data"),
+          need(user_count, "User count unavailable"),
+          need(validate_total_users(user_count), "Invalid user count"),
+          need(user_count > 0, "No users found")
+        )
         
         # Calculate completion rate for each module using reactive user count
         module_rates <- admin_data$stats$modules_stats %>%
@@ -792,17 +871,28 @@ adminDashboardServer <- function(id, user_data) {
               font = list(color = "#2d3748")
             )
           )
+        
+        return(p)
       } else {
-        empty_plot("No completion rate data available")
+        return(empty_plot("No completion rate data available"))
       }
+      }, error = function(e) {
+        return(empty_plot(paste("Chart error:", e$message)))
+      })
     })
     
     # Pass/Fail Chart
     output$pass_fail_chart <- renderPlotly({
-      req(admin_data$progress)
-      
-      if (length(admin_data$progress) > 0) {
+      tryCatch({
+        req(admin_data$progress)
+        validate(
+          need(admin_data$progress, "Progress data unavailable"),
+          need(length(admin_data$progress) > 0, "No progress data found")
+        )
+        
         scores <- sapply(admin_data$progress, function(x) as.numeric(x$percentage %||% 0))
+        validate(need(length(scores) > 0, "No score data available"))
+        
         pass_count <- sum(scores >= 70)
         fail_count <- sum(scores < 70)
         
@@ -835,16 +925,24 @@ adminDashboardServer <- function(id, user_data) {
               font = list(color = "#2d3748")
           )
         )
+        
+        return(p)
       } else {
-        empty_plot("No pass/fail data available")
+        return(empty_plot("No pass/fail data available"))
       }
+      }, error = function(e) {
+        return(empty_plot(paste("Chart error:", e$message)))
+      })
     })
     
     # Module Difficulty Chart
     output$difficulty_chart <- renderPlotly({
-      req(admin_data$stats)
-      
-      if (!is.null(admin_data$stats$modules_stats) && nrow(admin_data$stats$modules_stats) > 0) {
+      tryCatch({
+        req(admin_data$stats)
+        validate(
+          need(admin_data$stats$modules_stats, "Module statistics unavailable"),
+          need(nrow(admin_data$stats$modules_stats) > 0, "No module difficulty data")
+        )
         difficulty_data <- admin_data$stats$modules_stats %>%
           mutate(
             difficulty = case_when(
@@ -902,9 +1000,14 @@ adminDashboardServer <- function(id, user_data) {
               font = list(color = "#2d3748")
             )
           )
+        
+        return(p)
       } else {
-        empty_plot("No difficulty data available")
+        return(empty_plot("No difficulty data available"))
       }
+      }, error = function(e) {
+        return(empty_plot(paste("Chart error:", e$message)))
+      })
     })
     
     # Recent Activity Feed
